@@ -13,8 +13,8 @@
 		</global-results>
 		
 		<!-- 配置客户的Action，如果Action由Spring框架来管理，class标签上只需要编写ID值就OK -->
-		<action name="student_*" class="studentAction" method="{1}">
-			<result name="loginOK" type="redirect">/student.jsp</result>
+		<action name="login_*" class="loginAction" method="{1}">
+			<!-- <result name="loginOK" type="redirect">/student.jsp</result> -->
 		</action>
 		
 	</package>

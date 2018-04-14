@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>使用纯CSS美化checkbox和radio样式</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/mycss.css" />
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<div class="container">
+			<h2>手风琴实例</h2>
+			<p><strong>注意:</strong> 使用 data-parent 属性来确保所有的折叠元素在指定的父元素下，这样就能实现在一个折叠选项显示时其他选项就隐藏。</p>
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header">
+						<a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							Collapsible Group Item #1
+						</a>
+					</div>
+					<div id="collapseOne" class="collapse">
+						<div class="card-block">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+							Collapsible Group Item #2
+						</a>
+					</div>
+					<div id="collapseTwo" class="collapse">
+						<div class="card-block">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						<a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+							Collapsible Group Item #3
+						</a>
+					</div>
+					<div id="collapseThree" class="collapse">
+						<div class="card-block">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
