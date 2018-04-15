@@ -34,7 +34,7 @@ public class LoginAction extends ActionSupport{
 		
 		//获取登陆的身份参数
 		String identity = ServletActionContext.getRequest().getParameter("role");
-//		System.out.println(identity);
+		System.out.println(identity);
 		ServletActionContext.getRequest().getSession().setAttribute("role", identity);
 		
 		
