@@ -26,15 +26,14 @@ public class LoginAction extends ActionSupport{
 	}
 
 	/**
-	 * »ñÈ¡µÇÂ¼Éí·İµÄ²ÎÊı
+	 * æ§åˆ¶è·³è½¬
 	 * 
 	 * @return
 	 */
 	public String dump() {
 		
-		//»ñÈ¡µÇÂ¼Éí·İ²ÎÊı
+		//è·å–ç™»é™†çš„èº«ä»½å‚æ•°
 		String identity = ServletActionContext.getRequest().getParameter("role");
-		//½«Éí·İ²ÎÊı±£´æµ½sessionÖĞ
 //		System.out.println(identity);
 		ServletActionContext.getRequest().getSession().setAttribute("role", identity);
 		
@@ -43,17 +42,16 @@ public class LoginAction extends ActionSupport{
 	}
 	
 	/**
-	 * ¸ù¾İ²»Í¬µÄÉí·İ½øĞĞ¿ØÖÆÌø×ª
+	 * æ ¹æ®ä¸åŒçš„èº«ä»½å‚æ•°æ§åˆ¶ç™»å½•
+	 * 
 	 * @return
 	 */
 	public String login() {
 		
-//		//»ñÈ¡µÇÂ¼Éí·İµÄ²ÎÊı
-//		String identity = ServletActionContext.getRequest().getParameter("type");
 //		
-		//´ÓspringÈİÆ÷ÖĞ»ñÈ¡ÏàÓ¦µÄ¶ÔÏó
+		//è·å–springå®¹å™¨
 		WebApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(ServletActionContext.getServletContext());
-		System.out.println("µÇÂ¼Éí·İ£º"+type);
+		System.out.println("ç™»å½•èº«ä»½ï¼š"+type);
 		System.out.println(username);
 		Role role = (Role) ac.getBean(type);
 		role.login(username, password);
