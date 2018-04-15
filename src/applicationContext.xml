@@ -52,9 +52,11 @@
 	<!-- 开启事务的注解 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
+	<!-- 配置登录模块 -->
+	<bean id="loginAction" class="com.oes.web.action.LoginAction" scope="prototype">
+	</bean>
 	
-	
-	<!-- 配置学生的模块 -->
+	<!-- 配置学生的模块
 	<bean id="studentAction" class="" scope="prototype">
 		<property name="studentService" ref="studentService"/>
 	</bean>
@@ -66,7 +68,7 @@
 	<bean id="studentDao" class="">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	
+	 -->
 </beans>
 
 
