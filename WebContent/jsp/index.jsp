@@ -46,8 +46,6 @@
 						<h1 style="width:542px;position:fixed;top:100px;left:50%;margin-left:-271px;" class="text-dark">欢迎登录100test在线考试系统</h1>
 					</div>
 					<div style="width:372px;position:fixed;bottom:150px;left:50%;margin-left:-186px;color:red;">
-						<!--<h1 style="width:542px;position:fixed;top:100px;left:50%;margin-left:-271px;color:red;" class="text-dark">欢迎登录100test在线考试系统</h1>
-						-->
 						<a href="${pageContext.request.contextPath }/login_dump?role=student" class="btn btn-lg btn-outline-dark">学生登录</a>
 						<a href="${pageContext.request.contextPath }/login_dump?role=teacher" class="btn btn-lg btn-outline-dark">教师登录</a>
 						<a href="${pageContext.request.contextPath }/login_dump?role=admin" class="btn btn-lg btn-outline-dark">管理员登录</a>
