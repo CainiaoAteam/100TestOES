@@ -56,6 +56,13 @@
 	<bean id="loginAction" class="com.oes.web.action.LoginAction" scope="prototype">
 	</bean>
 	
+	<!-- 配置学生模块 -->
+	<bean id="student" class="com.oes.bean.Student">
+		
+	</bean>
+	
+	
+	
 	<!-- 配置学生的模块
 	<bean id="studentAction" class="" scope="prototype">
 		<property name="studentService" ref="studentService"/>

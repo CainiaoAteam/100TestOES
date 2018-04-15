@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -12,8 +11,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	</head>
-
-	<body background="${pageContext.request.contextPath }/img/kaoshi_002.jpg">
+	<body background="${pageContext.request.contextPath }/img/index_bg_1.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
