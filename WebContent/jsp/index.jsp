@@ -18,7 +18,6 @@
 			}
 		</style>
 	</head>
-
 	<body>
 		<div class="card">
     		<div  class="horizontally-center" >
@@ -33,13 +32,13 @@
 					<!-- 轮播图片 -->
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="img/index_bg1.jpg" >
+							<img src="${pageContext.request.contextPath }/img/index_bg1.jpg" >
 						</div>
 						<div class="carousel-item">
-							<img src="img/index_bg2.jpg" >
+							<img src="${pageContext.request.contextPath }/img/index_bg2.jpg" >
 						</div>
 						<div class="carousel-item">
-							<img src="img/index_bg3.jpg" >
+							<img src="${pageContext.request.contextPath }/img/index_bg3.jpg" >
 						</div>
 					</div>
 					<div>

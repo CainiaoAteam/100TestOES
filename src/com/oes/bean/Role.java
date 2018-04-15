@@ -5,6 +5,14 @@ package com.oes.bean;
  * @author Hking
  *
  */
-public class Role {
+public abstract class Role {
 	
+	/**
+	 * µÇÂ¼
+	 * 
+	 * @param name
+	 * @param password
+	 * @return
+	 */
+	abstract public Role login(String name, String password);
 }

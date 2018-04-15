@@ -9,7 +9,7 @@
 		
 		<!-- 配置全局的结果页面 -->
 		<global-results>
-			<result name="login" type="redirect">/login.jsp</result>
+			<result name="login" type="redirect">jsp/login.jsp</result>
 		</global-results>
 		
 		<!-- 配置客户的Action，如果Action由Spring框架来管理，class标签上只需要编写ID值就OK -->

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -13,7 +12,7 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	</head>
 
-	<body background="img/kaoshi_002.jpg">
+	<body background="img/index_bg2.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
