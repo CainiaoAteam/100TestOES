@@ -5,9 +5,13 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.oes.bean.Role;
+import com.oes.service.LoginService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
+	
+	private LoginService loginService;
+	
 	
 	private String username;
 	private String password;
@@ -23,6 +27,10 @@ public class LoginAction extends ActionSupport{
 	
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
 	}
 
 	/**
