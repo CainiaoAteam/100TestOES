@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/com/oes/utils/MD5Utils.java=UTF-8
+<<<<<<< HEAD
 encoding//src/com/oes/web/action/LoginAction.java=UTF-8
+=======
+>>>>>>> branch 'master' of https://github.com/CainiaoAteam/100TestOES.git
 encoding/<project>=UTF-8

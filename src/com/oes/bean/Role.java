@@ -1,14 +1,14 @@
 package com.oes.bean;
 
 /**
- * 所有角色的父类
+ * 鎵�鏈夎鑹茬殑鐖剁被
  * @author Hking
  *
  */
 public abstract class Role {
 	
 	/**
-	 * 登录
+	 * 瀛愮被闇�瑕佸疄鐜扮殑鎶借薄鐧诲綍鏂规硶
 	 * 
 	 * @param name
 	 * @param password
