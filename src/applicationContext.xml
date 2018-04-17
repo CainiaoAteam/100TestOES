@@ -35,7 +35,7 @@
 			</props>
 		</property>
 		
-		<!-- 引入映射的配置文件 -->
+		<!-- 增加实体配置文件 引入映射的配置文件 -->
 		<property name="mappingResources">
 			<list>
 				<!-- <value></value> -->
@@ -61,15 +61,15 @@
 	<bean id="student" class="com.oes.bean.Student">
 		
 	</bean>
-	<!--  配置登录业务模块 -->
+	<!--  配置登录业务模块
 	<bean id="loginService" class="com.oes.service.impl.LoginServiceImpl">
 		<property name="loginDao" ref="loginDao"/>
 	</bean>
 	
-	<!-- 配置登录Dao模块  -->
+	配置登录Dao模块 
 	<bean id="loginDao" class="com.oes.dao.impl.LoginDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
+	</bean> -->
 	
 	<!-- 配置学生的模块
 	<bean id="studentAction" class="" scope="prototype">

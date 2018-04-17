@@ -5,13 +5,11 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.oes.bean.Role;
-import com.oes.service.LoginService;
+import com.oes.service.RoleService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
-	
-	private LoginService loginService;
-	
+	private RoleService roleService;
 	
 	private String username;
 	private String password;
@@ -29,10 +27,10 @@ public class LoginAction extends ActionSupport{
 		this.type = type;
 	}
 	
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
 	}
-
+	
 	/**
 	 * 控制跳转
 	 * 
@@ -44,8 +42,7 @@ public class LoginAction extends ActionSupport{
 		String identity = ServletActionContext.getRequest().getParameter("role");
 		System.out.println(identity);
 		ServletActionContext.getRequest().getSession().setAttribute("role", identity);
-		
-		
+
 		return LOGIN;
 	}
 	
@@ -55,29 +52,16 @@ public class LoginAction extends ActionSupport{
 	 * @return
 	 */
 	public String login() {
-		
-//		
 		//获取spring容器
 		WebApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(ServletActionContext.getServletContext());
 		System.out.println("登录身份："+type);
 		System.out.println(username);
 		Role role = (Role) ac.getBean(type);
-		role.login(username, password);
-		
-		return NONE;
-	}
-	/**
-	 * 检查用户名是否存在
-	 * 
-	 * @return
-	 */
-	public String checkNameById() {
-		loginService.checkNameById(type,username);
-		
 		
 		
 		return NONE;
 	}
+	
 	
 
 }

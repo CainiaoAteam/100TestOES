@@ -14,5 +14,5 @@ public abstract class Role {
 	 * @param password
 	 * @return
 	 */
-	abstract public Role login(String name, String password);
+	//abstract public Role login(String name, String password);
 }
