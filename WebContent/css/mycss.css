@@ -55,3 +55,14 @@ body{
     position: fixed;
     top: 15px;
 }
+.myspan-Qu-Num{
+	display: inline-block;
+    margin-bottom: 5px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #e4e4e4;
+    color:black;
+    
+}

@@ -1,19 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/font-awesome.min.css" />
-		<link rel="stylesheet" href="css/build.css" />
-		<link rel="stylesheet" href="css/mycss.css" />
-		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/build.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/mycss.css" />
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	</head>
 
-	<body background="img/kaoshi_002.jpg">
+	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style=" background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
@@ -91,7 +93,7 @@
 									<td>
 										<div class="card ">
 											<div class="card-header " >
-												<span style="font-size: 20px; ">1. </span> 
+												<label class="mylabel-num">1</label>
 												<div class="float-right ">
 													<button type="button " class="btn btn-outline-secondary btn-sm ">编辑</button>
 													<button type="button " class="btn btn-outline-secondary btn-sm ">删除</button>
@@ -121,7 +123,7 @@
 									<td>
 										<div class="card ">
 											<div class="card-header " >
-												<span style="font-size: 20px; ">2. </span> 
+												<label class="mylabel-num">2</label>
 												<div class="float-right ">
 													<button type="button " class="btn btn-outline-secondary btn-sm ">编辑</button>
 													<button type="button " class="btn btn-outline-secondary btn-sm ">删除</button>
@@ -150,7 +152,7 @@
 									<td>
 										<div class="card ">
 											<div class="card-header " >
-												<span style="font-size: 20px; ">3. </span> 
+												<label class="mylabel-num">3</label>
 												<div class="float-right ">
 													<button type="button " class="btn btn-outline-secondary btn-sm ">编辑</button>
 													<button type="button " class="btn btn-outline-secondary btn-sm ">删除</button>
@@ -221,7 +223,7 @@
 						<br />
 						<div class="clearfix ">
 							<div class="float-right ">
-							<a href="addquestion.html "><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
+							<a href="addtestpaper.html"><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
 							</div>
 						</div>
 						<table class="table table-hover">
