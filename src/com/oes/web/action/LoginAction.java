@@ -66,7 +66,18 @@ public class LoginAction extends ActionSupport{
 		
 		return NONE;
 	}
-	
+	/**
+	 * 检查用户名是否存在
+	 * 
+	 * @return
+	 */
+	public String checkNameById() {
+		loginService.checkNameById(type,username);
+		
+		
+		
+		return NONE;
+	}
 	
 
 }

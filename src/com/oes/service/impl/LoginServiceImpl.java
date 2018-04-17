@@ -18,4 +18,10 @@ public class LoginServiceImpl implements LoginService {
 		return null;
 	}
 
+
+	public void checkNameById(String type, String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

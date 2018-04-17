@@ -17,4 +17,11 @@ public interface LoginService {
 	 * @return 如果存在将整个用户数据封装成一个对象，否则返回null
 	 */
 	public Role checkRoleByName(String role, String username);
+	/**
+	 * 检查用户名是否存在
+	 * 
+	 * @param type
+	 * @param username
+	 */
+	public void checkNameById(String type, String username);
 }

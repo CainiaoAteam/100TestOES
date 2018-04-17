@@ -13,23 +13,27 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js" ></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js" ></script>
   
-  <script type="text/javascript">
-  // 	var thisURL = document.URL;
-		// var getval = thisURL.split('?')[1];
-		// var showval = getval.split("=")[1];
-		// function showvalf() {
-		// 	document.getElementById('type').value = showval;
-		// }
-  </script>
-  
-  <!--<script type="text/javascript">
-  	function showform(){
-  		var uname=document.getElementById('usr').value;
-  		var utype=document.getElementById("type").value;
+  <script type="text/javascript">	
+  	$(function(){
+  		//失去焦点
+  		var $username = $("#user").val();
+  		var $usertype = $("#usertype").val();
+  		var url = "${pageContext.request.contextPath }/login_checkNameById";
+  		var param = {"username":$username,"type":$usertype};
   		
-  		alert(uname+utype);
-  	}
-  </script>-->
+  		
+  		$("#user").blur = $.post(url,param,function(data){
+  			//处理返回来的数据
+  			if(dat.msg=="" && data.msg=="null"){
+  				
+  			}
+  			
+  		},"json");
+  		
+  		
+  	})
+  	
+  </script>
 </head>
 <script>
 </script>
@@ -46,7 +50,7 @@
       <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password">
     </div>
     <div>
-      <input type="hidden" name="type" value="${sessionScope.role}">
+      <input id="usertype" type="hidden" name="type" value="${sessionScope.role}">
     </div>
     <!-- <div style="display:none">
       <label for="type">类型:</label>
