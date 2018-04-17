@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	</head>
-	<body background="${pageContext.request.contextPath }/img/index_bg_1.jpg">
+	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
@@ -21,7 +21,7 @@
 					</a>
 					<div> 
 						<a style="text-align: right;">欢迎你！靓仔</a>
-						<a class="btn btn-outline-secondary" href="home.html">退出</a>
+						<a class="btn btn-outline-secondary" href="index.jsp">退出</a>
 					</div>
 				</nav>
 			</div>
@@ -171,7 +171,7 @@
 					
 						<!-- 模态框底部 -->
 						<div class="modal-footer">
-							<a href="examing.html" type="button" class="btn btn-outline-light text-dark">确定</a>
+							<a href="examing.jsp" type="button" class="btn btn-outline-light text-dark">确定</a>
 <!--							<button type="button" class="btn btn-secondary" data-dismiss="modal" ><a href="examing.html">确定</a></button>
 -->						</div>
 			

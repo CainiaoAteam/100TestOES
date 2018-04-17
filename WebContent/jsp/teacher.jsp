@@ -24,7 +24,7 @@
 					</a>
 					<div> 
 						<a style="text-align: right;">欢迎你！老师</a>
-						<a class="btn btn-outline-secondary" href="home.html">退出</a>
+						<a class="btn btn-outline-secondary" href="index.jsp">退出</a>
 					</div>
 				</nav>
 			</div>
@@ -81,7 +81,7 @@
 							</p>
 							<div class="clearfix ">
 								<div class="float-right ">
-								<a href="addquestion.html "><button type="button " class="btn btn-outline-info ">添加题目</button></a>
+								<a href="addquestion.jsp"><button type="button " class="btn btn-outline-info ">添加题目</button></a>
 								</div>
 							</div>
 					</div>		
@@ -223,7 +223,7 @@
 						<br />
 						<div class="clearfix ">
 							<div class="float-right ">
-							<a href="addtestpaper.html"><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
+							<a href="addExamPaper.jsp"><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
 							</div>
 						</div>
 						<table class="table table-hover">

@@ -6,17 +6,17 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/font-awesome.min.css" />
-		<link rel="stylesheet" href="css/build.css" />
-		<link rel="stylesheet" href="css/mycss.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/build.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/mycss.css" />
 
-		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	</head>
 
-	<body background="img/kaoshi_002.jpg">
+	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style="background-color: rgba(255,255,255,0.8);">
 			<div class="card" style="float:left ;  width:87%;">
 				<div class="card-header">
