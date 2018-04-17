@@ -1,22 +1,24 @@
 package com.oes.web.action;
 
-import org.apache.struts2.ServletActionContext;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import com.oes.bean.Role;
+import org.apache.struts2.ServletActionContext;
 import com.oes.service.RoleService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
-	private RoleService roleService;
+	private RoleService studentService;
+	private RoleService teacherService;
+	private RoleService adminService;
 	
-	private String username;
+	private String sno;
 	private String password;
 	private String type;
 	
-	public void setUsername(String username) {
-		this.username = username;
+	
+	public void setSno(String sno) {
+		this.sno = sno;
 	}
 
 	public void setPassword(String password) {
@@ -27,10 +29,18 @@ public class LoginAction extends ActionSupport{
 		this.type = type;
 	}
 	
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
+	public void setStudentService(RoleService studentService) {
+		this.studentService = studentService;
 	}
-	
+
+	public void setTeacherService(RoleService teacherService) {
+		this.teacherService = teacherService;
+	}
+
+	public void setAdminService(RoleService adminService) {
+		this.adminService = adminService;
+	}
+
 	/**
 	 * 控制跳转
 	 * 
@@ -42,7 +52,7 @@ public class LoginAction extends ActionSupport{
 		String identity = ServletActionContext.getRequest().getParameter("role");
 		System.out.println(identity);
 		ServletActionContext.getRequest().getSession().setAttribute("role", identity);
-
+		
 		return LOGIN;
 	}
 	
@@ -52,16 +62,71 @@ public class LoginAction extends ActionSupport{
 	 * @return
 	 */
 	public String login() {
-		//获取spring容器
-		WebApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(ServletActionContext.getServletContext());
-		System.out.println("登录身份："+type);
-		System.out.println(username);
-		Role role = (Role) ac.getBean(type);
 		
 		
+		
+
 		return NONE;
 	}
-	
-	
+	/**
+	 * 处理ajax请求 判断用户名是否在
+	 * @return
+	 */
+	public String checkNameIsExit(){
+		//接收ajax 的post请求发送过来的数据
+//		System.out.println("失去焦点"+username+":"+type);
+		String json = "";
+		PrintWriter writer;
+		try {
+			writer = ServletActionContext.getResponse().getWriter();
+			if(type.equals("student")) {
+				boolean res = studentService.checkRoleExitByNo(sno);
+				if(!res) {
+					//该学生不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//学生存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
+			writer.print(json);
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return NONE;
+	}
+	/**
+	 * 检查密码是否正确
+	 * 
+	 * @return
+	 */
+	public String checkPassword() {
+		String json = "";
+		PrintWriter writer;
+		try {
+			writer = ServletActionContext.getResponse().getWriter();
+			if(type.equals("student")) {
+				boolean res = studentService.checkPassword(sno,password);
+				if(!res) {
+					//该学生不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//学生存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
+			writer.print(json);
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return null;
+		
+	}
 
 }

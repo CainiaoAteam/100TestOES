@@ -21,7 +21,14 @@ public class Student extends Role {
 	private String department;
 	private String grade;
 	private String phone;
+	private String password;
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Integer getSid() {
 		return sid;
 	}

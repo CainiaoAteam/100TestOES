@@ -5,7 +5,7 @@
 <struts>
 	
 	<!-- 先配置包结构 -->
-	<package name="crm" extends="struts-default" namespace="/">
+	<package name="oes" extends="struts-default" namespace="/">
 		
 		<!-- 配置全局的结果页面 -->
 		<global-results>
