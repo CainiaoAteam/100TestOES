@@ -54,36 +54,54 @@
 	
 	<!-- 配置登录模块 -->
 	<bean id="loginAction" class="com.oes.web.action.LoginAction" scope="prototype">
-		<property name="loginService" ref="loginService"/>
+		<property name="studentService" ref="studentService"/>
+		<property name="teacherService" ref="teacherService"/>
+		<property name="adminService" ref="adminService"/>
+	</bean>
+	<!-- 配置考试模块 -->
+	<bean id="examAction" class="com.oes.web.action.ExamAction" scope="prototype">
+		<property name="examService" ref="examService"/>
+	</bean>
+	
+	<!-- 考试业务 -->
+	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
+		<property name="examDao" ref="examDao"/>
+	</bean>
+	<!-- 考试dao -->
+	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
 	<!-- 配置学生模块 -->
 	<bean id="student" class="com.oes.bean.Student">
 		
 	</bean>
-	<!--  配置登录业务模块
-	<bean id="loginService" class="com.oes.service.impl.LoginServiceImpl">
-		<property name="loginDao" ref="loginDao"/>
+	<!-- 学生业务模块 -->
+	<bean id="studentService" class="com.oes.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<!-- 老师业务模块 -->
+	<bean id="teacherService" class="com.oes.service.impl.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+	<!-- 管理员业务模块 -->
+	<bean id="adminService" class="com.oes.service.impl.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"></property>
 	</bean>
 	
-	配置登录Dao模块 
-	<bean id="loginDao" class="com.oes.dao.impl.LoginDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean> -->
 	
-	<!-- 配置学生的模块
-	<bean id="studentAction" class="" scope="prototype">
-		<property name="studentService" ref="studentService"/>
-	</bean>
 	
-	<bean id="studentService" class="">
-		<property name="studentDao" ref="studentDao"/>
-	</bean>
-	
-	<bean id="studentDao" class="">
+	<!-- 配置持久dao层 -->
+	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	 -->
+	<bean id="teacherDao" class="com.oes.dao.impl.TeacherDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="adminDao" class="com.oes.dao.impl.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
 </beans>
 
 

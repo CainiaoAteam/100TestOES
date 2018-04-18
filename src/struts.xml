@@ -5,16 +5,25 @@
 <struts>
 	
 	<!-- 先配置包结构 -->
-	<package name="crm" extends="struts-default" namespace="/">
+	<package name="oes" extends="struts-default" namespace="/">
 		
 		<!-- 配置全局的结果页面 -->
 		<global-results>
 			<result name="login" type="redirect">jsp/login.jsp</result>
+			
+			<result name="index" type="redirect">jsp/index.jsp</result>
 		</global-results>
 		
 		<!-- 配置客户的Action，如果Action由Spring框架来管理，class标签上只需要编写ID值就OK -->
 		<action name="login_*" class="loginAction" method="{1}">
-			<!-- <result name="loginOK" type="redirect">/student.jsp</result> -->
+			<result name="student" type="redirect">jsp/student.jsp</result>
+			<result name="teacher" type="redirect">jsp/teacher.jsp</result>
+			<result name="admin" type="redirect">jsp/admin.jsp</result>
+		</action>
+		
+		<!-- 考试动作 -->
+		<action name="exam_*" class="examAction" method="{1}">
+			
 		</action>
 		
 	</package>
