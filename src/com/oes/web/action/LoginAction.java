@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
 	private RoleService roleService;
-	
+	 
 	private String username;
 	private String password;
 	private String type;
