@@ -46,15 +46,15 @@
 	</head>
 	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
-			<div>
+			<div id="topInfo">
 				<nav class="navbar navbar-light bg-faded">
-					<a class="navbar-brand" href="javasrcipt:;">
-						<h1>100test</h1>
+					<a class="navbar-brand">
+						<h1>100Test</h1>
 						<!--<p>&nbsp;we are the best</p>-->
 					</a>
 					<div> 
-						欢迎你， &nbsp;<a style="text-align: right;">${sessionScope.user.sname }</a> &nbsp;！
-						<!--<a class="btn btn-outline-secondary" href="${pageContext.request.contextPath }/login_logout">退出</a>-->
+						<a style="text-align: right;">欢迎你！${sessionScope.user.sname}</a>
+						<!-- <a class="btn btn-outline-secondary" href="home.html">退出</a> -->
 						<a class="user_a" href="${pageContext.request.contextPath }/login_logout">退出</a>
 					</div>
 				</nav>
@@ -63,26 +63,26 @@
 				<!-- Nav pills -->
 				<ul class="nav nav-pills flex-column " role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="pill" href="#home">参加考试</a>
+						<a class="nav-link active" data-toggle="pill" href="#toExam">参加考试</a>
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#menu1">考试记录</a>
+						<a class="nav-link" data-toggle="pill" href="#record">考试记录</a>
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#menu2">个人信息</a>
+						<a class="nav-link" data-toggle="pill" href="#myInfo">个人信息</a>
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#menu3">关于</a>
+						<a class="nav-link" data-toggle="pill" href="#about">关于</a>
 					</li>
 				</ul>
 			</div>
 
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
-					<div id="home" class="container tab-pane active">
+					<div id="toExam" class="container tab-pane active">
 						<table class="table table-hover">
 							<tbody>
 								<tr>
@@ -92,7 +92,7 @@
     										<h4 class="card-title">全国英语四级考试</h4>
       										<p class="card-text">考试编号：1531p</p>
       										<p class="card-text">考试时间：2018年8月8日 9:00-11:30</p>
-      										<a href="javascript:;" data-toggle="modal" data-target="#myModal" class="card-link"><p style="text-align: right;">进入考试</p></a>
+      										<a href="" data-toggle="modal" data-target="#confirmInfo" class="card-link"><p style="text-align: right;">进入考试</p></a>
     										</div>
   										</div>
 									</td>
@@ -104,7 +104,7 @@
     										<h4 class="card-title">全国英语六级考试</h4>
       										<p class="card-text">考试编号：1531p</p>
       										<p class="card-text">考试时间：2018年8月8日 14:30-16:30</p>
-      										<a href="" data-toggle="modal" data-target="#myModal" class="card-link"><p style="text-align: right;">进入考试</p></a>
+      										<a href="" data-toggle="modal" data-target="#confirmInfo" class="card-link"><p style="text-align: right;">进入考试</p></a>
     										</div>
   										</div>
 									</td>
@@ -112,7 +112,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div id="menu1" class="container tab-pane fade">
+					<div id="record" class="container tab-pane fade">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -129,50 +129,51 @@
 									<td>语文考试</td>
 									<td>2018-3-9</td>
 									<td>100</td>
-									<td><button class="btn btn-outline-info btn-sm">查看试卷</button></td>
+									<td><a href="seeExamPaper.jsp"><button class="btn btn-outline-info btn-sm">查看试卷</button></a></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div id="menu2" class="container tab-pane fade">
+					<div id="myInfo" class="container tab-pane fade">
 						<table class="table table-hover" style="border: hidden;">
 							<tbody>
 								<tr>
 									<td><p style="text-align: center;">学号:</p></td>
-									<td>${sessionScope.user.sno }</td>
+									<td>${sessionScope.user.sno}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">姓名:</p></td>
-									<td>${sessionScope.user.sname }</td>
+									<td>${sessionScope.user.sname}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">性别:</p></td>
-									<td>${sessionScope.user.gender }</td>
+									<td>${sessionScope.user.gender}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">身份证号:</p></td>
-									<td>${sessionScope.user.idcardnum }</td>
+									<td>${sessionScope.user.idcardnum}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">系别:</p></td>
-									<td>${sessionScope.user.department }</td>
+									<td>${sessionScope.user.department}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">班别:</p></td>
-									<td>${sessionScope.user.grade }</td>
+									<td>${sessionScope.user.grade}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">电话:</p></td>
-									<td>${sessionScope.user.phone }</td>
+									<td>${sessionScope.user.phone}</td>
 								</tr>
 								<tr>
-									<td><a href=""><p style="text-align: center;">修改密码</p></a></td>
+									<td><a href="" data-toggle="modal" data-target="#changePaw"><p style="text-align: center;">修改密码</p></a></td>
+									
 								</tr>
 							</tbody>
 						</table>
 					</div>
 					
-					<div id="menu3" class="container tab-pane fade">
+					<div id="about" class="container tab-pane fade">
 						<div>
 							<h3 align="center">欢迎使用100test在线考试系统</h3>
 							<!--<p align="center">
@@ -185,10 +186,9 @@
 				</div>
 			</div>
 			
-			<div class="modal fade" id="myModal">
+			<div class="modal fade" id="confirmInfo">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
-
 						<!-- 模态框头部 -->
 						<div class="modal-header">
 							<h4 class="modal-title">请确认考生信息</h4>
@@ -197,30 +197,65 @@
 					
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<p>姓  名:${sessionScope.user.sname }</p>
-							<p>身份证号:${sessionScope.user.idcardnum}</p>
+							<p>姓名:张恒</p>
+							<p>身份证号:445381199605250457</p>
 							<p>确认进入考试？</p>
 						</div>
 					
 						<!-- 模态框底部 -->
 						<div class="modal-footer">
-							<a href="examing.jsp" type="button" class="btn btn-outline-light text-dark">确定</a>
-<!--							<button type="button" class="btn btn-secondary" data-dismiss="modal" ><a href="examing.html">确定</a></button>
--->						</div>
+							<a href="myexam.jsp" type="button" class="btn btn-outline-light text-dark">确定</a>
+						</div>
 			
 					</div>
 				</div>
 			</div>
-		<div>
-			<div style="text-align: center;">
-				<p>
-					<a href="#">关于我们</a> | 
-					<a href="#">联系我们</a> | 
-					<a href="#">帮助我们</a>
-				</p>
-				<p>Design by @菜鸟A队</p>
+			<div class="modal fade" id="changePaw">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<!-- 模态框头部 -->
+						<div class="modal-header">
+							<h4 class="modal-title">修改密码</h4>
+							<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+						</div>
+					
+						<!-- 模态框主体 -->
+						<div class="modal-body">
+							<form>
+							  <fieldset class="form-group">
+							    <label for="oldPassword">请输入旧密码：</label>
+							    <input type="password" class="form-control" id="oldPassword" placeholder="Enter old password">
+							    <!--<small class="text-muted">We'll never share your email with anyone else.</small>-->
+							  </fieldset>
+							  <fieldset class="form-group">
+							    <label for="newPassword">请输入新密码：</label>
+							    <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+							  </fieldset>
+							  <fieldset class="form-group">
+							    <label for="newPasswordAgain">请再次输入新密码：</label>
+							    <input type="password" class="form-control" id="newPasswordAgain" placeholder="Enter again">
+							  </fieldset>
+							</form>
+						</div>
+					
+						<!-- 模态框底部 -->
+						<div class="modal-footer">
+							<a href="" type="button" class="btn btn-outline-light text-dark">确定</a>
+						</div>
+			
+					</div>
+				</div>
 			</div>
-  		</div>
+			<div id="aboutUs">
+				<div style="text-align: center;">
+					<p>
+						<a href="#">关于我们</a> | 
+						<a href="#">联系我们</a> | 
+						<a href="#">帮助我们</a>
+					</p>
+					<p>Design by @菜鸟A队</p>
+				</div>
+	  		</div>
 		
 		</div>
 		
