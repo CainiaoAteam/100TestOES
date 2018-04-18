@@ -11,23 +11,26 @@ public class AdminServiceImpl implements RoleService {
 	public void setAdminDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
 	}
-
-	public boolean checkRoleExitByNo(String aDminNo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean checkPassword(String aDminNo, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	/**
-	 * 在管理员登录的时候先判断该管理员输入的用户名是否存在
-	 * 存在的话 将该管理员的信息全部封装好
-	 * 
-	 * 然后返回
+	 * 检查管理输入的编号是否正确
 	 */
+	public boolean checkRoleExitByNo(String adminNo) {
+		return adminDao.checkAdminNo(adminNo);
+	}
+	/**
+	 * 检查管理员输入密码是否正确
+	 */
+	public boolean checkPassword(String adminNo, String password) {
+		return adminDao.checkAdminPassword(adminNo,password);
+	}
+	/**
+	 * 获取管理员对象
+	 */
+	public Admin getRoleByNoPsw(String adminNo, String password) {
+		return adminDao.getAdmin4NoPassword(adminNo,password);
+	}
+
+	
 	
 	
 }

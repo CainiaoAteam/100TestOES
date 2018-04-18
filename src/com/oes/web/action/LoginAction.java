@@ -3,7 +3,13 @@ package com.oes.web.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
+
+import com.oes.bean.Admin;
+import com.oes.bean.Student;
+import com.oes.bean.Teacher;
 import com.oes.service.RoleService;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -12,13 +18,15 @@ public class LoginAction extends ActionSupport{
 	private RoleService teacherService;
 	private RoleService adminService;
 	
-	private String sno;
+	private String userno;
 	private String password;
 	private String type;
 	
 	
-	public void setSno(String sno) {
-		this.sno = sno;
+	
+	
+	public void setUserno(String userno) {
+		this.userno = userno;
 	}
 
 	public void setPassword(String password) {
@@ -63,13 +71,49 @@ public class LoginAction extends ActionSupport{
 	 */
 	public String login() {
 		
+		//获取session；
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		
+		//学生登录
+		if(type.equals("student")) {
+			Student s = (Student) studentService.getRoleByNoPsw(userno,password);
+			if(s != null) {
+				//将数据保存到session中
+				session.setAttribute("user", s);
+				return "student";
+			}
+			//教师登录
+		}else if(type.equals("teacher")) {
+			Teacher t = (Teacher) teacherService.getRoleByNoPsw(userno, password);
+			if(t != null) {
+				session.setAttribute("user", t);
+				return "teacher";
+			}
+		}else {
+			//管理员登录
+			Admin admin = (Admin) adminService.getRoleByNoPsw(userno, password);
+			if(admin != null) {
+				session.setAttribute("user", admin);
+				return "admin";
+			}
+		}
 		
 
 		return NONE;
 	}
+	public String logout(){
+		//获取session；
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		//清除user数据域
+		session.removeAttribute("user");
+		
+		
+		
+		return "index";
+	}
+	
 	/**
-	 * 处理ajax请求 判断用户名是否在
+	 * 处理ajax请求 判断用户名是否在  注：管理员还没检测
 	 * @return
 	 */
 	public String checkNameIsExit(){
@@ -80,7 +124,18 @@ public class LoginAction extends ActionSupport{
 		try {
 			writer = ServletActionContext.getResponse().getWriter();
 			if(type.equals("student")) {
-				boolean res = studentService.checkRoleExitByNo(sno);
+				boolean res = studentService.checkRoleExitByNo(userno);
+				if(!res) {
+					//该学生不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//学生存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
+			if(type.equals("teacher")) {
+				boolean res = teacherService.checkRoleExitByNo(userno);
 				if(!res) {
 					//该学生不存在
 					json = "{\"msg\":\"no\"}";
@@ -99,7 +154,7 @@ public class LoginAction extends ActionSupport{
 		return NONE;
 	}
 	/**
-	 * 检查密码是否正确
+	 * 检查密码是否正确 注：管理员还没检测
 	 * 
 	 * @return
 	 */
@@ -109,7 +164,18 @@ public class LoginAction extends ActionSupport{
 		try {
 			writer = ServletActionContext.getResponse().getWriter();
 			if(type.equals("student")) {
-				boolean res = studentService.checkPassword(sno,password);
+				boolean res = studentService.checkPassword(userno,password);
+				if(!res) {
+					//该学生不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//学生存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
+			if(type.equals("teacher")) {
+				boolean res = teacherService.checkPassword(userno, password);
 				if(!res) {
 					//该学生不存在
 					json = "{\"msg\":\"no\"}";

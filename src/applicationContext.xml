@@ -58,6 +58,19 @@
 		<property name="teacherService" ref="teacherService"/>
 		<property name="adminService" ref="adminService"/>
 	</bean>
+	<!-- 配置考试模块 -->
+	<bean id="examAction" class="com.oes.web.action.ExamAction" scope="prototype">
+		<property name="examService" ref="examService"/>
+	</bean>
+	
+	<!-- 考试业务 -->
+	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
+		<property name="examDao" ref="examDao"/>
+	</bean>
+	<!-- 考试dao -->
+	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 	
 	<!-- 配置学生模块 -->
 	<bean id="student" class="com.oes.bean.Student">

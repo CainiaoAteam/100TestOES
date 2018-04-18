@@ -18,6 +18,7 @@ public interface StudentDao {
 	 * @param password
 	 * @return
 	 */
-	Student getStudentBySnoPsw(String sno, String password);
+	boolean checkPasswordBySnoPsw(String sno, String password);
+	Student getStudent(String sno, String password);
 
 }

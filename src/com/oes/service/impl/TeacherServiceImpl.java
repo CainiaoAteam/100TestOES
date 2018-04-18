@@ -11,15 +11,26 @@ public class TeacherServiceImpl implements RoleService {
 	public void setTeacherDao(TeacherDao teacherDao) {
 		this.teacherDao = teacherDao;
 	}
-
+	/**
+	 * 检查老师编号
+	 */
 	public boolean checkRoleExitByNo(String tno) {
 		// TODO Auto-generated method stub
-		return false;
+		return teacherDao.checkTeacherNo(tno);
 	}
-
+	/**
+	 * 检查老师输入的密码
+	 */
 	public boolean checkPassword(String tno, String password) {
 		// TODO Auto-generated method stub
-		return false;
+		return teacherDao.checkPassword4Teacher(tno,password);
+	}
+	/**
+	 * 通过老师编号和密码 获取教师信息
+	 */
+	public Teacher getRoleByNoPsw(String tno, String password) {
+		// TODO Auto-generated method stub
+		return teacherDao.getTeacher4NoPassword(tno,password);
 	}
 
 	

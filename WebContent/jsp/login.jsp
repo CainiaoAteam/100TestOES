@@ -32,18 +32,18 @@
       }else {
         //输入内容不为空，发送请求
         var url="${pageContext.request.contextPath }/login_checkNameIsExit";
-        var param = {"sno":$sno, "type":$("#usertype").val()};
+        var param = {"userno":$sno, "type":$("#usertype").val()};
 
         //发送请求
         $.post(url,param,function(data){
 
           if(data.msg == "no"){
-        	  oTip.html("输入学号不正确！");
+        	  oTip.html("输入编号不正确！");
               oTip.addClass("tipErro");
               checkPassword();
           }
           else if(data.msg == "yes"){
-        	  oTip.html("输入学号正确！");
+        	  oTip.html("输入编号正确！");
     		  oTip.removeClass("tipErro");
               oTip.addClass("tipTrue");
           }
@@ -66,7 +66,7 @@
         }else {
           //输入内容不为空，发送请求
           var url="${pageContext.request.contextPath }/login_checkPassword";
-          var param = {"sno":$sno,"password":$psw ,"type":$("#usertype").val()};
+          var param = {"userno":$sno,"password":$psw ,"type":$("#usertype").val()};
 
           //发送请求
           $.post(url,param,function(data){
@@ -97,12 +97,12 @@
   <form action="${pageContext.request.contextPath }/login_login" method="post">
     <div class="form-group">
       <label for="usr">账号:</label>
-      <input type="text" class="form-control" id="user" name="sno" onblur="checkName()" placeholder="Enter username">
+      <input type="text" class="form-control" id="user" name="userno" onblur="checkName()" placeholder="Enter username">
       <span id="checkTip"></span>
     </div>
     <div class="form-group">
       <label for="pwd">密码:</label>
-      <input id="psw" type="password" class="form-control" id="pwd" name="password" onblur="checkPassword()" placeholder="Enter password">
+      <input id="psw" type="password" class="form-control" id="pwd" name="password" onkeyup="checkPassword()" placeholder="Enter password">
       <span id="pswTip"></span>
     </div>
     <div>

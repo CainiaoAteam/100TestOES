@@ -10,18 +10,51 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.user_a{
+				text-decoration: none;
+				padding: 0 10px;
+				font: 500 14px "Microsoft Yahei";
+			}
+			
+		</style>
+		
+		
+		<!-- 一跳转到这个页面就加载相关考试的信息  -->
+		<script type="text/javascript">
+			// 页面加载成功
+			$(function(){
+				//加载考试项
+				loadExamWhenReady();
+
+			});
+			/**
+			 * 加载考试项，与谁根据当前时间来加载考试
+
+			 */
+			function loadExamWhenReady(){
+				var url = "${pageContext.request.contextPath }/exam_loadExamItem";
+				var param = {};
+				$.post(url,param,function(data){
+					console.log(data);
+				},"json");
+			}
+		</script>
+		
+		
 	</head>
 	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
-					<a class="navbar-brand" href="">
+					<a class="navbar-brand" href="javasrcipt:;">
 						<h1>100test</h1>
 						<!--<p>&nbsp;we are the best</p>-->
 					</a>
 					<div> 
-						<a style="text-align: right;">欢迎你！靓仔</a>
-						<a class="btn btn-outline-secondary" href="index.jsp">退出</a>
+						欢迎你， &nbsp;<a style="text-align: right;">${sessionScope.user.sname }</a> &nbsp;！
+						<!--<a class="btn btn-outline-secondary" href="${pageContext.request.contextPath }/login_logout">退出</a>-->
+						<a class="user_a" href="${pageContext.request.contextPath }/login_logout">退出</a>
 					</div>
 				</nav>
 			</div>
@@ -58,7 +91,7 @@
     										<h4 class="card-title">全国英语四级考试</h4>
       										<p class="card-text">考试编号：1531p</p>
       										<p class="card-text">考试时间：2018年8月8日 9:00-11:30</p>
-      										<a href="" data-toggle="modal" data-target="#myModal" class="card-link"><p style="text-align: right;">进入考试</p></a>
+      										<a href="javascript:;" data-toggle="modal" data-target="#myModal" class="card-link"><p style="text-align: right;">进入考试</p></a>
     										</div>
   										</div>
 									</td>
@@ -105,35 +138,34 @@
 							<tbody>
 								<tr>
 									<td><p style="text-align: center;">学号:</p></td>
-									<td>201524133215</td>
+									<td>${sessionScope.user.sno }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">姓名:</p></td>
-									<td>张创恒</td>
+									<td>${sessionScope.user.sname }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">性别:</p></td>
-									<td>男</td>
+									<td>${sessionScope.user.gender }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">身份证号:</p></td>
-									<td>445381199608250457</td>
+									<td>${sessionScope.user.idcardnum }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">系别:</p></td>
-									<td>计算机</td>
+									<td>${sessionScope.user.department }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">班别:</p></td>
-									<td>15软件2班</td>
+									<td>${sessionScope.user.grade }</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">电话:</p></td>
-									<td>15767044123</td>
+									<td>${sessionScope.user.phone }</td>
 								</tr>
 								<tr>
 									<td><a href=""><p style="text-align: center;">修改密码</p></a></td>
-									
 								</tr>
 							</tbody>
 						</table>
@@ -164,8 +196,8 @@
 					
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<p>姓名:张恒</p>
-							<p>身份证号:445381199605250457</p>
+							<p>姓  名:${sessionScope.user.sname }</p>
+							<p>身份证号:${sessionScope.user.idcardnum}</p>
 							<p>确认进入考试？</p>
 						</div>
 					

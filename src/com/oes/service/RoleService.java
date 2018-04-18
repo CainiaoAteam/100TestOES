@@ -10,7 +10,7 @@ public interface RoleService {
 	 * @param no 学号或者教师号
 	 * @return 如果存在返回true 否则false
 	 */
-	boolean checkRoleExitByNo(String no);
+	boolean checkRoleExitByNo(String userno);
 	/**
 	 * 检查用户密码是否正确
 	 * 
@@ -18,6 +18,8 @@ public interface RoleService {
 	 * @param password
 	 * @return
 	 */
-	boolean checkPassword(String username, String password);
+	boolean checkPassword(String userno, String password);
+	
+	Role getRoleByNoPsw(String userno, String password);
 	
 }

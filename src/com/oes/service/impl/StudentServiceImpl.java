@@ -28,13 +28,21 @@ public class StudentServiceImpl implements RoleService {
 	 * 检查输入密码是否正确
 	 */
 	public boolean checkPassword(String sno, String password) {
-		Student s = studentDao.getStudentBySnoPsw(sno,password);
-		if(s != null) {
-			return true;
-		}
 			
-		return false;
+		return studentDao.checkPasswordBySnoPsw(sno,password);
 		
 	}
+
+
+	/**
+	 * 获取学生角色的信息
+	 */
+	public Student getRoleByNoPsw(String sno, String password) {
+		
+		return studentDao.getStudent(sno,password);
+	}
+
+
+	
 	
 }

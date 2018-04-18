@@ -19,20 +19,26 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 		return false;
 	}
 	/**
-	 * 获取用户
+	 * 判断用户密码是否正确
 	 * 
 	 */
-	public Student getStudentBySnoPsw(String sno, String password) {
+	public boolean checkPasswordBySnoPsw(String sno, String password) {
 		// TODO Auto-generated method stub
 		if(sno.equals("123456") && password.equals("123456")) {
-			Student s = new Student();
-			s.setSno(sno);
-			s.setSname("帅仔");
-			s.setPassword(password);
-			
-			return s;
+			return true;
 		}
-		return null;
+		return false;
+	}
+	/**
+	 * 获取学生信息
+	 */
+	public Student getStudent(String sno, String password) {
+		Student s = new Student();
+		s.setSno(sno);
+		s.setPassword(password);
+		s.setSname("帅仔");
+		
+		return s;
 	}
 	
 
