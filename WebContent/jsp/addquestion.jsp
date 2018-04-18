@@ -23,7 +23,7 @@
 						<h1>100test</h1>
 					</a>
 					<div>
-						<a class="btn btn-outline-secondary" href="teacher.html">返回主页</a>
+						<a class="btn btn-outline-secondary" href="teacher.jsp">返回主页</a>
 					</div>
 				</nav>
 			</div>

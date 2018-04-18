@@ -11,15 +11,20 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		// TODO Auto-generated method stub
 		return tno.equals("abc123");
 	}
-
+	
 	public boolean checkPassword4Teacher(String tno, String password) {
 		// TODO Auto-generated method stub
 		return tno.equals("abc123")&&password.equals("abc123");
 	}
 
 	public Teacher getTeacher4NoPassword(String tno, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Teacher t = new Teacher();
+		t.setTno(tno);
+		t.setTname("隔壁老赵");
+		t.setPassword(password);
+		
+		return t;
 	}
 	
 }

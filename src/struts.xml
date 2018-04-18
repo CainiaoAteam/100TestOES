@@ -23,7 +23,7 @@
 		
 		<!-- 考试动作 -->
 		<action name="exam_*" class="examAction" method="{1}">
-			
+			<result name="exam" type="redirect">jsp/examing.jsp</result>
 		</action>
 		
 	</package>

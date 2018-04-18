@@ -26,9 +26,6 @@ public class LoginAction extends ActionSupport{
 	private String password;
 	private String type;
 	
-	
-	
-	
 	public void setUserno(String userno) {
 		this.userno = userno;
 	}
@@ -87,13 +84,16 @@ public class LoginAction extends ActionSupport{
 				return "student";
 			}
 			//教师登录
-		}else if(type.equals("teacher")) {
+		}
+		if(type.equals("teacher")) {
+			
 			Teacher t = (Teacher) teacherService.getRoleByNoPsw(userno, password);
 			if(t != null) {
 				session.setAttribute("user", t);
 				return "teacher";
 			}
-		}else {
+		}
+		if(type.equals("admin")){
 			//管理员登录
 			Admin admin = (Admin) adminService.getRoleByNoPsw(userno, password);
 			if(admin != null) {
@@ -101,8 +101,6 @@ public class LoginAction extends ActionSupport{
 				return "admin";
 			}
 		}
-		
-
 		return NONE;
 	}
 	public String logout(){
@@ -110,8 +108,7 @@ public class LoginAction extends ActionSupport{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		//清除user数据域
 		session.removeAttribute("user");
-		
-		
+		session.removeAttribute("role");
 		
 		return "index";
 	}
