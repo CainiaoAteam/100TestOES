@@ -23,6 +23,7 @@
 		
 		<!-- 一跳转到这个页面就加载相关考试的信息  -->
 		<script type="text/javascript">
+			var action;
 			// 页面加载成功
 			$(function(){
 				//加载考试项
@@ -31,14 +32,42 @@
 			});
 			/**
 			 * 加载考试项，与谁根据当前时间来加载考试
-
+			 data-toggle='modal' data-target='#confirmInfo'
 			 */
 			function loadExamWhenReady(){
 				var url = "${pageContext.request.contextPath }/exam_loadExamItem";
 				var param = {};
 				$.post(url,param,function(data){
-					console.log(data);
+					var inner = "";
+					var item = "";
+					$.each(data,function(i,n){
+						item = "<tr>"+
+									"<td>"+
+										"<div class='card'>"+
+											"<div class='card-body'>"+
+											"<h4 class='card-title'>"+data[i].examname+"</h4>"+
+												"<p class='card-text'>考试编号："+data[i].examno+"</p>"+
+												"<p class='card-text'>考试时间："+data[i].startTime+"</p>"+
+												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?pid="+data[i].tpid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
+											"</div>"+
+										"</div>"+
+									"</td>"+
+								"</tr>";
+						inner += item;
+					});
+
+					$("#examBody").html(inner);
 				},"json");
+			}
+			function checkInfo(obj){
+				action = obj.name;
+				$("#confirmInfo").show();
+			}
+			function closeWin(){
+				$("#confirmInfo").hide();
+			}
+			function enterExam(){
+				window.location.href=action;
 			}
 		</script>
 		
@@ -84,31 +113,9 @@
 				<div class="tab-content">
 					<div id="toExam" class="container tab-pane active">
 						<table class="table table-hover">
-							<tbody>
-								<tr>
-									<td>
-										<div class="card">
-    										<div class="card-body">
-    										<h4 class="card-title">全国英语四级考试</h4>
-      										<p class="card-text">考试编号：1531p</p>
-      										<p class="card-text">考试时间：2018年8月8日 9:00-11:30</p>
-      										<a href="" data-toggle="modal" data-target="#confirmInfo" class="card-link"><p style="text-align: right;">进入考试</p></a>
-    										</div>
-  										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="card">
-    										<div class="card-body">
-    										<h4 class="card-title">全国英语六级考试</h4>
-      										<p class="card-text">考试编号：1531p</p>
-      										<p class="card-text">考试时间：2018年8月8日 14:30-16:30</p>
-      										<a href="" data-toggle="modal" data-target="#confirmInfo" class="card-link"><p style="text-align: right;">进入考试</p></a>
-    										</div>
-  										</div>
-									</td>
-								</tr>
+							<!-- 加载考试的数据 -->
+							<tbody id="examBody">
+								
 							</tbody>
 						</table>
 					</div>
@@ -167,7 +174,6 @@
 								</tr>
 								<tr>
 									<td><a href="" data-toggle="modal" data-target="#changePaw"><p style="text-align: center;">修改密码</p></a></td>
-									
 								</tr>
 							</tbody>
 						</table>
@@ -186,25 +192,25 @@
 				</div>
 			</div>
 			
-			<div class="modal fade" id="confirmInfo">
+			<div class="modal" id="confirmInfo">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<!-- 模态框头部 -->
 						<div class="modal-header">
 							<h4 class="modal-title">请确认考生信息</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button id="close" type="button" class="close" data-dismiss="modal" onclick="closeWin()">&times;</button>
 						</div>
 					
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<p>姓名:张恒</p>
-							<p>身份证号:445381199605250457</p>
+							<p>姓名:${sessionScope.user.sname}</p>
+							<p>身份证号:${sessionScope.user.idcardnum}</p>
 							<p>确认进入考试？</p>
 						</div>
 					
 						<!-- 模态框底部 -->
 						<div class="modal-footer">
-							<a href="myexam.jsp" type="button" class="btn btn-outline-light text-dark">确定</a>
+							<a id="sure" href="javascript:;" type="button" class="btn btn-outline-light text-dark" onclick="enterExam()">确定</a>
 						</div>
 			
 					</div>
