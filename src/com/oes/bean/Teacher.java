@@ -11,11 +11,13 @@ public class Teacher extends Role {
   `phone` varchar(18) DEFAULT NULL,
 	 */
 	private Integer tid;
+	private String tno;
 	private String tname;
 	private String gender;
 	private String idcardnum;
 	private String password;
 	private String phone;
+	
 	public Integer getTid() {
 		return tid;
 	}
@@ -51,6 +53,12 @@ public class Teacher extends Role {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getTno() {
+		return tno;
+	}
+	public void setTno(String tno) {
+		this.tno = tno;
 	}
 	
 	

@@ -15,8 +15,6 @@ public class ExamAction extends ActionSupport {
 		this.examService = examService;
 	}
 
-
-
 	/**
 	 * 加载考试事项，一般都是页面加载成功的时候请求
 	 * 

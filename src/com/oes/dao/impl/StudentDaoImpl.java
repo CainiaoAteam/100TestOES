@@ -7,6 +7,7 @@ import com.oes.dao.StudentDao;
 
 public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 	
+	
 	/**
 	 * 这里只要使用学号获取用户即可，因为学号是唯一的
 	 * 
@@ -18,6 +19,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 		}
 		return false;
 	}
+	
 	/**
 	 * 判断用户密码是否正确
 	 * 
@@ -29,6 +31,7 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 		}
 		return false;
 	}
+	
 	/**
 	 * 获取学生信息
 	 */

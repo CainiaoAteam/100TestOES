@@ -6,4 +6,5 @@ import com.oes.dao.ExamDao;
 
 public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 	
+	
 }
