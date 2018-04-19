@@ -17,7 +17,7 @@
 		<property name="totalscore" column="totalscore"  type="integer"/>
 		<property name="state" column="state"  type="integer"/>
 		
-		<!--list 还没配置完成 -->
+		<!--list 还没配置完成啊 -->
 		
 		<list name="squestions" table="singlequestions">  
             
