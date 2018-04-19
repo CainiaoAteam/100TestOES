@@ -12,13 +12,26 @@ public interface StudentDao {
 	 */
 	boolean isExitBySno(String sno);
 	/**
-	 * 获取学生信息
+	 * 检查密码是否输入正确
 	 * 
 	 * @param username
 	 * @param password
 	 * @return
 	 */
 	boolean checkPasswordBySnoPsw(String sno, String password);
+	/**
+	 * 获取学生对象
+	 * @param sno
+	 * @param password
+	 * @return
+	 */
 	Student getStudent(String sno, String password);
+	/**
+	 * 更新密码到数据库
+	 * @param sno
+	 * @param newPassword
+	 * @return 成功返回true 
+	 */
+	boolean updatePassword(String sno, String newPassword);
 
 }

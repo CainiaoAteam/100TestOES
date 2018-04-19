@@ -1,5 +1,7 @@
 package com.oes.service.impl;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.oes.bean.Student;
 import com.oes.dao.StudentDao;
 import com.oes.service.RoleService;
@@ -40,6 +42,17 @@ public class StudentServiceImpl implements RoleService {
 	public Student getRoleByNoPsw(String sno, String password) {
 		
 		return studentDao.getStudent(sno,password);
+	}
+
+
+	/**
+	 * 修改密码 添加业务AOP
+	 * @param sno
+	 * @param newPassword
+	 */
+	public boolean modifyPassword(String sno, String newPassword) {
+		return studentDao.updatePassword(sno,newPassword);
+		
 	}
 
 
