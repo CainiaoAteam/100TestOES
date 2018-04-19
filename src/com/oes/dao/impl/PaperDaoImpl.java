@@ -6,11 +6,17 @@ import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
 
 public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
-	/**
-	 * 根据试卷的id获取试卷，而不是编号
-	 */
-	public TestPaper getPaperByPid(Integer pid) {
+
+	public TestPaper getPaperByPid(String pid) {
+		// TODO Auto-generated method stub
 		
+		
+		
+		return null;
+	}
+
+	public TestPaper getPaperByPid(Integer pid) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
