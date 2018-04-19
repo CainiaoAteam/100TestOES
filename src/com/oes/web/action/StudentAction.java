@@ -39,16 +39,18 @@ public class StudentAction extends ActionSupport {
 //		System.out.println(newPassword);
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Student student = (Student) session.getAttribute("user");
-		
+		this.sno = student.getSno();
 		//调用修改密码,业务层事务处理
-		boolean res = studentService.modifyPassword(student.getSno(),newPassword);
+		boolean res = studentService.modifyPassword(sno,newPassword);
 		
 		//修改成功
 		if(res) {
-			//清除session
-			session.removeAttribute("role");
-			//重定向到login.jsp
-			return "index";
+			//重新获取学生用户，直接将最新的学生信息放入session
+			student = studentService.getRoleByNoPsw(sno, newPassword);
+			session.setAttribute("user", student);
+			session.setAttribute("modify", "修改成功！");
+			//重定向回到学生主页面
+			return "tip";
 		}
 		
 		return null;
