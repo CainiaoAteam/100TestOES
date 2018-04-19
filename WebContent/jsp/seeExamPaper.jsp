@@ -16,6 +16,9 @@
 <body >
 		<div class="container">
   			<div class="card" style="float:left ;  width:87%; ">
+  				<div class="card-header" id="examInfo" style="text-align:center;">
+					<p style="font-size:22px;padding-top:7px;">全国英语四级考试---A卷</p>
+				</div>
   				<div id="SingleQuestion">
 	  				<div class="card-header" style="height: 70px;">
 	  					<div class="form-inline">

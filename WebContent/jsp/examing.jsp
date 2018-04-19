@@ -16,6 +16,9 @@
 	<body >
 		<div class="container">
   			<div class="card" style="float:left ;  width:87%; ">
+  				<div class="card-header" id="examInfo" style="text-align:center;">
+					<p style="font-size:22px;padding-top:7px;">全国英语四级考试---A卷</p>
+				</div>
   				<div id="SingleQuestion">
 	  				<div class="card-header" style="height: 70px;">
 	  					<div class="form-inline">
@@ -165,6 +168,28 @@
 	    			</div>
 	    			
     			</div> 
+    			<div id="FullQuestion">
+	  				<div class="card-header" style="height: 70px;">
+	  					<div class="form-inline">
+	  						<h5 style="margin-right: 20px;">填空题</h5>
+	  						<p class="myspan-fraction">
+								<span>共</span><samp>5</samp><span>题，合计</span><samp>5</samp><span>分</span>
+							</p>
+	  					</div>
+	  				</div>
+	    			<div class="card-body">
+	    				<div id="fq-1" class="mqtimu">
+	    					<label class="mylabel-num">1</label>
+	    					<p>西游记的作者是:（）.</p>
+	    					<div class="input-group input-group-sm">
+							  <label style="margin-top: 6px;">请输入答案：</label>
+							  <input type="text" class="form-control myfullinput col-3" id= "fq-answer-01">
+							</div>
+	    				</div>
+	    				<br />
+	    			</div>
+	    			
+    			</div>
     			<div class="card-footer">
 	    			<div class="float-right">
 						<button type="submit" class="btn btn-outline-info">交卷</button>
@@ -220,7 +245,21 @@
 	  						<a href="#mq-3"><span class="myspan-Qu-Num" id="card-mq-03">3</span></a>
 	  					</div>
   					</div>
-  					
+  					<div id="fq-card">
+						<div class="card-header input-group" style="background-color: #ffffff;">
+							<div style="text-align: center;margin:auto;">
+								<span>填空题</span>
+							</div>
+							<div style="text-align: center;margin:auto">
+								<span>共5题</span>
+							</div>
+						</div>
+						<div class="card-body" style="border-bottom: 1px solid #e4e4e4;" >
+							<a href="#fq-1"><span class="myspan-Qu-Num" id="card-fq-01">1</span></a>
+							<a href="#fq-2"><span class="myspan-Qu-Num" id="card-fq-02">2</span></a>
+							<a href="#fq-3"><span class="myspan-Qu-Num" id="card-fq-03">3</span></a>
+						</div>
+					</div>		
   				</div>
   			</div>
 		</div>
