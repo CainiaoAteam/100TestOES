@@ -61,6 +61,7 @@
 	<!-- 配置考试模块 -->
 	<bean id="examAction" class="com.oes.web.action.ExamAction" scope="prototype">
 		<property name="examService" ref="examService"/>
+		<property name="paperService" ref="paperService"/>
 	</bean>
 	
 	<!-- 考试业务 -->
@@ -69,6 +70,15 @@
 	</bean>
 	<!-- 考试dao -->
 	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	
+	<!-- 试卷业务 -->
+	<bean id="paperService" class="com.oes.service.impl.PaperServiceImpl">
+		<property name="paperDao" ref="paperDao"/>
+	</bean>
+	<bean id="paperDao" class="">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
@@ -92,8 +102,10 @@
 		<property name="adminDao" ref="adminDao"></property>
 	</bean>
 	
-	
-	
+	<!--  基础动作 -->
+	<bean id="basicAction" class="com.oes.web.action.BasicAction" scope="prototype">
+		
+	</bean>
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>

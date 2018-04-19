@@ -1,5 +1,6 @@
 package com.oes.web.action;
 
+import java.awt.print.Paper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -11,12 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.oes.bean.Exam;
+import com.oes.bean.TestPaper;
 import com.oes.service.ExamService;
+import com.oes.service.PaperService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ExamAction extends ActionSupport {
+	private PaperService paperService;
+	
+	public void setPaperService(PaperService paperService) {
+		this.paperService = paperService;
+	}
+
 	private String pid;
 	
 	public void setPid(String pid) {
@@ -36,7 +44,7 @@ public class ExamAction extends ActionSupport {
 	 */
 	public String loadExamItem() {
 		
-		System.out.println("加载考试事项！！！");
+//		System.out.println("加载考试事项！！！");
 		HttpServletResponse response = ServletActionContext.getResponse();
 		//设置编码格式
 		response.setContentType("text/html;charset=utf-8");
@@ -48,7 +56,7 @@ public class ExamAction extends ActionSupport {
 		//获取可以进行的考试项
 		List<Exam> exams = examService.getExamItemByDate(date);
 		String list = JSON.toJSONString(exams);
-		System.out.println(list);
+//		System.out.println(list);
 		
 		try {
 			PrintWriter writer = response.getWriter();
@@ -64,6 +72,7 @@ public class ExamAction extends ActionSupport {
 	public String loadPaper(){
 		
 		System.out.println(pid);
+		TestPaper paper = paperService.getPaperByPid(pid);
 		
 		return "exam";
 	}

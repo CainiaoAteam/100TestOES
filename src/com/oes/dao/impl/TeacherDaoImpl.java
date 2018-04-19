@@ -23,6 +23,7 @@ public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
 		t.setTno(tno);
 		t.setTname("隔壁老赵");
 		t.setPassword(password);
+		t.setIdcardnum("454658113145459");
 		
 		return t;
 	}

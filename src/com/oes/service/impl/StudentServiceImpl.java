@@ -1,7 +1,5 @@
 package com.oes.service.impl;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.oes.bean.Student;
 import com.oes.dao.StudentDao;
 import com.oes.service.RoleService;

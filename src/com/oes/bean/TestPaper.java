@@ -30,6 +30,69 @@ public class TestPaper {
 	private int fquestionscore;
 	private int totalscore;
 	
+	/**
+	 * 封装用于页面显示的数据，不用配置
+	 */
+	private int squestionSize;
+	private int mquestionSize;
+	private int fquestionSize;
+	
+	private int sTotal;
+	private int mTotal;
+	private int fTotal;
+	
+	
+	
+	/**************用于显示数据的getter setter**************/
+	public int getSquestionSize() {
+		return squestionSize;
+	}
+
+	public void setSquestionSize(int squestionSize) {
+		this.squestionSize = squestionSize;
+	}
+
+	public int getMquestionSize() {
+		return mquestionSize;
+	}
+
+	public void setMquestionSize(int mquestionSize) {
+		this.mquestionSize = mquestionSize;
+	}
+
+	public int getFquestionSize() {
+		return fquestionSize;
+	}
+
+	public void setFquestionSize(int fquestionSize) {
+		this.fquestionSize = fquestionSize;
+	}
+
+	public int getsTotal() {
+		return sTotal;
+	}
+
+	public void setsTotal(int sTotal) {
+		this.sTotal = sTotal;
+	}
+
+	public int getmTotal() {
+		return mTotal;
+	}
+
+	public void setmTotal(int mTotal) {
+		this.mTotal = mTotal;
+	}
+
+	public int getfTotal() {
+		return fTotal;
+	}
+
+	public void setfTotal(int fTotal) {
+		this.fTotal = fTotal;
+	}
+	/**************用于显示数据的getter setter**************/
+
 	//0代表未考的试卷  1代表考过的试卷  -1审核未通过的试卷
 	//2代表制定中的试卷
 	private int state;
