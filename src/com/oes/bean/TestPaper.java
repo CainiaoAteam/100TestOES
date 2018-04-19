@@ -28,6 +28,7 @@ public class TestPaper {
 	private int squestionscore;
 	private int mquestionscore;
 	private int fquestionscore;
+	
 	private int totalscore;
 	
 	/**

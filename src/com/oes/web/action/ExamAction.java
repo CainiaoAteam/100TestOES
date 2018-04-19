@@ -1,6 +1,5 @@
 package com.oes.web.action;
 
-import java.awt.print.Paper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -16,7 +15,9 @@ import com.oes.bean.Exam;
 import com.oes.bean.TestPaper;
 import com.oes.service.ExamService;
 import com.oes.service.PaperService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 
 public class ExamAction extends ActionSupport {
 	private PaperService paperService;
@@ -25,9 +26,8 @@ public class ExamAction extends ActionSupport {
 		this.paperService = paperService;
 	}
 
-	private String pid;
-	
-	public void setPid(String pid) {
+	private int pid;
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 
@@ -68,11 +68,20 @@ public class ExamAction extends ActionSupport {
 		}
 		return NONE;
 	}
-	
+	/**
+	 * 加载考试页面
+	 * 
+	 * @return
+	 */
 	public String loadPaper(){
 		
 		System.out.println(pid);
 		TestPaper paper = paperService.getPaperByPid(pid);
+		// 压栈
+		ValueStack vs = ActionContext.getContext().getValueStack();
+		// 栈顶是map<"paper",paper对象>
+		vs.set("paper", paper);
+		
 		
 		return "exam";
 	}
