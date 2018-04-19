@@ -56,7 +56,7 @@ public class ExamAction extends ActionSupport {
 		//获取可以进行的考试项
 		List<Exam> exams = examService.getExamItemByDate(date);
 		String list = JSON.toJSONString(exams);
-//		System.out.println(list);
+		System.out.println(list);
 		
 		try {
 			PrintWriter writer = response.getWriter();
@@ -82,6 +82,7 @@ public class ExamAction extends ActionSupport {
 		// 栈顶是map<"paper",paper对象>
 		vs.set("paper", paper);
 		
+		System.out.println(paper.getTpname());
 		
 		return "exam";
 	}

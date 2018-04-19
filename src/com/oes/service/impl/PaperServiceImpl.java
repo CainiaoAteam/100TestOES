@@ -16,17 +16,19 @@ public class PaperServiceImpl implements PaperService {
 	public TestPaper getPaperByPid(Integer pid) {
 		TestPaper paper = paperDao.getPaperByPid(pid);
 		
+		System.out.println(paper.getTpname());
+		
 		//封装好paper，方便显示
 		//封装每种题目的数目
-		paper.setSquestionSize(paper.getSquestions().size());
-		paper.setMquestionSize(paper.getMquestions().size());
-		paper.setFquestionSize(paper.getFquestions().size());
-		
-		//封装每种题目的总分值
-		paper.setsTotal(paper.getSquestions().size()*paper.getSquestionscore());
-		paper.setmTotal(paper.getMquestions().size()*paper.getMquestionscore());
-		paper.setfTotal(paper.getFquestions().size()*paper.getFquestionscore());
-		
+//		paper.setSquestionSize(paper.getSquestions().size());
+//		paper.setMquestionSize(paper.getMquestions().size());
+//		paper.setFquestionSize(paper.getFquestions().size());
+//		
+//		//封装每种题目的总分值
+//		paper.setsTotal(paper.getSquestions().size()*paper.getSquestionscore());
+//		paper.setmTotal(paper.getMquestions().size()*paper.getMquestionscore());
+//		paper.setfTotal(paper.getFquestions().size()*paper.getFquestionscore());
+//		
 		
 		
 		return paper;

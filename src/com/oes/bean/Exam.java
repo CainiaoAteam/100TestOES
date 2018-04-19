@@ -23,6 +23,13 @@ public class Exam {
 		this.examname = examname;
 	}
 	private TestPaper testpaper;
+	
+	public TestPaper getTestpaper() {
+		return testpaper;
+	}
+	public void setTestpaper(TestPaper testpaper) {
+		this.testpaper = testpaper;
+	}
 	private Date examday;
 	private double examtime;
 	
@@ -46,6 +53,7 @@ public class Exam {
 	public void setExamno(String examno) {
 		this.examno = examno;
 	}
+	
 	/*
 	public Integer getTpid() {
 		return tpid;

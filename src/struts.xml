@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	
-	<!-- 先配置包结构 -->
+	<!-- 先配置包结构  struts.devMode -->
 	<package name="oes" extends="struts-default" namespace="/">
 		
 		<!-- 配置全局的结果页面 -->

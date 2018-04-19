@@ -55,7 +55,7 @@
 											"<h4 class='card-title'>"+data[i].examname+"</h4>"+
 												"<p class='card-text'>考试编号："+data[i].examno+"</p>"+
 												"<p class='card-text'>考试时间："+data[i].startTime+"</p>"+
-												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?pid="+data[i].tpid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
+												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?pid="+data[i].testpaper.tpid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
 											"</div>"+
 										"</div>"+
 									"</td>"+

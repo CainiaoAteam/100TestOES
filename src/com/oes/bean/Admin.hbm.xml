@@ -17,4 +17,4 @@
 		<many-to-one name="" class="" column=""/>
 		
 	</class>
-    </hibernate-mapping>
+</hibernate-mapping>

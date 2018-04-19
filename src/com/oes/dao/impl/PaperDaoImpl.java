@@ -18,8 +18,10 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
 	}
 
 	public TestPaper getPaperByPid(Integer pid) {
-		// TODO Auto-generated method stub
-		return null;
+		TestPaper paper = new TestPaper();
+		paper.setTpname("2018英语四级考试 A 卷");
+		
+		return paper;
 	}
 	
 }
