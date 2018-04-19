@@ -8,6 +8,6 @@ public interface PaperService {
 	 * @param pid
 	 * @return
 	 */
-	TestPaper getPaperByPid(String pid);
+	TestPaper getPaperByPid(Integer pid);
 	
 }

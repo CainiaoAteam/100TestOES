@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,80 +18,41 @@
 		<div class="container">
   			<div class="card" style="float:left ;  width:87%; ">
   				<div class="card-header" id="examInfo" style="text-align:center;">
-					<p style="font-size:22px;padding-top:7px;">全国英语四级考试---A卷</p>
+					<p style="font-size:22px;padding-top:7px;">${paper.tpname}</p>
 				</div>
   				<div id="SingleQuestion">
 	  				<div class="card-header" style="height: 70px;">
 	  					<div class="form-inline">
 	  						<h5 style="margin-right: 20px;">单选题</h5>
 	  						<p class="myspan-fraction">
-								<span>共</span><samp>5</samp><span>题，合计</span><samp>5</samp><span>分</span>
+								<span>共</span><samp>${paper.squestionSize}</samp><span>题，合计</span><samp>${paper.sTotal}</samp><span>分</span>
 							</p>
 	  					</div>
 	  				</div>
 	    			<div class="card-body">
-	    				<div id="sq-1" class="sqtimu">
-	    					<label class="mylabel-num">1</label>
-	    					<p> 在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（ ）</p>
-	    					<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-01-option1" value="option1" name="sq-01-sqdifficulty">
-								<label for="sq-01-option1">A. 在工具栏中点击“workflow”标签</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-01-option2" value="option2" name="sq-01-sqdifficulty">
-								<label for="sq-01-option2">B. 在缺陷单界面中点击“推进流程”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-01-option3" value="option3" name="sq-01-sqdifficulty">
-								<label for="sq-01-option3">C. 在缺陷单界面中点击“提交”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-01-option4" value="option4" name="sq-01-sqdifficulty">
-								<label for="sq-01-option4">D. 后台启动流程推进</label>
-							</div>
-	    				</div>
-	    				<br/>
-	    				<div id="sq-2" class="sqtimu">
-	    					<label class="mylabel-num">2</label>
-	    					<p> 在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（ ）</p>
-	    					<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-02-option1" value="option1" name="sq-02-sqdifficulty">
-								<label for="sq-02-option1">A. 在工具栏中点击“workflow”标签</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-02-option2" value="option2" name="sq-02-sqdifficulty">
-								<label for="sq-02-option2">B. 在缺陷单界面中点击“推进流程”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-02-option3" value="option3" name="sq-02-sqdifficulty">
-								<label for="sq-02-option3">C. 在缺陷单界面中点击“提交”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-02-option4" value="sq-2-option4" name="sq-02-sqdifficulty">
-								<label for="sq-02-option4">D. 后台启动流程推进</label>
-							</div>
-	    				</div>
-	    				<br/>
-	    				<div id="sq-3" class="sqtimu">
-	    					<label class="mylabel-num">3</label>
-	    					<p> 在生产管理信息系统中，下列操作步骤能正确将工单推进流程的是（ ）</p>
-	    					<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-03-option1" value="option1" name="sq-03-sqdifficulty">
-								<label for="sq-03-option1">A. 在工具栏中点击“workflow”标签</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-03-option2" value="option2" name="sq-03-sqdifficulty">
-								<label for="sq-03-option2">B. 在缺陷单界面中点击“推进流程”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-03-option3" value="option3" name="sq-03-sqdifficulty">
-								<label for="sq-03-option3">C. 在缺陷单界面中点击“提交”按钮</label>
-							</div>
-							<div class="radio radio-success radio-inline">
-								<input type="radio" id="sq-03-option4" value="option4" name="sq-03-sqdifficulty">
-								<label for="sq-03-option4">D. 后台启动流程推进</label>
-							</div>
-	    				</div>
+	    				<c:forEach items="${paper.squestions}" var="squestion" varStatus="status">
+		    				<div id="sq-${status.index}" class="sqtimu">
+		    					<label class="mylabel-num">${status.index}</label>
+		    					<p> ${squestion.squestion }</p>
+		    					<div class="radio radio-success radio-inline">
+									<input type="radio" id="sq-01-option1" value="option1" name="sq-01-sqdifficulty">
+									<label for="sq-01-option1">A. ${squestion.schoiceA }</label>
+								</div>
+								<div class="radio radio-success radio-inline">
+									<input type="radio" id="sq-01-option2" value="option2" name="sq-01-sqdifficulty">
+									<label for="sq-01-option2">B. ${squestion.schoiceB }</label>
+								</div>
+								<div class="radio radio-success radio-inline">
+									<input type="radio" id="sq-01-option3" value="option3" name="sq-01-sqdifficulty">
+									<label for="sq-01-option3">C. ${squestion.schoiceC }</label>
+								</div>
+								<div class="radio radio-success radio-inline">
+									<input type="radio" id="sq-01-option4" value="option4" name="sq-01-sqdifficulty">
+									<label for="sq-01-option4">D. ${squestion.schoiceD }</label>
+								</div>
+		    				</div>
+		    				<br/>
+	    				</c:forEach>
 	    			</div>
     			</div>
     			<div id="MultipleQuestion">

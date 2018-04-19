@@ -106,6 +106,7 @@
 	<bean id="basicAction" class="com.oes.web.action.BasicAction" scope="prototype">
 		
 	</bean>
+	
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
