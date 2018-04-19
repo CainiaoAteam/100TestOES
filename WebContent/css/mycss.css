@@ -64,5 +64,8 @@ body{
     text-align: center;
     border: 1px solid #e4e4e4;
     color:black;
-    
+}
+.myfullinput{
+	border:0px;
+	border-bottom:#000000 1px solid;
 }

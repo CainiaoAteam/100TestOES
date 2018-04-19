@@ -76,6 +76,9 @@
 	<bean id="student" class="com.oes.bean.Student">
 		
 	</bean>
+	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
+		<property name="studentService" ref="studentService"/>
+	</bean>
 	<!-- 学生业务模块 -->
 	<bean id="studentService" class="com.oes.service.impl.StudentServiceImpl">
 		<property name="studentDao" ref="studentDao"></property>

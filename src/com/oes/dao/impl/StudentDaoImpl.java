@@ -40,8 +40,19 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 		s.setSno(sno);
 		s.setPassword(password);
 		s.setSname("帅仔");
+		s.setIdcardnum("400286565989561233454");
+		
 		
 		return s;
+	}
+	/**
+	 * 更新密码
+	 */
+	public boolean updatePassword(String sno, String newPassword) {
+		/**
+		 * 键入更新密码的操作
+		 */
+		return true;
 	}
 	
 

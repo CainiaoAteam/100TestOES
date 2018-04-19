@@ -112,11 +112,11 @@
       <label for="type">类型:</label>
       <input type="test" class="form-control" id="type" name="type" value="${sessionScope.role}">
     </div> -->
-    <div class="form-check">
+    <!-- <div class="form-check">
       <label class="form-check-label">
         <input class="form-check-input" type="checkbox">记住密码
       </label>
-    </div>
+    </div> -->
     <div class="text-center">
     	<button id="submit" disabled="disabled" type ="submit" class="btn">登陆</button>
     </div> 

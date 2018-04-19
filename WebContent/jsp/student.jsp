@@ -17,6 +17,12 @@
 				padding: 0 10px;
 				font: 500 14px "Microsoft Yahei";
 			}
+			.trueTip{
+				color: green;
+			}
+			.erroTip{
+				color: red;
+			}
 			
 		</style>
 		
@@ -227,28 +233,31 @@
 					
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<form>
+							<form action="${pageContext.request.contextPath }/stu_modifyPsw" method="post">
 							  <fieldset class="form-group">
 							    <label for="oldPassword">请输入旧密码：</label>
-							    <input type="password" class="form-control" id="oldPassword" placeholder="Enter old password">
+							    <input type="password" class="form-control" id="oldPassword" placeholder="Enter old password" onblur="checkOldPassword(this)">
+							    <span id="oldPasswordTip"></span>
 							    <!--<small class="text-muted">We'll never share your email with anyone else.</small>-->
 							  </fieldset>
 							  <fieldset class="form-group">
 							    <label for="newPassword">请输入新密码：</label>
-							    <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+							    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password">
 							  </fieldset>
 							  <fieldset class="form-group">
 							    <label for="newPasswordAgain">请再次输入新密码：</label>
-							    <input type="password" class="form-control" id="newPasswordAgain" placeholder="Enter again">
+							    <input type="password" class="form-control" id="newPasswordAgain" placeholder="Enter again" onkeyup="
+							    checkNewPswModify(this)">
+							    <span id="newPasswordTip"></span>
 							  </fieldset>
+							  <fieldset class="form-group">
+							    <div class="text-center">
+							      <button id="modifyPsw" id="submit" disabled="disabled" type ="submit" class="btn">修改</button>
+							    </div> 
+							  </fieldset>
+
 							</form>
 						</div>
-					
-						<!-- 模态框底部 -->
-						<div class="modal-footer">
-							<a href="" type="button" class="btn btn-outline-light text-dark">确定</a>
-						</div>
-			
 					</div>
 				</div>
 			</div>
@@ -262,9 +271,38 @@
 					<p>Design by @菜鸟A队</p>
 				</div>
 	  		</div>
-		
 		</div>
-		
 	</body>
+
+	<script type="text/javascript">
+		// 修改密码的js代码
+		// 首先对比输入的旧密码是否正确
+		function checkOldPassword(obj){
+			if($("#oldPassword").val() != "${sessionScope.user.password}"){
+				$("#oldPasswordTip").html("旧密码输入不正确！");
+				$("#oldPasswordTip").addClass("erroTip");
+			}else{
+				$("#oldPasswordTip").html("旧密码输入正确！");
+				$("#oldPasswordTip").removeClass("erroTip");
+				$("#oldPasswordTip").addClass("trueTip");
+			}
+		}
+
+		//检查两次输入的新密码是否正确
+		function checkNewPswModify(obj){
+			//密码不一致
+			if($("#newPassword").val() != $("#newPasswordAgain").val()){
+				$("#newPasswordTip").html("两次密码输入不一致！");
+				$("#newPasswordTip").addClass("erroTip");
+			}else{
+				$("#newPasswordTip").html("可以修改密码！");
+				$("#newPasswordTip").removeClass("erroTip");
+				$("#newPasswordTip").addClass("trueTip");
+
+				$("#modifyPsw").removeAttr("disabled");
+			}
+		}
+
+	</script>
 
 </html>
