@@ -51,6 +51,10 @@
 	
 	<!-- 开启事务的注解 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 配置学生模块 -->
+	<bean id="student" class="com.oes.bean.Student">
+		
+	</bean>
 	
 	<!-- 配置登录模块 -->
 	<bean id="loginAction" class="com.oes.web.action.LoginAction" scope="prototype">
@@ -64,13 +68,18 @@
 		<property name="paperService" ref="paperService"/>
 	</bean>
 	
+	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
+		<property name="studentService" ref="studentService"/>
+	</bean>
+	
+	<!--  基础动作 -->
+	<bean id="basicAction" class="com.oes.web.action.BasicAction" scope="prototype">
+		
+	</bean>
+	
 	<!-- 考试业务 -->
 	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
 		<property name="examDao" ref="examDao"/>
-	</bean>
-	<!-- 考试dao -->
-	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
 	
@@ -78,17 +87,8 @@
 	<bean id="paperService" class="com.oes.service.impl.PaperServiceImpl">
 		<property name="paperDao" ref="paperDao"/>
 	</bean>
-	<bean id="paperDao" class="">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
 	
-	<!-- 配置学生模块 -->
-	<bean id="student" class="com.oes.bean.Student">
-		
-	</bean>
-	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
-		<property name="studentService" ref="studentService"/>
-	</bean>
+	
 	<!-- 学生业务模块 -->
 	<bean id="studentService" class="com.oes.service.impl.StudentServiceImpl">
 		<property name="studentDao" ref="studentDao"></property>
@@ -102,10 +102,7 @@
 		<property name="adminDao" ref="adminDao"></property>
 	</bean>
 	
-	<!--  基础动作 -->
-	<bean id="basicAction" class="com.oes.web.action.BasicAction" scope="prototype">
-		
-	</bean>
+
 	
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
@@ -114,7 +111,14 @@
 	<bean id="teacherDao" class="com.oes.dao.impl.TeacherDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
+	<!-- 考试dao -->
+	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 	<bean id="adminDao" class="com.oes.dao.impl.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="paperDao" class="">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
