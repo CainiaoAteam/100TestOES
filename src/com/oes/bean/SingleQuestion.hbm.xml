@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+    	<class name="com.oes.bean.SingleQuestion" table="singlequestion">
+		<id name="sqid" column="sqid"  type="integer">
+			<generator class="native"/>
+		</id>
+		
+		<property name="sqno" column="sqno"  type="string"/>
+		<property name="squestion" column="squestion"  type="string"/>
+		<property name="schoiceA" column="schoiceA"  type="string"/>
+		<property name="schoiceB" column="schoiceB"  type="string"/>
+		<property name="schoiceC" column="schoiceC"  type="string"/>
+		<property name="schoiceD" column="schoiceD"  type="string"/>
+		<property name="sanswer" column="sanswer"  type="string"/>
+		<property name="sexplanation" column="sexplanation"  type="string"/>
+		<property name="difficulty" column="difficulty"  type="string"/>
+		
+
+		<!-- 配置的多方 name是JavaBean属性名称  class="一方类的全路径" cloumn="外键的名称"  -->
+		<many-to-one name="" class="" column=""/>
+		
+	</class>
+    </hibernate-mapping>

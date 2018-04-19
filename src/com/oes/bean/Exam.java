@@ -22,9 +22,9 @@ public class Exam {
 	public void setExamname(String examname) {
 		this.examname = examname;
 	}
-	private Integer tpid;
+	private TestPaper testpaper;
 	private Date examday;
-	private int examtime;
+	private double examtime;
 	
 	private String startTime;//装换的开始考试时间，这里不存进数据库，所以不要配置到xml文件中
 	
@@ -46,22 +46,24 @@ public class Exam {
 	public void setExamno(String examno) {
 		this.examno = examno;
 	}
+	/*
 	public Integer getTpid() {
 		return tpid;
 	}
 	public void setTpid(Integer tpid) {
 		this.tpid = tpid;
-	}
+	}*/
+	
 	public Date getExamday() {
 		return examday;
 	}
 	public void setExamday(Date examday) {
 		this.examday = examday;
 	}
-	public int getExamtime() {
+	public double getExamtime() {
 		return examtime;
 	}
-	public void setExamtime(int examtime) {
+	public void setExamtime(double examtime) {
 		this.examtime = examtime;
 	}
 	

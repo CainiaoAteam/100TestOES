@@ -38,7 +38,7 @@
 		<!-- 增加实体配置文件 引入映射的配置文件 -->
 		<property name="mappingResources">
 			<list>
-				<!-- <value></value> -->
+				<value>Admin.hbm.xml</value>
 				
 			</list>
 		</property>
