@@ -13,5 +13,13 @@ public interface ExamDao {
 	 * @return
 	 */
 	List<Exam> getExamByDate(Date date);
+	
+	/**
+	 * 根据id获取考试对象
+	 * 
+	 * @param examid
+	 * @return
+	 */
+	Exam getExamById(int examid);
 
 }

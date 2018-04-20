@@ -79,6 +79,7 @@
 	<!-- 考试业务 -->
 	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
 		<property name="examDao" ref="examDao"/>
+		<property name="paperDao" ref="paperDao"/>
 	</bean>
 	
 	
@@ -101,7 +102,7 @@
 		<property name="adminDao" ref="adminDao"></property>
 	</bean>
 	
-
+	
 	
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">

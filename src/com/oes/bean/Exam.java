@@ -16,6 +16,7 @@ public class Exam {
 	private Integer examid;
 	private String examno;
 	private String examname;
+	
 	public String getExamname() {
 		return examname;
 	}

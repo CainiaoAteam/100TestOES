@@ -20,19 +20,21 @@
 		<div class="container">
   			<div class="card" style="float:left ;  width:87%; ">
   				<div class="card-header" id="examInfo" style="text-align:center;">
-					<p style="font-size:22px;padding-top:7px;">${paper.tpname}</p>
+					<p style="font-size:22px;padding-top:7px;">${exam.testpaper.tpname}</p>
 				</div>
   				<div id="SingleQuestion">
-	  				<div class="card-header" style="height: 70px;">
-	  					<div class="form-inline">
-	  						<h5 style="margin-right: 20px;">单选题</h5>
-	  						<p class="myspan-fraction">
-								<span>共</span><samp>${paper.squestionSize}</samp><span>题，合计</span><samp>${paper.sTotal}</samp><span>分</span>
-							</p>
-	  					</div>
-	  				</div>
+  					<c:if test="${not empty exam.testpaper.squestions}">
+		  				<div class="card-header" style="height: 70px;">
+		  					<div class="form-inline">
+		  						<h5 style="margin-right: 20px;">单选题</h5>
+		  						<p class="myspan-fraction">
+									<span>共</span><samp>${exam.testpaper.squestionSize}</samp><span>题，合计</span><samp>${exam.testpaper.sTotal}</samp><span>分</span>
+								</p>
+		  					</div>
+		  				</div>
+	  				</c:if>
 	    			<div class="card-body">
-	    				<c:forEach items="${paper.squestions}" var="squestion" varStatus="status">
+	    				<c:forEach items="${exam.testpaper.squestions}" var="squestion" varStatus="status">
 		    				<div id="sq-${status.index}" class="sqtimu">
 		    					<label class="mylabel-num">${status.index}</label>
 		    					<p> ${squestion.squestion }</p>
@@ -58,101 +60,66 @@
 	    			</div>
     			</div>
     			<div id="MultipleQuestion">
-	  				<div class="card-header" style="height: 70px;">
-	  					<div class="form-inline">
-	  						<h5 style="margin-right: 20px;">多选题</h5>
-	  						<p class="myspan-fraction">
-								<span>共</span><samp>5</samp><span>题，合计</span><samp>5</samp><span>分</span>
-							</p>
-	  					</div>
-	  				</div>
+    				<c:if test="${not empty exam.testpaper.mquestions}">
+		  				<div class="card-header" style="height: 70px;">
+		  					<div class="form-inline">
+		  						<h5 style="margin-right: 20px;">多选题</h5>
+		  						<p class="myspan-fraction">
+									<span>共</span><samp>${exam.testpaper.mquestionSize}</samp><span>题，合计</span><samp>${exam.testpaper.mTotal}</samp><span>分</span>
+								</p>
+		  					</div>
+		  				</div>
+		  			</c:if>
 	    			<div class="card-body">
-	    				<div id="mq-1" class="mqtimu">
-	    					<label class="mylabel-num">1</label>
-	    					<p>  对 “热爱祖国、热爱南网、热爱岗位”理解正确的是()</p>
-	    					<div class="checkbox checkbox-success">
-								<input id="mq-01-answer1" class="styled" type="checkbox">
-							    <label for="mq-01-answer1">A. 坚持南网的利益高于一切</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-01-answer2" class="styled" type="checkbox">
-							    <label for="mq-01-answer2">B. 忠诚南网事业，维护南网利益</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-01-answer3" class="styled" type="checkbox">
-							    <label for="mq-01-answer3">C. 人往高处走，水往低处流，专注于爬上更高的岗位</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-01-answer4" class="styled" type="checkbox">
-							    <label for="mq-01-answer4">D. 个人利益第一，南网利益第二</label>
-							</div>
-	    				</div>
-	    				<br />
-	    				<div id="mq-2" class="mqtimu">
-	    					<label class="mylabel-num">2</label>
-	    					<p>  对 “热爱祖国、热爱南网、热爱岗位”理解正确的是()</p>
-	    					<div class="checkbox checkbox-success">
-								<input id="mq-02-answer1" class="styled" type="checkbox">
-							    <label for="mq-02-answer1">A. 坚持南网的利益高于一切</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-02-answer2" class="styled" type="checkbox">
-							    <label for="mq-02-answer2">B. 忠诚南网事业，维护南网利益</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-02-answer3" class="styled" type="checkbox">
-							    <label for="mq-02-answer3">C. 人往高处走，水往低处流，专注于爬上更高的岗位</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-02-answer4" class="styled" type="checkbox">
-							    <label for="mq-02-answer4">D. 个人利益第一，南网利益第二</label>
-							</div>
-	    				</div>
-	    				<br />
-	    				<div id="mq-3" class="mqtimu">
-	    					<label class="mylabel-num">13</label>
-	    					<p>  对 “热爱祖国、热爱南网、热爱岗位”理解正确的是()</p>
-	    					<div class="checkbox checkbox-success">
-								<input id="mq-03-answer1" class="styled" type="checkbox">
-							    <label for="mq-03-answer1">A. 坚持南网的利益高于一切</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-03-answer2" class="styled" type="checkbox">
-							    <label for="mq-03-answer2">B. 忠诚南网事业，维护南网利益</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-03-answer3" class="styled" type="checkbox">
-							    <label for="mq-03-answer3">C. 人往高处走，水往低处流，专注于爬上更高的岗位</label>
-							</div>
-							<div class="checkbox checkbox-success">
-								<input id="mq-03-answer4" class="styled" type="checkbox">
-							    <label for="mq-03-answer4">D. 个人利益第一，南网利益第二</label>
-							</div>
-	    				</div>
+	    				<c:forEach items="${exam.testpaper.mquestions}" var="mquestion" varStatus="status">
+		    				<div id="mq-${status.index}" class="mqtimu">
+		    					<label class="mylabel-num">${status.index}</label>
+		    					<p>  ${mquestion.mquestion}</p>
+		    					<div class="checkbox checkbox-success">
+									<input id="mq-01-answer1" class="styled" type="checkbox">
+								    <label for="mq-01-answer1">A. ${mquestion.mchoiceA}</label>
+								</div>
+								<div class="checkbox checkbox-success">
+									<input id="mq-01-answer2" class="styled" type="checkbox">
+								    <label for="mq-01-answer2">B. ${mquestion.mchoiceB}</label>
+								</div>
+								<div class="checkbox checkbox-success">
+									<input id="mq-01-answer3" class="styled" type="checkbox">
+								    <label for="mq-01-answer3">C. ${mquestion.mchoiceC}</label>
+								</div>
+								<div class="checkbox checkbox-success">
+									<input id="mq-01-answer4" class="styled" type="checkbox">
+								    <label for="mq-01-answer4">D. ${mquestion.mchoiceD}</label>
+								</div>
+		    				</div>
+		    				<br />
+		    			</c:forEach>
 	    			</div>
-	    			
     			</div> 
     			<div id="FullQuestion">
-	  				<div class="card-header" style="height: 70px;">
-	  					<div class="form-inline">
-	  						<h5 style="margin-right: 20px;">填空题</h5>
-	  						<p class="myspan-fraction">
-								<span>共</span><samp>5</samp><span>题，合计</span><samp>5</samp><span>分</span>
-							</p>
-	  					</div>
-	  				</div>
+    				<c:if test="${not empty exam.testpaper.fquestions}">
+		  				<div class="card-header" style="height: 70px;">
+		  					<div class="form-inline">
+		  						<h5 style="margin-right: 20px;">填空题</h5>
+		  						<p class="myspan-fraction">
+									<span>共</span><samp>${exam.testpaper.fquestionSize}</samp><span>题，合计</span><samp>${exam.testpaper.fTotal}</samp><span>分</span>
+								</p>
+		  					</div>
+		  				</div>
+	  				</c:if>
 	    			<div class="card-body">
-	    				<div id="fq-1" class="mqtimu">
-	    					<label class="mylabel-num">1</label>
-	    					<p>西游记的作者是:（）.</p>
-	    					<div class="input-group input-group-sm">
-							  <label style="margin-top: 6px;">请输入答案：</label>
-							  <input type="text" class="form-control myfullinput col-3" id= "fq-answer-01">
-							</div>
-	    				</div>
-	    				<br />
+	    				<c:forEach items="${exam.testpaper.fquestions}" var="fquestion" varStatus="status">
+		    				<div id="fq-${status.index}" class="mqtimu">
+		    					<label class="mylabel-num">${status.index}</label>
+		    					<p>${fquestion.fquestion}</p>
+		    					<div class="input-group input-group-sm">
+								  <label style="margin-top: 6px;">请输入答案：</label>
+								  <input type="text" class="form-control myfullinput col-3" id= "fq-answer-01">
+								</div>
+		    				</div>
+		    				<br />
+	    				</c:forEach>
 	    			</div>
-	    			
     			</div>
     			<div class="card-footer">
 	    			<div class="float-right">
@@ -176,54 +143,60 @@
 	  							<span>答题卡</span>
 	  						</div>
 	  						<div style="text-align: center;margin:auto">
-	  							<span id="timer" class="myspan-time">150</span>
+	  							<span id="timer" class="myspan-time">${exam.examtime}</span>
 	  						</div>
 	  					</div>
-  					<div id="sq-card">
-	  					<div class="card-header input-group" style="background-color: #ffffff;">
-	  						<div style="text-align: center;margin:auto;">
-	  							<span>单选题</span>
-	  						</div>
-	  						<div style="text-align: center;margin:auto">
-	  							<span>共5题</span>
-	  						</div>
+	  				<c:if test="${not empty exam.testpaper.squestions}">
+	  					<div id="sq-card">
+		  					<div class="card-header input-group" style="background-color: #ffffff;">
+		  						<div style="text-align: center;margin:auto;">
+		  							<span>单选题</span>
+		  						</div>
+		  						<div style="text-align: center;margin:auto">
+		  							<span>共${exam.testpaper.squestionSize}题</span>
+		  						</div>
+		  					</div>
+		  					<div class="card-body" style="border-bottom: 1px solid #e4e4e4;">
+		  						<c:forEach items="${exam.testpaper.squestions}" var="squestion" varStatus="status">
+			  						<a href="#sq-${status.index}"><span class="myspan-Qu-Num" id="card-sq-0${status.index}">${status.index}</span></a>
+		  						</c:forEach>
+		  					</div>
 	  					</div>
-	  					<div class="card-body" style="border-bottom: 1px solid #e4e4e4;">
-	  						<a href="#sq-1"><span class="myspan-Qu-Num" id="card-sq-01">1</span></a>
-	  						<a href="#sq-2"><span class="myspan-Qu-Num" id="card-sq-02">2</span></a>
-	  						<a href="#sq-3"><span class="myspan-Qu-Num" id="card-sq-03">3</span></a>
+  					</c:if>
+  					<c:if test="${not empty exam.testpaper.mquestions}">
+	  					<div id="mq-card">
+		  					<div class="card-header input-group" style="background-color: #ffffff;">
+		  						<div style="text-align: center;margin:auto;">
+		  							<span>多选题</span>
+		  						</div>
+		  						<div style="text-align: center;margin:auto">
+		  							<span>共${exam.testpaper.mquestionSize}题</span>
+		  						</div>
+		  					</div>
+		  					<div class="card-body" style="border-bottom: 1px solid #e4e4e4;" >
+		  						<c:forEach items="${exam.testpaper.mquestions}" var="mquestion" varStatus="status">
+		  							<a href="#mq-${status.index}"><span class="myspan-Qu-Num" id="card-mq-0${status.index}">${status.index}</span></a>
+		  						</c:forEach>
+		  					</div>
 	  					</div>
-  					</div>
-  					<div id="mq-card">
-	  					<div class="card-header input-group" style="background-color: #ffffff;">
-	  						<div style="text-align: center;margin:auto;">
-	  							<span>多选题</span>
-	  						</div>
-	  						<div style="text-align: center;margin:auto">
-	  							<span>共5题</span>
-	  						</div>
-	  					</div>
-	  					<div class="card-body" style="border-bottom: 1px solid #e4e4e4;" >
-	  						<a href="#mq-1"><span class="myspan-Qu-Num" id="card-mq-01">1</span></a>
-	  						<a href="#mq-2"><span class="myspan-Qu-Num" id="card-mq-02">2</span></a>
-	  						<a href="#mq-3"><span class="myspan-Qu-Num" id="card-mq-03">3</span></a>
-	  					</div>
-  					</div>
-  					<div id="fq-card">
-						<div class="card-header input-group" style="background-color: #ffffff;">
-							<div style="text-align: center;margin:auto;">
-								<span>填空题</span>
+  					</c:if>
+  					<c:if test="${not empty exam.testpaper.fquestions}">
+	  					<div id="fq-card">
+							<div class="card-header input-group" style="background-color: #ffffff;">
+								<div style="text-align: center;margin:auto;">
+									<span>填空题</span>
+								</div>
+								<div style="text-align: center;margin:auto">
+									<span>共${exam.testpaper.fquestionSize}题</span>
+								</div>
 							</div>
-							<div style="text-align: center;margin:auto">
-								<span>共5题</span>
+							<div class="card-body" style="border-bottom: 1px solid #e4e4e4;" >
+								<c:forEach items="${exam.testpaper.mquestions}" var="mquestion" varStatus="status">
+									<a href="#fq-${status.index}"><span class="myspan-Qu-Num" id="card-fq-0${status.index}">${status.index}</span></a>
+								</c:forEach>
 							</div>
 						</div>
-						<div class="card-body" style="border-bottom: 1px solid #e4e4e4;" >
-							<a href="#fq-1"><span class="myspan-Qu-Num" id="card-fq-01">1</span></a>
-							<a href="#fq-2"><span class="myspan-Qu-Num" id="card-fq-02">2</span></a>
-							<a href="#fq-3"><span class="myspan-Qu-Num" id="card-fq-03">3</span></a>
-						</div>
-					</div>		
+					</c:if>	
   				</div>
   			</div>
 		</div>

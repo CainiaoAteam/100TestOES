@@ -16,6 +16,13 @@ public interface ExamService {
 	 */
 	List<Exam> getExamItemByDate(Date date);
 	
+	/**
+	 * 获取考试对象
+	 * @param examid 
+	 * @return
+	 */
+	Exam getExamById(int examid);
+	
 	
 	
 	

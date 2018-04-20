@@ -30,6 +30,12 @@ public class ExamAction extends ActionSupport {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
+	
+	private int examid;
+	
+	public void setExamid(int examid) {
+		this.examid = examid;
+	}
 
 	private ExamService examService;
 	
@@ -56,7 +62,7 @@ public class ExamAction extends ActionSupport {
 		//获取可以进行的考试项
 		List<Exam> exams = examService.getExamItemByDate(date);
 		String list = JSON.toJSONString(exams);
-		System.out.println(list);
+//		System.out.println(list);
 		
 		try {
 			PrintWriter writer = response.getWriter();
@@ -75,14 +81,13 @@ public class ExamAction extends ActionSupport {
 	 */
 	public String loadPaper(){
 		
-		System.out.println(pid);
-		TestPaper paper = paperService.getPaperByPid(pid);
-		// 压栈
-		ValueStack vs = ActionContext.getContext().getValueStack();
-		// 栈顶是map<"paper",paper对象>
-		vs.set("paper", paper);
+		//获取当前考试的信息
+		Exam exam = examService.getExamById(examid);
 		
-		System.out.println(paper.getTpname());
+//		System.out.println(examid);
+//		TestPaper paper = paperService.getPaperByPid(pid);
+		//将考试对象存入session
+		ServletActionContext.getRequest().getSession().setAttribute("exam", exam);
 		
 		return "exam";
 	}
