@@ -21,6 +21,22 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
 
 public class ExamAction extends ActionSupport {
+	private String[] my_s_answer;
+	private String[] my_m_answer;
+	private String[] my_f_answer;
+	
+	
+	public void setMy_s_answer(String[] my_s_answer) {
+		this.my_s_answer = my_s_answer;
+	}
+
+	public void setMy_m_answer(String[] my_m_answer) {
+		this.my_m_answer = my_m_answer;
+	}
+
+	public void setMy_f_answer(String[] my_f_answer) {
+		this.my_f_answer = my_f_answer;
+	}
 	private PaperService paperService;
 	
 	public void setPaperService(PaperService paperService) {
@@ -30,10 +46,6 @@ public class ExamAction extends ActionSupport {
 	
 	public void setSid(Integer sid) {
 		this.sid = sid;
-	}
-	private int pid;
-	public void setPid(int pid) {
-		this.pid = pid;
 	}
 	
 	private int examid;
@@ -127,5 +139,35 @@ public class ExamAction extends ActionSupport {
 		return NONE;
 		
 	}
-	
+	/**
+	 * 查看考试对应的试卷
+	 * 
+	 * @return
+	 */
+	public String showPaper() {
+		//根据对应的id获取考试对象
+		Exam exam = examService.getExamById(examid);
+		//根据因为考试对象中需要的paper对象，根据相应的id获取paper对象
+		TestPaper paper = paperService.getPaperByPid(exam.getTestpaper().getTpid());
+		//将获取到的paper封装好exam对象
+		exam.setTestpaper(paper);
+		
+		//将exam存入session
+		ServletActionContext.getRequest().getSession().setAttribute("record", exam);
+		
+		return "showPaper";
+	}
+	/**
+	 * 交卷，计算分数
+	 * @return
+	 */
+	public String handPaper(){
+		System.out.println("交卷");
+		
+		System.out.println(my_f_answer.toString());
+		System.out.println(my_m_answer.toString());
+		System.out.println(my_s_answer.toString());
+		
+		return NONE;
+	}
 }

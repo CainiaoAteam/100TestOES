@@ -58,7 +58,7 @@
 											"<h4 class='card-title'>"+data[i].examname+"</h4>"+
 												"<p class='card-text'>考试编号："+data[i].examno+"</p>"+
 												"<p class='card-text'>考试时间："+data[i].startTime+"</p>"+
-												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?pid="+data[i].examid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
+												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?examid="+data[i].examid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
 											"</div>"+
 										"</div>"+
 									"</td>"+
@@ -103,7 +103,7 @@
 												"<td>"+data[i].exam.examname+"</td>"+
 												"<td>"+data[i].exam.startTime+"</td>"+
 												"<td>"+data[i].score+"</td>"+
-												"<td><a href='seeExamPaper.jsp'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
+												"<td><a href='${pageContext.request.contextPath }/exam_showPaper?examid="+data[i].exam.examid+"'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
 											"</tr>";
 								bodyInner += exambody;
 							}

@@ -8,7 +8,10 @@ import java.util.List;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.Exam;
+import com.oes.bean.FillQuestion;
+import com.oes.bean.MutipleQuestion;
 import com.oes.bean.Record;
+import com.oes.bean.SingleQuestion;
 import com.oes.bean.TestPaper;
 import com.oes.dao.ExamDao;
 
@@ -72,6 +75,9 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		TestPaper p = new TestPaper();
 		p.setTpid(12);
 		p.setTpname("测试试卷 AAA");
+		
+		
+		
 		exam.setTestpaper(p);
 		
 		return exam;

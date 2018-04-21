@@ -17,11 +17,10 @@
     <!-- custom CSS here -->
     <link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet" />
 </head>
-<body>
+<body  style="background-color: #6C4AC8;">
     <div class="container">
         <div class="row pad-top text-center">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <h1 style="color: red;"> TIP: </h1>
                 <h5> 100Test By CAINIAO A TEAM</h5> 
               	<span style="font-size: 50px;padding: 10px;">MODIFY THE PASSWORD SUCCEED</span>
                 <h2>after <i id="second" style="color: red;"></i> seconds to turn....</h2>
@@ -49,7 +48,6 @@
 	<script type="text/javascript">
 		window.onload = function(){
 			//页面一加载将该提示秒数变成3
-			alert("hahha");
 			$("#second").html("3");
 			var arr=['2','1'];
 			var i = 0;

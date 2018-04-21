@@ -17,9 +17,10 @@ public class Record {
   PRIMARY KEY (`rid`)
 	 */
 	
+	
 	private Integer rid;
 	private Student student;
-	private String myanswer;
+	private String myanswer;	
 	private double score;		//这里修改数据类型为double 《郭冠志
 	
 	private Exam exam;			//增加字段 examid； 删除了tpid 
