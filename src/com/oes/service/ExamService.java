@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.oes.bean.Exam;
+import com.oes.bean.Record;
 import com.oes.dao.ExamDao;
 
 public interface ExamService {
@@ -22,6 +23,14 @@ public interface ExamService {
 	 * @return
 	 */
 	Exam getExamById(int examid);
+	
+	/**
+	 * 根据学生id获取该学生的考试记录
+	 * 
+	 * @param sid
+	 * @return
+	 */
+	List<Record> getExamRecordBySid(Integer sid);
 	
 	
 	

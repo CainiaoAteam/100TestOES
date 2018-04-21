@@ -21,11 +21,12 @@
 		<property name="password" value="root"/>
 	</bean>
 	
-	<!-- LocalSessionFactoryBean加载配置文件 -->
+	
+	<!-- LocalSessionFactoryBean加载配置文件  -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<!-- 先加载连接池 -->
 		<property name="dataSource" ref="dataSource"/>
-		<!-- 加载方言，加载可选 -->
+		<!-- 加载方言，加载可选
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -35,24 +36,32 @@
 			</props>
 		</property>
 		
-		<!-- 增加实体配置文件 引入映射的配置文件 -->
+		
+		增加实体配置文件 引入映射的配置文件 
 		<property name="mappingResources">
 			<list>
-				<!-- <value>com/oes/bean/Exam.hbm.xml</value> -->
+				
 			</list>
-		</property>
+		</property> -->
+		
 	</bean>
 	
-	<!-- 先配置平台事务管理器 -->
+	<!--  先关闭事务先配置平台事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<!-- 开启事务的注解 -->
+	 <!-- 开启事务的注解 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
 	<!-- 配置学生模块 -->
 	<bean id="student" class="com.oes.bean.Student">
 		
+	</bean>
+	<!-- 配置jdbcTemplate  -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<!-- 配置登录模块 -->
@@ -106,20 +115,20 @@
 	
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<bean id="teacherDao" class="com.oes.dao.impl.TeacherDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<!-- 考试dao -->
 	<bean id="examDao" class="com.oes.dao.impl.ExamDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<bean id="adminDao" class="com.oes.dao.impl.AdminDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<bean id="paperDao" class="com.oes.dao.impl.PaperDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	
 </beans>

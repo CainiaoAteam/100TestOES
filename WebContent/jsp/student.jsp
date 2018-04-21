@@ -46,6 +46,10 @@
 				$.post(url,param,function(data){
 					var inner = "";
 					var item = "";
+					if(data == ""){
+						$("#examBody").html("<h3 style='color:red;'>暂无考试！</h3>");
+						return;
+					}
 					$.each(data,function(i,n){
 						item = "<tr>"+
 									"<td>"+
@@ -75,6 +79,41 @@
 			function enterExam(){
 				window.location.href=action;
 			}
+			//加载考试记录
+			function loadExamRecrod(){
+				var url = "${pageContext.request.contextPath }/exam_loadExamRecrod";
+				var param = {"sid":"${sessionScope.user.sid}"};
+				
+				$.post(url,param,function(data){
+
+					if(data == ""){
+						$("#examhead").html("暂无考试记录信息！");
+					}else {
+						var inner = "<tr><th>编号</th><th>名称</th><th>时间</th><th>分数</th><th>操作</th></tr>";
+						var exambody = "";
+						var bodyInner = "";
+						$("#examhead").html(inner);
+						
+						//alert(data.exam.examno);
+						
+						$.each(data,function(i,n){
+							if(i>0){
+								exambody = "<tr>"+
+												"<td>"+data[i].exam.examno+"</td>"+
+												"<td>"+data[i].exam.examname+"</td>"+
+												"<td>"+data[i].exam.startTime+"</td>"+
+												"<td>"+data[i].score+"</td>"+
+												"<td><a href='seeExamPaper.jsp'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
+											"</tr>";
+								bodyInner += exambody;
+							}
+						});
+						
+						$("#examlist").html(bodyInner);
+
+					}
+				},"json");
+			}
 		</script>
 		
 		
@@ -101,7 +140,7 @@
 						<a class="nav-link active" data-toggle="pill" href="#toExam">参加考试</a>
 					</li>
 					<br />
-					<li class="nav-item">
+					<li class="nav-item" onclick="loadExamRecrod()">
 						<a class="nav-link" data-toggle="pill" href="#record">考试记录</a>
 					</li>
 					<br />
@@ -114,37 +153,18 @@
 					</li>
 				</ul>
 			</div>
-
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
 					<div id="toExam" class="container tab-pane active">
 						<table class="table table-hover">
 							<!-- 加载考试的数据 -->
-							<tbody id="examBody">
-								
-							</tbody>
+							<tbody id="examBody"></tbody>
 						</table>
 					</div>
 					<div id="record" class="container tab-pane fade">
 						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>编号</th>
-									<th>名称</th>
-									<th>时间</th>
-									<th>分数</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>12315</td>
-									<td>语文考试</td>
-									<td>2018-3-9</td>
-									<td>100</td>
-									<td><a href="seeExamPaper.jsp"><button class="btn btn-outline-info btn-sm">查看试卷</button></a></td>
-								</tr>
-							</tbody>
+							<thead id="examhead"></thead>
+							<tbody id="examlist"></tbody>
 						</table>
 					</div>
 					<div id="myInfo" class="container tab-pane fade">

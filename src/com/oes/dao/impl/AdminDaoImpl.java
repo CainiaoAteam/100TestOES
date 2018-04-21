@@ -1,11 +1,12 @@
 package com.oes.dao.impl;
 
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.oes.bean.Admin;
 import com.oes.dao.AdminDao;
 
-public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao {
+public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
 
 	public boolean checkAdminNo(String adminNo) {
 		// TODO Auto-generated method stub

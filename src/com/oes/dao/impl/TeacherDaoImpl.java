@@ -1,11 +1,11 @@
 package com.oes.dao.impl;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.Teacher;
 import com.oes.dao.TeacherDao;
 
-public class TeacherDaoImpl extends HibernateDaoSupport implements TeacherDao {
+public class TeacherDaoImpl extends JdbcDaoSupport implements TeacherDao {
 
 	public boolean checkTeacherNo(String tno) {
 		// TODO Auto-generated method stub

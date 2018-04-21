@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.Exam;
+import com.oes.bean.Record;
 import com.oes.bean.TestPaper;
 import com.oes.dao.ExamDao;
 
-public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
+public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 
 	public List<Exam> getExamByDate(Date date) {
 		// TODO Auto-generated method stub
@@ -21,7 +22,7 @@ public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 		
 		List<Exam> list = new ArrayList();
 		Exam a1 = new Exam();
-		a1.setExamname("2018年大学四级英语考试");
+		a1.setExamname("测试考试科目一");
 		a1.setExamday(new Date());
 		a1.setExamid(1);
 		//为了方便显示，处理一下时间的格式
@@ -33,7 +34,7 @@ public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 		a1.setTestpaper(p1);
 		
 		Exam a2 = new Exam();
-		a2.setExamname("2018年大学六级英语考试");
+		a2.setExamname("测试考试科目二");
 		a2.setExamday(new Date());
 		a2.setStartTime(sdf.format(new Date()));
 		a2.setExamno("cet6-4128963");
@@ -43,7 +44,7 @@ public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 		a2.setTestpaper(p2);
 		
 		Exam a3 = new Exam();
-		a3.setExamname("2018年国际雅思英语考试");
+		a3.setExamname("测试考试科目三");
 		a3.setExamday(new Date());
 		a3.setStartTime(sdf.format(new Date()));
 		a3.setExamno("yasi-4128963");
@@ -58,12 +59,12 @@ public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 		
 		return list;
 	}
+	
 	/**
 	 * 获取考试对象
 	 * 
 	 */
 	public Exam getExamById(int examid) {
-		
 		
 		Exam exam = new Exam();
 		exam.setExamid(examid);
@@ -74,6 +75,21 @@ public class ExamDaoImpl extends HibernateDaoSupport implements ExamDao {
 		exam.setTestpaper(p);
 		
 		return exam;
+	}
+	
+	/**
+	 * 根据学生id获取学生考试记录
+	 * 
+	 */
+	public List<Record> getRecordBySid(Integer sid) {
+		
+		Record re = new Record();
+		List<Record> res = new ArrayList<Record>();
+		
+		res.add(re);
+		
+		
+		return res;
 	}
 	
 	

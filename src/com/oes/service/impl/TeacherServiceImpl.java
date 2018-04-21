@@ -11,6 +11,7 @@ public class TeacherServiceImpl implements RoleService {
 	public void setTeacherDao(TeacherDao teacherDao) {
 		this.teacherDao = teacherDao;
 	}
+	
 	/**
 	 * 检查老师编号
 	 */

@@ -1,11 +1,11 @@
 package com.oes.dao.impl;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
 
-public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
+public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 	/**
 	 * 不要实现该方法
 	 * @param pid

@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
 import com.oes.bean.Exam;
+import com.oes.bean.Record;
 import com.oes.bean.TestPaper;
 import com.oes.service.ExamService;
 import com.oes.service.PaperService;
@@ -25,7 +26,11 @@ public class ExamAction extends ActionSupport {
 	public void setPaperService(PaperService paperService) {
 		this.paperService = paperService;
 	}
-
+	private Integer sid;
+	
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
 	private int pid;
 	public void setPid(int pid) {
 		this.pid = pid;
@@ -90,6 +95,37 @@ public class ExamAction extends ActionSupport {
 		ServletActionContext.getRequest().getSession().setAttribute("exam", exam);
 		
 		return "exam";
+	}
+	/**
+	 * 加载相应学生考试记录
+	 * 
+	 * 
+	 * @return
+	 */
+	public String loadExamRecrod() {
+		
+		System.out.println("加载考试记录！！");
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		//根据学生id获取考试记录
+		List<Record> records = examService.getExamRecordBySid(sid);
+		
+		if(records.size() > 0) {
+			String examlist = JSON.toJSONString(records);
+			System.out.println(examlist);
+			
+			try {
+				response.getWriter().print(examlist);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return NONE;
+		
 	}
 	
 }

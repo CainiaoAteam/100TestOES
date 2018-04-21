@@ -1,11 +1,12 @@
 package com.oes.dao.impl;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.Student;
 import com.oes.dao.StudentDao;
 
-public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
+public class StudentDaoImpl extends JdbcDaoSupport implements StudentDao {
 	
 	
 	/**
@@ -14,6 +15,9 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDao {
 	 */
 	public boolean isExitBySno(String sno) {
 		if(sno.equals("123456")) {
+			
+			
+			JdbcTemplate jdbcTemplate = getJdbcTemplate();
 			
 			return true;
 		}
