@@ -36,8 +36,10 @@ public class ExamServiceImpl implements ExamService {
 	 * 
 	 */
 	public Exam getExamById(int examid) {
+		
 		//第一步获取考试对象
 		Exam exam = examDao.getExamById(examid);
+		//获取要考试对应的试卷
 		Integer tpid = exam.getTestpaper().getTpid();
 		
 		//第二步 根据试卷id获取试卷对象

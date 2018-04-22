@@ -71,7 +71,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		Exam exam = new Exam();
 		exam.setExamid(examid);
-		exam.setExamtime(120);
+		exam.setExamtime(30);
 		TestPaper p = new TestPaper();
 		p.setTpid(12);
 		p.setTpname("测试试卷 AAA");

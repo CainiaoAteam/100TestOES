@@ -17,6 +17,7 @@ public class Exam {
 	private String examno;
 	private String examname;
 	
+	
 	public String getExamname() {
 		return examname;
 	}
@@ -34,6 +35,14 @@ public class Exam {
 	private Date examday;
 	private double examtime;
 	
+	private double totalScore;	//考试得分	郭冠志配置 
+	
+	public double getTotalScore() {
+		return totalScore;
+	}
+	public void setTotalScore(double totalScore) {
+		this.totalScore = totalScore;
+	}
 	private String startTime;//装换的开始考试时间，这里不存进数据库，所以不要配置到xml文件中
 	
 	public String getStartTime() {

@@ -12,7 +12,11 @@ import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
 import com.oes.bean.Exam;
+import com.oes.bean.FillQuestion;
+import com.oes.bean.MutipleQuestion;
+import com.oes.bean.Question;
 import com.oes.bean.Record;
+import com.oes.bean.SingleQuestion;
 import com.oes.bean.TestPaper;
 import com.oes.service.ExamService;
 import com.oes.service.PaperService;
@@ -21,23 +25,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
 
 public class ExamAction extends ActionSupport {
-	private String[] my_s_answer;
-	private String[] my_m_answer;
-	private String[] my_f_answer;
 	
-	
-	public void setMy_s_answer(String[] my_s_answer) {
-		this.my_s_answer = my_s_answer;
-	}
-
-	public void setMy_m_answer(String[] my_m_answer) {
-		this.my_m_answer = my_m_answer;
-	}
-
-	public void setMy_f_answer(String[] my_f_answer) {
-		this.my_f_answer = my_f_answer;
-	}
 	private PaperService paperService;
+	
+	private String sAnswer;
+	private String mAnswer;
+	private String fAnswer;
 	
 	public void setPaperService(PaperService paperService) {
 		this.paperService = paperService;
@@ -106,6 +99,7 @@ public class ExamAction extends ActionSupport {
 		//将考试对象存入session
 		ServletActionContext.getRequest().getSession().setAttribute("exam", exam);
 		
+		
 		return "exam";
 	}
 	/**
@@ -158,16 +152,132 @@ public class ExamAction extends ActionSupport {
 		return "showPaper";
 	}
 	/**
-	 * 交卷，计算分数
+	 * 交卷
 	 * @return
 	 */
 	public String handPaper(){
+		
 		System.out.println("交卷");
 		
-		System.out.println(my_f_answer.toString());
-		System.out.println(my_m_answer.toString());
-		System.out.println(my_s_answer.toString());
+		sAnswer = ServletActionContext.getRequest().getParameter("sAnswer");
+		mAnswer = ServletActionContext.getRequest().getParameter("mAnswer");
+		fAnswer = ServletActionContext.getRequest().getParameter("fAnswer");
 		
-		return NONE;
+		//获取考试对象
+		Exam exam = (Exam) ServletActionContext.getRequest().getSession().getAttribute("exam");
+		
+//		解析答案
+		String[] sArr = sAnswer.split("-");
+		List<SingleQuestion> squestions = exam.getTestpaper().getSquestions();
+		for(int i = 0; i<sArr.length;i++) {
+			if(sArr[i].equals("")) {
+				squestions.get(i).setAnswer("没有作答！");
+			}else {
+				squestions.get(i).setAnswer(sArr[i]);
+			}
+			
+			if(sArr[i].equals(squestions.get(i).getSanswer())) {
+				squestions.get(i).setIstrue(1);
+			}else {
+				squestions.get(i).setIstrue(0);
+			}
+			
+		}
+		exam.getTestpaper().setSquestions(squestions);
+		
+		String[] mArr = mAnswer.split("-");
+		List<MutipleQuestion> mquestions = exam.getTestpaper().getMquestions();
+		for(int i = 0; i<mArr.length;i++) {
+			if(mArr[i].equals("")) {
+				mquestions.get(i).setAnswer("没有作答！");
+			}else {
+				mquestions.get(i).setAnswer(mArr[i]);
+			}
+			
+			if(mArr[i].equals(mquestions.get(i).getManswer())) {
+				mquestions.get(i).setIstrue(1);
+			}else if(mquestions.get(i).getManswer().indexOf(mArr[i])>=0 && mArr[i].length() < mquestions.get(i).getManswer().length()){
+				mquestions.get(i).setIstrue(0.5);
+			}else {
+				mquestions.get(i).setIstrue(0);
+			}
+			
+		}
+		exam.getTestpaper().setMquestions(mquestions);
+		
+		String[] fArr = fAnswer.split("-");
+		List<FillQuestion> fquestions = exam.getTestpaper().getFquestions();
+		
+		for(int i = 0; i<fArr.length;i++) {
+			if(fArr[i].equals("")) {
+				fquestions.get(i).setAnswer("没有作答！");
+			}else {
+				fquestions.get(i).setAnswer(fArr[i]);
+			}
+			
+			if(fArr[i].equals(fquestions.get(i).getFanswer())) {
+				fquestions.get(i).setIstrue(1);
+			}else {
+				fquestions.get(i).setIstrue(0);
+			}
+		}
+		exam.getTestpaper().setFquestions(fquestions);
+		
+		//计算分数
+		double totalScore = this.calculateTotalScore(exam);
+		exam.setTotalScore(totalScore);
+		
+		//将结算后的exam放入session
+		ServletActionContext.getRequest().getSession().setAttribute("afterExam", exam);
+		
+		String json = JSON.toJSONString(exam);
+		System.out.println(json);
+		
+		//怎么保存到数据库
+		
+		
+		return "getScore";
 	}
+	
+	/**
+	 * 计算考试分数
+	 * 
+	 * @param exam
+	 * @return
+	 */
+	public double calculateTotalScore(Exam exam) {
+		double sTotal = 0.0;
+		double mTotal = 0.0;
+		double fTotal = 0.0;
+		
+		double total = 0.0;
+		
+		List<FillQuestion> fquestions = exam.getTestpaper().getFquestions();
+		int score = exam.getTestpaper().getFquestionscore();
+		for (FillQuestion fillQuestion : fquestions) {
+			fTotal += (score*fillQuestion.getIstrue());
+		}
+		System.out.println("填空题得分："+fTotal);
+		
+		List<SingleQuestion> squestions = exam.getTestpaper().getSquestions();
+		score = exam.getTestpaper().getSquestionscore();
+		for (SingleQuestion singleQuestion : squestions) {
+			sTotal += (score*singleQuestion.getIstrue());
+		}
+		System.out.println("单选题得分："+sTotal);
+		
+		List<MutipleQuestion> mquestions = exam.getTestpaper().getMquestions();
+		score = exam.getTestpaper().getMquestionscore();
+		for (MutipleQuestion mutipleQuestion : mquestions) {
+			mTotal +=(score*mutipleQuestion.getIstrue());
+		}
+		System.out.println("双选题得分："+mTotal);
+		
+		total = sTotal+mTotal+fTotal;
+		
+		System.out.println("最后得分："+total);
+		
+		return total;
+	}
+	
 }

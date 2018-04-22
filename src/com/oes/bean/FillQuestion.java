@@ -17,6 +17,23 @@ public class FillQuestion extends Question {
 	private String fexplanation;
 	private String difficulty;
 	
+	private String answer;	//我的答案
+	
+	private int istrue;	//判断答案是否正确 1代表正确0代表打错
+	
+	public int getIstrue() {
+		
+		return istrue;
+	}
+	public void setIstrue(int istrue) {
+		this.istrue = istrue;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public Integer getFqid() {
 		return fqid;
 	}
