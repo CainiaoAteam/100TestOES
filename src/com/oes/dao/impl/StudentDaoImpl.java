@@ -97,9 +97,34 @@ public class StudentDaoImpl extends JdbcDaoSupport implements StudentDao {
 		jdbcTemplate.update(sql, args);
 		return true;
 	}
-
+	
+	/**
+	 * 实现 ggz
+	 */
 	public Student getStudentById(Integer sid) {
-		
+		String sql = "select * from student where sid = ?";
+
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+
+		final Student s = new Student();
+		final Object args[] = new Object[] { sid };
+
+		jdbcTemplate.query(sql, args, new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+
+				System.out.println("=========" + rs.getString("sname"));
+				s.setSno(rs.getString("sno"));
+				s.setPassword(rs.getString("password"));
+				s.setSname(rs.getString("sname"));
+				s.setGender(rs.getString("gender"));
+				s.setIdcardnum(rs.getString("idcardnum"));
+				s.setDepartment(rs.getString("department"));
+				s.setGrade(rs.getString("grade"));
+				s.setPhone(rs.getString("phone"));
+
+			}
+		});
+		return s;
 	}
 
 }
