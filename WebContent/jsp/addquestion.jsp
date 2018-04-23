@@ -16,11 +16,11 @@
 	</head>
 
 	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
-		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
+				<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
 			<div>
 				<nav class="navbar navbar-light bg-faded">
 					<a class="navbar-brand" href="">
-						<h1>100test</h1>
+						<h1>100Test</h1>
 					</a>
 					<div>
 						<a class="btn btn-outline-secondary" href="teacher.jsp">返回主页</a>
@@ -51,24 +51,24 @@
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
 					<div id="addSQ" class="container tab-pane active">
-						<form>
+						<form action="">
 							<div class="form-group">
 								<div class="input-group">
 									<sapn>题目难度：</sapn>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqdifficulty1" value="option1" name="sqdifficulty" checked>
+										<input type="radio" id="sqdifficulty1" value="v1" name="sqdifficulty" checked>
 										<label for="sqdifficulty1">简单</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqdifficulty2" value="option2" name="sqdifficulty">
+										<input type="radio" id="sqdifficulty2" value="v2" name="sqdifficulty">
 										<label for="sqdifficulty2">普通</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqdifficulty3" value="option1" name="sqdifficulty">
+										<input type="radio" id="sqdifficulty3" value="v3" name="sqdifficulty">
 										<label for="sqdifficulty3">困难</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqdifficulty4" value="option2" name="sqdifficulty">
+										<input type="radio" id="sqdifficulty4" value="v4" name="sqdifficulty">
 										<label for="sqdifficulty4">绝望</label>
 									</div>
 								</div>
@@ -76,19 +76,19 @@
 								<div class="input-group">
 									<sapn>题目答案：</sapn>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqanswer1" value="option1" name="sqanswer" checked>
+										<input type="radio" id="sqanswer1" value="A" name="sqanswer" checked>
 										<label for="sqanswer1">A</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqanswer2" value="option2" name="sqanswer">
+										<input type="radio" id="sqanswer2" value="B" name="sqanswer">
 										<label for="sqanswer2">B</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqanswer3" value="option1" name="sqanswer">
+										<input type="radio" id="sqanswer3" value="C" name="sqanswer">
 										<label for="sqanswer3">C</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sqanswer4" value="option2" name="sqanswer">
+										<input type="radio" id="sqanswer4" value="D" name="sqanswer">
 										<label for="sqanswer4">D</label>
 									</div>
 								</div>
@@ -96,18 +96,18 @@
 								<div class="card">
 									<div class="card-header">
 										<h5>题目:</h5>
-										<textarea class="form-control" name=""></textarea>
+										<textarea class="form-control" name="squestion"></textarea>
 									</div>
 									<div class="card-body">
 										<div class="">
 											<span style="margin:7px 8px;">选项A:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="schoiceA" placeholder=""/>
 											<span style="margin:7px 8px;">选项B:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="schoiceB" placeholder=""/>
 											<span style="margin:7px 8px;">选项C:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="schoiceC" placeholder=""/>
 											<span style="margin:7px 8px;">选项D:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="schoiceD" placeholder=""/>
 											<span style="margin:7px 8px;">解析:</span>
 											<textarea class="form-control" name=""></textarea>
 										</div>
@@ -129,19 +129,19 @@
 								<div class="input-group">
 									<sapn>题目难度：</sapn>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="mqdifficulty1" value="option1" name="mqdifficulty" checked>
+										<input type="radio" id="mqdifficulty1" value="v1" name="mqdifficulty" checked>
 										<label for="mqdifficulty1">简单</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="mqdifficulty2" value="option2" name="mqdifficulty">
+										<input type="radio" id="mqdifficulty2" value="v2" name="mqdifficulty">
 										<label for="mqdifficulty2">普通</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="mqdifficulty3" value="option1" name="mqdifficulty">
+										<input type="radio" id="mqdifficulty3" value="v3" name="mqdifficulty">
 										<label for="mqdifficulty3">困难</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="mqdifficulty4" value="option2" name="mqdifficulty">
+										<input type="radio" id="mqdifficulty4" value="v4" name="mqdifficulty">
 										<label for="mqdifficulty4">绝望</label>
 									</div>
 								</div>
@@ -149,19 +149,19 @@
 								<div class="input-group">
 									<sapn>题目答案：</sapn>
 									<div class="checkbox checkbox-success">
-										<input id="mqanswer1" class="styled" type="checkbox">
+										<input id="mqanswer1" class="styled" name="mqanswer" type="checkbox">
 									    <label for="mqanswer1">A</label>
 									</div>
 									<div class="checkbox checkbox-success">
-										<input id="mqanswer2" class="styled" type="checkbox">
+										<input id="mqanswer2" class="styled" name="mqanswer" type="checkbox">
 									    <label for="mqanswer2">B</label>
 									</div>
 									<div class="checkbox checkbox-success">
-										<input id="mqanswer3" class="styled" type="checkbox">
+										<input id="mqanswer3" class="styled" name="mqanswer" type="checkbox">
 									    <label for="mqanswer3">C</label>
 									</div>
 									<div class="checkbox checkbox-success">
-										<input id="mqanswer4" class="styled" type="checkbox">
+										<input id="mqanswer4" class="styled" name="mqanswer" type="checkbox">
 									    <label for="mqanswer4">D</label>
 									</div>
 								</div>
@@ -169,20 +169,20 @@
 								<div class="card">
 									<div class="card-header">
 										<h5>题目:</h5>
-										<textarea class="form-control" name=""></textarea>
+										<textarea class="form-control" name="mquestion"></textarea>
 									</div>
 									<div class="card-body">
 										<div class="">
 											<span style="margin:7px 8px;">选项A:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="mchoiceA" placeholder=""/>
 											<span style="margin:7px 8px;">选项B:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="mchoiceA" placeholder=""/>
 											<span style="margin:7px 8px;">选项C:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="mchoiceA" placeholder=""/>
 											<span style="margin:7px 8px;">选项D:</span>
-											<input class="form-control"  type="text" placeholder=""/>
+											<input class="form-control"  type="text" name="mchoiceA" placeholder=""/>
 											<span style="margin:7px 8px;">解析:</span>
-											<textarea class="form-control" name=""></textarea>
+											<textarea class="form-control" name="mexplanation"></textarea>
 										</div>
 									</div>
 									
@@ -202,19 +202,19 @@
 								<div class="input-group">
 									<sapn>题目难度：</sapn>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="fqdifficulty1" value="option1" name="fqdifficulty" checked>
+										<input type="radio" id="fqdifficulty1" value="v1" name="fqdifficulty" checked>
 										<label for="fqdifficulty1">简单</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="fqdifficulty2" value="option2" name="fqdifficulty">
+										<input type="radio" id="fqdifficulty2" value="v2" name="fqdifficulty">
 										<label for="fqdifficulty2">普通</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="fqdifficulty3" value="option1" name="fqdifficulty">
+										<input type="radio" id="fqdifficulty3" value="v3" name="fqdifficulty">
 										<label for="fqdifficulty3">困难</label>
 									</div>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="fqdifficulty4" value="option2" name="fqdifficulty">
+										<input type="radio" id="fqdifficulty4" value="v4" name="fqdifficulty">
 										<label for="fqdifficulty4">绝望</label>
 									</div>
 								</div>
@@ -222,14 +222,14 @@
 								<div class="card">
 									<div class="card-header">
 										<h5>题目:</h5>
-										<textarea class="form-control" name=""></textarea>
+										<textarea class="form-control" name="fquestion"></textarea>
 									</div>
 									<div class="card-body">
 										<div class="">
 											<span style="margin:7px 8px;">答案:</span>
-											<textarea class="form-control" name=""></textarea>
+											<textarea class="form-control" name="fanswer"></textarea>
 											<span style="margin:7px 8px;">解析:</span>
-											<textarea class="form-control" name=""></textarea>
+											<textarea class="form-control" name="fexplanation"></textarea>
 										</div>
 									</div>
 									
@@ -260,6 +260,7 @@
 			</div>
 
 		</div>
+		
 
 	</body>
 
