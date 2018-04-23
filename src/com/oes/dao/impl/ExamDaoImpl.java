@@ -48,7 +48,6 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
 		    		   
-		    		   
 		    		   /**
 		    		    * 这部分还没完成
 		    		    * 
