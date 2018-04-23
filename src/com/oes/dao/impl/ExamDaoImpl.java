@@ -1,10 +1,18 @@
 package com.oes.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Test;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.Exam;
@@ -20,10 +28,41 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	public List<Exam> getExamByDate(Date date) {
 		// TODO Auto-generated method stub
 		//注： 这里要对data处理一下，以便于和数据库中的时间对比
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
+		String sql = "select * from exam where examday >= ?";
 		
-		List<Exam> list = new ArrayList();
+		 final List<Exam> examlist = new ArrayList<Exam>();
+		 JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		 Object args[] = new Object[]{date}; 
+		 
+		  jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   do {
+		    		   
+		    		   Exam exam = new Exam();  
+		    		
+		    		   exam.setExamname(rs.getString("examname"));  
+		    		   exam.setExamday(rs.getDate("examday"));
+		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+		    		   exam.setExamno(rs.getString("examno"));
+		    		   
+		    		   
+		    		   /**
+		    		    * 这部分还没完成
+		    		    * 
+		    		    */
+		    		   TestPaper p = new TestPaper();
+		    			p.setTpid(12);
+		    			exam.setTestpaper(p);
+		    		   
+		    		   examlist.add(exam); 
+		    	   } while(rs.next());
+		       }  
+		   });  
+		 
+		/*List<Exam> list = new ArrayList<Exam>();
 		Exam a1 = new Exam();
 		a1.setExamname("测试考试科目一");
 		a1.setExamday(new Date());
@@ -58,16 +97,28 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		list.add(a1);
 		list.add(a2);
-		list.add(a3);
+		list.add(a3);*/
 		
-		return list;
+		return examlist;
 	}
 	
 	/**
 	 * 获取考试对象
 	 * 
 	 */
+	@Test
 	public Exam getExamById(int examid) {
+		
+		 
+		/*String sql = "select examno from Exam where examid=?";
+		
+		RowMapper<Exam> rowMapper=new BeanPropertyRowMapper<Exam>(Exam.class);
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Exam exam= jdbcTemplate.queryForObject(sql, rowMapper,examid);
+		
+		System.out.println(exam);*/
+		
 		
 		Exam exam = new Exam();
 		exam.setExamid(examid);
@@ -76,11 +127,9 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		p.setTpid(12);
 		p.setTpname("测试试卷 AAA");
 		
-		
-		
 		exam.setTestpaper(p);
-		
 		return exam;
+		
 	}
 	
 	/**
