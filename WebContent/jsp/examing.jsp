@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	</head>
-	<body >
+	<body>
 		<%-- <s:debug></s:debug> --%>
 		
 		<div class="container">

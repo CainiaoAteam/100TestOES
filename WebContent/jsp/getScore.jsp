@@ -21,6 +21,12 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+	function toHomaPage(){
+		window.location.href="${pageContext.request.contextPath }/exam_toHomaPage";
+	}
+</script>
+
 <style type="text/css">
 	.istrue{
 		background: #fff url('${pageContext.request.contextPath }/img/true.png') no-repeat 10% 1%;
@@ -39,11 +45,11 @@
 		style="background-color: rgba(255, 255, 255, 0.8);">
 		<div class="card" style="float: left; width: 87%;">
 			<div class="card-header" align="center" id="showScore">
-				<span style="font-size: 45px;font-family:'SimSun';">${afterExam.testpaper.tpname}</span>
+				<span style="font-size: 45px;font-family:'SimSun';">${afterExam.exam.testpaper.tpname}</span>
 			</div>
 			
 			<div class="card" id="showQuestions">
-				<c:if test="${not empty afterExam.testpaper.squestions}">
+				<c:if test="${not empty afterExam.exam.testpaper.squestions}">
 				<table id="sQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -51,7 +57,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.testpaper.squestions}" var="squestion" varStatus="status">
+						<c:forEach items="${afterExam.exam.testpaper.squestions}" var="squestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="sq-${status.index+1}">
@@ -95,7 +101,7 @@
 				</table>
 				</c:if>
 				<!-- 双选 -->
-				<c:if test="${not empty afterExam.testpaper.mquestions}">
+				<c:if test="${not empty afterExam.exam.testpaper.mquestions}">
 				<table id="mQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -103,7 +109,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.testpaper.mquestions}" var="mquestion" varStatus="status">
+						<c:forEach items="${afterExam.exam.testpaper.mquestions}" var="mquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -151,7 +157,7 @@
 				</table>
 				</c:if>
 				<!-- 填空题 -->
-				<c:if test="${not empty afterExam.testpaper.fquestions}">
+				<c:if test="${not empty afterExam.exam.testpaper.fquestions}">
 				<table id="fQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -159,7 +165,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.testpaper.fquestions}" var="fquestion" varStatus="status">
+						<c:forEach items="${afterExam.exam.testpaper.fquestions}" var="fquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -209,7 +215,7 @@
 					<div class="card-header input-group"
 						style="background-color: #ffffff;">
 						<div style="text-align: center; margin: auto;">
-							<span style="font-weight:700;color:red;font-size:60px;">${afterExam.totalScore}</span>
+							<span style="font-weight:700;color:red;font-size:60px;">${afterExam.score}</span>
 						</div>
 						
 					</div>

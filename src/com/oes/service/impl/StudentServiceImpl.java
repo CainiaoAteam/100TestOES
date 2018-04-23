@@ -53,7 +53,9 @@ public class StudentServiceImpl implements RoleService {
 		
 	}
 
-
+	public Student getRoleById(Integer sid) {
+		return studentDao.getStudentById(sid);
+	}
 	
 	
 }

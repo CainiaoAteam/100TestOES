@@ -16,7 +16,11 @@ public class Exam {
 	private Integer examid;
 	private String examno;
 	private String examname;
+	private Date examday;
+	private double examtime;
 	
+	private double totalScore;	//考试得分	郭冠志配置 
+	private TestPaper testpaper;
 	
 	public String getExamname() {
 		return examname;
@@ -24,18 +28,13 @@ public class Exam {
 	public void setExamname(String examname) {
 		this.examname = examname;
 	}
-	private TestPaper testpaper;
-	
 	public TestPaper getTestpaper() {
 		return testpaper;
 	}
 	public void setTestpaper(TestPaper testpaper) {
 		this.testpaper = testpaper;
 	}
-	private Date examday;
-	private double examtime;
 	
-	private double totalScore;	//考试得分	郭冠志配置 
 	
 	public double getTotalScore() {
 		return totalScore;
@@ -63,14 +62,6 @@ public class Exam {
 	public void setExamno(String examno) {
 		this.examno = examno;
 	}
-	
-	/*
-	public Integer getTpid() {
-		return tpid;
-	}
-	public void setTpid(Integer tpid) {
-		this.tpid = tpid;
-	}*/
 	
 	public Date getExamday() {
 		return examday;

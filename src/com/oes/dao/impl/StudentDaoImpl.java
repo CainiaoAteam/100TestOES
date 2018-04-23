@@ -58,6 +58,16 @@ public class StudentDaoImpl extends JdbcDaoSupport implements StudentDao {
 		 */
 		return true;
 	}
+
+	public Student getStudentById(Integer sid) {
+		Student s = new Student();
+		s.setSno("123456");
+		s.setPassword("123456");
+		s.setSname("帅仔");
+		s.setIdcardnum("400286565989561233454");
+		s.setSid(sid);
+		return s;
+	}
 	
 
 }

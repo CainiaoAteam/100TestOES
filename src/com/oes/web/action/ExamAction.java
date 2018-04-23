@@ -17,9 +17,13 @@ import com.oes.bean.MutipleQuestion;
 import com.oes.bean.Question;
 import com.oes.bean.Record;
 import com.oes.bean.SingleQuestion;
+import com.oes.bean.Student;
 import com.oes.bean.TestPaper;
 import com.oes.service.ExamService;
 import com.oes.service.PaperService;
+import com.oes.service.RecordService;
+import com.oes.utils.BasicUtil;
+import com.oes.utils.ExamUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
@@ -27,11 +31,21 @@ import com.opensymphony.xwork2.util.ValueStack;
 public class ExamAction extends ActionSupport {
 	
 	private PaperService paperService;
+	private RecordService recordService;
 	
 	private String sAnswer;
 	private String mAnswer;
 	private String fAnswer;
 	
+	private Integer rid;
+	public void setRid(Integer rid) {
+		this.rid = rid;
+	}
+
+	public void setRecordService(RecordService recordService) {
+		this.recordService = recordService;
+	}
+
 	public void setPaperService(PaperService paperService) {
 		this.paperService = paperService;
 	}
@@ -134,20 +148,28 @@ public class ExamAction extends ActionSupport {
 		
 	}
 	/**
-	 * 查看考试对应的试卷
+	 * 查看考试对应的试卷			尚未完成，知识获取到了考试记录对象
+	 * 	留下的问题			在显示考试记录的时候，显示的应该是考试记录，而不是考试列表
 	 * 
 	 * @return
 	 */
 	public String showPaper() {
-		//根据对应的id获取考试对象
-		Exam exam = examService.getExamById(examid);
-		//根据因为考试对象中需要的paper对象，根据相应的id获取paper对象
-		TestPaper paper = paperService.getPaperByPid(exam.getTestpaper().getTpid());
-		//将获取到的paper封装好exam对象
-		exam.setTestpaper(paper);
+//		//根据对应的id获取考试对象
+//		Exam exam = examService.getExamById(examid);
+//		//根据因为考试对象中需要的paper对象，根据相应的id获取paper对象
+//		TestPaper paper = paperService.getPaperByPid(exam.getTestpaper().getTpid());
+//		//将获取到的paper封装好exam对象
+//		exam.setTestpaper(paper);
+//		
+//		//将exam存入session
+//		ServletActionContext.getRequest().getSession().setAttribute("record", exam);
 		
-		//将exam存入session
-		ServletActionContext.getRequest().getSession().setAttribute("record", exam);
+		//根据接收到的考试记录id获取考试记录对象
+		Record re = recordService.getRecordById(rid);
+		
+		//将获取的考试记录返回
+		ServletActionContext.getRequest().getSession().setAttribute("record", re);
+		
 		
 		return "showPaper";
 	}
@@ -163,121 +185,44 @@ public class ExamAction extends ActionSupport {
 		mAnswer = ServletActionContext.getRequest().getParameter("mAnswer");
 		fAnswer = ServletActionContext.getRequest().getParameter("fAnswer");
 		
+		//保存到考试记录中的答案字段
+		String answerRecord = sAnswer +"##" + mAnswer +"##"+fAnswer;
+		
+		//保存到数据库中的学生id
+		Student student = (Student) ServletActionContext.getRequest().getSession().getAttribute("user");
+		Integer sid = student.getSid();
+		
 		//获取考试对象
 		Exam exam = (Exam) ServletActionContext.getRequest().getSession().getAttribute("exam");
 		
-//		解析答案
-		String[] sArr = sAnswer.split("-");
-		List<SingleQuestion> squestions = exam.getTestpaper().getSquestions();
-		for(int i = 0; i<sArr.length;i++) {
-			if(sArr[i].equals("")) {
-				squestions.get(i).setAnswer("没有作答！");
-			}else {
-				squestions.get(i).setAnswer(sArr[i]);
-			}
+		//封装考试记录对象
+		Record record = recordService.packageRecord(student,exam,answerRecord);
+		
+		//将数据保存到数据库
+		boolean issucc = recordService.saveRecord(record);
+		
+		//保存成功
+		if(issucc) {
+			//将结算后的保存了该次考试记录的记录放入session
+			ServletActionContext.getRequest().getSession().setAttribute("afterExam", record);
 			
-			if(sArr[i].equals(squestions.get(i).getSanswer())) {
-				squestions.get(i).setIstrue(1);
-			}else {
-				squestions.get(i).setIstrue(0);
-			}
+			String json = JSON.toJSONString(record);
+			System.out.println(json);
 			
+			return "getScore";
 		}
-		exam.getTestpaper().setSquestions(squestions);
 		
-		String[] mArr = mAnswer.split("-");
-		List<MutipleQuestion> mquestions = exam.getTestpaper().getMquestions();
-		for(int i = 0; i<mArr.length;i++) {
-			if(mArr[i].equals("")) {
-				mquestions.get(i).setAnswer("没有作答！");
-			}else {
-				mquestions.get(i).setAnswer(mArr[i]);
-			}
-			
-			if(mArr[i].equals(mquestions.get(i).getManswer())) {
-				mquestions.get(i).setIstrue(1);
-			}else if(mquestions.get(i).getManswer().indexOf(mArr[i])>=0 && mArr[i].length() < mquestions.get(i).getManswer().length()){
-				mquestions.get(i).setIstrue(0.5);
-			}else {
-				mquestions.get(i).setIstrue(0);
-			}
-			
-		}
-		exam.getTestpaper().setMquestions(mquestions);
+		return "tip";
 		
-		String[] fArr = fAnswer.split("-");
-		List<FillQuestion> fquestions = exam.getTestpaper().getFquestions();
-		
-		for(int i = 0; i<fArr.length;i++) {
-			if(fArr[i].equals("")) {
-				fquestions.get(i).setAnswer("没有作答！");
-			}else {
-				fquestions.get(i).setAnswer(fArr[i]);
-			}
-			
-			if(fArr[i].equals(fquestions.get(i).getFanswer())) {
-				fquestions.get(i).setIstrue(1);
-			}else {
-				fquestions.get(i).setIstrue(0);
-			}
-		}
-		exam.getTestpaper().setFquestions(fquestions);
-		
-		//计算分数
-		double totalScore = this.calculateTotalScore(exam);
-		exam.setTotalScore(totalScore);
-		
-		//将结算后的exam放入session
-		ServletActionContext.getRequest().getSession().setAttribute("afterExam", exam);
-		
-		String json = JSON.toJSONString(exam);
-		System.out.println(json);
-		
-		//怎么保存到数据库
-		
-		
-		return "getScore";
 	}
-	
 	/**
-	 * 计算考试分数
+	 * 返回学生主页
 	 * 
-	 * @param exam
 	 * @return
 	 */
-	public double calculateTotalScore(Exam exam) {
-		double sTotal = 0.0;
-		double mTotal = 0.0;
-		double fTotal = 0.0;
-		
-		double total = 0.0;
-		
-		List<FillQuestion> fquestions = exam.getTestpaper().getFquestions();
-		int score = exam.getTestpaper().getFquestionscore();
-		for (FillQuestion fillQuestion : fquestions) {
-			fTotal += (score*fillQuestion.getIstrue());
-		}
-		System.out.println("填空题得分："+fTotal);
-		
-		List<SingleQuestion> squestions = exam.getTestpaper().getSquestions();
-		score = exam.getTestpaper().getSquestionscore();
-		for (SingleQuestion singleQuestion : squestions) {
-			sTotal += (score*singleQuestion.getIstrue());
-		}
-		System.out.println("单选题得分："+sTotal);
-		
-		List<MutipleQuestion> mquestions = exam.getTestpaper().getMquestions();
-		score = exam.getTestpaper().getMquestionscore();
-		for (MutipleQuestion mutipleQuestion : mquestions) {
-			mTotal +=(score*mutipleQuestion.getIstrue());
-		}
-		System.out.println("双选题得分："+mTotal);
-		
-		total = sTotal+mTotal+fTotal;
-		
-		System.out.println("最后得分："+total);
-		
-		return total;
+	public String toHomaPage() {
+		return "student";
 	}
+
 	
 }

@@ -59,6 +59,10 @@
 	<bean id="student" class="com.oes.bean.Student">
 		
 	</bean>
+	<!-- 配置考试记录  -->
+	<bean id="record" class="com.oes.bean.Record">
+		
+	</bean>
 	<!-- 配置jdbcTemplate  -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"/>
@@ -74,6 +78,7 @@
 	<bean id="examAction" class="com.oes.web.action.ExamAction" scope="prototype">
 		<property name="examService" ref="examService"/>
 		<property name="paperService" ref="paperService"/>
+		<property name="recordService" ref="recordService"/>
 	</bean>
 	
 	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
@@ -89,6 +94,13 @@
 	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
 		<property name="examDao" ref="examDao"/>
 		<property name="paperDao" ref="paperDao"/>
+	</bean>
+	<!-- 考试记录业务 -->
+	<bean id="recordService" class="com.oes.service.impl.RecordServiceImpl">
+		<property name="recordDao" ref="recordDao"/>
+		<property name="examService" ref="examService"/>
+		<property name="studentService" ref="studentService"/>
+		
 	</bean>
 	
 	
@@ -128,6 +140,10 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	<bean id="paperDao" class="com.oes.dao.impl.PaperDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="recordDao" class="com.oes.dao.impl.RecordDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
 	
