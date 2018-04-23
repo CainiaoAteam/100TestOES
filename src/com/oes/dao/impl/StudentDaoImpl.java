@@ -63,7 +63,7 @@ public class StudentDaoImpl extends JdbcDaoSupport implements StudentDao {
 			 
 		 final Student s = new Student();
 	     final Object args[] = new Object[]{sno,password};  
-	      
+	     
 	     jdbcTemplate.query(sql,args,new RowCallbackHandler() {
 	    	 public void processRow(ResultSet rs) throws SQLException {
 	    		 

@@ -52,9 +52,9 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		    * 这部分还没完成
 		    		    * 
 		    		    */
-		    		   TestPaper p = new TestPaper();
+		    		  /* TestPaper p = new TestPaper();
 		    			p.setTpid(12);
-		    			exam.setTestpaper(p);
+		    			exam.setTestpaper(p);*/
 		    		   
 		    		   examlist.add(exam); 
 		    	   } while(rs.next());

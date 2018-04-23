@@ -50,7 +50,7 @@ public class StudentAction extends ActionSupport {
 			session.setAttribute("user", student);
 			session.setAttribute("modify", "修改成功！");
 			//重定向回到学生主页面
-			return "tip";
+			return "index";
 		}
 		
 		return null;
