@@ -97,16 +97,14 @@
 						//alert(data.exam.examno);
 						
 						$.each(data,function(i,n){
-							if(i>0){
-								exambody = "<tr>"+
-												"<td>"+data[i].exam.examno+"</td>"+
-												"<td>"+data[i].exam.examname+"</td>"+
-												"<td>"+data[i].exam.startTime+"</td>"+
-												"<td>"+data[i].score+"</td>"+
-												"<td><a href='${pageContext.request.contextPath }/exam_showPaper?examid="+data[i].exam.examid+"'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
-											"</tr>";
-								bodyInner += exambody;
-							}
+							exambody = "<tr>"+
+											"<td>"+data[i].exam.examno+"</td>"+
+											"<td>"+data[i].exam.examname+"</td>"+
+											"<td>"+data[i].exam.startTime+"</td>"+
+											"<td>"+data[i].score+"</td>"+
+											"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+data[i].rid+"'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
+										"</tr>";
+							bodyInner += exambody;
 						});
 						
 						$("#examlist").html(bodyInner);
@@ -155,12 +153,14 @@
 			</div>
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
+					<!-- 可以参加的考试的列表 -->
 					<div id="toExam" class="container tab-pane active">
 						<table class="table table-hover">
 							<!-- 加载考试的数据 -->
 							<tbody id="examBody"></tbody>
 						</table>
 					</div>
+					<!-- 已经参加过的考试记录列表 -->
 					<div id="record" class="container tab-pane fade">
 						<table class="table table-hover">
 							<thead id="examhead"></thead>

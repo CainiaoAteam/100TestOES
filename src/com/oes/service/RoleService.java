@@ -1,6 +1,7 @@
 package com.oes.service;
 
 import com.oes.bean.Role;
+import com.oes.bean.Student;
 
 public interface RoleService {
 
@@ -22,4 +23,5 @@ public interface RoleService {
 	
 	Role getRoleByNoPsw(String userno, String password);
 	
+	Role getRoleById(Integer sid);
 }

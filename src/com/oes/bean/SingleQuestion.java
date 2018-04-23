@@ -24,6 +24,26 @@ public class SingleQuestion extends Question {
 	private String sanswer;			//题目答案
 	private String sexplanation;	//题目解析
 	private String difficulty;		//题目难度
+	
+	
+	private String answer;	//我的答案
+	
+	private int istrue;	//判断答案是否正确 1代表正确0代表打错
+	
+	
+	
+	public int getIstrue() {
+		return istrue;
+	}
+	public void setIstrue(int istrue) {
+		this.istrue = istrue;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public Integer getSqid() {
 		return sqid;
 	}

@@ -33,5 +33,14 @@ public interface StudentDao {
 	 * @return 成功返回true 
 	 */
 	boolean updatePassword(String sno, String newPassword);
+	/**
+	 * 根据id获取学生
+	 * 
+	 * @param sid
+	 * @return
+	 */
+	Student getStudentById(Integer sid);
+	
+	
 
 }

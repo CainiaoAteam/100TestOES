@@ -36,8 +36,10 @@ public class ExamServiceImpl implements ExamService {
 	 * 
 	 */
 	public Exam getExamById(int examid) {
+		
 		//第一步获取考试对象
 		Exam exam = examDao.getExamById(examid);
+		//获取要考试对应的试卷
 		Integer tpid = exam.getTestpaper().getTpid();
 		
 		//第二步 根据试卷id获取试卷对象
@@ -55,11 +57,13 @@ public class ExamServiceImpl implements ExamService {
 	 * 
 	 */
 	public List<Record> getExamRecordBySid(Integer sid) {
+		
+		//从数据库中获取对应该学生的考试记录
 		List<Record> records = examDao.getRecordBySid(sid);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Record re = new Record();
 		
+		Record re = new Record();
 //		Exam exam = examDao.getExamById(re.getExam().getExamid());
 		
 		Exam exam = new Exam();
@@ -75,7 +79,7 @@ public class ExamServiceImpl implements ExamService {
 		
 		re.setStudent(student);
 		re.setScore(65.5);
-		
+		re.setRid(1);
 		re.setExam(exam);
 		
 		Record re1 = new Record();

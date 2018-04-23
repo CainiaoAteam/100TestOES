@@ -34,6 +34,11 @@ public class TeacherServiceImpl implements RoleService {
 		return teacherDao.getTeacher4NoPassword(tno,password);
 	}
 
+	public Teacher getRoleById(Integer sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

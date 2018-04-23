@@ -16,23 +16,23 @@ public class Exam {
 	private Integer examid;
 	private String examno;
 	private String examname;
+	private Date examday;
+	private double examtime; 
+	
+	private TestPaper testpaper;
 	
 	public String getExamname() {
-		return examname;
+		return examname;            
 	}
 	public void setExamname(String examname) {
 		this.examname = examname;
 	}
-	private TestPaper testpaper;
-	
 	public TestPaper getTestpaper() {
 		return testpaper;
 	}
 	public void setTestpaper(TestPaper testpaper) {
 		this.testpaper = testpaper;
 	}
-	private Date examday;
-	private double examtime;
 	
 	private String startTime;//装换的开始考试时间，这里不存进数据库，所以不要配置到xml文件中
 	
@@ -54,14 +54,6 @@ public class Exam {
 	public void setExamno(String examno) {
 		this.examno = examno;
 	}
-	
-	/*
-	public Integer getTpid() {
-		return tpid;
-	}
-	public void setTpid(Integer tpid) {
-		this.tpid = tpid;
-	}*/
 	
 	public Date getExamday() {
 		return examday;

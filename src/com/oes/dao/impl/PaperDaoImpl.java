@@ -40,7 +40,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		sq.setSchoiceC("选项3");
 		sq.setSchoiceD("选项4");
 		sq.setSanswer("A");
-		sq.setSqno("123");
+		sq.setSqid(1);
 		
 		sq1.setSquestion("你要选哪个？");
 		sq1.setSchoiceA("选项1");
@@ -48,7 +48,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		sq1.setSchoiceC("选项3");
 		sq1.setSchoiceD("选项4");
 		sq1.setSanswer("D");
-		sq1.setSqno("124");
+		sq1.setSqid(2);
 		
 		List<SingleQuestion> squestions = new ArrayList();
 		squestions.add(sq);
@@ -60,7 +60,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		mq.setMchoiceC("选项3");
 		mq.setMchoiceD("选项4");
 		mq.setManswer("AD");
-		mq.setMqno("12");
+		mq.setMqid(1);
 		
 		mq1.setMquestion("你会选则哪？");
 		mq1.setMchoiceA("选项1");
@@ -68,18 +68,18 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		mq1.setMchoiceC("选项3");
 		mq1.setMchoiceD("选项4");
 		mq1.setManswer("AB");
-		mq1.setMqno("12");
+		mq1.setMqid(2);
 		
 		List<MutipleQuestion> mlist = new ArrayList();
-		mlist.add(mq1);
 		mlist.add(mq);
+		mlist.add(mq1);
 		
 		fq.setFquestion("你是傻逼吗？");
 		fq.setFanswer("不是");
-		fq.setFqno("22");
+		fq.setFqid(1);
 		fq1.setFquestion("你是傻逼吗？");
 		fq1.setFanswer("不是");
-		fq1.setFqno("23");
+		fq1.setFqid(2);
 		List<FillQuestion> flist = new ArrayList();
 		flist.add(fq);
 		flist.add(fq1);
@@ -88,6 +88,20 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		p.setFquestions(flist);
 		p.setMquestions(mlist);
 		p.setSquestions(squestions);
+		
+		p.setSquestionscore(3);
+		p.setMquestionscore(5);
+		p.setFquestionscore(10);
+		
+		p.setSquestionSize(p.getSquestions().size());
+		p.setMquestionSize(p.getMquestions().size());
+		p.setFquestionSize(p.getFquestions().size());
+		
+		p.setsTotal(p.getSquestionscore()*p.getSquestionSize());
+		p.setmTotal(p.getMquestionSize()*p.getMquestionscore());
+		p.setfTotal(p.getFquestionscore()*p.getFquestionSize());
+		
+		
 		
 		return p;
 	}
