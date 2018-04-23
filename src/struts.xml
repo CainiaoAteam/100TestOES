@@ -25,7 +25,7 @@
 		<!-- 考试动作 -->
 		<action name="exam_*" class="examAction" method="{1}">
 			<result name="exam" type="redirect">jsp/examing.jsp</result>
-			<result name="showPaper" type="redirect">jsp/showPaper.jsp</result>
+			<result name="examRecord" type="redirect">jsp/examRecord.jsp</result>
 			<result name="getScore" type="redirect">jsp/getScore.jsp</result>
 			
 		</action>

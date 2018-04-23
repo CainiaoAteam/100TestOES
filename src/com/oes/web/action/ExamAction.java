@@ -2,6 +2,7 @@ package com.oes.web.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.oes.bean.Exam;
 import com.oes.bean.FillQuestion;
 import com.oes.bean.MutipleQuestion;
@@ -29,6 +31,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
 
 public class ExamAction extends ActionSupport {
+	private static Record tmp;	//暂时数据
+	
 	
 	private PaperService paperService;
 	private RecordService recordService;
@@ -117,7 +121,7 @@ public class ExamAction extends ActionSupport {
 		return "exam";
 	}
 	/**
-	 * 加载相应学生考试记录
+	 * 加载相应学生考试记录列表
 	 * 
 	 * 
 	 * @return
@@ -131,12 +135,19 @@ public class ExamAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		
 		//根据学生id获取考试记录
-		List<Record> records = examService.getExamRecordBySid(sid);
+		//List<Record> records = recordService.getRecordsBySid(sid);
+		
+		List<Record> records = new ArrayList<Record>();
+		tmp.getExam().setExamno("cet-455555655565");
+		tmp.getExam().setExamname("测试考试一");
+		tmp.getExam().setStartTime("2018-4-23 12:30");
+		tmp.setRid(1);
+		records.add(tmp);
+		records.add(tmp);
 		
 		if(records.size() > 0) {
-			String examlist = JSON.toJSONString(records);
+			String examlist = JSON.toJSONString(records,SerializerFeature.DisableCircularReferenceDetect);
 			System.out.println(examlist);
-			
 			try {
 				response.getWriter().print(examlist);
 			} catch (IOException e) {
@@ -154,24 +165,17 @@ public class ExamAction extends ActionSupport {
 	 * @return
 	 */
 	public String showPaper() {
-//		//根据对应的id获取考试对象
-//		Exam exam = examService.getExamById(examid);
-//		//根据因为考试对象中需要的paper对象，根据相应的id获取paper对象
-//		TestPaper paper = paperService.getPaperByPid(exam.getTestpaper().getTpid());
-//		//将获取到的paper封装好exam对象
-//		exam.setTestpaper(paper);
-//		
-//		//将exam存入session
-//		ServletActionContext.getRequest().getSession().setAttribute("record", exam);
 		
 		//根据接收到的考试记录id获取考试记录对象
-		Record re = recordService.getRecordById(rid);
+//		Record re = recordService.getRecordById(rid);
 		
-		//将获取的考试记录返回
-		ServletActionContext.getRequest().getSession().setAttribute("record", re);
+		//将获取的考试记录返回，不要删除，到时候用到这里
+		//ServletActionContext.getRequest().getSession().setAttribute("record", re);
+		//到时候删除
+		ServletActionContext.getRequest().getSession().setAttribute("record", tmp);
 		
 		
-		return "showPaper";
+		return "examRecord";
 	}
 	/**
 	 * 交卷
@@ -197,6 +201,8 @@ public class ExamAction extends ActionSupport {
 		
 		//封装考试记录对象
 		Record record = recordService.packageRecord(student,exam,answerRecord);
+		
+		tmp = record;//暂时数据，到时候删除
 		
 		//将数据保存到数据库
 		boolean issucc = recordService.saveRecord(record);

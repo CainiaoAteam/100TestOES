@@ -100,7 +100,6 @@
 		<property name="recordDao" ref="recordDao"/>
 		<property name="examService" ref="examService"/>
 		<property name="studentService" ref="studentService"/>
-		
 	</bean>
 	
 	

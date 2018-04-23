@@ -1,5 +1,7 @@
 package com.oes.service;
 
+import java.util.List;
+
 import com.oes.bean.Exam;
 import com.oes.bean.Record;
 import com.oes.bean.Student;
@@ -28,6 +30,14 @@ public interface RecordService {
 	 * @return
 	 */
 	Record getRecordById(Integer rid);
+	
+	/**
+	 * 获取该学的考试记录
+	 * @param sid	对应的学生id
+	 * @return
+	 */
+	List<Record> getRecordsBySid(Integer sid);
+	
 	
 	
 

@@ -21,6 +21,10 @@ public class RecordServiceImpl implements RecordService {
 	private ExamService examService;
 	private RoleService studentService;
 	
+	
+	public void setExamService(ExamService examService) {
+		this.examService = examService;
+	}
 	public void setStudentService(RoleService studentService) {
 		this.studentService = studentService;
 	}
@@ -77,7 +81,7 @@ public class RecordServiceImpl implements RecordService {
 	}
 	public Record getRecordById(Integer rid) {
 		//获取到考试对象
-		Record re = recordDao.getRrcordById(rid);
+		Record re = recordDao.getRecordById(rid);
 		//获取到考试答案
 		String myanswer = re.getMyanswer();
 		//获取要获取的考试对象id
@@ -92,6 +96,11 @@ public class RecordServiceImpl implements RecordService {
 		re = this.packageRecord(student, exam, myanswer);
 		
 		return re;
+	}
+	public List<Record> getRecordsBySid(Integer sid) {
+		// TODO Auto-generated method stub
+		
+		return recordDao.getRecordBySid(sid);
 	}
 
 }

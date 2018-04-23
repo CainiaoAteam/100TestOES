@@ -1,5 +1,7 @@
 package com.oes.dao;
 
+import java.util.List;
+
 import com.oes.bean.Record;
 
 public interface RecordDao {
@@ -20,6 +22,14 @@ public interface RecordDao {
 	 * @param rid
 	 * @return
 	 */
-	Record getRrcordById(Integer rid);
+	Record getRecordById(Integer rid);
+	
+	/**
+	 * 返回学生sid的考试记录列表
+	 * 
+	 * @param sid
+	 * @return
+	 */
+	List<Record> getRecordBySid(Integer sid);
 
 }
