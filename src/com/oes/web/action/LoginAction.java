@@ -189,10 +189,21 @@ public class LoginAction extends ActionSupport{
 			if(type.equals("teacher")) {
 				boolean res = teacherService.checkPassword(userno, password);
 				if(!res) {
-					//该学生不存在
+					//该教师不存在
 					json = "{\"msg\":\"no\"}";
 				}else {
-					//学生存在
+					//教师存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
+			if(type.equals("admin")) {
+				boolean res = adminService.checkPassword(userno, password);
+				if(!res) {
+					//该管理员不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//管理员存在
 					json = "{\"msg\":\"yes\"}";
 //					json = JSON.toJSONString(s);
 				}
