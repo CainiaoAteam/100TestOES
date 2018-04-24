@@ -95,20 +95,5 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 	}
 	
-	/**
-	 * 根据学生id获取学生考试记录
-	 * 
-	 */
-	public List<Record> getRecordBySid(Integer sid) {
-		
-		Record re = new Record();
-		List<Record> res = new ArrayList<Record>();
-		
-		res.add(re);
-		
-		
-		return res;
-	}
-	
 	
 }

@@ -41,7 +41,6 @@ public class TeacherDaoImpl extends JdbcDaoSupport implements TeacherDao {
 			return true;
 		}
 		return false;
-		
 	}
 
 	public Teacher getTeacher4NoPassword(String tno, String password) {

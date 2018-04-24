@@ -23,14 +23,14 @@ public interface ExamService {
 	 * @return
 	 */
 	Exam getExamById(int examid);
-	
-	/**
-	 * 根据学生id获取该学生的考试记录
-	 * 
-	 * @param sid
-	 * @return
-	 */
-	List<Record> getExamRecordBySid(Integer sid);
+//	
+//	/**
+//	 * 根据学生id获取该学生的考试记录
+//	 * 
+//	 * @param sid
+//	 * @return
+//	 */
+//	List<Record> getExamRecordBySid(Integer sid);
 	
 	
 	
