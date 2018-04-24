@@ -113,7 +113,6 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		return exam;
 		
 	}
-	
 	/**
 	 * 根据学生id获取学生考试记录
 	 * ----------不实现-------------
@@ -124,6 +123,5 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		res.add(re);
 		return res;
 	}
-	
-	
+
 }

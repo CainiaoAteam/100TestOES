@@ -26,5 +26,7 @@ public interface AdminDao {
 	 * @return
 	 */
 	Admin getAdmin4NoPassword(String adminNo, String password);
+	
+	boolean updatePassword(String adminno, String newPassword);
 
 }

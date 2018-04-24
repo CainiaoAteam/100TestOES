@@ -29,16 +29,18 @@ public class AdminServiceImpl implements RoleService {
 	public Admin getRoleByNoPsw(String adminNo, String password) {
 		return adminDao.getAdmin4NoPassword(adminNo,password);
 	}
+	
 	public Admin getRoleById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public boolean modifyPassword(String adminNo, String newPassword) {
+	
+	public boolean modifyPassword(String adminno, String newPassword) {
 		// TODO Auto-generated method stub
-		return false;
+		return adminDao.updatePassword(adminno,newPassword);
+		
 	}
+	
 
-	
-	
 	
 }

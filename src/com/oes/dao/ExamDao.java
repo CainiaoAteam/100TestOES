@@ -23,12 +23,4 @@ public interface ExamDao {
 	 */
 	Exam getExamById(int examid);
 	
-	/**
-	 * 根据学生id获取该学生的考试记录
-	 * 
-	 * @param sid
-	 * @return
-	 */
-	List<Record> getRecordBySid(Integer sid);
-
 }
