@@ -20,6 +20,7 @@ import com.oes.bean.FillQuestion;
 import com.oes.bean.MutipleQuestion;
 import com.oes.bean.Record;
 import com.oes.bean.SingleQuestion;
+import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
 import com.oes.dao.ExamDao;
 
@@ -47,18 +48,24 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   exam.setExamday(rs.getDate("examday"));
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
+		    		   exam.setExamstate(rs.getInt("examstate"));
 		    		   
 		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
-
 		    		   TestPaper p = new TestPaper();
 		    		   p.setTpid(tpid);	//将id封装到试卷中
 		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		    		   
+		    		   Teacher t = new Teacher();
+		    		   int tid = rs.getInt("tid");
+		    		   t.setTid(tid);
+		    		   exam.setTeacher(t);
+		    		   
+		    		   //System.out.println("获取考试信息:-------"+exam);
+		    		   
 		    		   examlist.add(exam); 
 		    		   
-		    		   /*exam.setExamid(1);
-		    			p.setTpid(12);*/
-
 		    	   } while(rs.next());
+		    	   
 		       }  
 		   });  
 		
@@ -72,41 +79,49 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	@Test
 	public Exam getExamById(int examid) {
 		
-		 
-		/*String sql = "select examno from Exam where examid=?";
-		
-		RowMapper<Exam> rowMapper=new BeanPropertyRowMapper<Exam>(Exam.class);
-		
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String sql = "select * from Exam where examid=?";
+		Object args[] = new Object[] {examid};
 		JdbcTemplate jdbcTemplate = getJdbcTemplate();
-		Exam exam= jdbcTemplate.queryForObject(sql, rowMapper,examid);
 		
-		System.out.println(exam);*/
+		final Exam exam = new Exam();
+		jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   
+		    		   exam.setExamid(rs.getInt("examid"));
+		    		   exam.setExamname(rs.getString("examname"));  
+		    		   exam.setExamday(rs.getDate("examday"));
+		    		   exam.setExamtime(rs.getInt("examtime"));
+		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+		    		   exam.setExamno(rs.getString("examno"));
+		    		   exam.setExamstate(rs.getInt("examstate"));
+		    		   
+		    		   Teacher t = new Teacher();
+		    		   int tid = rs.getInt("tid");
+		    		   t.setTid(tid);
+		    		   exam.setTeacher(t);
+		    		   
+		    		   TestPaper p = new TestPaper();
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id    		   
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		  
+		       }  
+		   });  
 		
-		
-		Exam exam = new Exam();
-		exam.setExamid(examid);
-		exam.setExamtime(30);
-		TestPaper p = new TestPaper();
-		p.setTpid(12);
-		p.setTpname("测试试卷 AAA");
-		
-		exam.setTestpaper(p);
 		return exam;
 		
 	}
 	
 	/**
 	 * 根据学生id获取学生考试记录
-	 * 
+	 * ----------不实现-------------
 	 */
 	public List<Record> getRecordBySid(Integer sid) {
-		
 		Record re = new Record();
-		List<Record> res = new ArrayList<Record>();
-		
+		List<Record> res = new ArrayList<Record>();	
 		res.add(re);
-		
-		
 		return res;
 	}
 	

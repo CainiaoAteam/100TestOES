@@ -14,13 +14,28 @@ public class Exam {
 	 */
 	
 	private Integer examid;
+	private Teacher teacher;
 	private String examno;
 	private String examname;
 	private Date examday;
-	private double examtime; 
+	private int examtime; 
+	private int examstate; //考试状态，1代表已考，0代表未考
 	
+	public int getExamstate() {
+		return examstate;
+	}
+	public void setExamstate(int examstate) {
+		this.examstate = examstate;
+	}
+
 	private TestPaper testpaper;
 	
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 	public String getExamname() {
 		return examname;            
 	}
@@ -64,8 +79,13 @@ public class Exam {
 	public double getExamtime() {
 		return examtime;
 	}
-	public void setExamtime(double examtime) {
+	public void setExamtime(int examtime) {
 		this.examtime = examtime;
+	}
+	@Override
+	public String toString() {
+		return "Exam [teacher=" + teacher + ", examno=" + examno + ", examname=" + examname + ", examday=" + examday
+				+ ", examtime=" + examtime + ", examstate=" + examstate + ", startTime=" + startTime + "]";
 	}
 	
 }

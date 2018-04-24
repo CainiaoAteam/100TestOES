@@ -219,6 +219,15 @@ public class TestPaper {
 	public void setState(int state) {
 		this.state = state;
 	}
+
+	@Override
+	public String toString() {
+		return "TestPaper [tpid=" + tpid + ", tpno=" + tpno + ", tpname=" + tpname + ", teacher=" + teacher
+				+ ", squestions=" + squestions + ", mquestions=" + mquestions + ", fquestions=" + fquestions
+				+ ", squestionscore=" + squestionscore + ", mquestionscore=" + mquestionscore + ", fquestionscore="
+				+ fquestionscore + ", totalscore=" + totalscore + ", squestionSize=" + squestionSize
+				+ ", mquestionSize=" + mquestionSize + ", fquestionSize=" + fquestionSize + ", state=" + state + "]";
+	}
 	
 	
 	
