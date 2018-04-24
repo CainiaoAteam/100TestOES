@@ -77,7 +77,6 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		
 		Object args[] = new Object[] {tid};
 		int count = jdbcTemplate.queryForObject(sql, args, Integer.class);
-		
 		return count;
 	}
 	public boolean updateFillByFno(String fqno) {
