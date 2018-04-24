@@ -12,6 +12,51 @@ public class TestPaper {
 	private List<MutipleQuestion> mquestions;
 	private List<FillQuestion> fquestions;
 	
+	private String squestion;
+	private String mquestion;
+	private String fquestion;
+	
+	private Teacher teacher;
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+	private int tpstate;
+	
+	public int getTpstate() {
+		return tpstate;
+	}
+
+	public void setTpstate(int tpstate) {
+		this.tpstate = tpstate;
+	}
+
+	public String getSquestion() {
+		return squestion;
+	}
+
+	public void setSquestion(String squestion) {
+		this.squestion = squestion;
+	}
+
+	public String getMquestion() {
+		return mquestion;
+	}
+
+	public void setMquestion(String mquestion) {
+		this.mquestion = mquestion;
+	}
+
+	public String getFquestion() {
+		return fquestion;
+	}
+
+	public void setFquestion(String fquestion) {
+		this.fquestion = fquestion;
+	}
 	private int squestionscore;
 	private int mquestionscore;
 	private int fquestionscore;
