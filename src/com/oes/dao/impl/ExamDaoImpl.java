@@ -40,20 +40,22 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 			  
 		       public void processRow(ResultSet rs) throws SQLException {  
 		    	   do {
-		    		   
 		    		   Exam exam = new Exam();  
-		    		   
+
 		    		   exam.setExamid(rs.getInt("examid"));
 		    		   exam.setExamname(rs.getString("examname"));  
 		    		   exam.setExamday(rs.getDate("examday"));
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
 		    		   
-		    		   int tpid = rs.getInt("tpid");
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+
 		    		   TestPaper p = new TestPaper();
+
 		    		   p.setTpid(tpid);
 		    		   exam.setTestpaper(p);
-		    		  
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
 		    		   examlist.add(exam); 
 		    		   
 		    		   /*exam.setExamid(1);

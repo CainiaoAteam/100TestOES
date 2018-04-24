@@ -1,5 +1,7 @@
 package com.oes.service.impl;
 
+import java.util.List;
+
 import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
 import com.oes.service.PaperService;
@@ -15,6 +17,8 @@ public class PaperServiceImpl implements PaperService {
 	 */
 	public TestPaper getPaperByPid(Integer pid) {
 		TestPaper paper = paperDao.getPaperByPid(pid);
+		
+		
 		
 		System.out.println(paper.getTpname());
 		
@@ -32,6 +36,10 @@ public class PaperServiceImpl implements PaperService {
 		
 		
 		return paper;
+	}
+	public List<TestPaper> getPapersByStateForTid(int tid, int state) {
+		// TODO Auto-generated method stub
+		return paperDao.getPapersByStateForTid(tid, state);
 	}
 
 }

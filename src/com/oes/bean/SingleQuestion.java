@@ -25,13 +25,23 @@ public class SingleQuestion extends Question {
 	private String sexplanation;	//题目解析
 	private String difficulty;		//题目难度
 	
-	
 	private String answer;	//我的答案
 	
 	private int istrue;	//判断答案是否正确 1代表正确0代表打错
 	
+	private int tid;	//出题老师的id要保存到数据库
 	
+	private final int type=1;		//标记一下题目类型，不用存到数据库
 	
+	public int getType() {
+		return type;
+	}
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
 	public int getIstrue() {
 		return istrue;
 	}
@@ -103,6 +113,13 @@ public class SingleQuestion extends Question {
 	}
 	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
+	}
+	@Override
+	public String toString() {
+		return "SingleQuestion [sqid=" + sqid + ", sqno=" + sqno + ", squestion=" + squestion + ", schoiceA=" + schoiceA
+				+ ", schoiceB=" + schoiceB + ", schoiceC=" + schoiceC + ", schoiceD=" + schoiceD + ", sanswer="
+				+ sanswer + ", sexplanation=" + sexplanation + ", difficulty=" + difficulty + ", answer=" + answer
+				+ ", istrue=" + istrue + ", tid=" + tid + "]";
 	}
 	
 }

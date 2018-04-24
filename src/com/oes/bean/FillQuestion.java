@@ -17,9 +17,25 @@ public class FillQuestion extends Question {
 	private String fexplanation;
 	private String difficulty;
 	
+	
 	private String answer;	//我的答案
 	
 	private int istrue;	//判断答案是否正确 1代表正确0代表打错
+	
+	private int tid;	//出题老师的id要保存到数据库
+	
+	private final int type=3;		//标记一下题目类型，不用存到数据库
+	
+	public int getType() {
+		return type;
+	}
+	
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
 	
 	public int getIstrue() {
 		
@@ -70,5 +86,11 @@ public class FillQuestion extends Question {
 	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
 	}
-
+	@Override
+	public String toString() {
+		return "FillQuestion [fqid=" + fqid + ", fqno=" + fqno + ", fquestion=" + fquestion + ", fanswer=" + fanswer
+				+ ", fexplanation=" + fexplanation + ", difficulty=" + difficulty + ", answer=" + answer + ", istrue="
+				+ istrue + ", tid=" + tid + "]";
+	}
+	
 }

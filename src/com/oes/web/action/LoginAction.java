@@ -146,6 +146,17 @@ public class LoginAction extends ActionSupport{
 //					json = JSON.toJSONString(s);
 				}
 			}
+			if(type.equals("admin")) {
+				boolean res = adminService.checkRoleExitByNo(userno);
+				if(!res) {
+					//该学生不存在
+					json = "{\"msg\":\"no\"}";
+				}else {
+					//学生存在
+					json = "{\"msg\":\"yes\"}";
+//					json = JSON.toJSONString(s);
+				}
+			}
 			writer.print(json);
 			
 		} catch (IOException e1) {

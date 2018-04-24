@@ -8,15 +8,8 @@ public class TestPaper {
 	private String tpno;
 	private String tpname;
 	
-	private List<SingleQuestion> squestions;
-	private List<MutipleQuestion> mquestions;
-	private List<FillQuestion> fquestions;
+	private Teacher teacher;	//新增 郭冠志 用于记录老师出的试卷
 	
-	private String squestion;
-	private String mquestion;
-	private String fquestion;
-	
-	private Teacher teacher;
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -24,6 +17,10 @@ public class TestPaper {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
+	private List<SingleQuestion> squestions;
+	private List<MutipleQuestion> mquestions;
+	private List<FillQuestion> fquestions;
+	
 	private int tpstate;
 	
 	public int getTpstate() {
@@ -33,7 +30,30 @@ public class TestPaper {
 	public void setTpstate(int tpstate) {
 		this.tpstate = tpstate;
 	}
-
+	
+	private int squestionscore;
+	private int mquestionscore;
+	private int fquestionscore;
+	
+	private int totalscore;
+	
+	/**
+	 * 封装用于页面显示的数据，不用配置
+	 */
+	private int squestionSize;
+	private int mquestionSize;
+	private int fquestionSize;
+	
+	private int sTotal;
+	private int mTotal;
+	private int fTotal;
+	
+	
+//	封装题目标号
+	private String squestion;
+	private String mquestion;
+	private String fquestion;
+	
 	public String getSquestion() {
 		return squestion;
 	}
@@ -57,25 +77,7 @@ public class TestPaper {
 	public void setFquestion(String fquestion) {
 		this.fquestion = fquestion;
 	}
-	private int squestionscore;
-	private int mquestionscore;
-	private int fquestionscore;
-	
-	private int totalscore;
-	
-	/**
-	 * 封装用于页面显示的数据，不用配置
-	 */
-	private int squestionSize;
-	private int mquestionSize;
-	private int fquestionSize;
-	
-	private int sTotal;
-	private int mTotal;
-	private int fTotal;
-	
-	
-	
+
 	/**************用于显示数据的getter setter**************/
 	public int getSquestionSize() {
 		return squestionSize;

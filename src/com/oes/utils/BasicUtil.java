@@ -1,6 +1,7 @@
 package com.oes.utils;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.oes.bean.Exam;
 import com.oes.bean.FillQuestion;
@@ -8,6 +9,14 @@ import com.oes.bean.MutipleQuestion;
 import com.oes.bean.SingleQuestion;
 
 public class BasicUtil {
+	
+	/**
+	 * 生成uuid
+	 * @return
+	 */
+	public static String getUUID() {
+		return UUID.randomUUID().toString();
+	}
 	
 	/**
 	 * 计算考试分数

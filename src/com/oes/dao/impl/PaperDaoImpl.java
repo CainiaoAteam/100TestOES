@@ -17,12 +17,13 @@ import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
 
 public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
+	
 	/**
 	 * 不要实现该方法
 	 * @param pid
 	 * @return
 	 */
-	public TestPaper getPaperByPid(String pid) {
+	public TestPaper getPaperByPid(String tpno) {
 		// TODO Auto-generated method stub
 		
 		return null;
@@ -61,6 +62,14 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 	     });
 	
 		return p;
+	}
+	
+	/**
+	 * 根据tid获取对应状态下所有试卷
+	 */
+	public List<TestPaper> getPapersByStateForTid(int tid, int state) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
