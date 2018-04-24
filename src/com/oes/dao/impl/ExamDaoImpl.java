@@ -94,6 +94,24 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		return exam;
 		
 	}
-	
+	/**
+	 * 获取该老师对应状态下的考试
+	 * @param tid
+	 * @param state
+	 * @return
+	 */
+	public List<Exam> getExamsByTidAndState(int tid, int state){
+		return null;
+		
+	}
+	/**
+	 * 获取该老发布的所有考试
+	 * @param tid
+	 * @return
+	 */
+	public List<Exam> getExamsByTid(int tid){
+		return null;
+		
+	}
 	
 }

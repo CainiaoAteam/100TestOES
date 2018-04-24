@@ -88,6 +88,7 @@
 	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
 		<property name="studentService" ref="studentService"/>
 	</bean>
+	
 	<bean id="teacherAction" class="com.oes.web.action.TeacherAction" scope="prototype">
 		<property name="teacherService" ref="teacherService"/>
 		<property name="singleService" ref="singleService"/>

@@ -5,12 +5,12 @@ import java.util.Date;
 public class Exam {
 	/**
 	 *  `examid` int(10) NOT NULL,
-  `examno` varchar(10) DEFAULT NULL,
-  `examname` varchar(10) DEFAULT NULL,
-  `tpid` int(10) DEFAULT NULL,
-  `examday` date DEFAULT NULL,
-  `examtime` int(10) DEFAULT NULL,
-   PRIMARY KEY (`examid`)
+	  `examno` varchar(10) DEFAULT NULL,
+	  `examname` varchar(10) DEFAULT NULL,
+	  `tpid` int(10) DEFAULT NULL,
+	  `examday` date DEFAULT NULL,
+	  `examtime` int(10) DEFAULT NULL,
+	   PRIMARY KEY (`examid`)
 	 */
 	
 	private Integer examid;
@@ -21,6 +21,14 @@ public class Exam {
 	
 	private TestPaper testpaper;
 	
+	private int state;	//考试状态，新增ggz
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 	public String getExamname() {
 		return examname;            
 	}

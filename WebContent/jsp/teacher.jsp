@@ -234,21 +234,17 @@
 					</div>
 					<div id="myPaper" class="container tab-pane fade"><!-- 我的试卷管理-->
 						<form >
-							<div class="input-group ">
-								<input class="form-control col-sm-6 " type="text " placeholder="题目/类型 ">
-								<button class="btn btn-success-outline " type="submit ">Search</button>
-							</div>
-							<br />
 							<div class="input-group">
 								<sapn>试卷状态：</sapn>
+								<div class="radio radio-success radio-inline">
+									<input id="tpSatae2" checked="checked" type="radio" name="state" value="1" onclick="getTestPaperByState(this)">
+									<label for="tpSatae2">通过审核</label>
+								</div>
 								<div class="radio radio-success radio-inline">
 									<input id="tpSatae1" type="radio" name="state" value="-1" onclick="getTestPaperByState(this)">
 									<label for="tpSatae1">未通过审核</label>
 								</div>
-								<div class="radio radio-success radio-inline">
-									<input id="tpSatae2" type="radio" name="state" value="1" onclick="getTestPaperByState(this)">
-									<label for="tpSatae2">通过审核</label>
-								</div>
+								
 								<div class="radio radio-success radio-inline">
 									<input id="tpSatae3" type="radio" name="state" value="0" onclick="getTestPaperByState(this)">
 									<label for="tpSatae3">待审核</label>
@@ -257,7 +253,7 @@
 						</form>
 						<div class="clearfix ">
 							<div class="float-right">
-								<a href="${pageContext.request.contextPath }/jsp/addExamPaper.jsp"><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
+								<a href="${pageContext.request.contextPath }/teacher_addExamPaper"><button type="button " class="btn btn-outline-info ">制作新试卷</button></a>
 							</div>
 						</div>
 						<table class="table table-hover">
@@ -283,13 +279,17 @@
 						<form>
 							<div class="input-group">
 								<sapn>考试状态：</sapn>
-								<div class="checkbox checkbox-success">
-									<input id="state1" class="styled" name="state" type="checkbox">
-									<label for="state1">已考</label>
+								<div class="radio radio-success radio-inline">
+									<input id="state1" checked="checked" type="radio" name="state" value="2" onclick="getExamByState(this)">
+									<label for="state1">全部</label>
 								</div>
-								<div class="checkbox checkbox-success">
-									<input id="state2" class="styled" name="state" type="checkbox">
-									<label for="state2">未考</label>
+								<div class="radio radio-success radio-inline">
+									<input id="state2"  type="radio" name="state" value="1" onclick="getExamByState(this)">
+									<label for="state2">已考</label>
+								</div>
+								<div class="radio radio-success radio-inline">
+									<input id="state3" type="radio" name="state" value="0" onclick="getExamByState(this)">
+									<label for="state3">未考</label>
 								</div>
 								<div class="float-right" style="margin-left: auto">
 									<a href="" data-toggle="modal" data-target="#addANewExam"><button type="button " class="btn btn-outline-info btn-sm">发布考试</button></a>
@@ -638,36 +638,39 @@
 						</div>
 	
 						<!-- 模态框主体 -->
-						<div class="modal-body">
-							<form>
+						<div class="modal-body" style="padding:15px;">
+							<form action="${pageContext.request.contextPath }/teacher_addExam" method="post">
+								<div class="form-group row">
+									<label for="exmaname" class="form-control-label" style="margin-top: 8px;">考试名称:</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="exmaname" name="exam.examname">
+									</div>
+								</div>
 								<div class="form-group row">
 									<label for="paper">选择试卷:</label>
-									<select class="form-control" id="paper">
-										<option value="">这是一张试卷</option>
-										<option value="">这是一张试卷</option>
-										<option value="">这是一张试卷</option>
-										<option value="">这是一张试卷</option>
+									<select id="se-paper" onclick="getAllPaperByTid()" class="form-control" id="paper" style="width:250px;">
+										<option value="" name="exam.testpaper.tpid">--请选择试卷--</option>
 									</select>
+									<span id="paperState"></span>
 								</div>
 								<br/>
 								<div class="form-group row">
 									<label for="examday" class="form-control-label" style="margin-top: 8px;">考试日期:</label>
 									<div class="col-sm-7">
-										<input type="datetime-local" class="form-control" id="examday" placeholder="">
+										<input type="datetime-local" class="form-control" id="examday" name="exam.examday">
 									</div>
 								</div>
+								
 								<div class="form-group row">
 									<label for="examtime" class="form-control-label" style="margin-top: 8px;">考试时长:</label>
 									<div class="col-sm-7">
-										<input type="text" class="form-control" id="examtime" placeholder="单位/分钟">
+										<input type="text" class="form-control" id="examtime" placeholder="单位/分钟" name="exam.examtime">
 									</div>
 								</div>
+								<div class="form-group row">
+									<input type="submit" class="form-control" value="发布考试">
+								</div>
 							</form>
-						</div>
-	
-						<!-- 模态框底部 -->
-						<div class="modal-footer">
-							<a href="" type="button" class="btn btn-outline-light text-dark">确定发布</a>
 						</div>
 					</div>
 				</div>
@@ -723,6 +726,32 @@
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+			//获取所有关于该老师的试卷
+			function getAllPaperByTid(){
+				var url = "${pageContext.request.contextPath }/teacher_getAllPaper";
+				var who = ${sessionScope.user.tid};
+				var param = {"tid":who};
+				var tmp = "";
+				var inner = "";
+
+				$.post(url,param,function(data){
+					data = eval("("+data+")");
+
+					console.log(data);
+					if(data.tip == "no"){
+						$("#paperState").html("<p style='color:red;'>你赞无可选择的试卷！</p>");
+					}else{
+						$.each(data,function(i,n){
+							tmp="<option value="+data[i].tpid+" name='exam.testpaper.tpid'>"+data[i].tpname+"</option>";
+						});
+						$("#se-paper").html(inner);
+					}
+				},"json");
+
+			}
+		</script>
 
 		<script>//这是修改题目时的js
 			function editQusetion(){
@@ -764,9 +793,35 @@
 				var url = "${pageContext.request.contextPath }/teacher_getTestPaperByState";
 				var who = ${sessionScope.user.tid};
 				var param = {"state":obj.value,"who":who};
+				var tmp = "";
+				var inner = "";
+				var states = ["待审核","通过审核","未通过审核"];
 				$.post(url,param,function(data){
-					if(data.tip != ""){
+					data = eval("("+data+")");
+					// console.log(data);
+					if(data.tip == "no"){
 						$("#paperBody").html("<p style='color:red;'>暂无该状态下的sss试卷！</p>");
+					}else{
+						$.each(data,function(i,n){
+							tmp="<tr>"+
+									"<td>"+
+										"<div class='card'>"+
+											"<div class='card-body'>"+
+												"<h4 class='card-title'>"+data[i].tpname+"</h4>"+
+												"<p class='card-text'>"+data[i].tpno+"</p>"+
+												"<p class='card-text'>"+states[Number(data[i].tpstate)]+"</p>"+
+												"<a href='${pageContext.request.contextPath }/paper_getPaperById?pid="+data[i].tpid+"' class='card-link'>"+
+													"<p style='text-align: right;'>"+查看试卷+"</p>"+
+												"</a>"+
+											"</div>"+
+										"</div>"+
+									"</td>"+
+								"</tr>";
+							inner += tmp;
+						});
+
+					$("#paperBody").html(inner);
+
 					}
 					
 				},"json");

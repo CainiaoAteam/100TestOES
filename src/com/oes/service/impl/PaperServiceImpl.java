@@ -5,6 +5,7 @@ import java.util.List;
 import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
 import com.oes.service.PaperService;
+import com.oes.utils.BasicUtil;
 
 public class PaperServiceImpl implements PaperService {
 	private PaperDao paperDao;
@@ -40,6 +41,22 @@ public class PaperServiceImpl implements PaperService {
 	public List<TestPaper> getPapersByStateForTid(int tid, int state) {
 		// TODO Auto-generated method stub
 		return paperDao.getPapersByStateForTid(tid, state);
+	}
+	/**
+	 * 添加题目
+	 */
+	public boolean addTestPaper(TestPaper testPaper) {
+		// 封装适合保存于数据库的题目字段
+		testPaper.setSquestion(BasicUtil.join(testPaper.getSqid(), ","));
+		testPaper.setMquestion(BasicUtil.join(testPaper.getMqid(), ","));
+		testPaper.setFquestion(BasicUtil.join(testPaper.getFqid(), ","));
+		testPaper.setTpno(BasicUtil.getUUID());
+		
+		return paperDao.addTestPaper(testPaper);
+	}
+	public List<TestPaper> getPapersByTid(int tid) {
+		// TODO Auto-generated method stub
+		return paperDao.getPapersByTid(tid);
 	}
 
 }

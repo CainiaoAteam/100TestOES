@@ -71,5 +71,15 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public boolean addTestPaper(TestPaper testPaper) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public List<TestPaper> getPapersByTid(int tid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

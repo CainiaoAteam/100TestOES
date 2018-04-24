@@ -14,4 +14,8 @@ public interface PaperService {
 
 	List<TestPaper> getPapersByStateForTid(int tid, int state);
 	
+	boolean addTestPaper(TestPaper testPaper);
+
+	List<TestPaper> getPapersByTid(int tid);
+	
 }

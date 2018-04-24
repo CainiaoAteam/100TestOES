@@ -14,5 +14,9 @@ public interface PaperDao {
 	TestPaper getPaperByPid(Integer pid);
 
 	List<TestPaper> getPapersByStateForTid(int tid, int state);
+
+	boolean addTestPaper(TestPaper testPaper);
+
+	List<TestPaper> getPapersByTid(int tid);
 	
 }

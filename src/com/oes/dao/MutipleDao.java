@@ -11,5 +11,7 @@ public interface MutipleDao {
 	List<MutipleQuestion> getMutiplesByTid(int tid);
 
 	int getMutiplesCountByTid(int tid);
-
+	
+	boolean updateMutipleByMno(String mqno);
+	boolean updateMutipleByMid(int mqid);
 }
