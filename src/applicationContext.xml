@@ -59,6 +59,10 @@
 	<bean id="student" class="com.oes.bean.Student">
 		
 	</bean>
+	<!-- 配置分页模块 -->
+	<bean id="pageBean" class="com.oes.bean.PageBean">
+		
+	</bean>
 	<!-- 配置考试记录  -->
 	<bean id="record" class="com.oes.bean.Record">
 		
@@ -83,6 +87,14 @@
 	
 	<bean id="studentAction" class="com.oes.web.action.StudentAction" scope="prototype">
 		<property name="studentService" ref="studentService"/>
+	</bean>
+	<bean id="teacherAction" class="com.oes.web.action.TeacherAction" scope="prototype">
+		<property name="teacherService" ref="teacherService"/>
+		<property name="singleService" ref="singleService"/>
+		<property name="mutipleService" ref="mutipleService"/>
+		<property name="fillService" ref="fillService"/>
+		<property name="pageBean" ref="pageBean"/>
+		<property name="paperService" ref="paperService"/>
 	</bean>
 	
 	<!--  基础动作 -->
@@ -122,7 +134,27 @@
 		<property name="adminDao" ref="adminDao"></property>
 	</bean>
 	
+	<!-- 题目业务 -->
+	<bean id="singleService" class="com.oes.service.impl.SingleServiceImpl">
+		<property name="singleDao" ref="singleDao"></property>
+	</bean>
+	<bean id="mutipleService" class="com.oes.service.impl.MutipleServiceImpl">
+		<property name="mutipleDao" ref="mutipleDao"></property>
+	</bean>
+	<bean id="fillService" class="com.oes.service.impl.FillServiceImpl">
+		<property name="fillDao" ref="fillDao"></property>
+	</bean>
 	
+	<!-- 题目持久层 -->
+	<bean id="singleDao" class="com.oes.dao.impl.SingleDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<bean id="mutipleDao" class="com.oes.dao.impl.MutipleDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	<bean id="fillDao" class="com.oes.dao.impl.FillDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
 	
 	<!-- 配置持久dao层 -->
 	<bean id="studentDao" class="com.oes.dao.impl.StudentDaoImpl">
@@ -141,7 +173,6 @@
 	<bean id="paperDao" class="com.oes.dao.impl.PaperDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>
-	
 	<bean id="recordDao" class="com.oes.dao.impl.RecordDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"/>
 	</bean>

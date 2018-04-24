@@ -41,62 +41,23 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		       public void processRow(ResultSet rs) throws SQLException {  
 		    	   do {
 		    		   
-		    		   Exam exam = new Exam();  
-		    		
+		    		   Exam exam = new Exam(); 
+		    		   
+		    		   exam.setExamid(rs.getInt("examid"));
 		    		   exam.setExamname(rs.getString("examname"));  
 		    		   exam.setExamday(rs.getDate("examday"));
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
 		    		   
-		    		   /**
-		    		    * 这部分还没完成
-		    		    * 
-		    		    */
-		    		  /* TestPaper p = new TestPaper();
-		    			p.setTpid(12);
-		    			exam.setTestpaper(p);*/
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+		    		   TestPaper p = new TestPaper();
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
 		    		   
 		    		   examlist.add(exam); 
 		    	   } while(rs.next());
 		       }  
 		   });  
-		 
-		/*List<Exam> list = new ArrayList<Exam>();
-		Exam a1 = new Exam();
-		a1.setExamname("测试考试科目一");
-		a1.setExamday(new Date());
-		a1.setExamid(1);
-		//为了方便显示，处理一下时间的格式
-		a1.setStartTime(sdf.format(new Date()));
-		a1.setExamno("cet4-4122563");
-		//a1.setTpid(12);
-		TestPaper p1 = new TestPaper();
-		p1.setTpid(12);
-		a1.setTestpaper(p1);
-		
-		Exam a2 = new Exam();
-		a2.setExamname("测试考试科目二");
-		a2.setExamday(new Date());
-		a2.setStartTime(sdf.format(new Date()));
-		a2.setExamno("cet6-4128963");
-		a2.setExamid(2);
-		TestPaper p2 = new TestPaper();
-		p2.setTpid(13);
-		a2.setTestpaper(p2);
-		
-		Exam a3 = new Exam();
-		a3.setExamname("测试考试科目三");
-		a3.setExamday(new Date());
-		a3.setStartTime(sdf.format(new Date()));
-		a3.setExamno("yasi-4128963");
-		a3.setExamid(3);
-		TestPaper p3 = new TestPaper();
-		p3.setTpid(14);
-		a3.setTestpaper(p3);
-		
-		list.add(a1);
-		list.add(a2);
-		list.add(a3);*/
 		
 		return examlist;
 	}

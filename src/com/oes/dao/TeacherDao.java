@@ -24,5 +24,12 @@ public interface TeacherDao {
 	 * @return
 	 */
 	Teacher getTeacher4NoPassword(String tno, String password);
+	/**
+	 * 修改教师密码
+	 * @param tno
+	 * @param newPassword
+	 * @return
+	 */
+	boolean updatePassword(String tno, String newPassword);
 
 }

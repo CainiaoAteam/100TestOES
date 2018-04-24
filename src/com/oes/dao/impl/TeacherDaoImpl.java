@@ -55,7 +55,7 @@ public class TeacherDaoImpl extends JdbcDaoSupport implements TeacherDao {
 	      
 	     jdbcTemplate.query(sql,args,new RowCallbackHandler() {
 	    	 public void processRow(ResultSet rs) throws SQLException {
-	    		 
+	    		 t.setTid(rs.getInt("tid"));
 	    		 t.setTno(rs.getString("tno"));
 	    		 t.setPassword(rs.getString("password"));
 	    		 t.setTname(rs.getString("tname"));
@@ -66,6 +66,22 @@ public class TeacherDaoImpl extends JdbcDaoSupport implements TeacherDao {
 	     });
 	     
 		return t;
+	}
+	
+	/**
+	 * 修改教师密码
+	 */
+	public boolean updatePassword(String tno, String newPassword) {
+		/**
+		 * 键入更新密码的操作
+		 */
+		String sql = "update teacher set password=? where tno=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+
+		// final Student s = new Student();
+		final Object args[] = new Object[] { newPassword, tno };
+		jdbcTemplate.update(sql, args);
+		return true;
 	}
 	
 }

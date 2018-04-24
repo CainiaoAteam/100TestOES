@@ -1,5 +1,7 @@
 package com.oes.service;
 
+import java.util.List;
+
 import com.oes.bean.TestPaper;
 
 public interface PaperService {
@@ -9,5 +11,7 @@ public interface PaperService {
 	 * @return
 	 */
 	TestPaper getPaperByPid(Integer pid);
+
+	List<TestPaper> getPapersByStateForTid(int tid, int state);
 	
 }

@@ -24,4 +24,11 @@ public interface RoleService {
 	Role getRoleByNoPsw(String userno, String password);
 	
 	Role getRoleById(Integer sid);
+	/**
+	 * 修改密码
+	 * @param tno
+	 * @param newPassword
+	 * @return
+	 */
+	boolean modifyPassword(String tno, String newPassword);
 }

@@ -1,5 +1,7 @@
 package com.oes.bean;
 
+import java.util.Arrays;
+
 public class MutipleQuestion extends Question {
 	/**
 	 * `mqid` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
@@ -28,6 +30,28 @@ public class MutipleQuestion extends Question {
 	
 	private double istrue;	//判断答案是否正确 1代表正确0代表打错
 	
+	private String[] manswers;	//该字段不要理，为了方便从页面保存数据所设置 
+	
+	private int tid;	//出题老师的id要保存到数据库
+	
+	private final int type=2;		//标记一下题目类型，不用存到数据库
+	
+	public int getType() {
+		return type;
+	}
+	public int getTid() {
+		return tid;
+	}
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
+	
+	public String[] getManswers() {
+		return manswers;
+	}
+	public void setManswers(String[] manswers) {
+		this.manswers = manswers;
+	}
 	public double getIstrue() {
 		return istrue;
 	}
@@ -101,5 +125,13 @@ public class MutipleQuestion extends Question {
 	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
 	}
+	@Override
+	public String toString() {
+		return "MutipleQuestion [mqid=" + mqid + ", mqno=" + mqno + ", mquestion=" + mquestion + ", mchoiceA="
+				+ mchoiceA + ", mchoiceB=" + mchoiceB + ", mchoiceC=" + mchoiceC + ", mchoiceD=" + mchoiceD
+				+ ", manswer=" + manswer + ", mexplanation=" + mexplanation + ", difficulty=" + difficulty + ", answer="
+				+ answer + ", istrue=" + istrue + ", manswers=" + Arrays.toString(manswers) + ", tid=" + tid + "]";
+	}
+	
 	
 }

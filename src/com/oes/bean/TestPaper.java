@@ -8,6 +8,15 @@ public class TestPaper {
 	private String tpno;
 	private String tpname;
 	
+	private Teacher teacher;	//新增 郭冠志 用于记录老师出的试卷
+	
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 	private List<SingleQuestion> squestions;
 	private List<MutipleQuestion> mquestions;
 	private List<FillQuestion> fquestions;
@@ -30,7 +39,35 @@ public class TestPaper {
 	private int fTotal;
 	
 	
+//	封装题目标号
+	private String squestion;
+	private String mquestion;
+	private String fquestion;
 	
+	public String getSquestion() {
+		return squestion;
+	}
+
+	public void setSquestion(String squestion) {
+		this.squestion = squestion;
+	}
+
+	public String getMquestion() {
+		return mquestion;
+	}
+
+	public void setMquestion(String mquestion) {
+		this.mquestion = mquestion;
+	}
+
+	public String getFquestion() {
+		return fquestion;
+	}
+
+	public void setFquestion(String fquestion) {
+		this.fquestion = fquestion;
+	}
+
 	/**************用于显示数据的getter setter**************/
 	public int getSquestionSize() {
 		return squestionSize;

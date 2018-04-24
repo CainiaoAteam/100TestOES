@@ -1,5 +1,7 @@
 package com.oes.dao;
 
+import java.util.List;
+
 import com.oes.bean.TestPaper;
 
 public interface PaperDao {
@@ -10,5 +12,7 @@ public interface PaperDao {
 	 * @return
 	 */
 	TestPaper getPaperByPid(Integer pid);
+
+	List<TestPaper> getPapersByStateForTid(int tid, int state);
 	
 }
