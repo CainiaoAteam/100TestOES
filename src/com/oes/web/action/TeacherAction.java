@@ -95,36 +95,36 @@ public class TeacherAction extends ActionSupport{
 	 * 根据试卷状态获取试卷
 	 * @return
 	 */
-	public String getTestPaperByState() {
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-		//设置编码格式
-		response.setContentType("text/html;charset=utf-8");
-		
-		int state = Integer.parseInt(ServletActionContext.getRequest().getParameter("state"));
-		int who = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
-		List<TestPaper> list = paperService.getPapersByStateForTid(who,state);
-		System.out.println(who+":"+state);
-		
-		String json = "";
-		
-		if(list == null) {
-			json = "{\"tip\":\"no\"}";
-			json = JSON.toJSONString(json);
-			
-		}else {
-			json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
-		}
-		
-		try {
-			response.getWriter().print(json);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return NONE;
-	}
+//	public String getTestPaperByState() {
+//		
+//		HttpServletResponse response = ServletActionContext.getResponse();
+//		//设置编码格式
+//		response.setContentType("text/html;charset=utf-8");
+//		
+//		int state = Integer.parseInt(ServletActionContext.getRequest().getParameter("state"));
+//		int who = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
+//		List<TestPaper> list = paperService.getPapersByStateForTid(who,state);
+//		System.out.println(who+":"+state);
+//		
+//		String json = "";
+//		
+//		if(list == null) {
+//			json = "{\"tip\":\"no\"}";
+//			json = JSON.toJSONString(json);
+//			
+//		}else {
+//			json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
+//		}
+//		
+//		try {
+//			response.getWriter().print(json);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return NONE;
+//	}
 	/**
 	 * 获取所有的题目
 	 * 

@@ -73,7 +73,8 @@
 
             if(data.msg == "no"){
           	  oTip.html("输入密码不正确！");
-                oTip.addClass("tipErro");
+              oTip.addClass("tipErro");
+              $('#submit').attr("disabled","disabled"); 
             }
             else if(data.msg == "yes"){
           	  oTip.html("输入密码正确！");
@@ -108,15 +109,6 @@
     <div>
       <input id="usertype" type="hidden" name="type" value="${sessionScope.role}">
     </div>
-    <!-- <div style="display:none">
-      <label for="type">类型:</label>
-      <input type="test" class="form-control" id="type" name="type" value="${sessionScope.role}">
-    </div> -->
-    <!-- <div class="form-check">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox">记住密码
-      </label>
-    </div> -->
     <div class="text-center">
     	<button id="submit" disabled="disabled" type ="submit" class="btn">登陆</button>
     </div> 
