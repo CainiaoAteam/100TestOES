@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -21,8 +22,8 @@
 						<h1>100Test</h1>
 					</a>
 					<div> 
-						<a style="text-align: right;">欢迎你！管理员</a>
-						<a class="btn btn-outline-secondary" href="home.html">退出</a>
+						<a style="text-align: right;">欢迎你！${sessionScope.user.adminname}</a>
+						<a class="user_a" href="${pageContext.request.contextPath }/login_logout">退出</a>
 					</div>
 				</nav>
 			</div>
@@ -181,11 +182,11 @@
 							<tbody>
 								<tr>
 									<td><p style="text-align: center;">ID:</p></td>
-									<td>201524133215</td>
+									<td>${sessionScope.user.adminid}</td>
 								</tr>
 								<tr>
 									<td><p style="text-align: center;">称呼:</p></td>
-									<td>张创恒</td>
+									<td>${sessionScope.user.adminname}</td>
 								</tr>
 								<tr>
 									<td><a href="" data-toggle="modal" data-target="#changePaw"><p style="text-align: center;">修改密码</p></a></td>
@@ -218,7 +219,7 @@
 						
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<form action="${pageContext.request.contextPath }/stu_modifyPsw" method="post">
+							<form action="${pageContext.request.contextPath }/admin_modifyPsw" method="post">
 								<fieldset class="form-group">
 									<label for="oldPassword">请输入旧密码：</label>
 									<input type="password" class="form-control" id="oldPassword" placeholder="Enter old password" onblur="checkOldPassword(this)">
@@ -387,6 +388,37 @@
 				$("#tpState").text("未通过");
 			}
 		</script>
+		
+		<script type="text/javascript">
+		// 修改密码的js代码
+		// 首先对比输入的旧密码是否正确
+		function checkOldPassword(obj){
+			if($("#oldPassword").val() != "${sessionScope.user.adminpwd}"){
+				$("#oldPasswordTip").html("旧密码输入不正确！");
+				$("#oldPasswordTip").addClass("erroTip");
+			}else{
+				$("#oldPasswordTip").html("旧密码输入正确！");
+				$("#oldPasswordTip").removeClass("erroTip");
+				$("#oldPasswordTip").addClass("trueTip");
+			}
+		}
+
+		//检查两次输入的新密码是否正确
+		function checkNewPswModify(obj){
+			//密码不一致
+			if($("#newPassword").val() != $("#newPasswordAgain").val()){
+				$("#newPasswordTip").html("两次密码输入不一致！");
+				$("#newPasswordTip").addClass("erroTip");
+			}else{
+				$("#newPasswordTip").html("可以修改密码！");
+				$("#newPasswordTip").removeClass("erroTip");
+				$("#newPasswordTip").addClass("trueTip");
+
+				$("#modifyPsw").removeAttr("disabled");
+			}
+		}
+
+	</script>
 	</body>
 </html>
  

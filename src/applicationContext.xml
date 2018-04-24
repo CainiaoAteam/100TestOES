@@ -96,7 +96,10 @@
 		<property name="pageBean" ref="pageBean"/>
 		<property name="paperService" ref="paperService"/>
 	</bean>
-	
+	<!-- 管理员 --><!-- 这是我配的 -->
+	<bean id="adminAction" class="com.oes.web.action.AdminAction" scope="prototype">
+		<property name="adminService" ref="adminService"/>
+	</bean>
 	<!--  基础动作 -->
 	<bean id="basicAction" class="com.oes.web.action.BasicAction" scope="prototype">
 		

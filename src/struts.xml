@@ -14,7 +14,7 @@
 			<result name="tip" type="redirect">jsp/tip.jsp</result>
 			<result name="student" type="redirect">jsp/student.jsp</result>
 			<result name="teacher" type="redirect">jsp/teacher.jsp</result>
-			<result name="admin" type="redirect">jsp/admin.jsp</result>
+			<result name="admin" type="redirect">jsp/administrator.jsp</result>
 		</global-results>
 		
 		<!-- 配置客户的Action，如果Action由Spring框架来管理，class标签上只需要编写ID值就OK -->
@@ -43,7 +43,9 @@
 		<action name="basic_*" class="basicAction" method="{1}">
 			
 		</action>
-		
+		<!-- 管理员动作 --><!-- 这是我配的 -->
+		<action name="admin_*" class="adminAction" method="{1}">
+		</action>
 		
 	</package>
     

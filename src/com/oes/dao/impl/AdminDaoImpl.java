@@ -6,10 +6,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.oes.bean.Admin;
-import com.oes.bean.Student;
 import com.oes.dao.AdminDao;
 
 public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
@@ -31,7 +29,7 @@ public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
 
 	public boolean checkAdminPassword(String adminNo, String password) {
 		// TODO Auto-generated method stub
-		String sql = "select count(*) from admin where adminNo = ? and password=?"; 
+		String sql = "select count(*) from admin where adminno = ? and adminpwd=?"; 
 		 
 		 JdbcTemplate jdbcTemplate = getJdbcTemplate();
 			 
@@ -57,12 +55,24 @@ public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
 	    	 public void processRow(ResultSet rs) throws SQLException {
 	    		 
 	    		 admin.setAdminid(rs.getInt("adminid"));
-	    		 admin.setAdminname(rs.getString("sname"));
-	    		 admin.setAdminpwd(rs.getString("password"));
+	    		 admin.setAdminno(rs.getString("adminno"));
+	    		 admin.setAdminname(rs.getString("adminname"));
+	    		 admin.setAdminpwd(rs.getString("adminpwd"));
 	    	 }
 	     });
 		
 		return admin;
+	}
+
+	public boolean updatePassword(String adminno, String newPassword) {
+		// TODO Auto-generated method stub
+		String sql = "update admin set adminpwd=? where adminno=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+
+		// final Student s = new Student();
+		final Object args[] = new Object[] { newPassword, adminno };
+		jdbcTemplate.update(sql, args);
+		return true;
 	}
 
 }

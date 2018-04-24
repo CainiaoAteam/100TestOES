@@ -34,12 +34,13 @@ public class AdminServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public boolean modifyPassword(String adminNo, String newPassword) {
+	
+	public boolean modifyPassword(String adminno, String newPassword) {
 		// TODO Auto-generated method stub
-		return false;
+		return adminDao.updatePassword(adminno,newPassword);
+		
 	}
+	
 
-	
-	
 	
 }

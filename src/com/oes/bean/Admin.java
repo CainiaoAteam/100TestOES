@@ -7,6 +7,7 @@ public class Admin extends Role {
   `adminpwd` varchar(20) DEFAULT NULL,
 	 */
 	private Integer adminid;
+	private String adminno;
 	private String adminname;
 	private String adminpwd;
 	
@@ -21,6 +22,12 @@ public class Admin extends Role {
 	}
 	public void setAdminname(String adminname) {
 		this.adminname = adminname;
+	}
+	public String getAdminno() {
+		return adminno;
+	}
+	public void setAdminno(String adminno) {
+		this.adminno = adminno;
 	}
 	public String getAdminpwd() {
 		return adminpwd;
