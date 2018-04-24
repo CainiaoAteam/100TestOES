@@ -1,5 +1,6 @@
 package com.oes.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TestPaper {
@@ -54,6 +55,37 @@ public class TestPaper {
 	private String mquestion;
 	private String fquestion;
 	
+	
+	//增加3个字段方便接收表单数据
+	private int[] sqid;
+	private int[] mqid;
+	private int[] fqid;
+
+	
+	public int[] getSqid() {
+		return sqid;
+	}
+
+	public void setSqid(int[] sqid) {
+		this.sqid = sqid;
+	}
+
+	public int[] getMqid() {
+		return mqid;
+	}
+
+	public void setMqid(int[] mqid) {
+		this.mqid = mqid;
+	}
+
+	public int[] getFqid() {
+		return fqid;
+	}
+
+	public void setFqid(int[] fqid) {
+		this.fqid = fqid;
+	}
+
 	public String getSquestion() {
 		return squestion;
 	}
@@ -94,7 +126,7 @@ public class TestPaper {
 	public void setMquestionSize(int mquestionSize) {
 		this.mquestionSize = mquestionSize;
 	}
-
+	
 	public int getFquestionSize() {
 		return fquestionSize;
 	}
@@ -128,8 +160,7 @@ public class TestPaper {
 	}
 	/**************用于显示数据的getter setter**************/
 
-	//0代表未考的试卷  1代表考过的试卷  -1审核未通过的试卷
-	//2代表制定中的试卷
+	//0代表待审核的试卷、1代表通过审核的试卷、2代表审核没通过的试卷
 	private int state;
 
 	public Integer getTpid() {
@@ -223,12 +254,11 @@ public class TestPaper {
 	@Override
 	public String toString() {
 		return "TestPaper [tpid=" + tpid + ", tpno=" + tpno + ", tpname=" + tpname + ", teacher=" + teacher
-				+ ", squestions=" + squestions + ", mquestions=" + mquestions + ", fquestions=" + fquestions
-				+ ", squestionscore=" + squestionscore + ", mquestionscore=" + mquestionscore + ", fquestionscore="
-				+ fquestionscore + ", totalscore=" + totalscore + ", squestionSize=" + squestionSize
-				+ ", mquestionSize=" + mquestionSize + ", fquestionSize=" + fquestionSize + ", state=" + state + "]";
+				+ ", tpstate=" + tpstate + ", squestionscore=" + squestionscore + ", mquestionscore=" + mquestionscore
+				+ ", fquestionscore=" + fquestionscore + ", totalscore=" + totalscore + ", squestionSize="
+				+ squestionSize + ", mquestionSize=" + mquestionSize + ", fquestionSize=" + fquestionSize + ", sqid="
+				+ Arrays.toString(sqid) + ", mqid=" + Arrays.toString(mqid) + ", fqid=" + Arrays.toString(fqid)
+				+ ", state=" + state + "]";
 	}
-	
-	
-	
+
 }

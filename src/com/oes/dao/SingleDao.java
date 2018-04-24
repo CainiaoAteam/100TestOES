@@ -11,5 +11,6 @@ public interface SingleDao {
 	List<SingleQuestion> getSinglesByTid(int tid);
 
 	int getSinglesCountByTid(int tid);
-
+	public boolean updateSingleBySno(String sno);
+	public boolean updateSingleBySid(int sid);
 }

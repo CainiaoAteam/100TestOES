@@ -91,5 +91,13 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 		
 		return count;
 	}
+	public boolean updateMutipleByMno(String mqno) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean updateMutipleByMid(int mqid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

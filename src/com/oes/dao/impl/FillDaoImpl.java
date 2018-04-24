@@ -80,5 +80,13 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		
 		return count;
 	}
+	public boolean updateFillByFno(String fqno) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean updateFillByMid(int fqid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
