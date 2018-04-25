@@ -3,11 +3,13 @@ package com.oes.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.junit.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import com.mchange.v1.db.sql.DriverManagerDataSource;
 import com.oes.bean.Student;
 import com.oes.dao.StudentDao;
 

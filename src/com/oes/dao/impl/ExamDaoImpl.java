@@ -48,7 +48,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   exam.setExamday(rs.getDate("examday"));
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
-		    		   exam.setExamstate(rs.getInt("examstate"));
+		    		   exam.setState(rs.getInt("state"));
 		    		   
 		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
 		    		   TestPaper p = new TestPaper();
@@ -76,7 +76,6 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	 * 获取考试对象
 	 * 
 	 */
-	@Test
 	public Exam getExamById(int examid) {
 		
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -95,7 +94,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   exam.setExamtime(rs.getInt("examtime"));
 		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
 		    		   exam.setExamno(rs.getString("examno"));
-		    		   exam.setExamstate(rs.getInt("examstate"));
+		    		   exam.setState(rs.getInt("state"));
 		    		   
 		    		   Teacher t = new Teacher();
 		    		   int tid = rs.getInt("tid");
@@ -130,7 +129,46 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	 * @return
 	 */
 	public List<Exam> getExamsByTidAndState(int tid, int state){
-		return null;
+		
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String sql = "select * from exam where tid = ? and state = ?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid,state};
+		
+		final List<Exam> examlist = new ArrayList<Exam>();
+		jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   do {
+		    		   Exam exam = new Exam();  
+
+		    		   exam.setExamid(rs.getInt("examid"));
+		    		   exam.setExamname(rs.getString("examname"));  
+		    		   exam.setExamday(rs.getDate("examday"));
+		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+		    		   exam.setExamno(rs.getString("examno"));
+		    		   exam.setState(rs.getInt("state"));
+		    		   
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+		    		   TestPaper p = new TestPaper();
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		    		   
+		    		   Teacher t = new Teacher();
+		    		   int tid = rs.getInt("tid");
+		    		   t.setTid(tid);
+		    		   exam.setTeacher(t);
+		    		   
+		    		   //System.out.println("获取考试信息:-------"+exam);
+		    		   
+		    		   examlist.add(exam); 
+		    		   
+		    	   } while(rs.next());
+		    	   
+		       }  
+		   });  
+		
+		return examlist;
 		
 	}
 	/**
@@ -139,7 +177,45 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	 * @return
 	 */
 	public List<Exam> getExamsByTid(int tid){
-		return null;
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String sql = "select * from exam where tid = ?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid};
+		
+		final List<Exam> examlist = new ArrayList<Exam>();
+		jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   do {
+		    		   Exam exam = new Exam();  
+
+		    		   exam.setExamid(rs.getInt("examid"));
+		    		   exam.setExamname(rs.getString("examname"));  
+		    		   exam.setExamday(rs.getDate("examday"));
+		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+		    		   exam.setExamno(rs.getString("examno"));
+		    		   exam.setState(rs.getInt("state"));
+		    		   
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+		    		   TestPaper p = new TestPaper();
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		    		   
+		    		   Teacher t = new Teacher();
+		    		   int tid = rs.getInt("tid");
+		    		   t.setTid(tid);
+		    		   exam.setTeacher(t);
+		    		   
+		    		   //System.out.println("获取考试信息:-------"+exam);
+		    		   
+		    		   examlist.add(exam); 
+		    		   
+		    	   } while(rs.next());
+		    	   
+		       }  
+		   });  
+		
+		return examlist;
 		
 		}
 	}

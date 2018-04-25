@@ -19,14 +19,6 @@ public class Exam {
 	private String examname;
 	private Date examday;
 	private int examtime; 
-	private int examstate; //考试状态，1代表已考，0代表未考
-	
-	public int getExamstate() {
-		return examstate;
-	}
-	public void setExamstate(int examstate) {
-		this.examstate = examstate;
-	}
 
 	private TestPaper testpaper;
 	public Teacher getTeacher() {
@@ -91,7 +83,7 @@ public class Exam {
 	@Override
 	public String toString() {
 		return "Exam [teacher=" + teacher + ", examno=" + examno + ", examname=" + examname + ", examday=" + examday
-				+ ", examtime=" + examtime + ", examstate=" + examstate + ", startTime=" + startTime + "]";
+				+ ", examtime=" + examtime + ", state=" + state + ", startTime=" + startTime + "]";
 	}
 	
 }

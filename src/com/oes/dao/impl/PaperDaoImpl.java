@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -112,12 +113,62 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 
 	public boolean addTestPaper(TestPaper testPaper) {
 		// TODO Auto-generated method stub
+		String sql = "insert into testpaper(tpno,tpname,squestion,mquestion,fquestion,"
+		+" squestionscore,mquestionscore,fquestionscore,tid,totalscore,state)values(?,?,?,?,?,?,?,?,?,?,?)";
+		
+JdbcTemplate jdbcTemplate = getJdbcTemplate();
+
+		Object args[] = new Object[] {testPaper.getTpno(),testPaper.getTpname(),testPaper.getSquestion(),
+				testPaper.getMquestion(),testPaper.getFquestion(),testPaper.getSquestionscore(),testPaper.getMquestionscore(),
+				testPaper.getFquestionscore(),testPaper.getTeacher().getTid(),testPaper.getfTotal(),testPaper.getState()};
+		
+		int temp = jdbcTemplate.update(sql,args);
+		
+		if( temp>0) {
+			return true;
+		}
 		return false;
 	}
 
 	public List<TestPaper> getPapersByTid(int tid) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from testpaper where tid=?";
+		Object args[] = new Object[] {tid};
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		final List<TestPaper> paperlist = new ArrayList<TestPaper>();
+		jdbcTemplate.query(sql, args, new RowCallbackHandler(){
+	    	 public void processRow(ResultSet rs) throws SQLException {
+	 
+	    		 do {
+		    			 TestPaper p = new TestPaper();
+			    		 
+			    		 p.setTpid(rs.getInt("tpid"));
+			    		 p.setTpno(rs.getString("tpno"));
+			    		 p.setTpname(rs.getString("tpname"));
+			    		
+			    		 p.setSquestion(rs.getString("squestion"));
+			    		 p.setMquestion(rs.getString("mquestion"));
+			    		 p.setFquestion(rs.getString("fquestion"));
+			    		
+			    		 p.setSquestionscore(rs.getInt("squestionscore"));
+			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
+			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
+			    		 p.setTotalscore(rs.getInt("totalscore"));;
+			    		 p.setTpstate(rs.getInt("state"));
+			    		 
+			    		 int tid = rs.getInt("tid");
+			    		 Teacher t = new Teacher();
+			    		 t.setTid(tid);
+			    		 p.setTeacher(t);
+			    		 
+			    		 paperlist.add(p);
+		    		 
+	    		 }while(rs.next());
+	    	 }
+	     });
+
+		return paperlist;
 	}
 	
 }

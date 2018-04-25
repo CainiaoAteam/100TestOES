@@ -90,6 +90,7 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	}
 	
 	public boolean updateSingleBySno(String sno) {
+		
 		return false;
 	
 	}
