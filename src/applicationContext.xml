@@ -136,6 +136,7 @@
 	<!-- 管理员业务模块 -->
 	<bean id="adminService" class="com.oes.service.impl.AdminServiceImpl">
 		<property name="adminDao" ref="adminDao"></property>
+		<property name="paperDao" ref="paperDao"/>
 	</bean>
 	
 	<!-- 题目业务 -->

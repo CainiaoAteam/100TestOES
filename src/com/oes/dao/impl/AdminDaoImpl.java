@@ -216,7 +216,7 @@ public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
 				"%' or tname like '%"+tea_key+"%' or gender like '%"+tea_key+"%' or idcardnum like '%"+
 				tea_key+"%' or phone like '%"+tea_key+"%'";
 		
-		System.out.println(sql);
+		//System.out.println(sql);
 		
 		JdbcTemplate jdbcTemplate = getJdbcTemplate();
 		final List<Teacher> tea_list=new ArrayList<Teacher>();
@@ -244,6 +244,54 @@ public class AdminDaoImpl extends JdbcDaoSupport implements AdminDao {
 		});
 		
 		return tea_list;
+	}
+
+	public boolean insertStudent(Student s) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO student(sno,sname,gender,department,grade,idcardnum,phone,password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; 
+		Object aObject[] = new Object[] {s.getSno(),s.getSname(),s.getGender(),
+		s.getDepartment(),s.getGrade(),s.getIdcardnum(),s.getPhone(),s.getPassword()};
+		int temp= this.getJdbcTemplate().update(sql,aObject); 
+		
+		if(temp>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean insertTeacher(Teacher t) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO teacher(tno,tname,gender,idcardnum,phone,password) VALUES(?, ?, ?, ?, ?, ?)"; 
+		Object aObject[] = new Object[] {t.getTno(),t.getTname(),t.getGender(),
+		t.getIdcardnum(),t.getPhone(),t.getPassword()};
+		int temp= this.getJdbcTemplate().update(sql,aObject); 
+		
+		if(temp>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean passPaper(int tpid) {
+		// TODO Auto-generated method stub
+		String sql="UPDATE testpaper SET state=1 where tpid='"+tpid+"'";
+		
+		int temp= this.getJdbcTemplate().update(sql); 
+		if(temp>0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean unpassPaper(int tpid) {
+		// TODO Auto-generated method stub
+		String sql="UPDATE testpaper SET state=2 where tpid='"+tpid+"'";
+		
+		int temp= this.getJdbcTemplate().update(sql); 
+		if(temp>0)
+			return true;
+		else
+			return false;
 	}
 
 }

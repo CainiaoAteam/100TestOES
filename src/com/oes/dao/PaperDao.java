@@ -3,6 +3,7 @@ package com.oes.dao;
 import java.util.List;
 
 import com.oes.bean.TestPaper;
+import com.opensymphony.xwork2.util.TextParser;
 
 public interface PaperDao {
 	/**
@@ -18,5 +19,7 @@ public interface PaperDao {
 	boolean addTestPaper(TestPaper testPaper);
 
 	List<TestPaper> getPapersByTid(int tid);
+
+	List<TestPaper> getAllPapers();
 	
 }

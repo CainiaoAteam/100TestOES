@@ -15,6 +15,7 @@ import com.oes.bean.SingleQuestion;
 import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
 import com.oes.dao.PaperDao;
+import com.opensymphony.xwork2.util.TextParser;
 
 public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 	
@@ -118,6 +119,46 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 	public List<TestPaper> getPapersByTid(int tid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<TestPaper> getAllPapers() {
+		// TODO Auto-generated method stub
+		String sql = "select * from testpaper";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		final List<TestPaper> paperlist = new ArrayList<TestPaper>();
+		jdbcTemplate.query(sql, new RowCallbackHandler(){
+	    	 public void processRow(ResultSet rs) throws SQLException {
+	 
+	    		 do {
+		    			 TestPaper p = new TestPaper();
+			    		 
+			    		 p.setTpid(rs.getInt("tpid"));
+			    		 p.setTpno(rs.getString("tpno"));
+			    		 p.setTpname(rs.getString("tpname"));
+			    		
+			    		 p.setSquestion(rs.getString("squestion"));
+			    		 p.setMquestion(rs.getString("mquestion"));
+			    		 p.setFquestion(rs.getString("fquestion"));
+			    		
+			    		 p.setSquestionscore(rs.getInt("squestionscore"));
+			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
+			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
+			    		 p.setTotalscore(rs.getInt("totalscore"));;
+			    		 p.setTpstate(rs.getInt("state"));
+			    		 
+			    		 int tid = rs.getInt("tid");
+			    		 Teacher t = new Teacher();
+			    		 t.setTid(tid);
+			    		 p.setTeacher(t);
+			    		 
+			    		 paperlist.add(p);
+		    		 
+	    		 }while(rs.next());
+	    	 }
+	     });
+
+		return paperlist;
 	}
 	
 }

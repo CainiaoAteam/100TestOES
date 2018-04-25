@@ -52,5 +52,17 @@ public interface AdminDao {
 	
 	//查找教师
 	List<Teacher> selTeaByKey(String tea_key);
+	
+	//添加学生
+	boolean insertStudent(Student student);
+	
+	//添加教师
+	boolean insertTeacher(Teacher teacher);
+	
+	//通过审核
+	boolean passPaper(int tpid);
+	
+	//不通过审核
+	boolean unpassPaper(int tpid);
 
 }
