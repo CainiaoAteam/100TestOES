@@ -41,6 +41,11 @@ public class MutipleServiceImpl implements MutipleService {
 		// TODO Auto-generated method stub
 		return mutipleDao.getMutiplesCountByTid(tid);
 	}
+
+	public MutipleQuestion getMutipleById(int parseInt) {
+		// TODO Auto-generated method stub
+		return mutipleDao.getMutipleById(parseInt);
+	}
 	
 
 }

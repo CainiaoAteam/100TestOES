@@ -17,9 +17,13 @@ public interface PaperDao {
 	List<TestPaper> getPapersByStateForTid(int tid, int state);
 
 	boolean addTestPaper(TestPaper testPaper);
+	
 
 	List<TestPaper> getPapersByTid(int tid);
 
+
 	List<TestPaper> getAllPapers();
+
+	List<TestPaper> getPapersByState(int state);
 	
 }

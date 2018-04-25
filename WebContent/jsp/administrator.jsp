@@ -110,7 +110,7 @@
 					state[1]="通过审核";
 					state[2]="不通过审核";
 				$.each(data,function(i,n){
-					var state_index=Number(data[i].tpstate);
+					var state_index=Number(data[i].state);
 					item = "<tr><td><div class='card'>"+
 								"<div class='card-header input-group'>"+
 									"<h3>"+data[i].tpname+"</h3>"+

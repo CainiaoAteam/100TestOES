@@ -46,6 +46,9 @@
         	  oTip.html("输入编号正确！");
     		  oTip.removeClass("tipErro");
               oTip.addClass("tipTrue");
+              
+              //检查密码
+              checkPassword();
           }
 
         },"json");

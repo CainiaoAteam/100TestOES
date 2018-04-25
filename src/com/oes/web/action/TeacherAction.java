@@ -111,7 +111,53 @@ public class TeacherAction extends ActionSupport{
 	public void setTeacherService(RoleService teacherService) {
 		this.teacherService = teacherService;
 	}
+	public String showPaper() {
+		
+		int tpid = Integer.parseInt(ServletActionContext.getRequest().getParameter("tpid"));
+		TestPaper paper = paperService.getPaperByPid(tpid);
+		
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		session.setAttribute("tea_show", paper);
+		
+		return "showPaper";
+	}
 	
+	/**
+	 * 根据试卷状态获取试卷
+	 * @return
+	 */
+	public String getPaperIsPass() {
+		int paperState = Integer.parseInt(ServletActionContext.getRequest().getParameter("paperState"));
+		int tid = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
+		
+		System.out.println("状态："+paperState);
+		System.out.println("老师id："+tid);
+		
+		List<TestPaper> list = paperService.getPapersByStateForTid(tid, paperState);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(list.size()>0) {
+			json = JSON.toJSONString(list);		
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		
+		writer.println(json);
+		
+		return NONE;
+	}
 	/**
 	 * 发布考试时加载试卷的请求
 	 * @return
@@ -190,11 +236,11 @@ public class TeacherAction extends ActionSupport{
 	 * @return
 	 */
 	public String addPaper() {
-		System.out.println("添加试卷！");
-		
-		System.out.println(testPaper);
+//		System.out.println("添加试卷！");
 //		
-		System.out.println(testPaper.getTeacher().getTid());
+//		System.out.println(testPaper);
+////		
+//		System.out.println(testPaper.getTeacher().getTid());
 		
 		boolean istrue = paperService.addTestPaper(testPaper);
 		

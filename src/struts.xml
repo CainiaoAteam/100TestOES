@@ -40,6 +40,7 @@
 			<result name="addquestion" type="redirect">jsp/addquestion.jsp</result>	
 			<result name="success" type="redirect">jsp/teacher.jsp</result>	
 			<result name="addExamPaper" type="redirect">jsp/addExamPaper.jsp</result>	
+			<result name="showPaper" type="redirect">jsp/teacherShowPaper.jsp</result>	
 		</action>
 		<!-- 基础动作 -->
 		<action name="basic_*" class="basicAction" method="{1}">

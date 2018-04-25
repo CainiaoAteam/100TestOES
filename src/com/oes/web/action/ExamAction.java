@@ -112,11 +112,11 @@ public class ExamAction extends ActionSupport {
 		//获取当前考试的信息
 		Exam exam = examService.getExamById(examid);
 		
-//		System.out.println(examid);
-//		TestPaper paper = paperService.getPaperByPid(pid);
+		System.out.println(examid);
+		//TestPaper paper = paperService.getPaperByPid(pid);
 		//将考试对象存入session
 		ServletActionContext.getRequest().getSession().setAttribute("exam", exam);
-		
+		System.out.println(exam);
 		
 		return "exam";
 	}
@@ -135,19 +135,20 @@ public class ExamAction extends ActionSupport {
 		response.setContentType("text/html;charset=utf-8");
 		
 		//根据学生id获取考试记录
-		//List<Record> records = recordService.getRecordsBySid(sid);
-		
-		List<Record> records = new ArrayList<Record>();
-		tmp.getExam().setExamno("cet-455555655565");
-		tmp.getExam().setExamname("测试考试一");
-		tmp.getExam().setStartTime("2018-4-23 12:30");
-		tmp.setRid(1);
-		records.add(tmp);
-		records.add(tmp);
+		List<Record> records = recordService.getRecordsBySid(sid);
 		
 		if(records.size() > 0) {
 			String examlist = JSON.toJSONString(records,SerializerFeature.DisableCircularReferenceDetect);
-			System.out.println(examlist);
+			System.out.println("考试记录列表："+examlist);
+			try {
+				response.getWriter().print(examlist);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			String examlist = JSON.toJSONString(records,SerializerFeature.DisableCircularReferenceDetect);
+			System.out.println("考试记录列表22："+examlist);
 			try {
 				response.getWriter().print(examlist);
 			} catch (IOException e) {
@@ -167,13 +168,11 @@ public class ExamAction extends ActionSupport {
 	public String showPaper() {
 		
 		//根据接收到的考试记录id获取考试记录对象
-//		Record re = recordService.getRecordById(rid);
+		Record re = recordService.getRecordById(rid);
 		
 		//将获取的考试记录返回，不要删除，到时候用到这里
-		//ServletActionContext.getRequest().getSession().setAttribute("record", re);
-		//到时候删除
-		ServletActionContext.getRequest().getSession().setAttribute("record", tmp);
-		
+		ServletActionContext.getRequest().getSession().setAttribute("record", re);
+		System.out.println(re);
 		
 		return "examRecord";
 	}
@@ -200,12 +199,21 @@ public class ExamAction extends ActionSupport {
 		Exam exam = (Exam) ServletActionContext.getRequest().getSession().getAttribute("exam");
 		
 		//封装考试记录对象
-		Record record = recordService.packageRecord(student,exam,answerRecord);
+		Record record = new Record();
+		//组装好答案
+		answerRecord = BasicUtil.packageAnswerToDB(answerRecord);
+		record = recordService.packageRecord(record,student,exam,answerRecord);
 		
-		tmp = record;//暂时数据，到时候删除
+		//计算分数
+		double totalScore = BasicUtil.calculateTotalScore(record.getExam());
 		
-		//将数据保存到数据库
+		//保存分数
+		record.setScore(totalScore);//保存成绩的记录
+		
+		System.out.println("保存记录："+record);
+		
 		boolean issucc = recordService.saveRecord(record);
+		
 		
 		//保存成功
 		if(issucc) {

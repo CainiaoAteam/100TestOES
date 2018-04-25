@@ -38,6 +38,11 @@
 		background-size:40px auto;
 		-moz-background-size:40px auto;
 	}
+	.error-true{
+		background: #fff url('${pageContext.request.contextPath }/img/notrue.png') no-repeat 10% 10%;
+		background-size:40px auto;
+		-moz-background-size:40px auto;
+	}
 </style>
 </head>
 <body>
@@ -87,7 +92,7 @@
 									<div class="collapse show" id="collapse1_${status.index+1} ">
 										<div class="card-footer ">
 											<p style="color:#007bff">解析：
-												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">困难</b>）</span>
+												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${squestion.difficulty}</b>）</span>
 											</p>
 											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${squestion.sanswer}&nbsp;</label>，${squestion.sexplanation}
 											</span>
@@ -135,7 +140,7 @@
 											</div>
 										</c:if>
 										<c:if test="${mquestion.istrue == 0.5}">
-											<div class="card-footer iserror">
+											<div class="card-footer error-true">
 												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
 											</div>
 										</c:if>
@@ -144,7 +149,7 @@
 										<div class="card-footer ">
 											<p style="color:#007bff">
 												解析：
-												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">困难</b>）</span>
+												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${mquestion.difficulty}</b>）</span>
 											</p>
 											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${mquestion.manswer}&nbsp;</label>，${mquestion.mexplanation}</span>
 										</div>

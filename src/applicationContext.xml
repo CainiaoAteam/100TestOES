@@ -109,7 +109,8 @@
 	<!-- 考试业务 -->
 	<bean id="examService" class="com.oes.service.impl.ExamServiceImpl">
 		<property name="examDao" ref="examDao"/>
-		<property name="paperDao" ref="paperDao"/>
+		<property name="paperService" ref="paperService"/>
+		
 	</bean>
 	<!-- 考试记录业务 -->
 	<bean id="recordService" class="com.oes.service.impl.RecordServiceImpl">
@@ -122,6 +123,9 @@
 	<!-- 试卷业务 -->
 	<bean id="paperService" class="com.oes.service.impl.PaperServiceImpl">
 		<property name="paperDao" ref="paperDao"/>
+		<property name="singleService" ref="singleService"/>
+		<property name="mutipleService" ref="mutipleService"/>
+		<property name="fillService" ref="fillService"/>
 	</bean>
 	
 	

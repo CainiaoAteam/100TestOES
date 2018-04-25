@@ -23,38 +23,26 @@
 
 <script type="text/javascript">
 	function toHomaPage(){
-		window.location.href="${pageContext.request.contextPath }/exam_toHomaPage";
+		window.location.href="${pageContext.request.contextPath }/basic_toUserIndex";
 	}
 </script>
 
 <style type="text/css">
-	.istrue{
-		background: #fff url('${pageContext.request.contextPath }/img/true.png') no-repeat 10% 1%;
-		background-size:40px auto;
-		-moz-background-size:40px auto;
-	}
-	.iserror{
-		background: #fff url('${pageContext.request.contextPath }/img/error.png') no-repeat 10% 10%;
-		background-size:40px auto;
-		-moz-background-size:40px auto;
-	}
-	.error-true{
-		background: #fff url('${pageContext.request.contextPath }/img/notrue.png') no-repeat 10% 10%;
-		background-size:40px auto;
-		-moz-background-size:40px auto;
-	}
 </style>
 </head>
 <body>
 	<div class="container"
 		style="background-color: rgba(255, 255, 255, 0.8);">
-		<div class="card" style="float: left; width: 87%;">
+		<div class="card" style="margin:0 auto; width: 87%;">
 			<div class="card-header" align="center" id="showScore">
-				<span style="font-size: 45px;font-family:'SimSun';">${record.exam.testpaper.tpname}</span>
+				<span style="font-size: 45px;font-family:'SimSun';">${tea_show.tpname}</span>
+			</div>
+			<div class="card-header" align="right" id="showScore">
+				<span style="font-size: 20px;font-family:'SimSun';">总分：${tea_show.totalscore}</span>
 			</div>
 			
 			<div class="card" id="showQuestions">
-				<c:if test="${not empty record.exam.testpaper.squestions}">
+				<c:if test="${not empty tea_show.squestions}">
 				<table id="sQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -62,7 +50,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${record.exam.testpaper.squestions}" var="squestion" varStatus="status">
+						<c:forEach items="${tea_show.squestions}" var="squestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="sq-${status.index+1}">
@@ -77,24 +65,16 @@
 										<p>D.  ${squestion.schoiceD }</p>
 									</div>
 									<div class="collapse show" style="box-shadow:0 5px 5px rgba(250,0,0,.3);" id="collapse_${status.index+1} ">
-										<c:if test="${squestion.istrue == 1}">
-											<div class="card-footer istrue">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${squestion.answer}</b></p>
-											</div>
-										</c:if>
-										<c:if test="${squestion.istrue == 0}">
-											<div class="card-footer iserror">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${squestion.answer}</b></p>
-											</div>
-										</c:if>
-
+										<div class="card-footer">
+											<p style="color:red;font-weight:600;">答案：<b style="color:black;">${squestion.sanswer}</b></p>
+										</div>
 									</div>
 									<div class="collapse show" id="collapse1_${status.index+1} ">
 										<div class="card-footer ">
 											<p style="color:#007bff">解析：
 												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${squestion.difficulty}</b>）</span>
 											</p>
-											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${squestion.sanswer}&nbsp;</label>，${squestion.sexplanation}
+											<span style="color:red;margin-left:2em;">${squestion.sexplanation}
 											</span>
 										</div>
 									</div>
@@ -106,7 +86,7 @@
 				</table>
 				</c:if>
 				<!-- 双选 -->
-				<c:if test="${not empty record.exam.testpaper.mquestions}">
+				<c:if test="${not empty tea_show.mquestions}">
 				<table id="mQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -114,7 +94,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${record.exam.testpaper.mquestions}" var="mquestion" varStatus="status">
+						<c:forEach items="${tea_show.mquestions}" var="mquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -129,21 +109,10 @@
 										<p>D. ${mquestion.mchoiceD}</p>
 									</div>
 									<div class="collapse show" style="box-shadow:0 5px 5px rgba(250,0,0,.3);" id="collapse_1 ">
-										<c:if test="${mquestion.istrue == 1}">
-											<div class="card-footer istrue">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
-											</div>
-										</c:if>
-										<c:if test="${mquestion.istrue == 0}">
-											<div class="card-footer iserror">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
-											</div>
-										</c:if>
-										<c:if test="${mquestion.istrue == 0.5}">
-											<div class="card-footer error-true">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
-											</div>
-										</c:if>
+										<div class="card-footer">
+											<p style="color:red;font-weight:600;">答案：<b style="color:black;">${mquestion.manswer}</b></p>
+										</div>
+										
 									</div>
 									<div class="collapse show" id="collapse_2 ">
 										<div class="card-footer ">
@@ -151,7 +120,7 @@
 												解析：
 												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${mquestion.difficulty}</b>）</span>
 											</p>
-											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${mquestion.manswer}&nbsp;</label>，${mquestion.mexplanation}</span>
+											<span style="color:red;margin-left:2em;">${mquestion.mexplanation}</span>
 										</div>
 									</div>
 								</div>
@@ -162,7 +131,7 @@
 				</table>
 				</c:if>
 				<!-- 填空题 -->
-				<c:if test="${not empty record.exam.testpaper.fquestions}">
+				<c:if test="${not empty tea_show.fquestions}">
 				<table id="fQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -170,7 +139,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${record.exam.testpaper.fquestions}" var="fquestion" varStatus="status">
+						<c:forEach items="${tea_show.fquestions}" var="fquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -179,22 +148,12 @@
 										<span class="card-title" style="font-weight:600;">${fquestion.fquestion}</span>
 									</div>
 									<div class="collapse show" style="box-shadow:0 5px 5px rgba(250,0,0,.3);" id="collapse_${status.index+1} ">
-										<c:if test="${fquestion.istrue == 1}">
-											<div class="card-footer istrue">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${fquestion.answer}</b></p>
-											</div>
-										</c:if>
-										<c:if test="${fquestion.istrue == 0}">
-											<div class="card-footer iserror">
-												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${fquestion.answer}</b></p>
-											</div>
-										</c:if>
+										<div class="card-footer">
+											<p style="color:red;font-weight:600;">答案：<b style="color:black;">${fquestion.fanswer}</b></p>
+										</div>
 									</div>
 									<div class="collapse show" id="collapse_2 ">
 										<div class="card-footer ">
-											<p style="color:#007bff">正确答案：</p>
-											<span style="color:red;margin-left:2em;"><label class="rightAnswer" style="font-weight:600;">&nbsp;${fquestion.fanswer}&nbsp;</label>
-											</span>
 											<p style="color:#f00">解析：</p>
 											<span style="color:red;margin-left:2em;"><label class="rightAnswer" style="font-weight:600;">&nbsp;${fquestion.fexplanation}&nbsp;</label>
 											</span>
@@ -207,25 +166,6 @@
 					</tbody>
 				</table>
 				</c:if>
-			</div>
-		</div>
-		<div class="card" style="float: right; width: 12%;">
-			<div class="Answer-card">
-				<div class="card-header input-group">
-					<div style="text-align: left;">
-						<span>你的成绩：</span>
-					</div>
-				</div>
-				<div id="sq-card">
-					<div class="card-header input-group"
-						style="background-color: #ffffff;">
-						<div style="text-align: center; margin: auto;">
-							<span style="font-weight:700;color:red;font-size:60px;">${record.score}</span>
-						</div>
-						
-					</div>
-					
-				</div>
 				<div onclick="toHomaPage()" title="返回主页" id="backHome" style="width:48px;height:48px;background-image: url(${pageContext.request.contextPath }/img/home.png);position:fixed;right:20px;bottom:50px;">
 					
 				</div>
@@ -235,24 +175,6 @@
 	<script>
 			$(document).ready(function() {
 				$(".collapse").addClass('show');
-			})
-		</script>
-	<script>
-			$(document).ready(function(){
-				var SqSum=$("#sqCount").text();
-				console.log(SqSum);
-				for(var i=1;i<=SqSum;i++){
-					var myAns=$("#sq-"+i+" .myAnswer").text();
-					var rightAns=$("#sq-"+i+" .rightAnswer").text();
-					if(myAns==rightAns){
-						//console.log("答对了");
-						$("#card-sq-"+i).css("background-color","#20c997");
-					}
-					else{
-						//console.log("答错了");
-						$("#card-sq-"+i).css("background-color","#dc3545");
-					}
-				}
 			})
 		</script>
 </body>
