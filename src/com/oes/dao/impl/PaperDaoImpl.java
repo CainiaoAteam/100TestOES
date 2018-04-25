@@ -119,5 +119,10 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<TestPaper> getPapersByState(int state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -3,6 +3,7 @@ package com.oes.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.junit.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;

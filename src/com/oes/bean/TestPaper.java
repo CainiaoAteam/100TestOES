@@ -254,11 +254,15 @@ public class TestPaper {
 	@Override
 	public String toString() {
 		return "TestPaper [tpid=" + tpid + ", tpno=" + tpno + ", tpname=" + tpname + ", teacher=" + teacher
+				+ ", squestions=" + squestions + ", mquestions=" + mquestions + ", fquestions=" + fquestions
 				+ ", tpstate=" + tpstate + ", squestionscore=" + squestionscore + ", mquestionscore=" + mquestionscore
 				+ ", fquestionscore=" + fquestionscore + ", totalscore=" + totalscore + ", squestionSize="
-				+ squestionSize + ", mquestionSize=" + mquestionSize + ", fquestionSize=" + fquestionSize + ", sqid="
-				+ Arrays.toString(sqid) + ", mqid=" + Arrays.toString(mqid) + ", fqid=" + Arrays.toString(fqid)
-				+ ", state=" + state + "]";
+				+ squestionSize + ", mquestionSize=" + mquestionSize + ", fquestionSize=" + fquestionSize + ", sTotal="
+				+ sTotal + ", mTotal=" + mTotal + ", fTotal=" + fTotal + ", squestion=" + squestion + ", mquestion="
+				+ mquestion + ", fquestion=" + fquestion + ", sqid=" + Arrays.toString(sqid) + ", mqid="
+				+ Arrays.toString(mqid) + ", fqid=" + Arrays.toString(fqid) + ", state=" + state + "]";
 	}
+	
+	
 
 }

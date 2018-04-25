@@ -91,11 +91,40 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 		
 		return count;
 	}
-	public boolean updateMutipleByMno(String mqno) {
+
+	public MutipleQuestion getMutipleById(int id) {
+		String sql = "select * from multipquestion where mqid=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {id};
+		
+		final MutipleQuestion mq = new MutipleQuestion();
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					mq.setMqid(rs.getInt("mqid"));
+					mq.setTid(rs.getInt("tid"));
+					mq.setMqno(rs.getString("mqno"));
+					mq.setMquestion(rs.getString("mquestion"));
+					mq.setMchoiceA(rs.getString("mchoiceA"));
+					mq.setMchoiceB(rs.getString("mchoiceB"));
+					mq.setMchoiceC(rs.getString("mchoiceC"));
+					mq.setMchoiceD(rs.getString("mchoiceD"));
+					mq.setManswer(rs.getString("manswer"));
+					mq.setMexplanation(rs.getString("mexplanation"));
+					mq.setDifficulty(rs.getString("difficulty"));
+					
+				}while(rs.next());
+				
+			}
+		});
+		return mq;
+	}
+	public boolean updateMutipleByMno(MutipleQuestion mq) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public boolean updateMutipleByMid(int mqid) {
+	public boolean updateMutipleByMid(MutipleQuestion mq) {
 		// TODO Auto-generated method stub
 		return false;
 	}

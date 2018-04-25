@@ -12,4 +12,6 @@ public interface FillService {
 
 	int getFillsCountByTid(int tid);
 
+	FillQuestion getFillById(int parseInt);
+
 }

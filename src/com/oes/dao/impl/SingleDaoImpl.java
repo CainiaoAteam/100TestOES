@@ -91,11 +91,55 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	
 	public boolean updateSingleBySno(String sno) {
 		return false;
-	
+		
 	}
 	public boolean updateSingleBySid(int sid) {
 		return false;
 		
+	}
+	
+	/**
+	 * 已经实现
+	 */
+	public SingleQuestion getSingleBySqid(int sqid) {
+		String sql = "select * from singlequestion where sqid=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {sqid};
+		
+		final SingleQuestion sq = new SingleQuestion();
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					sq.setSqid(rs.getInt("sqid"));
+					sq.setTid(rs.getInt("tid"));
+					sq.setSqno(rs.getString("sqno"));
+					sq.setSquestion(rs.getString("squestion"));
+					sq.setSchoiceA(rs.getString("schoiceA"));
+					sq.setSchoiceB(rs.getString("schoiceB"));
+					sq.setSchoiceC(rs.getString("schoiceC"));
+					sq.setSchoiceD(rs.getString("schoiceD"));
+					sq.setSanswer(rs.getString("sanswer"));
+					sq.setSexplanation(rs.getString("sexplanation"));
+					sq.setDifficulty(rs.getString("difficulty"));
+					
+					
+				}while(rs.next());
+				
+			}
+		});
+		
+		return sq;
+	}
+
+	public boolean updateSingleBySno(SingleQuestion sq) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateSingleBySid(SingleQuestion sq) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

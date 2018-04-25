@@ -90,8 +90,10 @@ public class Exam {
 	}
 	@Override
 	public String toString() {
-		return "Exam [teacher=" + teacher + ", examno=" + examno + ", examname=" + examname + ", examday=" + examday
-				+ ", examtime=" + examtime + ", examstate=" + examstate + ", startTime=" + startTime + "]";
+		return "Exam [examid=" + examid + ", teacher=" + teacher + ", examno=" + examno + ", examname=" + examname
+				+ ", examday=" + examday + ", examtime=" + examtime + ", examstate=" + examstate + ", testpaper="
+				+ testpaper + ", state=" + state + ", startTime=" + startTime + "]";
 	}
+	
 	
 }

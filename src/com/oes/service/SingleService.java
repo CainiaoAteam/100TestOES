@@ -12,4 +12,6 @@ public interface SingleService {
 
 	int getSinglesCountByTid(int tid);
 
+	SingleQuestion getSingleById(int parseInt);
+
 }
