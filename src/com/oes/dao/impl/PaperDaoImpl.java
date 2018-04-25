@@ -52,7 +52,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 	    		 p.setMquestionscore(rs.getInt("mquestionscore"));
 	    		 p.setFquestionscore(rs.getInt("fquestionscore"));
 	    		 p.setTotalscore(rs.getInt("totalscore"));;
-	    		 p.setTpstate(rs.getInt("state"));
+	    		 p.setState(rs.getInt("state"));
 	    		 
 	    		 int tid = rs.getInt("tid");
 	    		 Teacher t = new Teacher();
@@ -95,7 +95,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
 			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
 			    		 p.setTotalscore(rs.getInt("totalscore"));;
-			    		 p.setTpstate(rs.getInt("state"));
+			    		 p.setState(rs.getInt("state"));
 			    		 
 			    		 int tid = rs.getInt("tid");
 			    		 Teacher t = new Teacher();
@@ -116,7 +116,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 		String sql = "insert into testpaper(tpno,tpname,squestion,mquestion,fquestion,"
 		+" squestionscore,mquestionscore,fquestionscore,tid,totalscore,state)values(?,?,?,?,?,?,?,?,?,?,?)";
 		
-JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
 
 		Object args[] = new Object[] {testPaper.getTpno(),testPaper.getTpname(),testPaper.getSquestion(),
 				testPaper.getMquestion(),testPaper.getFquestion(),testPaper.getSquestionscore(),testPaper.getMquestionscore(),
@@ -155,7 +155,7 @@ JdbcTemplate jdbcTemplate = getJdbcTemplate();
 			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
 			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
 			    		 p.setTotalscore(rs.getInt("totalscore"));;
-			    		 p.setTpstate(rs.getInt("state"));
+			    		 p.setState(rs.getInt("state"));
 			    		 
 			    		 int tid = rs.getInt("tid");
 			    		 Teacher t = new Teacher();
