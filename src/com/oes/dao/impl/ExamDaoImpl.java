@@ -217,7 +217,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		}
 
-	public List<Exam> getExamByDate(int sid, Date date) {
+	public List<Exam> getExamByDate(int sid, final Date date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -327,6 +327,15 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	 */
 	public boolean addExam(Exam exam) {
 		// TODO Auto-generated method stub
+		String sql = "insert into exam(tid,examno,tpid,examday,examtime,examname,state)values(?,?,?,?,?,?,?)"; 
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {exam.getTeacher().getTid(),exam.getExamno(),exam.getTestpaper().getTpid(),
+				exam.getExamday(),exam.getExamtime(),exam.getExamname(),exam.getState()};
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 )
+			return true;
+		
 		return false;
 	}
 
