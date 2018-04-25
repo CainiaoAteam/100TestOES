@@ -31,5 +31,6 @@ public interface RecordDao {
 	 * @return
 	 */
 	List<Record> getRecordBySid(Integer sid);
+	
 
 }

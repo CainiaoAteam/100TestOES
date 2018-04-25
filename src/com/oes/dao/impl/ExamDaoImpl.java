@@ -236,4 +236,12 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public List<Exam> getExamsBySidAndExamId(int sid, int examid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+}
+	
+	
