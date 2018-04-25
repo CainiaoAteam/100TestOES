@@ -96,6 +96,8 @@
 		<property name="fillService" ref="fillService"/>
 		<property name="pageBean" ref="pageBean"/>
 		<property name="paperService" ref="paperService"/>
+		<property name="examService" ref="examService"/>
+		<property name="recordService" ref="recordService"/>
 	</bean>
 	<!-- 管理员 --><!-- 这是我配的 -->
 	<bean id="adminAction" class="com.oes.web.action.AdminAction" scope="prototype">

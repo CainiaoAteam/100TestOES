@@ -118,7 +118,7 @@ public class RecordDaoImpl extends JdbcDaoSupport implements RecordDao {
 
 	public List<Record> getRecordsByExamId(int examId) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<Record>();
 	}
 
 	public Record getRecordByExamId(int ExamId) {

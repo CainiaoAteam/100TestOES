@@ -20,12 +20,15 @@ import com.oes.bean.FillQuestion;
 import com.oes.bean.MutipleQuestion;
 import com.oes.bean.PageBean;
 import com.oes.bean.Question;
+import com.oes.bean.Record;
 import com.oes.bean.SingleQuestion;
 import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
+import com.oes.service.ExamService;
 import com.oes.service.FillService;
 import com.oes.service.MutipleService;
 import com.oes.service.PaperService;
+import com.oes.service.RecordService;
 import com.oes.service.RoleService;
 import com.oes.service.SingleService;
 import com.oes.utils.BasicUtil;
@@ -40,8 +43,9 @@ public class TeacherAction extends ActionSupport{
 	private MutipleService mutipleService;
 	private FillService fillService;
 	private PaperService paperService;
-	
+	private ExamService examService;
 	private RoleService teacherService;
+	private RecordService recordService;
 	private int tid;
 	
 	private String tno;
@@ -53,6 +57,14 @@ public class TeacherAction extends ActionSupport{
 	
 	private Exam exam;
 	
+	
+	
+	public void setRecordService(RecordService recordService) {
+		this.recordService = recordService;
+	}
+	public void setExamService(ExamService examService) {
+		this.examService = examService;
+	}
 	public Exam getExam() {
 		return exam;
 	}
@@ -111,6 +123,71 @@ public class TeacherAction extends ActionSupport{
 	public void setTeacherService(RoleService teacherService) {
 		this.teacherService = teacherService;
 	}
+	/**
+	 * 获取相应的考试信息
+	 * @return
+	 */
+	public String getExamByTid() {
+		
+		int examid = Integer.parseInt(ServletActionContext.getRequest().getParameter("examid"));
+		List<Record> list = recordService.getRecordByExamId(examid);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(list.size()>0) {
+			json = JSON.toJSONString(list);		
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		
+		writer.println(json);
+		return NONE;
+	}
+	public String getAllExamByTid(){
+		int tid = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
+		
+		System.out.println("老师id："+tid);
+		
+		List<Exam> list = examService.getExamTid(tid);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(list.size()>0) {
+			json = JSON.toJSONString(list);		
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		
+		writer.println(json);
+		
+		return NONE;
+	}
+	
+	/**
+	 * 查看试卷
+	 * @return
+	 */
 	public String showPaper() {
 		
 		int tpid = Integer.parseInt(ServletActionContext.getRequest().getParameter("tpid"));
@@ -392,7 +469,7 @@ public class TeacherAction extends ActionSupport{
 		this.tno = teacher.getTno();
 		
 		boolean res = teacherService.modifyPassword(tno, newPassword);
-
+		
 		// 修改成功
 		if (res) {
 			

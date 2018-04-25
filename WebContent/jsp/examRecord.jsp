@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 	function toHomaPage(){
-		window.location.href="${pageContext.request.contextPath }/exam_toHomaPage";
+		window.location.href="${pageContext.request.contextPath }/basic_toHomaPage";
 	}
 </script>
 
