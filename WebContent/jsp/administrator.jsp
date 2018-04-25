@@ -122,7 +122,7 @@
 								"<div class='card-body'>"+
 									"<p>试卷编号: <span class='card-text'>"+data[i].tpno+"</span></p>"+
 									"<span>审核状态："+state[state_index]+"</span>"+
-									"<a href='' value='"+data[i].tpid+"' onclick='seePaper(this)' class='card-link'><p style='padding-top:10px;'>查看试卷</p></a>"+
+									"<a href=${pageContext.request.contextPath }/admin_seePaper?tpid="+data[i].tpid+" class='card-link'><p style='padding-top:10px;'>查看试卷</p></a>"+
 								"</div>"+
 						"</div></td></tr>";
 					info += item; 
@@ -492,16 +492,15 @@
 		</script>
 		
 		<script>
-			function seePaper(obj){
+			/* function seePaper(obj){
 				var paperid=$(obj).attr("value");
-				//window.location.href="${pageContext.request.contextPath }/admin_seePaper?tpid="+paperid;	
-				 var url = "${pageContext.request.contextPath }/admin_seePaper";//getAllStudents
+				window.location.href="${pageContext.request.contextPath }/admin_seePaper?tpid="+paperid;	
+				/*  var url = "${pageContext.request.contextPath }/admin_seePaper";//getAllStudents
 				 var param = {"tpid":paperid};
-				 $.post(url,param,function(data){},"json");
-			}
-			function toSeePaper(){
-				//window.location.href=
-			}
+				 $.post(url,param,function(data){
+					 window.location.href="${pageContext.request.contextPath }/teacherShowPaper.jsp";
+				 },"json"); */
+			} */
 		</script>
 
 		<script type="text/javascript">// 修改密码的js代码

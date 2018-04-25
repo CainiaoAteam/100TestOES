@@ -49,6 +49,7 @@
 
 		<!-- 管理员动作 --><!-- 这是我配的 -->
 		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="showPaper" type="redirect">jsp/teacherShowPaper.jsp</result>
 		</action>
 
 	</package>

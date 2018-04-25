@@ -14,6 +14,7 @@ import com.oes.bean.Admin;
 import com.oes.bean.Student;
 import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
+import com.oes.service.PaperService;
 import com.oes.service.impl.AdminServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.TextParser;
@@ -52,6 +53,8 @@ public class AdminAction extends ActionSupport{
 	
 	
 	private AdminServiceImpl adminService;
+	
+	private PaperService paperService;
 	
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
@@ -147,7 +150,9 @@ public class AdminAction extends ActionSupport{
 		this.adminService = adminService;
 	}
 
-
+	public void setPaperService(PaperService paperService) {
+		this.paperService = paperService;
+	}
 
 	/**
 	 * 修改密码
@@ -474,10 +479,12 @@ public class AdminAction extends ActionSupport{
 	}
 
 	public String seePaper() {
+
+		TestPaper tp = paperService.getPaperByPid(tpid);
+		HttpSession session = ServletActionContext.getRequest().getSession();
 		
-		TestPaper tp = adminService.getAPaper(tpid);
-		ServletActionContext.getRequest().getSession().setAttribute("theTp",tp);
-		System.out.println("chakanshijiuan");
-		return "seeExamPaper";
+		session.setAttribute("tea_show", tp);
+		
+		return "showPaper";
 	}
 }
