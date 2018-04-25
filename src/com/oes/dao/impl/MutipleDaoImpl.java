@@ -122,10 +122,34 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 	}
 	public boolean updateMutipleByMno(MutipleQuestion mq) {
 		// TODO Auto-generated method stub
+		String sql = "update multipquestion set tid=?,mquestion=?,mchoiceA=?,mchoiceB=?,"
+				+ "mchoiceC=?,mchoiceD=?,manswer=?,mexplanation=?,difficulty=? where mqno=?";
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {mq.getTid(),mq.getMquestion(),mq.getMchoiceA(),
+				mq.getMchoiceB(),mq.getMchoiceC(),mq.getMchoiceD(),mq.getManswer(),mq.getMexplanation(),mq.getDifficulty(),mq.getMqno() };
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 ) {
+			return true;
+		}		
 		return false;
 	}
 	public boolean updateMutipleByMid(MutipleQuestion mq) {
 		// TODO Auto-generated method stub
+		String sql = "update multipquestion set tid=?,mqno=?,mquestion=?,mchoiceA=?,mchoiceB=?,"
+				+ "mchoiceC=?,mchoiceD=?,manswer=?,mexplanation=?,difficulty=? where mqid=?";
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {mq.getTid(),mq.getMqno(),mq.getMquestion(),mq.getMchoiceA(),
+				mq.getMchoiceB(),mq.getMchoiceC(),mq.getMchoiceD(),mq.getManswer(),mq.getMexplanation(),mq.getDifficulty(),mq.getMqid() };
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 ) {
+			return true;
+		}		
 		return false;
 	}
 
