@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,11 +31,19 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		//注： 这里要对data处理一下，以便于和数据库中的时间对比
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int minute = calendar.get(Calendar.MINUTE);
+		calendar.set(Calendar.MINUTE, minute-30);
+		String datebefore = sdf.format(calendar.getTime());
+		
+		System.out.println("30分钟前的时间：" + sdf.format(calendar.getTime()));
+		
 		String sql = "select * from exam where examday >= ?";
 		
 		 final List<Exam> examlist = new ArrayList<Exam>();
 		 JdbcTemplate jdbcTemplate = getJdbcTemplate();
-		 Object args[] = new Object[]{date}; 
+		 Object args[] = new Object[]{datebefore}; 
 		 
 		  jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
 			  
