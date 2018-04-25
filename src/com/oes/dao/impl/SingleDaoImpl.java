@@ -114,7 +114,6 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 					sq.setSexplanation(rs.getString("sexplanation"));
 					sq.setDifficulty(rs.getString("difficulty"));
 					
-					
 				}while(rs.next());
 				
 			}
