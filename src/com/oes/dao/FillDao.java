@@ -15,5 +15,6 @@ public interface FillDao {
 	List<FillQuestion> getFillsByTid(int tid);
 
 	int getFillsCountByTid(int tid);
-
+	boolean updateFillByFno(String fqno);
+	boolean updateFillByMid(int fqid);
 }

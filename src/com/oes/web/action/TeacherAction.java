@@ -1,7 +1,9 @@
 package com.oes.web.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,8 @@ import org.apache.struts2.ServletActionContext;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.mchange.lang.StringUtils;
+import com.oes.bean.Exam;
 import com.oes.bean.FillQuestion;
 import com.oes.bean.MutipleQuestion;
 import com.oes.bean.PageBean;
@@ -24,6 +28,7 @@ import com.oes.service.MutipleService;
 import com.oes.service.PaperService;
 import com.oes.service.RoleService;
 import com.oes.service.SingleService;
+import com.oes.utils.BasicUtil;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeacherAction extends ActionSupport{
@@ -44,7 +49,22 @@ public class TeacherAction extends ActionSupport{
 	
 	private PageBean pageBean;
 	
+	private TestPaper testPaper;
 	
+	private Exam exam;
+	
+	public Exam getExam() {
+		return exam;
+	}
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+	public TestPaper getTestPaper() {
+		return testPaper;
+	}
+	public void setTestPaper(TestPaper testPaper) {
+		this.testPaper = testPaper;
+	}
 	public void setPaperService(PaperService paperService) {
 		this.paperService = paperService;
 	}
@@ -91,40 +111,133 @@ public class TeacherAction extends ActionSupport{
 	public void setTeacherService(RoleService teacherService) {
 		this.teacherService = teacherService;
 	}
+	
+	/**
+	 * 发布考试时加载试卷的请求
+	 * @return
+	 */
+	public String getAllPaper() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		int tid = Integer.parseInt(ServletActionContext.getRequest().getParameter("tid"));
+		List<TestPaper> papers = paperService.getPapersByTid(tid);
+		System.out.println("发布考试：加载试卷！"+tid);
+		String json ="";
+		if(papers == null) {
+			json = "{'tip':'no'}";
+			json = JSON.toJSONString(json);
+			PrintWriter writer = null;
+			System.out.println(json);
+			try {
+				writer = response.getWriter();
+				writer.print(json);
+				writer.flush();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			json = JSON.toJSONString(papers);
+			PrintWriter writer = null;
+			System.out.println(json);
+			try {
+				writer = ServletActionContext.getResponse().getWriter();
+				writer.print(json);
+				writer.flush();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return NONE;
+	}
+	
+	
+	/**
+	 * 控制跳转到添加试卷的页面
+	 * @return
+	 */
+	public String addExamPaper() {
+		
+		//获取关于该老师的单选题目
+		Teacher teacher = (Teacher) ServletActionContext.getRequest().getSession().getAttribute("user");
+		int tid = teacher.getTid();
+		List<SingleQuestion> singles = singleService.getSinglesByTid(tid);
+		List<MutipleQuestion> mutiples = mutipleService.getMutiplesByTid(tid);
+		List<FillQuestion> fills = fillService.getFillsByTid(tid);
+		
+		HashMap<String, List<?>> question = new HashMap<String, List<?>>();
+		question.put("singles", singles);
+		question.put("mutiples", mutiples);
+		question.put("fills", fills);
+		
+		//将题目保存到session中
+		ServletActionContext.getRequest().getSession().setAttribute("question", question);
+		
+		
+		return "addExamPaper";
+	}
+	
+	/**
+	 * 添加试卷
+	 * @return
+	 */
+	public String addPaper() {
+		System.out.println("添加试卷！");
+		
+		System.out.println(testPaper);
+//		
+		System.out.println(testPaper.getTeacher().getTid());
+		
+		boolean istrue = paperService.addTestPaper(testPaper);
+		
+		return SUCCESS;
+	}
 	/**
 	 * 根据试卷状态获取试卷
 	 * @return
 	 */
-//	public String getTestPaperByState() {
-//		
-//		HttpServletResponse response = ServletActionContext.getResponse();
-//		//设置编码格式
-//		response.setContentType("text/html;charset=utf-8");
-//		
-//		int state = Integer.parseInt(ServletActionContext.getRequest().getParameter("state"));
-//		int who = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
-//		List<TestPaper> list = paperService.getPapersByStateForTid(who,state);
-//		System.out.println(who+":"+state);
-//		
-//		String json = "";
-//		
-//		if(list == null) {
-//			json = "{\"tip\":\"no\"}";
-//			json = JSON.toJSONString(json);
-//			
-//		}else {
-//			json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
-//		}
-//		
-//		try {
-//			response.getWriter().print(json);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return NONE;
-//	}
+	public String getTestPaperByState() {
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter writer;
+		try {
+			writer = response.getWriter();
+		
+			//设置编码格式
+			response.setContentType("text/html;charset=utf-8");
+			
+			int state = Integer.parseInt(ServletActionContext.getRequest().getParameter("state"));
+			int who = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
+			List<TestPaper> list = paperService.getPapersByStateForTid(who,state);
+			System.out.println(who+":"+state);
+			
+			String json = "";
+			
+			if(list == null) {
+				json = "{'tip':'no'}";
+				
+				json = JSON.toJSONString(json);
+				
+			}else {
+				json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
+			}
+			
+			writer.print(json);
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return NONE;
+	}
 	/**
 	 * 获取所有的题目
 	 * 
@@ -169,7 +282,7 @@ public class TeacherAction extends ActionSupport{
 		if(issecu) {
 			ServletActionContext.getRequest().getSession().setAttribute("msg", "添加填空题成功！");
 			System.out.println(fillQuestion);
-			return "addQuestion";
+			return "add";
 		}
 		
 		return NONE;
@@ -186,7 +299,7 @@ public class TeacherAction extends ActionSupport{
 		if(issecu) {
 			ServletActionContext.getRequest().getSession().setAttribute("msg", "添加双选题成功！");
 			System.out.println(mutipleQuestion);
-			return "addQuestion";
+			return "add";
 		}
 		
 		return NONE;
@@ -204,11 +317,15 @@ public class TeacherAction extends ActionSupport{
 		if(issecu) {
 			ServletActionContext.getRequest().getSession().setAttribute("msg", "添加单选题成功！");
 			System.out.println(singleQuestion);
-			return "addQuestion";
+			return "add";
 		}
 		
 		return NONE;
 	}
+	/**
+	 * 跳转到添加题目页面
+	 * @return
+	 */
 	public String toAddJsp() {
 		if(ServletActionContext.getRequest().getSession().getAttribute("msg") != null) {
 			

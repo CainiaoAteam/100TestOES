@@ -17,7 +17,22 @@ public class BasicUtil {
 	public static String getUUID() {
 		return UUID.randomUUID().toString();
 	}
-	
+	/**
+	 * 字符串拼接
+	 * @param js
+	 * @param flag
+	 * @return
+	 */
+	public static String join( int[] js , String flag ){  
+        StringBuffer str_buff = new StringBuffer();  
+        
+        for(int i=0 , len=js.length ; i<len ; i++){  
+            str_buff.append( String.valueOf( js[i] ) );  
+            if(i<len-1)str_buff.append( flag );  
+        }  
+       
+        return str_buff.toString();   
+    }
 	/**
 	 * 计算考试分数
 	 * 

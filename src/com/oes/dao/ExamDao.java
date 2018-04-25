@@ -22,5 +22,6 @@ public interface ExamDao {
 	 * @return
 	 */
 	Exam getExamById(int examid);
-	
+	public List<Exam> getExamsByTidAndState(int tid, int state);
+	public List<Exam> getExamsByTid(int tid);
 }

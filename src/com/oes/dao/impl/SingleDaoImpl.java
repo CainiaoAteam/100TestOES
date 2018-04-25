@@ -1,7 +1,12 @@
 package com.oes.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.SingleQuestion;
@@ -14,7 +19,21 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	 */
 	public boolean saveSingleQuestion(SingleQuestion singleQuestion) {
 		// TODO Auto-generated method stub
-		return true;
+		
+		String sql = "insert into singlequestion(tid,sqno,squestion,schoiceA,schoiceB,"
+				+ "schoiceC,schoiceD,sanswer,sexplanation,difficulty)values(?,?,?,?,?,?,?,?,?,?)";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {singleQuestion.getTid(),singleQuestion.getSqno(),singleQuestion.getSquestion(),
+				singleQuestion.getSchoiceA(),singleQuestion.getSchoiceB(),singleQuestion.getSchoiceC(),
+				singleQuestion.getSchoiceD(),singleQuestion.getSanswer(),singleQuestion.getSexplanation(),singleQuestion.getDifficulty()};
+		int temp = jdbcTemplate.update(sql,args);
+		
+		if( temp>0) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -22,7 +41,37 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	 */
 	public List<SingleQuestion> getSinglesByTid(int tid) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from singlequestion where tid=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid};
+		
+		final List<SingleQuestion> sqlist = new ArrayList<SingleQuestion>();
+		
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					SingleQuestion sq = new SingleQuestion();
+					sq.setSqid(rs.getInt("sqid"));
+					sq.setTid(rs.getInt("tid"));
+					sq.setSqno(rs.getString("sqno"));
+					sq.setSquestion(rs.getString("squestion"));
+					sq.setSchoiceA(rs.getString("schoiceA"));
+					sq.setSchoiceB(rs.getString("schoiceB"));
+					sq.setSchoiceC(rs.getString("schoiceC"));
+					sq.setSchoiceD(rs.getString("schoiceD"));
+					sq.setSanswer(rs.getString("sanswer"));
+					sq.setSexplanation(rs.getString("sexplanation"));
+					sq.setDifficulty(rs.getString("difficulty"));
+					
+					sqlist.add(sq);
+					
+				}while(rs.next());
+				
+			}
+		});
+		
+		return sqlist;
 	}
 	
 	/**
@@ -31,7 +80,22 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	 */
 	public int getSinglesCountByTid(int tid) {
 		// TODO Auto-generated method stub
-		return 0;
+		String sql = "select count(*) from singlequestion where tid=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {tid};
+		int count = jdbcTemplate.queryForObject(sql, args, Integer.class);
+		
+		return count;
+	}
+	
+	public boolean updateSingleBySno(String sno) {
+		return false;
+	
+	}
+	public boolean updateSingleBySid(int sid) {
+		return false;
+		
 	}
 	
 }
