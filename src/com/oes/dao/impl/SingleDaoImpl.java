@@ -66,8 +66,7 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 					
 					sqlist.add(sq);
 					
-				}while(rs.next());
-				
+				}while(rs.next());			
 			}
 		});
 		
@@ -121,7 +120,7 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 		
 		return sq;
 	}
-
+	
 	public boolean updateSingleBySno(SingleQuestion sq) {
 		// TODO Auto-generated method stub
 		return false;
