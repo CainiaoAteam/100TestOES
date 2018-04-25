@@ -30,5 +30,7 @@ public interface ExamDao {
 	public boolean saveExam(Exam exam);
 	
 	
-	List<Exam> getExamsBySidAndExamId(int sid, int examid);
+	Exam getExamsBySidAndExamId(int sid, int examid);
+	
+	boolean addExam(Exam exam);
 }
