@@ -83,26 +83,22 @@
 			function loadExamRecrod(){
 				var url = "${pageContext.request.contextPath }/exam_loadExamRecrod";
 				var param = {"sid":"${sessionScope.user.sid}"};
-				
 				$.post(url,param,function(data){
 
 					if(data == ""){
 						$("#examhead").html("暂无考试记录信息！");
 					}else {
-						var inner = "<tr><th>编号</th><th>名称</th><th>时间</th><th>分数</th><th>操作</th></tr>";
+						var inner = "<tr><th>编号</th><th>名称</th><th>开始时间</th><th>分数</th><th>操作</th></tr>";
 						var exambody = "";
 						var bodyInner = "";
 						$("#examhead").html(inner);
-						
-						//alert(data.exam.examno);
-						
 						$.each(data,function(i,n){
 							exambody = "<tr>"+
-											"<td>"+data[i].exam.examno+"</td>"+
-											"<td>"+data[i].exam.examname+"</td>"+
-											"<td>"+data[i].exam.startTime+"</td>"+
-											"<td>"+data[i].score+"</td>"+
-											"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+data[i].rid+"'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
+											"<td>"+n.exam.examno+"</td>"+
+											"<td>"+n.exam.examname+"</td>"+
+											"<td>"+n.exam.startTime+"</td>"+
+											"<td>"+n.score+"</td>"+
+											"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+n.rid+"'><button class='btn btn-outline-info btn-sm'>查看试卷</button></a></td>"+
 										"</tr>";
 							bodyInner += exambody;
 						});

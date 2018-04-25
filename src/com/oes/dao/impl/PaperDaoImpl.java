@@ -170,5 +170,10 @@ JdbcTemplate jdbcTemplate = getJdbcTemplate();
 
 		return paperlist;
 	}
+
+	public List<TestPaper> getPapersByState(int state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

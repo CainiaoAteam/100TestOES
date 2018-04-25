@@ -29,5 +29,9 @@ public class FillServiceImpl implements FillService {
 		// TODO Auto-generated method stub
 		return fillDao.getFillsCountByTid(tid);
 	}
+	public FillQuestion getFillById(int parseInt) {
+		// TODO Auto-generated method stub
+		return fillDao.getFillQuestionById(parseInt);
+	}
 	
 }

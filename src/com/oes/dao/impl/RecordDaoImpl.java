@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -16,6 +17,16 @@ import com.oes.dao.RecordDao;
 
 public class RecordDaoImpl extends JdbcDaoSupport implements RecordDao {
 
+	/**
+	 * 测试不通过，不知道是什么原因
+	 * 
+	 * 
+	 */
+	@Test
+	public void run() {
+		saveRecord(5,1,"5556",56);
+	}
+	
 	public boolean saveRecord(Integer examid, Integer sid, String myanswer, double score) {
 		// TODO Auto-generated method stub
 		

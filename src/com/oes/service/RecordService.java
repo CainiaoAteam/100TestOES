@@ -22,7 +22,7 @@ public interface RecordService {
 	 * @param exam
 	 * @return
 	 */
-	Record packageRecord(Student student, Exam exam,String answer);
+	Record packageRecord(Record re,Student student, Exam exam,String answer);
 	
 	/**
 	 * 根据考试记录id获取考试相应的记录

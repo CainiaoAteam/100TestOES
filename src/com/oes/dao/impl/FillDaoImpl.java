@@ -79,11 +79,38 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		int count = jdbcTemplate.queryForObject(sql, args, Integer.class);
 		return count;
 	}
-	public boolean updateFillByFno(String fqno) {
+
+	public FillQuestion getFillQuestionById(int id) {
+		String sql = "select * from fillquestion where fqid=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {id};
+		
+		final FillQuestion fq = new FillQuestion();
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					fq.setFqid(rs.getInt("fqid"));
+					fq.setTid(rs.getInt("tid"));
+					fq.setFqno(rs.getString("fqno"));
+					fq.setFquestion(rs.getString("fquestion"));
+					fq.setFanswer(rs.getString("fanswer"));
+					fq.setFexplanation(rs.getString("fexplanation"));
+					fq.setDifficulty(rs.getString("difficulty"));
+					
+					
+				}while(rs.next());
+				
+			}
+		});
+		
+		return fq;
+	}
+	public boolean updateFillByFno(FillQuestion fill) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public boolean updateFillByMid(int fqid) {
+	public boolean updateFillByMid(FillQuestion fill) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,7 +17,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import com.oes.bean.Exam;
 import com.oes.bean.FillQuestion;
 import com.oes.bean.MutipleQuestion;
-import com.oes.bean.Record;
+import com.oes.bean.Record; 
 import com.oes.bean.SingleQuestion;
 import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
@@ -218,4 +217,24 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		return examlist;
 		
 		}
+
+	public List<Exam> getExamByDate(int sid, Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Exam> getExamsByState(int state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Exam> getAllExams() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean saveExam(Exam exam) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	}

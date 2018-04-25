@@ -11,5 +11,7 @@ public interface MutipleService {
 	List<MutipleQuestion> getMutiplesByTid(int tid);
 
 	int getMutiplesCountByTid(int tid);
+
+	MutipleQuestion getMutipleById(int parseInt);
 	
 }

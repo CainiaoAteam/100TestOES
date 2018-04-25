@@ -80,10 +80,6 @@ public class Exam {
 	public void setExamtime(int examtime) {
 		this.examtime = examtime;
 	}
-	@Override
-	public String toString() {
-		return "Exam [teacher=" + teacher + ", examno=" + examno + ", examname=" + examname + ", examday=" + examday
-				+ ", examtime=" + examtime + ", state=" + state + ", startTime=" + startTime + "]";
-	}
+	
 	
 }

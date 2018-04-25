@@ -32,6 +32,8 @@ public class RecordServiceImpl implements RecordService {
 		this.recordDao = recordDao;
 	}
 	public boolean saveRecord(Record re) {
+		System.out.println("保存记录："+re);
+		
 		boolean res = recordDao.saveRecord(re.getExam().getExamid(),re.getStudent().getSid(),
 				re.getMyanswer(),re.getScore());
 		
@@ -41,16 +43,12 @@ public class RecordServiceImpl implements RecordService {
 	/**
 	 * 
 	 */
-	public Record packageRecord(Student student, Exam exam, String answer) {
+	public Record packageRecord(Record re,Student student, Exam exam, String answer) {
 		
 //		System.out.println(answer);
 		
+		//解析答案
 		String[] allAnswer = answer.split("##");
-		System.out.println("答案"+answer);
-		System.out.println(allAnswer.length+"个数组");
-		System.out.println("单选："+allAnswer[0]);
-		System.out.println("双选："+allAnswer[1]);
-		System.out.println("填空："+allAnswer[2]);
 		
 		//根据答案封装单选
 		List<SingleQuestion> squestions = exam.getTestpaper().getSquestions();
@@ -70,8 +68,7 @@ public class RecordServiceImpl implements RecordService {
 		//计算分数
 		double totalScore = BasicUtil.calculateTotalScore(exam);
 		
-		//创建一个考试记录对象
-		Record re = new Record();
+		
 		re.setScore(totalScore);//保存成绩的记录
 		re.setStudent(student);
 		re.setExam(exam);
@@ -93,14 +90,28 @@ public class RecordServiceImpl implements RecordService {
 		
 		
 		//封装考试记录对象
-		re = this.packageRecord(student, exam, myanswer);
+		re = this.packageRecord(re,student, exam, myanswer);
 		
 		return re;
 	}
+	/**
+	 * 获取该学生的所有考试记录、要封装好每一条记录对象
+	 * 
+	 */
 	public List<Record> getRecordsBySid(Integer sid) {
 		// TODO Auto-generated method stub
 		
-		return recordDao.getRecordBySid(sid);
+		List<Record> list = recordDao.getRecordBySid(sid);
+		for (int i =0; i<list.size();i++) {
+			Integer examid = list.get(i).getExam().getExamid();
+			Exam exam = examService.getExamById(examid);
+			Student student = (Student) studentService.getRoleById(sid);
+			Record record = new Record();
+			record = this.packageRecord(list.get(i),student, exam, list.get(i).getMyanswer());
+			list.set(i, record);
+		}
+		
+		return list;
 	}
 
 }
