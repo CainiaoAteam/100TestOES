@@ -92,7 +92,7 @@
 									<div class="collapse show" id="collapse1_${status.index+1} ">
 										<div class="card-footer ">
 											<p style="color:#007bff">解析：
-												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">困难</b>）</span>
+												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${squestion.difficulty}</b>）</span>
 											</p>
 											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${squestion.sanswer}&nbsp;</label>，${squestion.sexplanation}
 											</span>
@@ -149,7 +149,7 @@
 										<div class="card-footer ">
 											<p style="color:#007bff">
 												解析：
-												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">困难</b>）</span>
+												<span style="margin-left: 2em;color: #00f">（难度：<b style="color: red;">${mquestion.difficulty}</b>）</span>
 											</p>
 											<span style="color:red;margin-left:2em;">选<label class="rightAnswer" style="font-weight:600;">&nbsp;${mquestion.manswer}&nbsp;</label>，${mquestion.mexplanation}</span>
 										</div>

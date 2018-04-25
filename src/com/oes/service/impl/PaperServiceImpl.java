@@ -92,6 +92,8 @@ public class PaperServiceImpl implements PaperService {
 		testPaper.setMquestion(BasicUtil.join(testPaper.getMqid(), ","));
 		testPaper.setFquestion(BasicUtil.join(testPaper.getFqid(), ","));
 		testPaper.setTpno(BasicUtil.getUUID());
+		testPaper.setState(0);//初始化试卷为未审核
+		
 		
 		return paperDao.addTestPaper(testPaper);
 	}

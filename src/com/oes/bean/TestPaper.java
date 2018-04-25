@@ -24,14 +24,6 @@ public class TestPaper {
 	
 	private int tpstate;
 	
-	public int getTpstate() {
-		return tpstate;
-	}
-
-	public void setTpstate(int tpstate) {
-		this.tpstate = tpstate;
-	}
-	
 	private int squestionscore;
 	private int mquestionscore;
 	private int fquestionscore;

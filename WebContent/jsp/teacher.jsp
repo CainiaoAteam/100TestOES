@@ -76,6 +76,42 @@
 
 	});*/
 
+	//点击我的试卷默认加载通过审核的试卷
+	function getPaperIsPass(){
+		var url = "${pageContext.request.contextPath }/teacher_getPaperIsPass";
+		var who = ${sessionScope.user.tid};
+		var param = {"paperState":1,"who":who};
+		var tmp ="";
+		var inner ="";
+		var sta = ["待审核","通过审核","未通过审核"];
+
+		$.post(url,param,function(data){
+			if(data.tip == "no"){
+				$("#paperBody").html("暂无通过审核的试卷！");
+			}else{
+				$.each(data,function(i,n){
+					tmp = "<tr>"+
+									"<td>"+
+										"<div class='card'>"+
+											"<div class='card-body'>"+
+												"<h4 class='card-title'>"+n.tpname+"</h4>"+
+												"<p class='card-text'>试卷编号:"+n.tpno+"</p>"+
+												"<p class='card-text'>状态："+sta[Number(n.state)]+"</p>"+
+												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+n.tpid+" class='card-link'>"+
+													"<p style='text-align: right;'>查看试卷</p>"+
+												"</a>"+
+											"</div>"+
+										"</div>"+
+									"</td>"+
+							"</tr>"
+					inner += tmp;
+				})
+				$("#paperBody").html(inner);
+			}
+		},"json");
+
+	}
+
 </script>
 </head>
 
@@ -100,7 +136,7 @@
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#myPaper">我的试卷</a>
+						<a class="nav-link" data-toggle="pill" href="#myPaper" onclick="getPaperIsPass()">我的试卷</a>
 					</li>
 					<br />
 					<li class="nav-item"><!-- 新增我的发布-->
@@ -241,7 +277,7 @@
 									<label for="tpSatae2">通过审核</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input id="tpSatae1" type="radio" name="state" value="-1" onclick="getTestPaperByState(this)">
+									<input id="tpSatae1" type="radio" name="state" value="2" onclick="getTestPaperByState(this)">
 									<label for="tpSatae1">未通过审核</label>
 								</div>
 								
