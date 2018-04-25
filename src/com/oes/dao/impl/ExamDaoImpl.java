@@ -313,14 +313,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		return false;
 	}
-	
-	/**
-	 * 新增，实现它
-	 */
-	public Exam getExamsBySidAndExamId(int sid, int examid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	/**
 	 * 保存考试信息，即老师发布考试

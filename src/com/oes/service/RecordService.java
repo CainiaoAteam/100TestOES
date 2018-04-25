@@ -37,6 +37,8 @@ public interface RecordService {
 	 * @return
 	 */
 	List<Record> getRecordsBySid(Integer sid);
+
+	List<Record> getRecordByExamId(int examid);
 	
 	
 	

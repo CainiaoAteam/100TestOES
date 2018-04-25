@@ -108,5 +108,9 @@ public class RecordServiceImpl implements RecordService {
 		
 		return list;
 	}
+	public List<Record> getRecordByExamId(int examid) {
+		// TODO Auto-generated method stub
+		return recordDao.getRecordsByExamId(examid);
+	}
 
 }
