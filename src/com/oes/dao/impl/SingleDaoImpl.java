@@ -89,16 +89,6 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 		return count;
 	}
 	
-	public boolean updateSingleBySno(String sno) {
-		
-		return false;
-		
-	}
-	public boolean updateSingleBySid(int sid) {
-		return false;
-		
-	}
-	
 	/**
 	 * 已经实现
 	 */
