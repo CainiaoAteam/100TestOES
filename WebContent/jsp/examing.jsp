@@ -85,7 +85,7 @@
 				<c:if test="${not empty exam.testpaper.mquestions}">
 					<div class="card-header" style="height: 70px;">
 						<div class="form-inline">
-							<h5 style="margin-right: 20px;">多选题</h5>
+							<h5 style="margin-right: 20px;">双选题</h5>
 							<p class="myspan-fraction">
 								<span>共</span>
 								<samp>${exam.testpaper.mquestionSize}</samp>

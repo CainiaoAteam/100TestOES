@@ -28,4 +28,7 @@ public interface ExamDao {
 	public List<Exam> getExamsByState(int state);
 	public List<Exam> getAllExams();
 	public boolean saveExam(Exam exam);
+	
+	
+	List<Exam> getExamsBySidAndExamId(int sid, int examid);
 }
