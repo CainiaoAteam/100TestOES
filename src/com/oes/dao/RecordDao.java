@@ -32,5 +32,10 @@ public interface RecordDao {
 	 */
 	List<Record> getRecordBySid(Integer sid);
 	
+	List<Record> getRecordsByExamId(int examId);
+	Record getRecordByExamId(int ExamId);
+	
+	
+	
 
 }
