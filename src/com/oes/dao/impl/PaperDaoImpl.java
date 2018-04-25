@@ -196,7 +196,7 @@ public class PaperDaoImpl extends JdbcDaoSupport implements PaperDao {
 			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
 			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
 			    		 p.setTotalscore(rs.getInt("totalscore"));;
-			    		 p.setTpstate(rs.getInt("state")); 
+			    		 p.setState(rs.getInt("state")); 
 			    		 
 			    		 int tid = rs.getInt("tid");
 			    		 Teacher t = new Teacher();

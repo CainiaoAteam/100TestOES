@@ -224,16 +224,93 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 
 	public List<Exam> getExamsByState(int state) {
 		// TODO Auto-generated method stub
-		return null;
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String sql = "select * from exam where state = ?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {state};
+		
+		final List<Exam> examlist = new ArrayList<Exam>();
+		jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   do {
+		    		   Exam exam = new Exam();  
+
+		    		   exam.setExamid(rs.getInt("examid"));
+		    		   exam.setExamname(rs.getString("examname"));  
+		    		   exam.setExamday(rs.getDate("examday"));
+		    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+		    		   exam.setExamno(rs.getString("examno"));
+		    		   exam.setState(rs.getInt("state"));
+		    		   
+		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+		    		   TestPaper p = new TestPaper();
+		    		   p.setTpid(tpid);	//将id封装到试卷中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		    		   
+		    		   Teacher t = new Teacher();
+		    		   int tid = rs.getInt("tid");
+		    		   t.setTid(tid);
+		    		   exam.setTeacher(t);
+		    		   
+		    		   examlist.add(exam); 
+		    		   
+		    	   } while(rs.next());	   
+		       }  
+		   });  
+		return examlist;
 	}
 
 	public List<Exam> getAllExams() {
 		// TODO Auto-generated method stub
-		return null;
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String sql = "select * from exam";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		final List<Exam> examlist = new ArrayList<Exam>();
+		jdbcTemplate.query(sql,new RowCallbackHandler(){  
+			  
+		       public void processRow(ResultSet rs) throws SQLException {  
+		    	   do {
+		    		  
+			    		   Exam exam = new Exam();  
+	
+			    		   exam.setExamid(rs.getInt("examid"));
+			    		   exam.setExamname(rs.getString("examname"));  
+			    		   exam.setExamday(rs.getDate("examday"));
+			    		   exam.setStartTime(sdf.format(rs.getTimestamp("examday")));
+			    		   exam.setExamno(rs.getString("examno"));
+			    		   exam.setState(rs.getInt("state"));
+			    		   
+			    		   int tpid = rs.getInt("tpid");	//获取到试卷id
+			    		   TestPaper p = new TestPaper();
+			    		   p.setTpid(tpid);	//将id封装到试卷中
+			    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+			    		   
+			    		   Teacher t = new Teacher();
+			    		   int tid = rs.getInt("tid");
+			    		   t.setTid(tid);
+			    		   exam.setTeacher(t);
+			    		   
+			    		   examlist.add(exam); 
+		    		   
+		    	   } while(rs.next());	   
+		       }  
+		   });  
+		return examlist;
 	}
 
 	public boolean saveExam(Exam exam) {
 		// TODO Auto-generated method stub
+		String sql = "insert into exam(tid,examno,tpid,examday,examtime,examname,state)values(?,?,?,?,?,?,?)";  
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {exam.getTeacher().getTid(),exam.getExamno(),exam.getTestpaper().getTpid(),
+				exam.getExamday(),exam.getExamtime(),exam.getExamname(),exam.getState()};
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 )
+			return true;
+		
 		return false;
 	}
 

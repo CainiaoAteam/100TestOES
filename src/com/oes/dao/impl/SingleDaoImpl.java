@@ -123,11 +123,35 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	
 	public boolean updateSingleBySno(SingleQuestion sq) {
 		// TODO Auto-generated method stub
+		String sql = "update singlequestion set tid=?,squestion=?,schoiceA=?,schoiceB=?,"
+				+ "schoiceC=?,schoiceD=?,sanswer=?,sexplanation=?,difficulty=? where sqno=?";
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {sq.getTid(),sq.getSquestion(),sq.getSchoiceA(),
+				sq.getSchoiceB(),sq.getSchoiceC(),sq.getSchoiceD(),sq.getSanswer(),sq.getSexplanation(),sq.getDifficulty(),sq.getSqno() };
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 ) {
+			return true;
+		}		
 		return false;
 	}
 
 	public boolean updateSingleBySid(SingleQuestion sq) {
 		// TODO Auto-generated method stub
+		String sql = "update singlequestion set tid=?,sqno=?,squestion=?,schoiceA=?,schoiceB=?,"
+				+ "schoiceC=?,schoiceD=?,sanswer=?,sexplanation=?,difficulty=? where sqno=?";
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {sq.getTid(),sq.getSqno(),sq.getSquestion(),sq.getSchoiceA(),
+				sq.getSchoiceB(),sq.getSchoiceC(),sq.getSchoiceD(),sq.getSanswer(),sq.getSexplanation(),sq.getDifficulty(),sq.getSqid() };
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 ) {
+			return true;
+		}		
 		return false;
 	}
 	
