@@ -173,7 +173,43 @@ JdbcTemplate jdbcTemplate = getJdbcTemplate();
 
 	public List<TestPaper> getPapersByState(int state) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from testpaper where state=?";
+		Object args[] = new Object[] {state};
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		final List<TestPaper> paperlist = new ArrayList<TestPaper>();
+		jdbcTemplate.query(sql, args, new RowCallbackHandler(){
+	    	 public void processRow(ResultSet rs) throws SQLException {
+	 
+	    		 do {
+		    			 TestPaper p = new TestPaper();
+			    		 
+			    		 p.setTpid(rs.getInt("tpid"));
+			    		 p.setTpno(rs.getString("tpno"));
+			    		 p.setTpname(rs.getString("tpname"));
+			    		
+			    		 p.setSquestion(rs.getString("squestion"));
+			    		 p.setMquestion(rs.getString("mquestion"));
+			    		 p.setFquestion(rs.getString("fquestion"));
+			    		
+			    		 p.setSquestionscore(rs.getInt("squestionscore"));
+			    		 p.setMquestionscore(rs.getInt("mquestionscore"));
+			    		 p.setFquestionscore(rs.getInt("fquestionscore"));
+			    		 p.setTotalscore(rs.getInt("totalscore"));;
+			    		 p.setTpstate(rs.getInt("state"));
+			    		 
+			    		 int tid = rs.getInt("tid");
+			    		 Teacher t = new Teacher();
+			    		 t.setTid(tid);
+			    		 p.setTeacher(t);
+			    		 
+			    		 paperlist.add(p);
+		    		 
+	    		 }while(rs.next());
+	    	 }
+	     });
+
+		return paperlist;
 	}
 	
 }

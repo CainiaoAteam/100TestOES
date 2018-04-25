@@ -176,6 +176,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 	 * @return
 	 */
 	public List<Exam> getExamsByTid(int tid){
+		
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String sql = "select * from exam where tid = ?";
 		JdbcTemplate jdbcTemplate = getJdbcTemplate();
@@ -204,8 +205,6 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   int tid = rs.getInt("tid");
 		    		   t.setTid(tid);
 		    		   exam.setTeacher(t);
-		    		   
-		    		   //System.out.println("获取考试信息:-------"+exam);
 		    		   
 		    		   examlist.add(exam); 
 		    		   
