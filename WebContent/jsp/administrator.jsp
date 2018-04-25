@@ -13,6 +13,103 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				//
+				getStudents();
+				getTeachers();
+	
+			});
+			function getStudents(){
+				var url = "${pageContext.request.contextPath }/admin_getAllStudents";//getAllStudents
+				var param = {};
+				$.post(url,param,function(data){loadStu(data)},"json");
+			}
+			
+			function getTeachers(){
+				var url = "${pageContext.request.contextPath }/admin_getAllTeachers";//
+				var param = {};
+				$.post(url,param,function(data){loadTea(data)},"json");
+			}
+			
+			
+		</script>
+		<script>
+			function loadStu(data){
+				var nobody="<h3 style='color:red;'>暂无数据！</h3>"
+				var tou = "<tr><th>学号</th><th>姓名</th><th>性别</th><th>身份证号</th><th>系别</th><th>班别</th><th>手机号</th><th>操作</th></tr>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#stus_info").html(nobody);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					
+					 item = "<tr>"+
+								"<td>"+data[i].sno+"</td>"+
+								"<td>"+data[i].sname+"</td>"+
+								"<td>"+data[i].gender+"</td>"+
+								"<td>"+data[i].idcardnum+"</td>"+
+								"<td>"+data[i].department+"</td>"+
+								"<td>"+data[i].grade+"</td>"+
+								"<td>"+data[i].phone+"</td>"+
+								"<td><a class='btn btn-outline-secondary btn-sm' href='${pageContext.request.contextPath }/admin_delStu?sid="+data[i].sid+"'>删除</a></td>"+
+							"</tr>";
+					info += item; 
+				});
+				$("#stus_head").html(tou);
+				$("#stus_info").html(info);
+			}
+			
+			function loadTea(data){
+				var nobody="<h3 style='color:red;'>暂无数据！</h3>"
+				var tou = "<tr><th>教工号</th><th>姓名</th><th>性别</th><th>身份证号</th><th>手机号</th><th>操作</th></tr>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#teas_info").html(nobody);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					
+						item = "<tr>"+
+								"<td>"+data[i].tno+"</td>"+
+								"<td>"+data[i].tname+"</td>"+
+								"<td>"+data[i].gender+"</td>"+
+								"<td>"+data[i].idcardnum+"</td>"+
+								"<td>"+data[i].phone+"</td>"+
+								"<td><a class='btn btn-outline-secondary btn-sm' href='${pageContext.request.contextPath }/admin_delTea?tid="+data[i].tid+"'>删除</a></td>"+
+							"</tr>";
+					info += item; 
+				});
+				$("#teas_head").html(tou);
+				$("#teas_info").html(info);
+			}
+		</script>
+		<script type="text/javascript">
+			function stuFind(){
+				var url = "${pageContext.request.contextPath }/admin_findStuByKey";//
+				var key=$("#stu_key").val();
+				alert(key);
+				var param = {"stu_key":key};
+				$("#stus_head").empty();
+				$("#stus_info").empty();
+				$.post(url,param,function(data){loadStu(data)},"json");
+			}
+			function teaFind(){
+				var url = "${pageContext.request.contextPath }/admin_findTeaByKey";//
+				var key=$("#tea_key").val();
+				alert(key);
+				var param = {"tea_key":key};
+				$("#teas_head").empty();
+				$("#teas_info").empty();
+				$.post(url,param,function(data){loadTea(data)},"json");
+			}
+		</script>
 	</head>
 	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
@@ -100,80 +197,35 @@
 					</div>
 					<div id="stu_manage" class="container tab-pane fade">
 						<div class="input-group card-header">
-							<div>
-								<form class="form-inline">
-									<input class="form-control"  type="text " name="key" placeholder="学生信息">
-									<button class="btn btn-success-outline " type="submit ">Search</button>
-								</form>
-							</div>
+							<input class="form-control col-6"  type="text" id="stu_key" name="stu_key" placeholder="学生信息">
+							<button class="btn btn-success-outline"  onclick ="stuFind();">Search</button>
+							
 							<div style="margin-left:auto;">
 								<a href="" data-toggle="modal" data-target="#addStu"> <button class="btn btn-outline-info btn-sm">添加学生</button></a>
 							</div>
 						</div>
 						<table class="table">
-							<thead class="thead-inverse">
-								<tr>
-									<th>#</th>
-									<th>学号</th>
-									<th>姓名</th>
-									<th>性别</th>
-									<th>身份证号</th>
-									<th>系别</th>
-									<th>班别</th>
-									<th>手机号</th>
-									<th>操作</th>
-								</tr>
+							<thead class="thead-inverse" id="stus_head">
 							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>201524133215</td>
-									<td>张创恒</td>
-									<td>男</td>
-									<td>445381199608250457</td>
-									<td>软件学院</td>
-									<td>15软件2班</td>
-									<td>15767515364</td>
-									<td><a class="btn btn-outline-secondary btn-sm" href="">删除</a></td>
-								</tr>
+							<tbody id="stus_info">
 							</tbody>
 						</table>
 								  
 					</div>
 					<div id="tea_manage" class="container tab-pane fade">
 						<div class="input-group card-header">
-								<div>
-									<form class="form-inline">
-										<input class="form-control"  type="text " name="key" placeholder="教师信息">
-										<button class="btn btn-success-outline " type="submit ">Search</button>
-									</form>
-								</div>
+								
+								<input class="form-control col-6"  type="text" id="tea_key"  name="tea_key" placeholder="教师信息">
+								<button class="btn btn-success-outline " onclick ="teaFind();">Search</button>
+									
 								<div style="margin-left:auto;">
 									<a href="" data-toggle="modal" data-target="#addTea"> <button class="btn btn-outline-info btn-sm">添加教师</button></a>
 								</div>
 							</div>
 							<table class="table">
-								<thead class="thead-inverse">
-									<tr>
-										<th>#</th>
-										<th>教工号</th>
-										<th>姓名</th>
-										<th>性别</th>
-										<th>身份证号</th>
-										<th>手机号</th>
-										<th>操作</th>
-									</tr>
+								<thead class="thead-inverse" id="teas_head">
 								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>201524133215</td>
-										<td>张创恒</td>
-										<td>男</td>
-										<td>445381199608250457</td>
-										<td>15767515364</td>
-										<td><a class="btn btn-outline-secondary btn-sm" href="">删除</a></td>
-									</tr>
+								<tbody id="teas_info">
 								</tbody>
 							</table>
 					</div>
@@ -389,8 +441,8 @@
 			}
 		</script>
 		
-		<script type="text/javascript">
-		// 修改密码的js代码
+		<script type="text/javascript">// 修改密码的js代码
+		
 		// 首先对比输入的旧密码是否正确
 		function checkOldPassword(obj){
 			if($("#oldPassword").val() != "${sessionScope.user.adminpwd}"){

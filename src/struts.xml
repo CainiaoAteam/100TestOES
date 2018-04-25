@@ -29,24 +29,27 @@
 			<result name="getScore" type="redirect">jsp/getScore.jsp</result>
 			
 		</action>
+		
 		<!-- 学生动作 -->
 		<action name="stu_*" class="studentAction" method="{1}">
 			
 		</action>
 		<!-- 教师动作 -->
 		<action name="teacher_*" class="teacherAction" method="{1}">
-			<result name="addQuestion" type="redirect">jsp/addquestion.jsp</result>
-			<result name="addquestion" type="redirect">jsp/addquestion.jsp</result>
-			
+			<result name="add" type="redirect">jsp/addquestion.jsp</result>
+			<result name="addquestion" type="redirect">jsp/addquestion.jsp</result>	
+			<result name="success" type="redirect">jsp/teacher.jsp</result>	
+			<result name="addExamPaper" type="redirect">jsp/addExamPaper.jsp</result>	
 		</action>
 		<!-- 基础动作 -->
 		<action name="basic_*" class="basicAction" method="{1}">
 			
 		</action>
+
 		<!-- 管理员动作 --><!-- 这是我配的 -->
 		<action name="admin_*" class="adminAction" method="{1}">
 		</action>
-		
+
 	</package>
     
 </struts>

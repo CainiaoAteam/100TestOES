@@ -1,6 +1,10 @@
 package com.oes.dao;
 
+import java.util.List;
+
 import com.oes.bean.Admin;
+import com.oes.bean.Student;
+import com.oes.bean.Teacher;
 
 public interface AdminDao {
 	/**
@@ -27,6 +31,26 @@ public interface AdminDao {
 	 */
 	Admin getAdmin4NoPassword(String adminNo, String password);
 	
+	
+	//更改密码
 	boolean updatePassword(String adminno, String newPassword);
+	
+	//获取学生
+	List<Student> getStudents();
+	
+	//获取学生
+	List<Teacher> getTeachers();
+	
+	//删除学生
+	boolean delStu(int sid);
+	
+	//删除教师
+	boolean delTea(int tid);
+	
+	//查找学生
+	List<Student> selStuByKey(String stu_key);
+	
+	//查找教师
+	List<Teacher> selTeaByKey(String tea_key);
 
 }
