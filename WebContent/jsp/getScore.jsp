@@ -38,6 +38,11 @@
 		background-size:40px auto;
 		-moz-background-size:40px auto;
 	}
+	.error-true{
+		background: #fff url('${pageContext.request.contextPath }/img/notrue.png') no-repeat 10% 10%;
+		background-size:40px auto;
+		-moz-background-size:40px auto;
+	}
 </style>
 </head>
 <body>
@@ -135,7 +140,7 @@
 											</div>
 										</c:if>
 										<c:if test="${mquestion.istrue == 0.5}">
-											<div class="card-footer iserror">
+											<div class="card-footer error-true">
 												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
 											</div>
 										</c:if>

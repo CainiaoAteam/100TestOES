@@ -204,6 +204,11 @@ public class ExamAction extends ActionSupport {
 		answerRecord = BasicUtil.packageAnswerToDB(answerRecord);
 		record = recordService.packageRecord(record,student,exam,answerRecord);
 		
+		//计算分数
+		double totalScore = BasicUtil.calculateTotalScore(record.getExam());
+		
+		//保存分数
+		record.setScore(totalScore);//保存成绩的记录
 		
 		System.out.println("保存记录："+record);
 		

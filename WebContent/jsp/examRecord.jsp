@@ -38,6 +38,11 @@
 		background-size:40px auto;
 		-moz-background-size:40px auto;
 	}
+	.error-true{
+		background: #fff url('${pageContext.request.contextPath }/img/notrue.png') no-repeat 10% 10%;
+		background-size:40px auto;
+		-moz-background-size:40px auto;
+	}
 </style>
 </head>
 <body>
@@ -45,11 +50,11 @@
 		style="background-color: rgba(255, 255, 255, 0.8);">
 		<div class="card" style="float: left; width: 87%;">
 			<div class="card-header" align="center" id="showScore">
-				<span style="font-size: 45px;font-family:'SimSun';">${afterExam.exam.testpaper.tpname}</span>
+				<span style="font-size: 45px;font-family:'SimSun';">${record.exam.testpaper.tpname}</span>
 			</div>
 			
 			<div class="card" id="showQuestions">
-				<c:if test="${not empty afterExam.exam.testpaper.squestions}">
+				<c:if test="${not empty record.exam.testpaper.squestions}">
 				<table id="sQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -57,7 +62,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.exam.testpaper.squestions}" var="squestion" varStatus="status">
+						<c:forEach items="${record.exam.testpaper.squestions}" var="squestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="sq-${status.index+1}">
@@ -101,7 +106,7 @@
 				</table>
 				</c:if>
 				<!-- 双选 -->
-				<c:if test="${not empty afterExam.exam.testpaper.mquestions}">
+				<c:if test="${not empty record.exam.testpaper.mquestions}">
 				<table id="mQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -109,7 +114,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.exam.testpaper.mquestions}" var="mquestion" varStatus="status">
+						<c:forEach items="${record.exam.testpaper.mquestions}" var="mquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -135,7 +140,7 @@
 											</div>
 										</c:if>
 										<c:if test="${mquestion.istrue == 0.5}">
-											<div class="card-footer iserror">
+											<div class="card-footer error-true">
 												<p style="color:red;font-weight:600;">你的答案：<b style="color:black;">${mquestion.answer}</b></p>
 											</div>
 										</c:if>
@@ -157,7 +162,7 @@
 				</table>
 				</c:if>
 				<!-- 填空题 -->
-				<c:if test="${not empty afterExam.exam.testpaper.fquestions}">
+				<c:if test="${not empty record.exam.testpaper.fquestions}">
 				<table id="fQuestion" class="table table-hover " style="border-bottom:1px solid rgba(0, 0, 0, .125);box-shadow:0 10px 5px rgba(250,0,0,.3);">
 					<thead>
 						<div class="card-header" align="left">
@@ -165,7 +170,7 @@
 						</div>
 					</thead>
 					<tbody>
-						<c:forEach items="${afterExam.exam.testpaper.fquestions}" var="fquestion" varStatus="status">
+						<c:forEach items="${record.exam.testpaper.fquestions}" var="fquestion" varStatus="status">
 						<tr>
 							<td>
 								<div class="card" id="mq-${status.index+1}">
@@ -215,7 +220,7 @@
 					<div class="card-header input-group"
 						style="background-color: #ffffff;">
 						<div style="text-align: center; margin: auto;">
-							<span style="font-weight:700;color:red;font-size:60px;">${afterExam.score}</span>
+							<span style="font-weight:700;color:red;font-size:60px;">${record.score}</span>
 						</div>
 						
 					</div>

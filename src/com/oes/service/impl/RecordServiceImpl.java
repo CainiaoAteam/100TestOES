@@ -65,11 +65,6 @@ public class RecordServiceImpl implements RecordService {
 		ExamUtils.packageFillQuestion(fquestions, allAnswer[2]);
 		exam.getTestpaper().setFquestions(fquestions);
 		
-		//计算分数
-		double totalScore = BasicUtil.calculateTotalScore(exam);
-		
-		
-		re.setScore(totalScore);//保存成绩的记录
 		re.setStudent(student);
 		re.setExam(exam);
 		re.setMyanswer(answer);
