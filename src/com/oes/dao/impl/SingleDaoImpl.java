@@ -100,7 +100,6 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
 			public void processRow(ResultSet rs) throws SQLException {
 				
-				do {
 					sq.setSqid(rs.getInt("sqid"));
 					sq.setTid(rs.getInt("tid"));
 					sq.setSqno(rs.getString("sqno"));
@@ -113,8 +112,6 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 					sq.setSexplanation(rs.getString("sexplanation"));
 					sq.setDifficulty(rs.getString("difficulty"));
 					
-				}while(rs.next());
-				
 			}
 		});
 		
@@ -157,7 +154,36 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 
 	public List<SingleQuestion> getSQByTidAndDiff(Integer tid, String difficulty) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from singlequestion where tid=? and difficulty=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid,difficulty};
+		
+		final List<SingleQuestion> sqlist = new ArrayList<SingleQuestion>();
+		
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					SingleQuestion sq = new SingleQuestion();
+					sq.setSqid(rs.getInt("sqid"));
+					sq.setTid(rs.getInt("tid"));
+					sq.setSqno(rs.getString("sqno"));
+					sq.setSquestion(rs.getString("squestion"));
+					sq.setSchoiceA(rs.getString("schoiceA"));
+					sq.setSchoiceB(rs.getString("schoiceB"));
+					sq.setSchoiceC(rs.getString("schoiceC"));
+					sq.setSchoiceD(rs.getString("schoiceD"));
+					sq.setSanswer(rs.getString("sanswer"));
+					sq.setSexplanation(rs.getString("sexplanation"));
+					sq.setDifficulty(rs.getString("difficulty"));
+					
+					sqlist.add(sq);
+					
+				}while(rs.next());			
+			}
+		});
+		
+		return sqlist;
 	}
 
 	public boolean updataSQ(SingleQuestion singleQuestion) {

@@ -89,7 +89,6 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
 			public void processRow(ResultSet rs) throws SQLException {
 				
-				do {
 					fq.setFqid(rs.getInt("fqid"));
 					fq.setTid(rs.getInt("tid"));
 					fq.setFqno(rs.getString("fqno"));
@@ -97,10 +96,6 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 					fq.setFanswer(rs.getString("fanswer"));
 					fq.setFexplanation(rs.getString("fexplanation"));
 					fq.setDifficulty(rs.getString("difficulty"));
-					
-					
-				}while(rs.next());
-				
 			}
 		});
 		
@@ -139,7 +134,32 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 	}
 	public List<FillQuestion> getFQByTidAndDiff(Integer tid, String difficulty) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from fillquestion where tid=? and difficulty=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid,difficulty};
+		
+		final List<FillQuestion> fqlist = new ArrayList<FillQuestion>();
+		
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					FillQuestion fq = new FillQuestion();
+					fq.setFqid(rs.getInt("fqid"));
+					fq.setTid(rs.getInt("tid"));
+					fq.setFqno(rs.getString("fqno"));
+					fq.setFquestion(rs.getString("fquestion"));
+					fq.setFanswer(rs.getString("fanswer"));
+					fq.setFexplanation(rs.getString("fexplanation"));
+					fq.setDifficulty(rs.getString("difficulty"));
+					
+					fqlist.add(fq);
+					
+				}while(rs.next());
+			}
+		});
+		
+		return fqlist;
 	}
 	
 }

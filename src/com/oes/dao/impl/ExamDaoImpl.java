@@ -61,7 +61,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		    		   int tpid = rs.getInt("tpid");	//获取到试卷id
 		    		   TestPaper p = new TestPaper();
 		    		   p.setTpid(tpid);	//将id封装到试卷中
-		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中
+		    		   exam.setTestpaper(p);	//将相应的试卷封装到对应的考试中 
 		    		   
 		    		   Teacher t = new Teacher();
 		    		   int tid = rs.getInt("tid");
@@ -226,6 +226,9 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		}
 
+	/**
+	 * 不实现
+	 */
 	public List<Exam> getExamByDate(int sid, final Date date) {
 		// TODO Auto-generated method stub
 		return null;
