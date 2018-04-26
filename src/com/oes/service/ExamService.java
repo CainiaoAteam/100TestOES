@@ -34,6 +34,12 @@ public interface ExamService {
 //	List<Record> getExamRecordBySid(Integer sid);
 
 	List<Exam> getExamTid(int tid);
+
+	void saveExam(Exam exam);
+
+	List<Exam> getExamByTidAndState(int tid, int i);
+
+	void setExamState(Integer examid);
 	
 	
 	

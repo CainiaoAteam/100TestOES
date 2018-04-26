@@ -31,4 +31,6 @@ public interface ExamDao {
 	
 	
 	boolean addExam(Exam exam);
+
+	void updateExamState(Integer examid);
 }

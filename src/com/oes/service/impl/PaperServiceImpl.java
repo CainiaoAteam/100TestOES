@@ -102,4 +102,9 @@ public class PaperServiceImpl implements PaperService {
 		return paperDao.getPapersByTid(tid);
 	}
 
+	public List<TestPaper> getExamByTidAndState(int tid, int i) {
+		// TODO Auto-generated method stub
+		return paperDao.getPapersByStateForTid(tid, i);
+	}
+
 }

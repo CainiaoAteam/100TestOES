@@ -1,23 +1,15 @@
 package com.oes.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import com.oes.bean.Exam;
-import com.oes.bean.Record;
-import com.oes.bean.Student;
 import com.oes.bean.TestPaper;
 import com.oes.dao.ExamDao;
-import com.oes.dao.FillDao;
-import com.oes.dao.MutipleDao;
-import com.oes.dao.PaperDao;
-import com.oes.dao.SingleDao;
+
 import com.oes.service.ExamService;
-import com.oes.service.FillService;
-import com.oes.service.MutipleService;
 import com.oes.service.PaperService;
-import com.oes.service.SingleService;
+import com.oes.utils.BasicUtil;
 
 public class ExamServiceImpl implements ExamService {
 	private ExamDao examDao;
@@ -66,6 +58,24 @@ public class ExamServiceImpl implements ExamService {
 	public List<Exam> getExamTid(int tid) {
 		// TODO Auto-generated method stub
 		return examDao.getExamsByTid(tid);
+	}
+
+
+	public void saveExam(Exam exam) {
+		exam.setExamno(BasicUtil.getUUID());
+		examDao.saveExam(exam);
+	}
+
+
+	public List<Exam> getExamByTidAndState(int tid, int i) {
+		// TODO Auto-generated method stub
+		return examDao.getExamsByTidAndState(tid, i);
+	}
+
+
+	public void setExamState(Integer examid) {
+		examDao.updateExamState(examid);
+		
 	}
 
 	
