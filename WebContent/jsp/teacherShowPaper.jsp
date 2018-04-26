@@ -37,9 +37,7 @@
 			<div class="card-header" align="center" id="showScore">
 				<span style="font-size: 45px;font-family:'SimSun';">${tea_show.tpname}</span>
 			</div>
-			<div class="card-header" align="right" id="showScore">
-				<span style="font-size: 20px;font-family:'SimSun';">总分：${tea_show.totalscore}</span>
-			</div>
+			
 			
 			<div class="card" id="showQuestions">
 				<c:if test="${not empty tea_show.squestions}">
