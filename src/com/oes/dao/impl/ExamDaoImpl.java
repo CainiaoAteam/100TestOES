@@ -226,6 +226,9 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		}
 
+	/**
+	 * 不实现
+	 */
 	public List<Exam> getExamByDate(int sid, final Date date) {
 		// TODO Auto-generated method stub
 		return null;

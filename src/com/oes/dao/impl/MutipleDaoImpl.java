@@ -101,7 +101,6 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
 			public void processRow(ResultSet rs) throws SQLException {
 				
-				do {
 					mq.setMqid(rs.getInt("mqid"));
 					mq.setTid(rs.getInt("tid"));
 					mq.setMqno(rs.getString("mqno"));
@@ -114,8 +113,6 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 					mq.setMexplanation(rs.getString("mexplanation"));
 					mq.setDifficulty(rs.getString("difficulty"));
 					
-				}while(rs.next());
-				
 			}
 		});
 		return mq;
@@ -154,7 +151,37 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 	}
 	public List<MutipleQuestion> getMQByTidAndDiff(Integer tid, String difficulty) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from multipquestion where tid=? and difficulty=?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {tid,difficulty};
+		
+		final List<MutipleQuestion> mqlist = new ArrayList<MutipleQuestion>();
+		
+		jdbcTemplate.query(sql, args,new RowCallbackHandler() {
+			public void processRow(ResultSet rs) throws SQLException {
+				
+				do {
+					MutipleQuestion mq = new MutipleQuestion();
+					mq.setMqid(rs.getInt("mqid"));
+					mq.setTid(rs.getInt("tid"));
+					mq.setMqno(rs.getString("mqno"));
+					mq.setMquestion(rs.getString("mquestion"));
+					mq.setMchoiceA(rs.getString("mchoiceA"));
+					mq.setMchoiceB(rs.getString("mchoiceB"));
+					mq.setMchoiceC(rs.getString("mchoiceC"));
+					mq.setMchoiceD(rs.getString("mchoiceD"));
+					mq.setManswer(rs.getString("manswer"));
+					mq.setMexplanation(rs.getString("mexplanation"));
+					mq.setDifficulty(rs.getString("difficulty"));
+					
+					mqlist.add(mq);
+					
+				}while(rs.next());
+				
+			}
+		});
+		
+		return mqlist;
 	}
 
 }
