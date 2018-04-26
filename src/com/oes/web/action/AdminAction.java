@@ -219,7 +219,6 @@ public class AdminAction extends ActionSupport{
 		String list = JSON.toJSONString(stu_list);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println("数据已发送！");
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -417,11 +416,11 @@ public class AdminAction extends ActionSupport{
 		
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println(list);
+
+			//System.out.println(list);
 			writer.print(list);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return NONE;
