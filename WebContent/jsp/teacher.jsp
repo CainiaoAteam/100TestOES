@@ -305,7 +305,7 @@
 									</div>
 									<div class="radio radio-success radio-inline">
 										<input id="v4" type="radio" value="绝望" name="difficulty">
-										<label for="v4">困难</label>
+										<label for="v4">绝望</label>
 									</div>
 								</div>
 							</div>
