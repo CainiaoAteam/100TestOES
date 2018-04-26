@@ -22,4 +22,17 @@ public class BasicAction extends ActionSupport {
 		
 		return NONE;
 	}
+	public String toHomaPage() {
+		String role = (String) ServletActionContext.getRequest().getSession().getAttribute("role");
+		if(role.equals("student")) {
+			return "student";
+		}else if(role.equals("teacher")) {
+			return "teacher";
+		}else if(role.equals("admin")){
+			
+			return "admin";
+		}
+		
+		return NONE;
+	}
 }

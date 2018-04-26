@@ -15,4 +15,6 @@ public interface MutipleDao {
 	boolean updateMutipleByMno(MutipleQuestion mq);
 	boolean updateMutipleByMid(MutipleQuestion mq);
 	MutipleQuestion getMutipleById(int id);
+
+	List<MutipleQuestion> getMQByTidAndDiff(Integer tid, String difficulty);
 }

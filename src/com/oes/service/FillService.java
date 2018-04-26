@@ -14,4 +14,6 @@ public interface FillService {
 
 	FillQuestion getFillById(int parseInt);
 
+	List<FillQuestion> getFillsByTidAndDifficulty(Integer tid, String difficulty);
+
 }

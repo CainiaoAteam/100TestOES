@@ -119,7 +119,6 @@
 	}
 
 </script>
-
 <!-- 获取成绩管理 -->
 <script type="text/javascript">
 	//获取关于该老师的所有考试
@@ -270,11 +269,11 @@
 						</div>
 
 						<div style="height: 130px; ">
-							<form>
+							<div class="timu_type">
 								<div class="input-group">
 									<span style="margin-left: 30px; ">题目类型：</span>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sq" value="sq" name="questionType">
+										<input type="radio" id="sq" value="sq" name="questionType" checked>
 										<label for="sq">单选</label>
 									</div>
 									<div class="radio radio-success radio-inline">
@@ -286,27 +285,29 @@
 										<label for="fq">填空</label>
 									</div>
 								</div>
-									
+							</div>	
+							<div class="timu_difficulty">
 								<div class="input-group">
 									<span style="margin-left: 30px; ">题目难度：</span>
-									<div class="checkbox checkbox-success">
-										<input id="v1" class="styled" type="checkbox" name="difficulty">
+									<div class="radio radio-success radio-inline">
+										<input id="v0" type="radio" value="全部" name="difficulty" checked>
+										<label for="v0">全部</label>
+									</div>
+									<div class="radio radio-success radio-inline">
+										<input id="v1" type="radio" value="简单" name="difficulty">
 										<label for="v1">简单</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v2" class="styled" type="checkbox" name="difficulty">
-										<label for="v2">容易</label>
+									<div class="radio radio-success radio-inline">
+										<input id="v2" type="radio" value="一般" name="difficulty">
+										<label for="v2">一般</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v3" class="styled" type="checkbox" name="difficulty">
+									<div class="radio radio-success radio-inline">
+										<input id="v3" type="radio" value="困难" name="difficulty">
 										<label for="v3">困难</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v4" class="styled" type="checkbox" name="difficulty">
-										<label for="v4">绝望</label>
-									</div>
+									
 								</div>
-							</form>
+							</div>
 							<div class="clearfix ">
 								<div class="float-right ">
 									<a href="${pageContext.request.contextPath }/jsp/teacher_toAddJsp"><button type="button " class="btn btn-outline-info ">添加题目</button></a>
@@ -316,37 +317,8 @@
 						<br />
 						<div id="accordion">
 							<table class="table table-hover">
-								<tbody>
-									<tr>
-										<td>
-											<div class="card ">
-												<div class="card-header ">
-													<label class="mylabel-num">1</label>
-													<div class="float-right form-inline">
-														<a href="javascript:;" onclick="editQusetion();" class="card-link">编辑</a>
-														<a href="" data-toggle="modal" data-target="#deleteQuestion" class="card-link">删除</a>
-													</div>
-												</div>
-												<div class="card-body ">
-													<p class="title" >Not until Ibegan to work ____ how much time I had wasted.</p>
-													<p class="op1">A. didn't Irealize</p>
-													<p class="op2">B. did I realize</p>
-													<p class="op3">C. I didn'trealize</p>
-													<p class="op4">D. I realized</p>
-													<a class="card-link " data-toggle="collapse" data-parent="#accordion " href="#collapse_1 ">
-														查看解析
-													</a>
-												</div>
-												<div class="collapse" id="collapse_1 ">
-													<div class="card-footer ">
-														<p>答案：</p>
-														<span class="explain">我也不知道选什么....</span>
-													</div>
-												</div>
-											</div>
-
-										</td>
-									</tr>
+								<tbody id="loadQuestion">
+									
 								</tbody>
 							</table>
 						</div>
@@ -402,7 +374,7 @@
 					<div id="releaseExam" class="container tab-pane fade"><!-- 发布考试-->
 						<form>
 							<div class="input-group">
-								<sapn>考试状态：</sapn>
+								<span>考试状态：</span>
 								<div class="radio radio-success radio-inline">
 									<input id="state1" checked="checked" type="radio" name="state" value="2" onclick="getExamByState(this)">
 									<label for="state1">全部</label>
@@ -890,36 +862,110 @@
 		</script>
 
 		<script>//这是修改题目时的js
-			function editQusetion(){
+			function editQusetion(obj){
 				var qtype = $("input[name='questionType']:checked").val();//获取题目的类型（是单选还是多选）
 				//alert(qtype);
 				if(qtype=='sq'){//如果是单选，把数据填进--修改单选题的提示框
-					$("input:radio[name='sqdifficulty']").eq(0).attr("checked",true);//设置题目难度为...
-					$("input:radio[name='sqanswer']").eq(0).attr("checked",true);//设置题目答案为...
-					$("textarea[name='squestion']").val("hahah");//设置题目问题为...
-					$("input[name='schoiceA']").val("aaaaa");//设置题目选项为...
-					$("input[name='schoiceB']").val("aaaaa");
-					$("input[name='schoiceC']").val("aaaaa");
-					$("input[name='schoiceD']").val("aaaaa");
-					$("textarea[name='sqExplain']").val("hahah");//设置题目解析为...
-					$("#editSq").modal('show');
+					var sqid=$(obj).attr("value");
+					var url = "${pageContext.request.contextPath }/teacher_getOneSQ";//getAllStudents
+					var param = {"sqid":sqid};
+					$.post(url,param,function(data){load_A_SQ(data)},"json");
+					
 				}else if(qtype=='mq'){//如果是多选
-					$("input:radio[name='mqdifficulty']").eq(1).attr("checked",true);
-					$("input:checkbox[name='mqanswer']").eq(1).attr("checked",true);
-					$("textarea[name='mquestion']").val("1111");
-					$("input[name='mchoiceA']").val("1111");
-					$("input[name='mchoiceB']").val("1111");
-					$("input[name='mchoiceC']").val("1111");
-					$("input[name='mchoiceD']").val("1111");
-					$("textarea[name='mqExplain']").val("1111");
-					$("#editMq").modal('show');
+					var mqid=$(obj).attr("value");
+					var url = "${pageContext.request.contextPath }/teacher_getOneMQ";//getAllStudents
+					var param = {"mqid":mqid};
+					$.post(url,param,function(data){load_A_MQ(data)},"json");
 				}else if(qtype=='fq'){//如果是填空
-					$("input:radio[name='fqdifficulty']").eq(2).attr("checked",true);
-					$("textarea[name='fquestion']").val("123");
-					$("textarea[name='fqanswer']").val("123");
-					$("textarea[name='fqExplain']").val("123");
-					$("#editFq").modal('show');
+					var fqid=$(obj).attr("value");
+					var url = "${pageContext.request.contextPath }/teacher_getOneFQ";//getAllStudents
+					var param = {"fqid":fqid};
+					$.post(url,param,function(data){load_A_FQ(data)},"json");
 				}
+			}
+
+			function load_A_SQ(data){
+				//alert(data.squestion);
+				
+				var diff=data.difficulty;
+				alert(diff);
+				var answer;
+				if(diff=="简单"){
+					diff=0;
+				}else if(diff=="一般"){
+					diff=1;
+				}else if(diff=="困难"){
+					diff=2;
+				}
+				if(data.sanswer=="A"){
+					answer=0;
+				}else if(data.sanswer=="B"){
+					answer=1;
+				}else if(data.sanswer=="C"){
+					answer=2;
+				}else if(data.sanswer=="D"){
+					answer=3;
+				}
+				//alert(data[i].squestion);
+				$("input:radio[name='sqdifficulty']").eq(diff).attr("checked",true);//设置题目难度为...
+				$("input:radio[name='sqanswer']").eq(manswer).attr("checked",true);//设置题目答案为...
+				$("textarea[name='squestion']").val(data[i].squestion);//设置题目问题为...
+				$("input[name='schoiceA']").val(data.schoiceA);//设置题目选项为...
+				$("input[name='schoiceB']").val(data.schoiceB);
+				$("input[name='schoiceC']").val(data.schoiceC);
+				$("input[name='schoiceD']").val(data.schoiceD);
+				$("textarea[name='sqExplain']").val(data.sexplanation);//设置题目解析为...
+				$("#editSq").modal('show');
+
+				
+			}
+			function load_A_MQ(data){
+				var diff;
+				var answer;
+				if(data.difficulty=="简单"){
+					diff=0;
+				}else if(data.difficulty=="一般"){
+					diff=1;
+				}else if(data.difficulty=="困难"){
+					diff=2;
+				}
+				if(data[i].manswer.indexOf("A")>-1){
+					$("input:radio[name='sqanswer']").eq(0).attr("checked",true);
+				}else if(data.manswer.indexOf("B")>-1){
+					$("input:radio[name='sqanswer']").eq(1).attr("checked",true);
+				}else if(data.manswer.indexOf("C")>-1){
+					$("input:radio[name='sqanswer']").eq(2).attr("checked",true);
+				}else if(data.manswer.indexOf("D")>-1){
+					$("input:radio[name='sqanswer']").eq(3).attr("checked",true);
+				}
+				$("input:radio[name='mqdifficulty']").eq(diff).attr("checked",true);
+				//$("input:checkbox[name='mqanswer']").eq(1).attr("checked",true);
+				$("textarea[name='mquestion']").val(data.mquestion);
+				$("input[name='mchoiceA']").val(data.mchoiceA);
+				$("input[name='mchoiceB']").val(data.mchoiceB);
+				$("input[name='mchoiceC']").val(data.mchoiceC);
+				$("input[name='mchoiceD']").val(data.mchoiceD);
+				$("textarea[name='mqExplain']").val(data.mexplanation);
+				$("#editMq").modal('show');
+			}
+			function load_A_FQ(data){
+				var diff;
+				var answer;
+				if(data.difficulty=="简单"){
+					diff=0;
+					$("input:radio[name='fqdifficulty']").eq(0).attr("checked",true);
+				}else if(data.difficulty=="一般"){
+					diff=1;
+					$("input:radio[name='fqdifficulty']").eq(1).attr("checked",true);
+				}else if(data.difficulty=="困难"){
+					diff=2;
+					$("input:radio[name='fqdifficulty']").eq(2).attr("checked",true);
+				}
+				//$("input:radio[name='fqdifficulty']").eq(diff).attr("checked",true);
+				$("textarea[name='fquestion']").val(data.fquestion);
+				$("textarea[name='fqanswer']").val(data.fanswer);
+				$("textarea[name='fqExplain']").val(data.fexplanation);
+				$("#editFq").modal('show');
 			}
 		</script>
 		<script type="text/javascript">
@@ -927,6 +973,159 @@
 			function getTestPaperByState(obj){
 				getPaperIsPass(obj.value);
 			}
+		</script>
+
+		<script>//加载题目---zch
+			$(function(){
+				getSQuestion();
+			});
+
+			$(document).on('click', '.timu_type :radio', function() {
+				var qtype = $(this).val();
+				if(qtype=='sq'){
+					getSQuestion();
+				}else if(qtype=='mq'){
+					getMQuestion();
+				}else if(qtype=='fq'){
+					getFQuestion();
+				}
+			});
+			$(document).on('click', '.timu_difficulty :radio', function() {
+				var qtype = $("input[name='questionType']:checked").val();
+				if(qtype=='sq'){
+					getSQuestion();
+				}else if(qtype=='mq'){
+					getMQuestion();
+				}else if(qtype=='fq'){
+					getFQuestion();
+				}
+			});
+			function getSQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getSQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadSQ(data)},"json");
+			}
+			function getMQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getMQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadMQ(data)},"json");
+			}
+			function getFQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getFQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadFQ(data)},"json");
+			}
+			
+			function loadSQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header form-inline'>"+
+									"<label class='mylabel-num'>"+i+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].sqid+"' onclick='editQusetion(this);'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].sqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].squestion+"</p>"+
+									"<p class='op1'>A. "+data[i].schoiceA+"</p>"+
+									"<p class='op2'>B. "+data[i].schoiceB+"</p>"+
+									"<p class='op3'>C. "+data[i].schoiceC+"</p>"+
+									"<p class='op4'>D. "+data[i].schoiceD+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].sqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].sqno+"'>"+
+									"<div class='card-footer'><p>答案：选"+data[i].sanswer+"</p>"+
+										"<span class='explain'>"+data[i].sexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
+			}
+			function loadMQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header'>"+
+									"<label class='mylabel-num'>"+i+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].mqid+"' onclick='editQusetion(this);'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].mqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].mquestion+"</p>"+
+									"<p class='op1'>A. "+data[i].mchoiceA+"</p>"+
+									"<p class='op2'>B. "+data[i].mchoiceB+"</p>"+
+									"<p class='op3'>C. "+data[i].mchoiceC+"</p>"+
+									"<p class='op4'>D. "+data[i].mchoiceD+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].mqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].mqno+"'>"+
+									"<div class='card-footer'><p>答案：选"+data[i].manswer+"</p>"+
+										"<span class='explain'>"+data[i].mexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
+			}
+			function loadFQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header'>"+
+									"<label class='mylabel-num'>"+i+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].fqid+"' onclick='editQusetion(this);'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].fqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].fquestion+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].fqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].fqno+"'>"+
+									"<div class='card-footer'><p>答案:"+data[i].fanswer+"</p>"+
+										"<span class='explain'>"+data[i].fexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
+			}
+
+
+
 		</script>
 	<body/>
 

@@ -47,9 +47,14 @@ public class TeacherAction extends ActionSupport{
 	private RoleService teacherService;
 	private RecordService recordService;
 	private int tid;
+	private int sqid;
+	private int mqid;
+	private int fqid;
 	
 	private String tno;
 	private String newPassword;
+	
+	private String difficulty;
 	
 	private PageBean pageBean;
 	
@@ -86,6 +91,15 @@ public class TeacherAction extends ActionSupport{
 	public void setTid(int tid) {
 		this.tid = tid;
 	}
+	public void setSqid(int sqid) {
+		this.sqid = sqid;
+	}
+	public void setMqid(int mqid) {
+		this.mqid = mqid;
+	}
+	public void setFqid(int fqid) {
+		this.fqid = fqid;
+	}
 	public MutipleQuestion getMutipleQuestion() {
 		return mutipleQuestion;
 	}
@@ -119,7 +133,11 @@ public class TeacherAction extends ActionSupport{
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-
+	
+	//difficulty题目难度
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
 	public void setTeacherService(RoleService teacherService) {
 		this.teacherService = teacherService;
 	}
@@ -482,4 +500,144 @@ public class TeacherAction extends ActionSupport{
 
 		return null;
 	}
+	
+	/**
+	 * 获取该老师的所有单选题
+	 * 
+	 * @return
+	 */
+	public String getSQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		List<SingleQuestion> sq_list=singleService.getSinglesByTid(t.getTid());
+		
+		//List<SingleQuestion> sq_list=singleService.getSinglesByTidAndDifficulty(t.getTid(),difficulty);
+		String list = JSON.toJSONString(sq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取该老师的所有双选题
+	 * 
+	 * @return
+	 */
+	public String getMQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		//List<MutipleQuestion> mq_list=mutipleService.getMutiplesByTidAndDifficulty(t.getTid(),difficulty);
+		
+		List<MutipleQuestion> mq_list=mutipleService.getMutiplesByTid(t.getTid());
+		String list = JSON.toJSONString(mq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取该老师的所有填空题
+	 * 
+	 * @return
+	 */
+	public String getFQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		//List<FillQuestion> fq_list=fillService.getFillsByTidAndDifficulty(t.getTid(),difficulty);
+		
+		List<FillQuestion> fq_list=fillService.getFillsByTid(t.getTid());
+		String list = JSON.toJSONString(fq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getOneSQ() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		SingleQuestion sQuestion=singleService.getSingleById(sqid);
+		session.setAttribute("upadtaid", sqid);
+		String list = JSON.toJSONString(sQuestion);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println(list);
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getOneMQ() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		MutipleQuestion mQuestion=mutipleService.getMutipleById(mqid);
+		session.setAttribute("upadtaid", mqid);
+		String list = JSON.toJSONString(mQuestion);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println(list);
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getOneFQ() {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		FillQuestion fQuestion=fillService.getFillById(fqid);
+		session.setAttribute("upadtaid", fqid);
+		String list = JSON.toJSONString(fQuestion);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println(list);
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 }

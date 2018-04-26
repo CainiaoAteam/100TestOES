@@ -18,5 +18,7 @@ public interface FillDao {
 	boolean updateFillByFno(FillQuestion fill);
 	boolean updateFillByMid(FillQuestion fill);
 	FillQuestion getFillQuestionById(int id);
+
+	List<FillQuestion> getFQByTidAndDiff(Integer tid, String difficulty);
 	
 }

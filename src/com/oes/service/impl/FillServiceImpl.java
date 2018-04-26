@@ -33,5 +33,9 @@ public class FillServiceImpl implements FillService {
 		// TODO Auto-generated method stub
 		return fillDao.getFillQuestionById(parseInt);
 	}
+	public List<FillQuestion> getFillsByTidAndDifficulty(Integer tid, String difficulty) {
+		// TODO Auto-generated method stub
+		return fillDao.getFQByTidAndDiff(tid,difficulty);
+	}
 	
 }

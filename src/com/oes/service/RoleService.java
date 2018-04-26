@@ -1,6 +1,9 @@
 package com.oes.service;
 
+import java.util.List;
+
 import com.oes.bean.Role;
+import com.oes.bean.SingleQuestion;
 import com.oes.bean.Student;
 
 public interface RoleService {
@@ -31,4 +34,6 @@ public interface RoleService {
 	 * @return
 	 */
 	boolean modifyPassword(String tno, String newPassword);
+	
+	
 }

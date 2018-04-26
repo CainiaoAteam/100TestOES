@@ -170,5 +170,18 @@ public class RecordDaoImpl extends JdbcDaoSupport implements RecordDao {
 		*/
 		return null;
 	}
+	
+	public boolean getRecordByExamIdAndSid(int sid, int examid) {
+		String sql = "select COUNT(*) from record where sid = ? and examid = ?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {sid,examid};
+		
+		int count = jdbcTemplate.queryForObject(sql, args,Integer.class);
+			
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
 
 }
