@@ -54,7 +54,21 @@ public class MutipleServiceImpl implements MutipleService {
 
 	public boolean updataMutipleQuestion(MutipleQuestion mutipleQuestion) {
 		// TODO Auto-generated method stub
+		//解析答案数组
+		String[] manswers = mutipleQuestion.getManswers();//manswers
+		String manswer = "";
+		for(int i = 0; i<manswers.length; i++) {
+			manswer += manswers[i];
+		}
+		//将该答案组装进去
+		mutipleQuestion.setManswer(manswer);
+		System.out.println(manswer);
 		return mutipleDao.updateMutipleByMid(mutipleQuestion);
+	}
+
+	public boolean delectMQByMqid(int mqid) {
+		// TODO Auto-generated method stub
+		return mutipleDao.delectMutipleByMqid(mqid);
 	}
 	
 

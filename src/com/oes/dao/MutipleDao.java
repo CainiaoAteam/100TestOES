@@ -17,4 +17,6 @@ public interface MutipleDao {
 	MutipleQuestion getMutipleById(int id);
 
 	List<MutipleQuestion> getMQByTidAndDiff(Integer tid, String difficulty);
+
+	boolean delectMutipleByMqid(int mqid);
 }

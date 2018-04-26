@@ -17,5 +17,7 @@ public interface MutipleService {
 	List<MutipleQuestion> getMutiplesByTidAndDifficulty(Integer tid, String difficulty);
 
 	boolean updataMutipleQuestion(MutipleQuestion mutipleQuestion);
+
+	boolean delectMQByMqid(int mqid);
 	
 }

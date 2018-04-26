@@ -18,4 +18,6 @@ public interface FillService {
 
 	boolean updataFillQuestion(FillQuestion fillQuestion);
 
+	boolean delectFQByFqid(int fqid);
+
 }

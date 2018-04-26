@@ -41,5 +41,9 @@ public class FillServiceImpl implements FillService {
 		// TODO Auto-generated method stub
 		return fillDao.updateFillByFid(fillQuestion);
 	}
+	public boolean delectFQByFqid(int fqid) {
+		// TODO Auto-generated method stub
+		return fillDao.deleteFillByfqid(fqid);
+	}
 	
 }

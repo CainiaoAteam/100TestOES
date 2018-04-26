@@ -513,8 +513,15 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Teacher t=(Teacher)session.getAttribute("user");
-		List<SingleQuestion> sq_list=singleService.getSinglesByTid(t.getTid());
-		
+		List<SingleQuestion> sq_list;
+		System.out.println(difficulty);
+		if(difficulty.equals("全部")) {
+			sq_list=singleService.getSinglesByTid(t.getTid());
+		}
+		//List<SingleQuestion> sq_list=singleService.getSinglesByTid(t.getTid());
+		else {
+			sq_list=singleService.getSinglesByTidAndDifficulty(t.getTid(),difficulty);
+		}
 		//List<SingleQuestion> sq_list=singleService.getSinglesByTidAndDifficulty(t.getTid(),difficulty);
 		String list = JSON.toJSONString(sq_list);
 		try {
@@ -540,9 +547,14 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Teacher t=(Teacher)session.getAttribute("user");
-		//List<MutipleQuestion> mq_list=mutipleService.getMutiplesByTidAndDifficulty(t.getTid(),difficulty);
-		
-		List<MutipleQuestion> mq_list=mutipleService.getMutiplesByTid(t.getTid());
+		List<MutipleQuestion> mq_list;
+		if(difficulty.equals("全部")) {
+			mq_list=mutipleService.getMutiplesByTid(t.getTid());
+		}
+		else {
+			mq_list=mutipleService.getMutiplesByTidAndDifficulty(t.getTid(),difficulty);
+			
+		}
 		String list = JSON.toJSONString(mq_list);
 		try {
 			PrintWriter writer = response.getWriter();
@@ -567,9 +579,13 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Teacher t=(Teacher)session.getAttribute("user");
-		//List<FillQuestion> fq_list=fillService.getFillsByTidAndDifficulty(t.getTid(),difficulty);
-		
-		List<FillQuestion> fq_list=fillService.getFillsByTid(t.getTid());
+		List<FillQuestion> fq_list;
+		if(difficulty.equals("全部")) {
+			fq_list=fillService.getFillsByTid(t.getTid());
+		}else {
+			fq_list=fillService.getFillsByTidAndDifficulty(t.getTid(),difficulty);
+		}
+		 
 		String list = JSON.toJSONString(fq_list);
 		try {
 			PrintWriter writer = response.getWriter();
@@ -588,7 +604,8 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		SingleQuestion sQuestion=singleService.getSingleById(sqid);
-		session.setAttribute("upadtaid", sqid);
+		session.setAttribute("updataid", sQuestion.getSqid());
+		session.setAttribute("updatano", sQuestion.getSqno());
 		String list = JSON.toJSONString(sQuestion);
 		try {
 			PrintWriter writer = response.getWriter();
@@ -607,7 +624,8 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		MutipleQuestion mQuestion=mutipleService.getMutipleById(mqid);
-		session.setAttribute("upadtaid", mqid);
+		session.setAttribute("updataid", mQuestion.getMqid());
+		session.setAttribute("updatano", mQuestion.getMqno());
 		String list = JSON.toJSONString(mQuestion);
 		try {
 			PrintWriter writer = response.getWriter();
@@ -626,12 +644,13 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		FillQuestion fQuestion=fillService.getFillById(fqid);
-		session.setAttribute("upadtaid", fqid);
+		session.setAttribute("updataid", fQuestion.getFqid());
+		session.setAttribute("updatano", fQuestion.getFqno());
 		String list = JSON.toJSONString(fQuestion);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println(list);
-			//writer.print(list);
+			//System.out.println(list);
+			writer.print(list);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -646,9 +665,11 @@ public class TeacherAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		int qid=(Integer)session.getAttribute("upadtaid");
+		int qid=(Integer)session.getAttribute("updataid");
+		String qno=(String) session.getAttribute("updatano");
 		Teacher t=(Teacher)session.getAttribute("user");
 		singleQuestion.setSqid(qid);
+		singleQuestion.setSqno(qno);
 		singleQuestion.setTid(t.getTid());
 		boolean issecu = singleService.updataSingleQuestion(singleQuestion);
 		System.out.println(singleQuestion.getSquestion());
@@ -682,10 +703,13 @@ public class TeacherAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		int qid=(Integer)session.getAttribute("upadtaid");
+		int qid=(Integer)session.getAttribute("updataid");
+		String qno=(String) session.getAttribute("updatano");
 		Teacher t=(Teacher)session.getAttribute("user");
 		mutipleQuestion.setMqid(qid);
+		mutipleQuestion.setMqno(qno);
 		mutipleQuestion.setTid(t.getTid());
+		
 		boolean issecu = mutipleService.updataMutipleQuestion(mutipleQuestion);
 		if(issecu) {
 			try {
@@ -717,9 +741,11 @@ public class TeacherAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		int qid=(Integer)session.getAttribute("upadtaid");
+		int qid=(Integer)session.getAttribute("updataid");
+		String qno=(String) session.getAttribute("updatano");
 		Teacher t=(Teacher)session.getAttribute("user");
 		fillQuestion.setFqid(qid);
+		fillQuestion.setFqno(qno);
 		fillQuestion.setTid(t.getTid());
 		boolean issecu = fillService.updataFillQuestion(fillQuestion);
 		if(issecu) {
@@ -747,5 +773,94 @@ public class TeacherAction extends ActionSupport{
 		return null;
 	}
 	
-	
+	public String delectSQuestion() {
+		System.out.println(sqid);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		boolean issecu = singleService.delectSQBySqid(sqid);
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+	public String delectMQuestion() {
+			
+		System.out.println(mqid);	
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		boolean issecu = mutipleService.delectMQByMqid(mqid);
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
+		return null;
+	}
+	public String delectFQuestion() {
+		
+		System.out.println(fqid);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		boolean issecu = fillService.delectFQByFqid(fqid);
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
+		return null;
+	}
 }

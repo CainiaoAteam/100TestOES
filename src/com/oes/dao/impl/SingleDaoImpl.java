@@ -190,5 +190,10 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public boolean delectSingleBySqid(int sqid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

@@ -18,4 +18,6 @@ public interface SingleService {
 
 	boolean updataSingleQuestion(SingleQuestion singleQuestion);
 
+	boolean delectSQBySqid(int sqid);
+
 }

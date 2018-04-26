@@ -49,5 +49,10 @@ public class SingleServiceImpl implements SingleService {
 		// TODO Auto-generated method stub
 		return singleDao.updateSingleBySid(singleQuestion);
 	}
+
+	public boolean delectSQBySqid(int sqid) {
+		// TODO Auto-generated method stub
+		return singleDao.delectSingleBySqid(sqid);
+	}
 	
 }

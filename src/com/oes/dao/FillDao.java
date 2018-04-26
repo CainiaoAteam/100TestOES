@@ -21,4 +21,6 @@ public interface FillDao {
 
 	List<FillQuestion> getFQByTidAndDiff(Integer tid, String difficulty);
 	
+	boolean deleteFillByfqid(int fqid);
+	
 }

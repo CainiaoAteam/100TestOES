@@ -161,5 +161,9 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		
 		return fqlist;
 	}
+	public boolean deleteFillByfqid(int fqid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

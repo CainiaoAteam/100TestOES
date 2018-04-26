@@ -19,4 +19,6 @@ public interface SingleDao {
 
 	boolean updataSQ(SingleQuestion singleQuestion);
 
+	boolean delectSingleBySqid(int sqid);
+
 }

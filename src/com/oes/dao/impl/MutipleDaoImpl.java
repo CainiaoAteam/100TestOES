@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.oes.bean.MutipleQuestion;
-import com.oes.bean.SingleQuestion;
 import com.oes.dao.MutipleDao;
 
 /**
@@ -182,6 +181,10 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 		});
 		
 		return mqlist;
+	}
+	public boolean delectMutipleByMqid(int mqid) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
