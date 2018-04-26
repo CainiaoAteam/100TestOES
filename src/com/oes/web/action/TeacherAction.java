@@ -48,6 +48,7 @@ public class TeacherAction extends ActionSupport{
 	private RecordService recordService;
 	private int tid;
 	private int sqid;
+	
 	private int mqid;
 	private int fqid;
 	
@@ -591,7 +592,7 @@ public class TeacherAction extends ActionSupport{
 		String list = JSON.toJSONString(sQuestion);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println(list);
+			//System.out.println(list);
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -610,7 +611,7 @@ public class TeacherAction extends ActionSupport{
 		String list = JSON.toJSONString(mQuestion);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println(list);
+			//System.out.println(list);
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -630,7 +631,7 @@ public class TeacherAction extends ActionSupport{
 		try {
 			PrintWriter writer = response.getWriter();
 			System.out.println(list);
-			writer.print(list);
+			//writer.print(list);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -640,4 +641,111 @@ public class TeacherAction extends ActionSupport{
 	}
 
 
+	public String updataSQ() {
+		//System.out.println(singleQuestion.getSquestion());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		int qid=(Integer)session.getAttribute("upadtaid");
+		Teacher t=(Teacher)session.getAttribute("user");
+		singleQuestion.setSqid(qid);
+		singleQuestion.setTid(t.getTid());
+		boolean issecu = singleService.updataSingleQuestion(singleQuestion);
+		System.out.println(singleQuestion.getSquestion());
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public String updataMQ() {
+			
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		int qid=(Integer)session.getAttribute("upadtaid");
+		Teacher t=(Teacher)session.getAttribute("user");
+		mutipleQuestion.setMqid(qid);
+		mutipleQuestion.setTid(t.getTid());
+		boolean issecu = mutipleService.updataMutipleQuestion(mutipleQuestion);
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public String updataFQ() {
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		int qid=(Integer)session.getAttribute("upadtaid");
+		Teacher t=(Teacher)session.getAttribute("user");
+		fillQuestion.setFqid(qid);
+		fillQuestion.setTid(t.getTid());
+		boolean issecu = fillService.updataFillQuestion(fillQuestion);
+		if(issecu) {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("1");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				PrintWriter writer = response.getWriter();
+				//System.out.println(list);
+				writer.print("0");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	
 }

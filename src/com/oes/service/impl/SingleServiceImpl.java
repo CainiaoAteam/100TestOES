@@ -44,5 +44,10 @@ public class SingleServiceImpl implements SingleService {
 		// TODO Auto-generated method stub
 		return singleDao.getSQByTidAndDiff(tid,difficulty);
 	}
+
+	public boolean updataSingleQuestion(SingleQuestion singleQuestion) {
+		// TODO Auto-generated method stub
+		return singleDao.updateSingleBySid(singleQuestion);
+	}
 	
 }

@@ -122,11 +122,10 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		}		
 		return false;
 	}
-	public boolean updateFillByMid(FillQuestion fill) {
+	public boolean updateFillByFid(FillQuestion fill) {
 		// TODO Auto-generated method stub
 		String sql = "update fillquestion set tid=?,fqno=?,fquestion=?,"
 				+ "fanswer=?,fexplanation=?,difficulty=? where fqid=?";
-		
 		JdbcTemplate jdbcTemplate = getJdbcTemplate();
 		
 		Object args[] = new Object[] {fill.getTid(),fill.getFqno(),fill.getFquestion(),

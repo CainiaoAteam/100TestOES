@@ -15,5 +15,7 @@ public interface MutipleService {
 	MutipleQuestion getMutipleById(int parseInt);
 
 	List<MutipleQuestion> getMutiplesByTidAndDifficulty(Integer tid, String difficulty);
+
+	boolean updataMutipleQuestion(MutipleQuestion mutipleQuestion);
 	
 }

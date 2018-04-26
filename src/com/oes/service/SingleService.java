@@ -16,4 +16,6 @@ public interface SingleService {
 
 	List<SingleQuestion> getSinglesByTidAndDifficulty(Integer tid, String difficulty);
 
+	boolean updataSingleQuestion(SingleQuestion singleQuestion);
+
 }

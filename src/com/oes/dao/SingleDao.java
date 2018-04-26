@@ -17,4 +17,6 @@ public interface SingleDao {
 
 	List<SingleQuestion> getSQByTidAndDiff(Integer tid, String difficulty);
 
+	boolean updataSQ(SingleQuestion singleQuestion);
+
 }

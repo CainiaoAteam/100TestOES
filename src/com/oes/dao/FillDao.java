@@ -16,7 +16,7 @@ public interface FillDao {
 
 	int getFillsCountByTid(int tid);
 	boolean updateFillByFno(FillQuestion fill);
-	boolean updateFillByMid(FillQuestion fill);
+	boolean updateFillByFid(FillQuestion fill);
 	FillQuestion getFillQuestionById(int id);
 
 	List<FillQuestion> getFQByTidAndDiff(Integer tid, String difficulty);

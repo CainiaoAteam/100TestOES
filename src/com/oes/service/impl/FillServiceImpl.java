@@ -37,5 +37,9 @@ public class FillServiceImpl implements FillService {
 		// TODO Auto-generated method stub
 		return fillDao.getFQByTidAndDiff(tid,difficulty);
 	}
+	public boolean updataFillQuestion(FillQuestion fillQuestion) {
+		// TODO Auto-generated method stub
+		return fillDao.updateFillByFid(fillQuestion);
+	}
 	
 }

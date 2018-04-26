@@ -51,6 +51,11 @@ public class MutipleServiceImpl implements MutipleService {
 		// TODO Auto-generated method stub
 		return mutipleDao.getMQByTidAndDiff(tid,difficulty);
 	}
+
+	public boolean updataMutipleQuestion(MutipleQuestion mutipleQuestion) {
+		// TODO Auto-generated method stub
+		return mutipleDao.updateMutipleByMid(mutipleQuestion);
+	}
 	
 
 }

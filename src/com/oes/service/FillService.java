@@ -16,4 +16,6 @@ public interface FillService {
 
 	List<FillQuestion> getFillsByTidAndDifficulty(Integer tid, String difficulty);
 
+	boolean updataFillQuestion(FillQuestion fillQuestion);
+
 }

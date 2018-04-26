@@ -516,24 +516,24 @@
 						</div>
 						<!-- 模态框主体 -->
 						<div class="modal-body">
-							<form action="">
+							<form action="${pageContext.request.contextPath }/teacher_updataSQ" method="POST" id="newSQ">
 								<div class="form-group">
 									<div class="input-group">
 										<sapn>题目难度：</sapn>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqdifficulty1" value="v1" name="sqdifficulty" >
+											<input type="radio" id="sqdifficulty1" value="简单" name="singleQuestion.difficulty" >
 											<label for="sqdifficulty1">简单</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqdifficulty2" value="v2" name="sqdifficulty">
+											<input type="radio" id="sqdifficulty2" value="普通" name="singleQuestion.difficulty">
 											<label for="sqdifficulty2">普通</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqdifficulty3" value="v3" name="sqdifficulty">
+											<input type="radio" id="sqdifficulty3" value="困难" name="singleQuestion.difficulty">
 											<label for="sqdifficulty3">困难</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqdifficulty4" value="v4" name="sqdifficulty">
+											<input type="radio" id="sqdifficulty4" value="绝望" name="singleQuestion.difficulty">
 											<label for="sqdifficulty4">绝望</label>
 										</div>
 									</div>
@@ -541,19 +541,19 @@
 									<div class="input-group">
 										<sapn>题目答案：</sapn>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqanswer1" value="A" name="sqanswer" >
+											<input type="radio" id="sqanswer1" value="A" name="singleQuestion.sqanswer" >
 											<label for="sqanswer1">A</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqanswer2" value="B" name="sqanswer">
+											<input type="radio" id="sqanswer2" value="B" name="singleQuestion.sqanswer">
 											<label for="sqanswer2">B</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqanswer3" value="C" name="sqanswer">
+											<input type="radio" id="sqanswer3" value="C" name="singleQuestion.sqanswer">
 											<label for="sqanswer3">C</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="sqanswer4" value="D" name="sqanswer">
+											<input type="radio" id="sqanswer4" value="D" name="singleQuestion.sqanswer">
 											<label for="sqanswer4">D</label>
 										</div>
 									</div>
@@ -561,20 +561,20 @@
 									<div class="card">
 										<div class="card-header">
 											<h5>题目:</h5>
-											<textarea class="form-control" name="squestion"></textarea>
+											<textarea class="form-control" name="singleQuestion.squestion"></textarea>
 										</div>
 										<div class="card-body">
 											<div class="">
 												<span style="margin:7px 8px;">选项A:</span>
-												<input class="form-control"  type="text" name="schoiceA" placeholder=""/>
+												<input class="form-control"  type="text" name="singleQuestion.schoiceA" placeholder=""/>
 												<span style="margin:7px 8px;">选项B:</span>
-												<input class="form-control"  type="text" name="schoiceB" placeholder=""/>
+												<input class="form-control"  type="text" name="singleQuestion.schoiceB" placeholder=""/>
 												<span style="margin:7px 8px;">选项C:</span>
-												<input class="form-control"  type="text" name="schoiceC" placeholder=""/>
+												<input class="form-control"  type="text" name="singleQuestion.schoiceC" placeholder=""/>
 												<span style="margin:7px 8px;">选项D:</span>
-												<input class="form-control"  type="text" name="schoiceD" placeholder=""/>
+												<input class="form-control"  type="text" name="singleQuestion.schoiceD" placeholder=""/>
 												<span style="margin:7px 8px;">解析:</span>
-												<textarea class="form-control" name="sqExplain"></textarea>
+												<textarea class="form-control" name="singleQuestion.sqExplain"></textarea>
 											</div>
 										</div>
 	
@@ -582,10 +582,9 @@
 								</div>
 							</form>
 						</div>
-
 						<!-- 模态框底部 -->
 						<div class="modal-footer">
-							<a href="" type="button" class="btn btn-outline-light text-dark">确定修改</a>
+							<button onclick="updataSQ()" class="btn btn-outline-light text-dark">确定修改</button>
 						</div>
 
 					</div>
@@ -599,26 +598,26 @@
 							<h4 class="modal-title">修改题目</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
-						<!-- 模态框主体 -->
+						<!-- 模态框主体mutipleQuestion.manswers -->
 						<div class="modal-body">
-							<form action="">
+							<form action="" id="newMQ">
 								<div class="form-group">
 									<div class="input-group">
 										<sapn>题目难度：</sapn>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="mqdifficulty1" value="v1" name="mqdifficulty" >
+											<input type="radio" id="mqdifficulty1" value="简单" name="mutipleQuestion.difficulty" >
 											<label for="mqdifficulty1">简单</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="mqdifficulty2" value="v2" name="mqdifficulty">
+											<input type="radio" id="mqdifficulty2" value="普通" name="mutipleQuestion.difficulty">
 											<label for="mqdifficulty2">普通</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="mqdifficulty3" value="v3" name="mqdifficulty">
+											<input type="radio" id="mqdifficulty3" value="困难" name="mutipleQuestion.difficulty">
 											<label for="mqdifficulty3">困难</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="mqdifficulty4" value="v4" name="mqdifficulty">
+											<input type="radio" id="mqdifficulty4" value="绝望" name="mutipleQuestion.difficulty">
 											<label for="mqdifficulty4">绝望</label>
 										</div>
 									</div>
@@ -626,19 +625,19 @@
 									<div class="input-group">
 										<sapn>题目答案：</sapn>
 										<div class="checkbox checkbox-success">
-											<input id="mqanswer1" class="styled" name="mqanswer" type="checkbox">
+											<input id="mqanswer1" class="styled" name="mutipleQuestion.manswers" type="checkbox">
 											<label for="mqanswer1">A</label>
 										</div>
 										<div class="checkbox checkbox-success">
-											<input id="mqanswer2" class="styled" name="mqanswer" type="checkbox">
+											<input id="mqanswer2" class="styled" name="mutipleQuestion.manswers" type="checkbox">
 											<label for="mqanswer2">B</label>
 										</div>
 										<div class="checkbox checkbox-success">
-											<input id="mqanswer3" class="styled" name="mqanswer" type="checkbox">
+											<input id="mqanswer3" class="styled" name="mutipleQuestion.manswers" type="checkbox">
 											<label for="mqanswer3">C</label>
 										</div>
 										<div class="checkbox checkbox-success">
-											<input id="mqanswer4" class="styled" name="mqanswer" type="checkbox">
+											<input id="mqanswer4" class="styled" name="mutipleQuestion.manswers" type="checkbox">
 											<label for="mqanswer4">D</label>
 										</div>
 									</div>
@@ -646,20 +645,20 @@
 									<div class="card">
 										<div class="card-header">
 											<h5>题目:</h5>
-											<textarea class="form-control" name="mquestion"></textarea>
+											<textarea class="form-control" name="mutipleQuestion.mquestion"></textarea>
 										</div>
 										<div class="card-body">
 											<div class="">
 												<span style="margin:7px 8px;">选项A:</span>
-												<input class="form-control"  type="text" name="mchoiceA" placeholder=""/>
+												<input class="form-control"  type="text" name="mutipleQuestion.mchoiceA" placeholder=""/>
 												<span style="margin:7px 8px;">选项B:</span>
-												<input class="form-control"  type="text" name="mchoiceB" placeholder=""/>
+												<input class="form-control"  type="text" name="mutipleQuestion.mchoiceB" placeholder=""/>
 												<span style="margin:7px 8px;">选项C:</span>
-												<input class="form-control"  type="text" name="mchoiceC" placeholder=""/>
+												<input class="form-control"  type="text" name="mutipleQuestion.mchoiceC" placeholder=""/>
 												<span style="margin:7px 8px;">选项D:</span>
-												<input class="form-control"  type="text" name="mchoiceD" placeholder=""/>
+												<input class="form-control"  type="text" name="mutipleQuestion.mchoiceD" placeholder=""/>
 												<span style="margin:7px 8px;">解析:</span>
-												<textarea class="form-control" name="mqExplain"></textarea>
+												<textarea class="form-control" name="mutipleQuestion.mexplanation"></textarea>
 											</div>
 										</div>
 	
@@ -670,7 +669,7 @@
 
 						<!-- 模态框底部 -->
 						<div class="modal-footer">
-							<a href="" type="button" class="btn btn-outline-light text-dark">确定修改</a>
+							<button onclick="updataMQ();" type="button" class="btn btn-outline-light text-dark">确定修改</button>
 						</div>
 
 					</div>
@@ -691,19 +690,19 @@
 									<div class="input-group">
 										<sapn>题目难度：</sapn>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="fqdifficulty1" value="v1" name="fqdifficulty">
+											<input type="radio" id="fqdifficulty1" value="简单" name="fillQuestion.difficulty">
 											<label for="fqdifficulty1">简单</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="fqdifficulty2" value="v2" name="fqdifficulty">
+											<input type="radio" id="fqdifficulty2" value="普通" name="fillQuestion.difficulty">
 											<label for="fqdifficulty2">普通</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="fqdifficulty3" value="v3" name="fqdifficulty">
+											<input type="radio" id="fqdifficulty3" value="困难" name="fillQuestion.difficulty">
 											<label for="fqdifficulty3">困难</label>
 										</div>
 										<div class="radio radio-success radio-inline">
-											<input type="radio" id="fqdifficulty4" value="v4" name="fqdifficulty">
+											<input type="radio" id="fqdifficulty4" value="绝望" name="fillQuestion.difficulty">
 											<label for="fqdifficulty4">绝望</label>
 										</div>
 									</div>
@@ -711,14 +710,14 @@
 									<div class="card">
 										<div class="card-header">
 											<h5>题目:</h5>
-											<textarea class="form-control" name="fquestion"></textarea>
+											<textarea class="form-control" name="fillQuestion.fquestion"></textarea>
 										</div>
 										<div class="card-body">
 											<div class="">
 												<span style="margin:7px 8px;">答案:</span>
-												<textarea class="form-control" name="fqanswer"></textarea>
+												<textarea class="form-control" name="fillQuestion.fanswer"></textarea>
 												<span style="margin:7px 8px;">解析:</span>
-												<textarea class="form-control" name="fqExplain"></textarea>
+												<textarea class="form-control" name="fillQuestion.fexplanation"></textarea>
 											</div>
 										</div>
 									</div>
@@ -888,8 +887,7 @@
 				//alert(data.squestion);
 				
 				var diff=data.difficulty;
-				alert(diff);
-				var answer;
+				var a_answer;
 				if(diff=="简单"){
 					diff=0;
 				}else if(diff=="一般"){
@@ -898,30 +896,28 @@
 					diff=2;
 				}
 				if(data.sanswer=="A"){
-					answer=0;
+					a_answer=0;
 				}else if(data.sanswer=="B"){
-					answer=1;
+					a_answer=1;
 				}else if(data.sanswer=="C"){
-					answer=2;
+					a_answer=2;
 				}else if(data.sanswer=="D"){
-					answer=3;
+					a_answer=3;
 				}
-				//alert(data[i].squestion);
-				$("input:radio[name='sqdifficulty']").eq(diff).attr("checked",true);//设置题目难度为...
-				$("input:radio[name='sqanswer']").eq(manswer).attr("checked",true);//设置题目答案为...
-				$("textarea[name='squestion']").val(data[i].squestion);//设置题目问题为...
-				$("input[name='schoiceA']").val(data.schoiceA);//设置题目选项为...
-				$("input[name='schoiceB']").val(data.schoiceB);
-				$("input[name='schoiceC']").val(data.schoiceC);
-				$("input[name='schoiceD']").val(data.schoiceD);
-				$("textarea[name='sqExplain']").val(data.sexplanation);//设置题目解析为...
+				$("input:radio[name='singleQuestion.difficulty']").eq(diff).attr("checked",true);//设置题目难度为...
+				$("input:radio[name='singleQuestion.sqanswer']").eq(a_answer).attr("checked",true);//设置题目答案为...
+				$("textarea[name='singleQuestion.squestion']").val(data.squestion);//设置题目问题为...singleQuestion.squestion
+				$("input[name='singleQuestion.schoiceA']").val(data.schoiceA);//设置题目选项为...
+				$("input[name='singleQuestion.schoiceB']").val(data.schoiceB);
+				$("input[name='singleQuestion.schoiceC']").val(data.schoiceC);
+				$("input[name='singleQuestion.schoiceD']").val(data.schoiceD);
+				$("textarea[name='singleQuestion.sqExplain']").val(data.sexplanation);//设置题目解析为...
 				$("#editSq").modal('show');
 
 				
 			}
 			function load_A_MQ(data){
 				var diff;
-				var answer;
 				if(data.difficulty=="简单"){
 					diff=0;
 				}else if(data.difficulty=="一般"){
@@ -929,23 +925,26 @@
 				}else if(data.difficulty=="困难"){
 					diff=2;
 				}
-				if(data[i].manswer.indexOf("A")>-1){
-					$("input:radio[name='sqanswer']").eq(0).attr("checked",true);
-				}else if(data.manswer.indexOf("B")>-1){
-					$("input:radio[name='sqanswer']").eq(1).attr("checked",true);
-				}else if(data.manswer.indexOf("C")>-1){
-					$("input:radio[name='sqanswer']").eq(2).attr("checked",true);
-				}else if(data.manswer.indexOf("D")>-1){
-					$("input:radio[name='sqanswer']").eq(3).attr("checked",true);
+				var m_an=data.manswer;
+				if(m_an.indexOf("A")>-1){
+					$("input:checkbox[name='mutipleQuestion.manswers']").eq(0).attr("checked",true);
 				}
-				$("input:radio[name='mqdifficulty']").eq(diff).attr("checked",true);
-				//$("input:checkbox[name='mqanswer']").eq(1).attr("checked",true);
-				$("textarea[name='mquestion']").val(data.mquestion);
-				$("input[name='mchoiceA']").val(data.mchoiceA);
-				$("input[name='mchoiceB']").val(data.mchoiceB);
-				$("input[name='mchoiceC']").val(data.mchoiceC);
-				$("input[name='mchoiceD']").val(data.mchoiceD);
-				$("textarea[name='mqExplain']").val(data.mexplanation);
+				if(m_an.indexOf("B")>-1){
+					$("input:checkbox[name='mutipleQuestion.manswers']").eq(1).attr("checked",true);
+				}
+				if(m_an.indexOf("C")>-1){
+					$("input:checkbox[name='mutipleQuestion.manswers']").eq(2).attr("checked",true);
+				}
+				if(m_an.indexOf("D")>-1){
+					$("input:checkbox[name='mutipleQuestion.manswers']").eq(3).attr("checked",true);
+				}
+				$("input:radio[name='mutipleQuestion.difficulty']").eq(diff).attr("checked",true);
+				$("textarea[name='mutipleQuestion.mquestion']").val(data.mquestion);
+				$("input[name='mutipleQuestion.mchoiceA']").val(data.mchoiceA);
+				$("input[name='mutipleQuestion.mchoiceB']").val(data.mchoiceB);
+				$("input[name='mutipleQuestion.mchoiceC']").val(data.mchoiceC);
+				$("input[name='mutipleQuestion.mchoiceD']").val(data.mchoiceD);
+				$("textarea[name='mutipleQuestion.mexplanation']").val(data.mexplanation);
 				$("#editMq").modal('show');
 			}
 			function load_A_FQ(data){
@@ -953,19 +952,72 @@
 				var answer;
 				if(data.difficulty=="简单"){
 					diff=0;
-					$("input:radio[name='fqdifficulty']").eq(0).attr("checked",true);
+					$("input:radio[name='fillQuestion.difficulty']").eq(0).attr("checked",true);
 				}else if(data.difficulty=="一般"){
 					diff=1;
-					$("input:radio[name='fqdifficulty']").eq(1).attr("checked",true);
+					$("input:radio[name='fillQuestion.difficulty']").eq(1).attr("checked",true);
 				}else if(data.difficulty=="困难"){
 					diff=2;
-					$("input:radio[name='fqdifficulty']").eq(2).attr("checked",true);
+					$("input:radio[name='fillQuestion.difficulty']").eq(2).attr("checked",true);
 				}
-				//$("input:radio[name='fqdifficulty']").eq(diff).attr("checked",true);
-				$("textarea[name='fquestion']").val(data.fquestion);
-				$("textarea[name='fqanswer']").val(data.fanswer);
-				$("textarea[name='fqExplain']").val(data.fexplanation);
+				$("textarea[name='fillQuestion.fquestion']").val(data.fquestion);
+				$("textarea[name='fillQuestion.fanswer']").val(data.fanswer);
+				$("textarea[name='fillQuestion.fexplanation']").val(data.fexplanation);
 				$("#editFq").modal('show');
+			}
+
+			function updataSQ(){
+				$.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "${pageContext.request.contextPath }/teacher_updataSQ" ,//url
+                data: $('#newSQ').serialize(),
+                success: function (data) {
+                   updataTips(data);
+                },
+                error : function() {
+                    alert("异常！");
+                	}
+            	});
+				$("#editSq").modal('hide');
+			}
+			function updataMQ(){
+				$.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "${pageContext.request.contextPath }/teacher_updataMQ" ,//url
+                data: $('#newMQ').serialize(),
+                success: function (data) {
+                   updataTips(data);
+                },
+                error : function() {
+                    alert("异常！");
+                	}
+            	});
+				$("#editMq").modal('hide');
+			}
+			function updataFQ(){
+				$.ajax({
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "${pageContext.request.contextPath }/teacher_updataFQ" ,//url
+                data: $('#newFQ').serialize(),
+                success: function (data) {
+                   updataTips(data);
+                },
+                error : function() {
+                    alert("异常！");
+                	}
+            	});
+				$("#editFq").modal('hide');
+			}
+			function updataTips(data){
+				if (result>0) {
+                     alert("修改成功");
+                }else{
+					alert("修改失败");
+				}
+				getSQuestion();
 			}
 		</script>
 		<script type="text/javascript">

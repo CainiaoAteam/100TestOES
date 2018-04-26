@@ -141,7 +141,7 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	public boolean updateSingleBySid(SingleQuestion sq) {
 		// TODO Auto-generated method stub
 		String sql = "update singlequestion set tid=?,sqno=?,squestion=?,schoiceA=?,schoiceB=?,"
-				+ "schoiceC=?,schoiceD=?,sanswer=?,sexplanation=?,difficulty=? where sqno=?";
+				+ "schoiceC=?,schoiceD=?,sanswer=?,sexplanation=?,difficulty=? where sqid=?";
 		
 		JdbcTemplate jdbcTemplate = getJdbcTemplate();
 		
@@ -158,6 +158,11 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 	public List<SingleQuestion> getSQByTidAndDiff(Integer tid, String difficulty) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean updataSQ(SingleQuestion singleQuestion) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
