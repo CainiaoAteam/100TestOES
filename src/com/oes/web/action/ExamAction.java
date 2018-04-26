@@ -70,7 +70,38 @@ public class ExamAction extends ActionSupport {
 	public void setExamService(ExamService examService) {
 		this.examService = examService;
 	}
-	
+	public String getRecordBySidAndExamid() {
+		System.out.println("判断考试！");
+		int sid = Integer.parseInt(ServletActionContext.getRequest().getParameter("sid"));
+		int examid = Integer.parseInt(ServletActionContext.getRequest().getParameter("examid"));
+		
+		boolean res = recordService.isHasRecordForSidAndExamid(sid,examid);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(res);
+		if(res) {
+			json = "{\"tip\":\"yes\"}";	
+			JSON.toJSONString(json);
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		
+		writer.println(json);
+		
+		return NONE;
+	}
 	/**
 	 * 加载考试事项，一般都是页面加载成功的时候请求
 	 * 

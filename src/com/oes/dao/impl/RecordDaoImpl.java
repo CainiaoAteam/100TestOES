@@ -118,12 +118,70 @@ public class RecordDaoImpl extends JdbcDaoSupport implements RecordDao {
 
 	public List<Record> getRecordsByExamId(int examId) {
 		// TODO Auto-generated method stub
-		return new ArrayList<Record>();
+		String sql = "select * from record where examid=?";
+		Object args[] = new Object[] {examId};
+		
+		final List<Record> recordlist = new ArrayList<Record>();
+		this.getJdbcTemplate().query(sql, args,new RowCallbackHandler() {
+			
+			 public void processRow(ResultSet rs) throws SQLException {  
+		      
+				 do {
+						   Record re= new Record();
+						   
+						   re.setRid(rs.getInt("rid"));  
+				           re.setScore(rs.getDouble("score"));
+				           re.setMyanswer(rs.getString("myanswer"));
+				           
+				           Student student = new Student();
+				           int sid = rs.getInt("sid");
+				           student.setSid(sid);
+				           re.setStudent(student);
+				           
+				           recordlist.add(re);
+	         
+				 }while(rs.next());    
+		       }  	
+			});
+		
+		return recordlist;
 	}
 
 	public Record getRecordByExamId(int ExamId) {
 		// TODO Auto-generated method stub
+		/*String sql = "select * from record where examid=?";
+		Object args[] = new Object[] {ExamId};
+		
+		final Record record = new Record();
+		this.getJdbcTemplate().query(sql, args,new RowCallbackHandler() {
+			
+			 public void processRow(ResultSet rs) throws SQLException {  
+		      
+		           record.setRid(rs.getInt("rid"));  
+		           record.setScore(rs.getDouble("score"));
+		           record.setMyanswer(rs.getString("myanswer"));
+		           
+		           Student student = new Student();
+		           int sid = rs.getInt("sid");
+		           student.setSid(sid);
+		           record.setStudent(student);
+		       }  	
+			});
+		*/
 		return null;
+	}
+	
+	public boolean getRecordByExamIdAndSid(int sid, int examid) {
+		String sql = "select COUNT(*) from record where sid = ? and examid = ?";
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {sid,examid};
+		
+		int count = jdbcTemplate.queryForObject(sql, args,Integer.class);
+			
+		if(count > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }
