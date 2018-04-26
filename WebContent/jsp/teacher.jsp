@@ -78,6 +78,7 @@
 
 	//点击我的试卷默认加载通过审核的试卷
 	function getPaperIsPass(ispass){
+		$("#isPass").attr("checked","checked");
 		var url = "${pageContext.request.contextPath }/teacher_getPaperIsPass";
 		var who = ${sessionScope.user.tid};
 		var param = {"paperState":ispass,"who":who};
@@ -100,10 +101,10 @@
 									"<td>"+
 										"<div class='card'>"+
 											"<div class='card-body'>"+
-												"<h4 class='card-title'>"+n.tpname+"</h4>"+
-												"<p class='card-text'>试卷编号:"+n.tpno+"</p>"+
-												"<p class='card-text'>状态："+sta[Number(n.state)]+"</p>"+
-												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+n.tpid+" class='card-link'>"+
+												"<h4 class='card-title'>"+data[i].tpname+"</h4>"+
+												"<p class='card-text'>试卷编号:"+data[i].tpno+"</p>"+
+												"<p class='card-text'>状态："+sta[Number(data[i].state)]+"</p>"+
+												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+data[i].tpid+" class='card-link'>"+
 													"<p style='text-align: right;'>查看试卷</p>"+
 												"</a>"+
 											"</div>"+
@@ -145,7 +146,7 @@
 	}
 	function showScoreByExamIdForTid(obj){
 		var examId = obj.value;
-		var url="${pageContext.request.contextPath }/teacher_getExamByTid";
+		var url="${pageContext.request.contextPath }/teacher_getRecordByTid";
 		var param = {"examid":examId};
 
 		var tmp = "";
@@ -153,40 +154,43 @@
 		$.post(url,param,function(data){
 
 			if(data.tip == "no"){
-				$("#showScore").html("没有关于该考试的学生成绩！");
+				$("#scoreHead").html("没有关于该考试的学生成绩！");
+				$("#scorelist").html("");
 			}else{
+				
+				var headHtml = "<tr><th>序号</th><th>考试编号</th><th>学生姓名</th><th>成绩</th><th>查看答题情况</th></tr>";
+				$("#scoreHead").html(headHtml);
 				$.each(data,function(i,n){
 					tmp = "<tr>"+
 							"<td>"+(i+1)+"</td>"+
-							"<td>"+n.exam.examno+"</td>"+
-							"<td>"+n.student.sname+"</td>"+
-							"<td>"+n.score+"</td>"+
-							"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+n.rid+"'><button class='btn btn-outline-info btn-sm'>答题情况</button></a></td>"+
+							"<td>"+data[i].exam.examno+"</td>"+
+							"<td>"+data[i].student.sname+"</td>"+
+							"<td>"+data[i].score+"</td>"+
+							"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+data[i].rid+"'><button class='btn btn-outline-info btn-sm'>答题情况</button></a></td>"+
 						"</tr>";
+					inner += tmp;
 				});
 				$("#scorelist").html(inner);
 			}
 
 		},"json");
 	}
-
-	//根据考试的情况查看考试
-	function getExams(examstate){
-		var url = "${pageContext.request.contextPath }/teacher_getPaperIsPass";
+	function getExamByState(examstate){
+		var url = "${pageContext.request.contextPath }/teacher_getExamByState";
 		var who = ${sessionScope.user.tid};
-		var param = {"paperState":ispass,"who":who};
+		var param = {"examState":examstate,"who":who};
 		var tmp ="";
 		var inner ="";
-		var sta = ["已考","未考"];
+		var sta = ["未考","已考"];
 
 		$.post(url,param,function(data){
 			if(data.tip == "no"){
 				if(examstate == -1){
-					$("#paperBody").html("暂无你发布考试！");
+					$("#examBody").html("暂无你发布的考试！");
 				}else if(examstate == 0){
-					$("#paperBody").html("暂无已考试卷！");
+					$("#examBody").html("暂无未考的考试事项！");
 				}else {
-					$("#paperBody").html("暂无未通过审核的试卷！");
+					$("#examBody").html("暂无已考的考试事项！");
 				}
 			}else{
 				$.each(data,function(i,n){
@@ -194,10 +198,10 @@
 									"<td>"+
 										"<div class='card'>"+
 											"<div class='card-body'>"+
-												"<h4 class='card-title'>"+n.tpname+"</h4>"+
-												"<p class='card-text'>试卷编号:"+n.tpno+"</p>"+
-												"<p class='card-text'>状态："+sta[Number(n.state)]+"</p>"+
-												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+n.tpid+" class='card-link'>"+
+												"<h4 class='card-title'>考试名称："+data[i].examname+"</h4>"+
+												"<p class='card-text'>考试编号:"+data[i].examno+"</p>"+
+												"<p class='card-text'>状态："+sta[Number(data[i].state)]+"</p>"+
+												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+data[i].testpaper.tpid+" class='card-link'>"+
 													"<p style='text-align: right;'>查看试卷</p>"+
 												"</a>"+
 											"</div>"+
@@ -206,10 +210,15 @@
 							"</tr>"
 					inner += tmp;
 				})
-				$("#paperBody").html(inner);
+				$("#examBody").html(inner);
 			}
 		},"json");
-
+	}
+	
+	//根据考试的情况查看考试getExamByState(this)
+	function getExams(examstate){
+		$("#allExam").attr("checked","checked");
+		getExamByState(-1);
 	}
 
 </script>
@@ -350,17 +359,17 @@
 							<div class="input-group">
 								<sapn>试卷状态：</sapn>
 								<div class="radio radio-success radio-inline">
-									<input id="tpSatae2" checked="checked" type="radio" name="state" value="1" onclick="getTestPaperByState(this)">
-									<label for="tpSatae2">通过审核</label>
+									<input id="isPass" checked="checked" type="radio" name="state" value="1" onclick="getTestPaperByState(this)">
+									<label for="isPass">通过审核</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input id="tpSatae1" type="radio" name="state" value="2" onclick="getTestPaperByState(this)">
-									<label for="tpSatae1">未通过审核</label>
+									<input id="tpSatae78" type="radio" name="state" value="2" onclick="getTestPaperByState(this)">
+									<label for="tpSatae78">未通过审核</label>
 								</div>
 								
 								<div class="radio radio-success radio-inline">
-									<input id="tpSatae3" type="radio" name="state" value="0" onclick="getTestPaperByState(this)">
-									<label for="tpSatae3">待审核</label>
+									<input id="tpSatae89" type="radio" name="state" value="0" onclick="getTestPaperByState(this)">
+									<label for="tpSatae89">待审核</label>
 								</div>
 							</div>
 						</form>
@@ -379,15 +388,15 @@
 							<div class="input-group">
 								<span>考试状态：</span>
 								<div class="radio radio-success radio-inline">
-									<input id="state1" checked="checked" type="radio" name="state" value="2" onclick="getExamByState(this)">
-									<label for="state1">全部</label>
+									<input id="allExam" checked="checked" type="radio" name="state" value="-1" onclick="getExamByState(-1)">
+									<label for="allExam">全部</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input id="state2"  type="radio" name="state" value="1" onclick="getExamByState(this)">
+									<input id="state2"  type="radio" name="state" value="1" onclick="getExamByState(1)">
 									<label for="state2">已考</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input id="state3" type="radio" name="state" value="0" onclick="getExamByState(this)">
+									<input id="state3" type="radio" name="state" value="0" onclick="getExamByState(0)">
 									<label for="state3">未考</label>
 								</div>
 								<div class="float-right" style="margin-left: auto">
@@ -396,20 +405,7 @@
 							</div>
 						</form>
 						<table class="table table-hover">
-							<tbody>
-								<tr>
-									<td>
-										<div class="card">
-											<div class="card-body">
-												<h4 class="card-title">全国英语四级考试</h4>
-												<p class="card-text">试卷编号：1531p</p>
-												<a href="seeExamPaper.html" class="card-link">
-													<p style="text-align: right;">查看试卷</p>
-												</a>
-											</div>
-										</div>
-									</td>
-								</tr>
+							<tbody id="examBody">
 							</tbody>
 						</table>
 					</div>
@@ -427,14 +423,8 @@
 										</div>
 										<div id="showScore" class="card">
 											<table class="table table-hover">
-												<thead>
-													<tr>
-														<th>序号</th>
-														<th>考试编号</th>
-														<th>学生姓名</th>
-														<th>成绩</th>
-														<th>查看答题情况</th>
-													</tr>
+												<thead id="scoreHead">
+													
 												</thead>
 												<tbody id="scorelist">
 													
@@ -758,8 +748,8 @@
 								</div>
 								<div class="form-group row">
 									<label for="paper">选择试卷:</label>
-									<select id="se-paper" onclick="getAllPaperByTid()" class="form-control" id="paper" style="width:250px;">
-										<option value="" name="exam.testpaper.tpid">--请选择试卷--</option>
+									<select name="tpid" id="se-paper" onclick="getAllPaperByTid()" class="form-control" id="paper" style="width:250px;">
+										<option value="" name="tpid">--请选择试卷--</option>
 									</select>
 									<span id="paperState"></span>
 								</div>
@@ -767,7 +757,7 @@
 								<div class="form-group row">
 									<label for="examday" class="form-control-label" style="margin-top: 8px;">考试日期:</label>
 									<div class="col-sm-7">
-										<input type="datetime-local" class="form-control" id="examday" name="exam.examday">
+										<input type="text" class="form-control" id="examday" name="formatexamday" placeholder="格式：2000-01-01 15:00">
 									</div>
 								</div>
 								
@@ -847,14 +837,13 @@
 				var inner = "";
 
 				$.post(url,param,function(data){
-					data = eval("("+data+")");
-
-					console.log(data);
+					
 					if(data.tip == "no"){
 						$("#paperState").html("<p style='color:red;'>你赞无可选择的试卷！</p>");
 					}else{
 						$.each(data,function(i,n){
-							tmp="<option value="+data[i].tpid+" name='exam.testpaper.tpid'>"+data[i].tpname+"</option>";
+							tmp="<option value="+data[i].tpid+" name='tpid'>"+data[i].tpname+"</option>";
+							inner += tmp;
 						});
 						$("#se-paper").html(inner);
 					}

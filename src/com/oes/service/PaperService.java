@@ -17,5 +17,7 @@ public interface PaperService {
 	boolean addTestPaper(TestPaper testPaper);
 
 	List<TestPaper> getPapersByTid(int tid);
+
+	List<TestPaper> getExamByTidAndState(int tid, int i);
 	
 }

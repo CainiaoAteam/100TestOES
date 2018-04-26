@@ -2,7 +2,10 @@ package com.oes.web.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -142,13 +145,74 @@ public class TeacherAction extends ActionSupport{
 	public void setTeacherService(RoleService teacherService) {
 		this.teacherService = teacherService;
 	}
+	
+	public String getExamByState() {
+		
+		int state = Integer.parseInt(ServletActionContext.getRequest().getParameter("examState"));
+		int tid = Integer.parseInt(ServletActionContext.getRequest().getParameter("who"));
+		List<Exam> list = null;
+		if(state == -1) {
+			list = examService.getExamTid(tid);
+		}else {
+			
+			list = examService.getExamByTidAndState(tid, state);
+		}
+		HttpServletResponse response = ServletActionContext.getResponse();
+		//设置编码格式
+		response.setContentType("text/html;charset=utf-8");
+		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(list.size()>0) {
+			json = JSON.toJSONString(list);	
+			System.out.println(json);
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		
+		writer.println(json);
+		return NONE;
+	}
+	public String addExam() {
+		
+		System.out.println(exam);
+		Teacher teacher = (Teacher) ServletActionContext.getRequest().getSession().getAttribute("user");
+		String parameter = ServletActionContext.getRequest().getParameter("formatexamday");
+		int tpid = Integer.parseInt(ServletActionContext.getRequest().getParameter("tpid"));
+		System.out.println("tpid:"+tpid);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+		TestPaper paper = new TestPaper();
+		paper.setTpid(tpid);
+		exam.setTestpaper(paper);
+		
+		try {
+			Date examdate = simpleDateFormat.parse(parameter);
+			exam.setExamday(examdate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		exam.setTeacher(teacher);
+		examService.saveExam(exam);
+		
+		return "teacher";
+	}
+	
 	/**
-	 * 获取相应的考试信息
+	 * 获取相应的考试信息getExamByTid getExamByTid
 	 * @return
 	 */
-	public String getExamByTid() {
+	public String getRecordByTid() {
 		
 		int examid = Integer.parseInt(ServletActionContext.getRequest().getParameter("examid"));
+		System.out.println("考试id"+examid);
 		List<Record> list = recordService.getRecordByExamId(examid);
 		HttpServletResponse response = ServletActionContext.getResponse();
 		//设置编码格式
@@ -163,7 +227,8 @@ public class TeacherAction extends ActionSupport{
 			e.printStackTrace();
 		}
 		if(list.size()>0) {
-			json = JSON.toJSONString(list);		
+			json = JSON.toJSONString(list);	
+//			System.out.println(json);
 		}else {
 			json = "{\"tip\":\"no\"}";
 			JSON.toJSONString(json);
@@ -177,7 +242,10 @@ public class TeacherAction extends ActionSupport{
 		
 		System.out.println("老师id："+tid);
 		
-		List<Exam> list = examService.getExamTid(tid);
+//		List<Exam> list = examService.getExamTid(tid);
+		List<Exam> list = examService.getExamByTidAndState(tid, 1);
+		
+		 
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		//设置编码格式
@@ -264,39 +332,24 @@ public class TeacherAction extends ActionSupport{
 		response.setContentType("text/html;charset=utf-8");
 		
 		int tid = Integer.parseInt(ServletActionContext.getRequest().getParameter("tid"));
-		List<TestPaper> papers = paperService.getPapersByTid(tid);
-		System.out.println("发布考试：加载试卷！"+tid);
-		String json ="";
-		if(papers == null) {
-			json = "{'tip':'no'}";
-			json = JSON.toJSONString(json);
-			PrintWriter writer = null;
-			System.out.println(json);
-			try {
-				writer = response.getWriter();
-				writer.print(json);
-				writer.flush();
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else {
-			json = JSON.toJSONString(papers);
-			PrintWriter writer = null;
-			System.out.println(json);
-			try {
-				writer = ServletActionContext.getResponse().getWriter();
-				writer.print(json);
-				writer.flush();
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		List<TestPaper> papers = paperService.getPapersByStateForTid(tid, 1);
+		//设置编码格式
 		
+		PrintWriter writer = null;
+		String json ="";
+		try {
+			writer = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(papers.size()>0) {
+			json = JSON.toJSONString(papers);		
+		}else {
+			json = "{\"tip\":\"no\"}";
+			JSON.toJSONString(json);
+		}
+		writer.println(json);
 		
 		return NONE;
 	}

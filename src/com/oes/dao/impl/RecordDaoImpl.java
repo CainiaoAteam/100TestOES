@@ -138,6 +138,10 @@ public class RecordDaoImpl extends JdbcDaoSupport implements RecordDao {
 				           student.setSid(sid);
 				           re.setStudent(student);
 				           
+				           Exam exam = new Exam();
+				           exam.setExamid(rs.getInt("examid"));
+				           re.setExam(exam);
+				           
 				           recordlist.add(re);
 	         
 				 }while(rs.next());    

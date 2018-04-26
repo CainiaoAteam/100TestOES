@@ -229,6 +229,9 @@ public class ExamAction extends ActionSupport {
 		//获取考试对象
 		Exam exam = (Exam) ServletActionContext.getRequest().getSession().getAttribute("exam");
 		
+		//将考试状态改为已考
+		examService.setExamState(exam.getExamid());
+		
 		//封装考试记录对象
 		Record record = new Record();
 		//组装好答案

@@ -344,6 +344,16 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		return false;
 	}
 
+	public void updateExamState(Integer examid) {
+		String sql = "update exam set state=? where examid =?";
+		
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		
+		Object args[] = new Object[] {1,examid};
+		
+		jdbcTemplate.update(sql, args);
+	}
+
 }
 	
 	

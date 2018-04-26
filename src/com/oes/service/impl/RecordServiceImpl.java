@@ -109,8 +109,16 @@ public class RecordServiceImpl implements RecordService {
 		return list;
 	}
 	public List<Record> getRecordByExamId(int examid) {
-		// TODO Auto-generated method stub
-		return recordDao.getRecordsByExamId(examid);
+		List<Record> list = recordDao.getRecordsByExamId(examid);
+		for(int i=0; i<list.size();i++) {
+			Record record = list.get(i);
+			Exam exam = examService.getExamById(record.getExam().getExamid());
+			Student student = (Student) studentService.getRoleById(record.getStudent().getSid());
+			record.setExam(exam);
+			record.setStudent(student);
+			list.set(i, record);
+		}
+		return list;
 	}
 	public boolean isHasRecordForSidAndExamid(int sid, int examid) {
 		// TODO Auto-generated method stub
