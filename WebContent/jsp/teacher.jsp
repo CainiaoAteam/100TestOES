@@ -113,6 +113,10 @@
 	}
 
 </script>
+
+
+	
+
 </head>
 
 <body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
@@ -168,11 +172,11 @@
 						</div>
 
 						<div style="height: 130px; ">
-							<form>
+							<div class="timu_type">
 								<div class="input-group">
 									<span style="margin-left: 30px; ">题目类型：</span>
 									<div class="radio radio-success radio-inline">
-										<input type="radio" id="sq" value="sq" name="questionType">
+										<input type="radio" id="sq" value="sq" name="questionType" checked>
 										<label for="sq">单选</label>
 									</div>
 									<div class="radio radio-success radio-inline">
@@ -184,27 +188,29 @@
 										<label for="fq">填空</label>
 									</div>
 								</div>
-									
+							</div>	
+							<div class="timu_difficulty">
 								<div class="input-group">
 									<span style="margin-left: 30px; ">题目难度：</span>
-									<div class="checkbox checkbox-success">
-										<input id="v1" class="styled" type="checkbox" name="difficulty">
+									<div class="radio radio-success radio-inline">
+										<input id="v0" type="radio" value="全部" name="difficulty" checked>
+										<label for="v0">全部</label>
+									</div>
+									<div class="radio radio-success radio-inline">
+										<input id="v1" type="radio" value="简单" name="difficulty">
 										<label for="v1">简单</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v2" class="styled" type="checkbox" name="difficulty">
-										<label for="v2">容易</label>
+									<div class="radio radio-success radio-inline">
+										<input id="v2" type="radio" value="一般" name="difficulty">
+										<label for="v2">一般</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v3" class="styled" type="checkbox" name="difficulty">
+									<div class="radio radio-success radio-inline">
+										<input id="v3" type="radio" value="困难" name="difficulty">
 										<label for="v3">困难</label>
 									</div>
-									<div class="checkbox checkbox-success">
-										<input id="v4" class="styled" type="checkbox" name="difficulty">
-										<label for="v4">绝望</label>
-									</div>
+									
 								</div>
-							</form>
+							</div>
 							<div class="clearfix ">
 								<div class="float-right ">
 									<a href="${pageContext.request.contextPath }/jsp/teacher_toAddJsp"><button type="button " class="btn btn-outline-info ">添加题目</button></a>
@@ -214,37 +220,8 @@
 						<br />
 						<div id="accordion">
 							<table class="table table-hover">
-								<tbody>
-									<tr>
-										<td>
-											<div class="card ">
-												<div class="card-header ">
-													<label class="mylabel-num">1</label>
-													<div class="float-right form-inline">
-														<a href="javascript:;" onclick="editQusetion();" class="card-link">编辑</a>
-														<a href="" data-toggle="modal" data-target="#deleteQuestion" class="card-link">删除</a>
-													</div>
-												</div>
-												<div class="card-body ">
-													<p class="title" >Not until Ibegan to work ____ how much time I had wasted.</p>
-													<p class="op1">A. didn't Irealize</p>
-													<p class="op2">B. did I realize</p>
-													<p class="op3">C. I didn'trealize</p>
-													<p class="op4">D. I realized</p>
-													<a class="card-link " data-toggle="collapse" data-parent="#accordion " href="#collapse_1 ">
-														查看解析
-													</a>
-												</div>
-												<div class="collapse" id="collapse_1 ">
-													<div class="card-footer ">
-														<p>答案：</p>
-														<span class="explain">我也不知道选什么....</span>
-													</div>
-												</div>
-											</div>
-
-										</td>
-									</tr>
+								<tbody id="loadQuestion">
+									
 								</tbody>
 							</table>
 						</div>
@@ -314,7 +291,7 @@
 					<div id="releaseExam" class="container tab-pane fade"><!-- 发布考试-->
 						<form>
 							<div class="input-group">
-								<sapn>考试状态：</sapn>
+								<span>考试状态：</span>
 								<div class="radio radio-success radio-inline">
 									<input id="state1" checked="checked" type="radio" name="state" value="2" onclick="getExamByState(this)">
 									<label for="state1">全部</label>
@@ -861,6 +838,156 @@
 					}
 					
 				},"json");
+			}
+		</script>
+
+		<script>//加载题目---zch
+			$(function(){
+				getSQuestion();
+			});
+
+			$(document).on('click', '.timu_type :radio', function() {
+				var qtype = $(this).val();
+				if(qtype=='sq'){
+					getSQuestion();
+				}else if(qtype=='mq'){
+					getMQuestion();
+				}else if(qtype=='fq'){
+					getFQuestion();
+				}
+			});
+			$(document).on('click', '.timu_difficulty :radio', function() {
+				var qtype = $("input[name='questionType']:checked").val();
+				if(qtype=='sq'){
+					getSQuestion();
+				}else if(qtype=='mq'){
+					getMQuestion();
+				}else if(qtype=='fq'){
+					getFQuestion();
+				}
+			});
+			function getSQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getSQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadSQ(data)},"json");
+			}
+			function getMQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getMQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadMQ(data)},"json");
+			}
+			function getFQuestion(){
+				var qdiff = $("input[name='difficulty']:checked").val();
+				var url = "${pageContext.request.contextPath }/teacher_getFQuestion";//getAllStudents
+				var param = {"difficulty":qdiff};
+				$.post(url,param,function(data){loadFQ(data)},"json");
+			}
+			
+			function loadSQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header form-inline'>"+
+									"<label class='mylabel-num'>"+i+1+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].sqid+"' onclick='editQusetion();'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].sqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].squestion+"</p>"+
+									"<p class='op1'>A. "+data[i].schoiceA+"</p>"+
+									"<p class='op2'>B. "+data[i].schoiceB+"</p>"+
+									"<p class='op3'>C. "+data[i].schoiceC+"</p>"+
+									"<p class='op4'>D. "+data[i].schoiceD+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].sqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].sqno+"'>"+
+									"<div class='card-footer'><p>答案：选"+data[i].sanswer+"</p>"+
+										"<span class='explain'>"+data[i].sexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
+			}
+			function loadMQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header'>"+
+									"<label class='mylabel-num'>"+i+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].mqid+"' onclick='editQusetion();'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].mqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].mquestion+"</p>"+
+									"<p class='op1'>A. "+data[i].mchoiceA+"</p>"+
+									"<p class='op2'>B. "+data[i].mchoiceB+"</p>"+
+									"<p class='op3'>C. "+data[i].mchoiceC+"</p>"+
+									"<p class='op4'>D. "+data[i].mchoiceD+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].mqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].mqno+"'>"+
+									"<div class='card-footer'><p>答案：选"+data[i].manswer+"</p>"+
+										"<span class='explain'>"+data[i].mexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
+			}
+			function loadFQ(data){
+				var noquestion="<h3 style='color:red;'>暂无题目！</h3>";
+				var info = "";
+				var item = "";
+				if(data == ""){
+					$("#loadQuestion").html(noquestion);
+					alert("没有数据！");
+					return;
+				}
+				$.each(data,function(i,n){
+					item = "<tr><td><div class='card'>"+
+								"<div class='card-header'>"+
+									"<label class='mylabel-num'>"+i+"</label>"+
+									"<div style='margin-left: auto;' class='float-right form-inline'>"+
+										"<a class='card-link' href='javascript:;' value='"+data[i].fqid+"' onclick='editQusetion();'>编辑</a>"+
+										"<a href='' data-toggle='modal' data-target='#deleteQuestion' class='card-link' value='"+data[i].fqid+"' >删除</a>"+
+									"</div>"+
+								"</div>"+
+								"<div class='card-body'>"+
+									"<p class='title' >"+data[i].fquestion+"</p>"+
+									"<a data-toggle='collapse' data-parent='#accordion' href='#collapse_"+data[i].fqno+"' class='card-link'>查看解析</a>"+
+								"</div>"+
+								"<div class='collapse' id='collapse_"+data[i].fqno+"'>"+
+									"<div class='card-footer'><p>答案:"+data[i].fanswer+"</p>"+
+										"<span class='explain'>"+data[i].fexplanation+"</span>"+
+									"</div>"+
+								"</div>"+
+							"</div></td></tr>";
+					info += item; 
+				});
+				$("#loadQuestion").html(info);
 			}
 		</script>
 	<body/>

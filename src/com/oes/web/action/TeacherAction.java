@@ -405,4 +405,82 @@ public class TeacherAction extends ActionSupport{
 
 		return null;
 	}
+	
+	/**
+	 * 获取单选题
+	 * 
+	 * @return
+	 */
+	public String getSQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		List<SingleQuestion> sq_list=singleService.getSinglesByTid(t.getTid());
+		
+		String list = JSON.toJSONString(sq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取双选题
+	 * 
+	 * @return
+	 */
+	public String getMQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		List<MutipleQuestion> mq_list=mutipleService.getMutiplesByTid(t.getTid());
+		
+		String list = JSON.toJSONString(mq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 获取填空题
+	 * 
+	 * @return
+	 */
+	public String getFQuestion() {
+		//设置编码格式
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		Teacher t=(Teacher)session.getAttribute("user");
+		List<FillQuestion> fq_list=fillService.getFillsByTid(t.getTid());
+		
+		String list = JSON.toJSONString(fq_list);
+		try {
+			PrintWriter writer = response.getWriter();
+			System.out.println("题目已发送！");
+			writer.print(list);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

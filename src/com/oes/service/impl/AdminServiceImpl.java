@@ -127,7 +127,6 @@ public class AdminServiceImpl implements RoleService {
 		return paperDao.getPaperByPid(tpid);
 	}
 	
-	
 
 	
 }
