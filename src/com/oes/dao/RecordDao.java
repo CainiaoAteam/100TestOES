@@ -34,6 +34,8 @@ public interface RecordDao {
 	
 	List<Record> getRecordsByExamId(int examId);
 	Record getRecordByExamId(int ExamId);
+
+	boolean getRecordByExamIdAndSid(int sid, int examid);
 	
 	
 	

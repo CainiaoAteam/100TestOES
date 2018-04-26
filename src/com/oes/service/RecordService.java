@@ -39,6 +39,8 @@ public interface RecordService {
 	List<Record> getRecordsBySid(Integer sid);
 
 	List<Record> getRecordByExamId(int examid);
+
+	boolean isHasRecordForSidAndExamid(int sid, int examid);
 	
 	
 	

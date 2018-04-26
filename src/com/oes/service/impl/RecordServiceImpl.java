@@ -112,5 +112,9 @@ public class RecordServiceImpl implements RecordService {
 		// TODO Auto-generated method stub
 		return recordDao.getRecordsByExamId(examid);
 	}
+	public boolean isHasRecordForSidAndExamid(int sid, int examid) {
+		// TODO Auto-generated method stub
+		return recordDao.getRecordByExamIdAndSid(sid,examid);
+	}
 
 }

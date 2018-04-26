@@ -58,7 +58,8 @@
 											"<h4 class='card-title'>"+data[i].examname+"</h4>"+
 												"<p class='card-text'>考试编号："+data[i].examno+"</p>"+
 												"<p class='card-text'>考试时间："+data[i].startTime+"</p>"+
-												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?examid="+data[i].examid+"' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
+												"<p class='card-text' style='color:red;'></p>"+
+												"<a href='javascript:;' name='${pageContext.request.contextPath }/exam_loadPaper?examid="+data[i].examid+"&"+data[i].examid+"&"+data[i].startTime+" ' class='card-link' onclick='checkInfo(this)'><p style='text-align: right;'>进入考试</p></a>"+
 											"</div>"+
 										"</div>"+
 									"</td>"+
@@ -71,7 +72,61 @@
 			}
 			function checkInfo(obj){
 				action = obj.name;
-				$("#confirmInfo").show();
+				var sArr = action.split("&");
+				action = sArr[0];
+				sArr[1]//考试id
+				console.log(sArr);
+				var sid = ${sessionScope.user.sid};
+
+				//1、判断是否已考过
+				if(isHasExamForSid(sid,sArr[1],sArr[2])){
+					
+					$("#infoSure").html("你已参加过该次考试！");
+
+					console.log("考过试啦！！");
+					return;
+				}
+				//2、距离开始考试
+				// sArr[2]//开始考试的时间
+				// if(howLongTimeToStart(sArr[2])){
+
+				// }
+				
+				
+			}
+			function checkStartTimeFor(startTime){
+				var start = Number(Date.parse(startTime.replace(/-/g,"/")).valueOf());
+				//alert("start:"+start);
+				var now = Number(Date.parse(new Date()).valueOf());
+				//alert("now:"+now);
+				//alert(start-now);
+				//alert(now);
+		 		/* if(Date.parse(startTime) > ){
+					alert("考试尚未开始！")
+				}else{
+					$("#confirmInfo").show();
+				}  */
+				//还没达到考试时间
+				if(start - now > 0){
+					alert("考试尚未开始！");
+				}else{
+					$("#confirmInfo").show();
+				}
+
+			}
+			function isHasExamForSid(sid,examid,startTime){
+				var url = "${pageContext.request.contextPath }/exam_getRecordBySidAndExamid";
+				var param = {"sid":sid,"examid":examid};
+				$.post(url,param,function(data){
+					
+					if(data.tip == "yes"){
+						alert("你已参加过该次考试！");
+						$("#confirmInfo").hide();
+					}else{
+						checkStartTimeFor(startTime);
+						
+					}
+				},"json");
 			}
 			function closeWin(){
 				$("#confirmInfo").hide();
@@ -215,7 +270,7 @@
 			</div>
 			
 			<div class="modal" id="confirmInfo">
-				<div class="modal-dialog modal-sm">
+				<div id="infoSure" class="modal-dialog modal-sm">
 					<div class="modal-content">
 						<!-- 模态框头部 -->
 						<div class="modal-header">
