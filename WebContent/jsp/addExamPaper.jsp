@@ -89,7 +89,7 @@
 				<c:if test="${not empty question.singles}">
 					<div id="selectSq" style="display: none;">
 						<div class="card-header">
-							<span style="font-size: 25px;">开始选择单选题:</span>
+							<span style="font-size: 25px;">开始选择单选题:（请选择<b id="setSqNum"></b>题）</span>
 						</div>
 						<div class="card">
 							<table class="table table-hover" style="text-align: center;">
@@ -128,8 +128,8 @@
 				<c:if test="${not empty question.mutiples}">
 					<div id="selectMq" style="display: none;">
 						<div class="card-header">
-							<span style="font-size: 25px;">开始选择双选题:</span>
-						</div>
+							<span style="font-size: 25px;">开始选择双选题:（请选择<b id="setMqNum"></b> 题）</span>
+						</div> 
 						<div class="card">
 							<table class="table table-hover" style="text-align: center;">
 								<thead style="font-weight: 600;">
@@ -168,7 +168,7 @@
 				<c:if test="${not empty question.fills}">
 					<div id="selectFq" style="display: none;">
 						<div class="card-header">
-							<span style="font-size: 25px;">开始选择填空题:</span>
+							<span style="font-size: 25px;">开始选择填空题:（请选择<b id="setFqNum"></b> 题）</span>
 						</div>
 						<div class="card">
 							<table class="table table-hover" style="text-align: center;">
@@ -204,7 +204,7 @@
 				</div>
 				
 				<div align="center" id="nextBtn" style="position: absolute;bottom: 30px;right: 350px;">
-					<button type="button" class="btn btn-outline-info">下一步</button>
+					<button type="button" onclick="setQuestionNum()" class="btn btn-outline-info">下一步</button>
 				</div>
 			</form>
 		</div>
@@ -237,6 +237,23 @@
 
 	function $id(id) {
 		return document.getElementById(id);
+	}
+
+</script>
+<!-- 显示提示选题题目数量 -->
+<script type="text/javascript">
+	var setTime = 1;
+	function setQuestionNum(){
+		
+		//获取设置的题目数量
+		var sqNum = $("#SqNum").val();
+		var mqNum = $("#MqNum").val();
+		var fqNum = $("#FqNum").val();
+
+		var setFqNum = $("#setFqNum").html(fqNum);
+		var setMqNum = $("#setMqNum").html(mqNum);
+		var setSqNum = $("#setSqNum").html(sqNum);
+
 	}
 
 </script>

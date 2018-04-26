@@ -385,13 +385,14 @@ public class TeacherAction extends ActionSupport{
 	 * @return
 	 */
 	public String addPaper() {
-//		System.out.println("添加试卷！");
-//		
-//		System.out.println(testPaper);
-////		
-//		System.out.println(testPaper.getTeacher().getTid());
+		
+		if(testPaper == null) {
+			
+			return "teacher";
+		}
 		
 		boolean istrue = paperService.addTestPaper(testPaper);
+		
 		
 		return SUCCESS;
 	}
