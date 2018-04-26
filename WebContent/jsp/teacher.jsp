@@ -65,17 +65,6 @@
 </script>
 
 <script type="text/javascript">
-	/*// 页面已加载就获取全部的关于该老师的题目
-	$(function(){
-		var url="${pageContext.request.contextPath }/teacher_getAllQuestion";
-		var param={"tid":${sessionScope.tid},"pageBean.pageCode":1};
-
-		$.post(url,param,function(data){
-			alert(data);
-		},"json");
-
-	});*/
-
 	//点击我的试卷默认加载通过审核的试卷
 	function getPaperIsPass(ispass){
 		$("#isPass").attr("checked","checked");
