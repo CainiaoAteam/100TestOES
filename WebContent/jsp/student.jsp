@@ -168,7 +168,7 @@
 		
 	</head>
 	<body background="${pageContext.request.contextPath }/img/index_bg1.jpg">
-		<div class="container" style="height: 800px; background-color: rgba(255,255,255,0.8);">
+		<div class="container" style="background-color: rgba(255,255,255,0.8);">
 			<div id="topInfo">
 				<nav class="navbar navbar-light bg-faded">
 					<a class="navbar-brand">

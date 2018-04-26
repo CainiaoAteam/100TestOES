@@ -15,12 +15,17 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 		
 		<script type="text/javascript">
+			
 			$(function(){
 				//
-				getTestPaper();
+				getTestPaper(0);
 				getStudents();
 				getTeachers();
 	
+			});
+			$(document).on('click', '.tpState :radio', function() {
+				var tpstate = $(this).val();
+				getTestPaper(tpstate);
 			});
 			function getStudents(){
 				var url = "${pageContext.request.contextPath }/admin_getAllStudents";//getAllStudents
@@ -34,9 +39,9 @@
 				$.post(url,param,function(data){loadTea(data)},"json");
 			}
 			
-			function getTestPaper(){
+			function getTestPaper(Number){
 				var url = "${pageContext.request.contextPath }/admin_getAllTestPaper";//getAllStudents
-				var param = {};
+				var param = {"state":Number};
 				$.post(url,param,function(data){loadPaper(data)},"json");
 			}
 			
@@ -100,9 +105,9 @@
 				var nopaper="<h3 style='color:red;'>暂无数据！</h3>";
 				var info = "";
 				var item = "";
-				if(data == ""){
-					$("#thePapers").html(nobody);
-					alert("没有数据！");
+				if(jQuery.isEmptyObject(data)){
+					$("#thePapers").html(nopaper);
+					//alert("没有数据！");
 					return;
 				}
 				var state=new Array();
@@ -228,23 +233,23 @@
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
 					<div id="CheckPaper" class="container tab-pane active">
-						<form action="">
+						<div class="tpState">
 							<div class="input-group">
 								<span>试卷状态：</span>
 								<div class="radio radio-success radio-inline">
-									<input type="radio" id="tp_state_0" value="all" name="TPState" checked>
-									<label for="tp_state_0">全部</label>
+									<input type="radio" id="tp_state_0" value="0" name="TPState" checked>
+									<label for="tp_state_0">未审核</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input type="radio" id="tp_state_1" value="checked" name="TPState">
-									<label for="tp_state_1">已审核</label>
+									<input type="radio" id="tp_state_1" value="1" name="TPState">
+									<label for="tp_state_1">通过审核</label>
 								</div>
 								<div class="radio radio-success radio-inline">
-									<input type="radio" id="tp_state_2" value="unchecked" name="TPState">
-									<label for="tp_state_2">未审核</label>
+									<input type="radio" id="tp_state_2" value="2" name="TPState">
+									<label for="tp_state_2">不通过审核</label>
 								</div>
 							</div>
-						</form>
+						</div>
 						
 						<table class="table table-hover">
 							<tbody id="thePapers">

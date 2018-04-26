@@ -16,6 +16,7 @@ import com.oes.bean.Teacher;
 import com.oes.bean.TestPaper;
 import com.oes.service.PaperService;
 import com.oes.service.impl.AdminServiceImpl;
+import com.oes.service.impl.TeacherServiceImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.TextParser;
 
@@ -46,6 +47,8 @@ public class AdminAction extends ActionSupport{
 	
 	private int tpid;
 	
+	private int state;
+	
 	
 	private String stu_key;
 	
@@ -69,6 +72,9 @@ public class AdminAction extends ActionSupport{
 		this.tpid = tpid;
 	}
 	
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	public void setSno(String sno) {
 		this.sno = sno;
@@ -405,13 +411,13 @@ public class AdminAction extends ActionSupport{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=utf-8");
 		
-		List<TestPaper> paper_list=adminService.getAllPaper();
+		List<TestPaper> paper_list=adminService.getPaperByState(state);
 		
 		String list = JSON.toJSONString(paper_list);
 		
 		try {
 			PrintWriter writer = response.getWriter();
-			//System.out.println(list);
+			System.out.println(list);
 			writer.print(list);
 			
 		} catch (IOException e) {

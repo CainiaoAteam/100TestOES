@@ -270,12 +270,12 @@
 			<div id="show" style="float:left ;  width:83%;  height:100%;">
 				<div class="tab-content">
 					<div id="myQuestion" class="container tab-pane active"><!-- 我的题目管理-->
-						<div style="height: 50px;text-align: center;margin-left: 10%;margin-top: 3%;">
+						<!-- <div style="height: 50px;text-align: center;margin-left: 10%;margin-top: 3%;">
 							<div class="input-group ">
 								<input class="form-control col-sm-6 " type="text " placeholder="题目/类型 ">
 								<button class="btn btn-success-outline " type="submit ">Search</button>
 							</div>
-						</div>
+						</div> -->
 
 						<div style="height: 130px; ">
 							<div class="timu_type">
@@ -287,7 +287,7 @@
 									</div>
 									<div class="radio radio-success radio-inline">
 										<input type="radio" id="mq" value="mq" name="questionType">
-										<label for="mq">多选</label>
+										<label for="mq">双选</label>
 									</div>
 									<div class="radio radio-success radio-inline">
 										<input type="radio" id="fq" value="fq" name="questionType">
@@ -519,7 +519,7 @@
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="sqdifficulty2" value="普通" name="singleQuestion.difficulty">
-											<label for="sqdifficulty2">普通</label>
+											<label for="sqdifficulty2">一般</label>
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="sqdifficulty3" value="困难" name="singleQuestion.difficulty">
@@ -603,7 +603,7 @@
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="mqdifficulty2" value="普通" name="mutipleQuestion.difficulty">
-											<label for="mqdifficulty2">普通</label>
+											<label for="mqdifficulty2">一般</label>
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="mqdifficulty3" value="困难" name="mutipleQuestion.difficulty">
@@ -688,7 +688,7 @@
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="fqdifficulty2" value="普通" name="fillQuestion.difficulty">
-											<label for="fqdifficulty2">普通</label>
+											<label for="fqdifficulty2">一般</label>
 										</div>
 										<div class="radio radio-success radio-inline">
 											<input type="radio" id="fqdifficulty3" value="困难" name="fillQuestion.difficulty">
@@ -1048,6 +1048,8 @@
 					thediff=1;
 				}else if(diff=="困难"){
 					thediff=2;
+				}else if(diff=="绝望"){
+					thediff=3;
 				}
 				if(data.sanswer=="A"){
 					a_answer=0;
@@ -1077,6 +1079,8 @@
 				}else if(data.difficulty=="一般"){
 					diff=1;
 				}else if(data.difficulty=="困难"){
+					diff=2;
+				}else if(data.difficulty=="绝望"){
 					diff=2;
 				}
 				var m_an=data.manswer;
@@ -1112,6 +1116,10 @@
 					diff=1;
 					//$("input:radio[name='fillQuestion.difficulty']").eq(1).attr("checked",true);
 				}else if(data.difficulty=="困难"){
+					diff=2;
+					//$("input:radio[name='fillQuestion.difficulty']").eq(2).attr("checked",true);
+				}
+				else if(data.difficulty=="绝望"){
 					diff=2;
 					//$("input:radio[name='fillQuestion.difficulty']").eq(2).attr("checked",true);
 				}

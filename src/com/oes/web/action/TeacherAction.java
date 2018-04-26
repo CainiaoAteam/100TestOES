@@ -567,7 +567,7 @@ public class TeacherAction extends ActionSupport{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		Teacher t=(Teacher)session.getAttribute("user");
 		List<SingleQuestion> sq_list;
-		System.out.println(difficulty);
+		//System.out.println(difficulty);
 		if(difficulty.equals("全部")) {
 			sq_list=singleService.getSinglesByTid(t.getTid());
 		}
@@ -579,7 +579,7 @@ public class TeacherAction extends ActionSupport{
 		String list = JSON.toJSONString(sq_list);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println("题目已发送！");
+			//System.out.println("题目已发送！");
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -611,7 +611,7 @@ public class TeacherAction extends ActionSupport{
 		String list = JSON.toJSONString(mq_list);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println("题目已发送！");
+			//System.out.println("题目已发送！");
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -642,7 +642,7 @@ public class TeacherAction extends ActionSupport{
 		String list = JSON.toJSONString(fq_list);
 		try {
 			PrintWriter writer = response.getWriter();
-			System.out.println("题目已发送！");
+			//System.out.println("题目已发送！");
 			writer.print(list);
 			
 		} catch (IOException e) {
@@ -725,7 +725,7 @@ public class TeacherAction extends ActionSupport{
 		singleQuestion.setSqno(qno);
 		singleQuestion.setTid(t.getTid());
 		boolean issecu = singleService.updataSingleQuestion(singleQuestion);
-		System.out.println(singleQuestion.getSquestion());
+		//System.out.println(singleQuestion.getSquestion());
 		if(issecu) {
 			try {
 				PrintWriter writer = response.getWriter();

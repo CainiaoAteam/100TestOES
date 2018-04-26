@@ -6,10 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
-<link rel="stylesheet"
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/font-awesome.min.css" />
+	<link rel="stylesheet"
 	href="${pageContext.request.contextPath }/css/mycss.css" />
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/build.css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
@@ -20,7 +24,7 @@
 <body  style="height: 100%;" background="${pageContext.request.contextPath }/img/index_bg1.jpg">
 	<div class="container"
 		style="height: 100%; background-color: rgba(255, 255, 255, 0.8);">
-		<div style="width: 800px; margin: auto; padding-top: 100px;padding-bottom: 100px; position: relative;">
+		<div style="margin: auto; padding-top: 100px;padding-bottom: 100px; position: relative;">
 			<form action="${pageContext.request.contextPath }/teacher_addPaper" method="post">
 				<div id="paperInfo" style="padding-left: 30px;">
 					<div class="card-header">
@@ -103,8 +107,12 @@
 											<p class="card-title ">${squestion.squestion}</p>
 										</td>
 										<td>${squestion.difficulty}</td>
-										<td><input id="sq${status.index+1}" class="styled" type="checkbox"
-											value="${squestion.sqid}" name="testPaper.sqid"></td>
+										<td><div class="checkbox checkbox-success">
+												<input id="sq${status.index+1}" class="styled" type="checkbox"
+												value="${squestion.sqid}" name="testPaper.sqid">
+												<label for="sq${status.index+1}"></label>
+											</div>
+										</td>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -138,8 +146,12 @@
 												<p class="card-title ">${mquestion.mquestion}</p>
 											</td>
 											<td>${mquestion.difficulty}</td>
-											<td><input id="mq${status.index+1}" class="styled" type="checkbox"
-												value="${mquestion.mqid}" name="testPaper.mqid"></td>
+											<td><div class="checkbox checkbox-success">
+													<input id="mq${status.index+1}" class="styled" type="checkbox"
+													value="${mquestion.mqid}" name="testPaper.mqid">
+													<label for="mq${status.index+1}"></label>
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 
@@ -174,8 +186,12 @@
 												<p class="card-title ">${fquestion.fquestion}</p>
 											</td>
 											<td>${fquestion.difficulty}</td>
-											<td><input id="fq${status.index+1}" class="styled" type="checkbox"
-												value="${fquestion.fqid}" name="testPaper.fqid"></td>
+											<td><div class="checkbox checkbox-success">
+													<input id="fq${status.index+1}" class="styled" type="checkbox"
+													value="${fquestion.fqid}" name="testPaper.fqid">
+													<label for="fq${status.index+1}"></label>
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>

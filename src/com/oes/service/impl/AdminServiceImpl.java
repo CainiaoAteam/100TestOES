@@ -126,6 +126,11 @@ public class AdminServiceImpl implements RoleService {
 		// TODO Auto-generated method stub getPapersByTid
 		return paperDao.getPaperByPid(tpid);
 	}
+
+	public List<TestPaper> getPaperByState(int state) {
+		// TODO Auto-generated method stub
+		return paperDao.getPapersByState(state);
+	}
 	
 
 	
