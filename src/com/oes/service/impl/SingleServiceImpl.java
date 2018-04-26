@@ -39,5 +39,10 @@ public class SingleServiceImpl implements SingleService {
 		// TODO Auto-generated method stub
 		return singleDao.getSingleBySqid(parseInt);
 	}
+
+	public List<SingleQuestion> getSinglesByTidAndDifficulty(Integer tid, String difficulty) {
+		// TODO Auto-generated method stub
+		return singleDao.getSQByTidAndDiff(tid,difficulty);
+	}
 	
 }

@@ -13,5 +13,7 @@ public interface MutipleService {
 	int getMutiplesCountByTid(int tid);
 
 	MutipleQuestion getMutipleById(int parseInt);
+
+	List<MutipleQuestion> getMutiplesByTidAndDifficulty(Integer tid, String difficulty);
 	
 }

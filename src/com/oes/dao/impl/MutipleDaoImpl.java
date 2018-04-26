@@ -152,5 +152,9 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 		}		
 		return false;
 	}
+	public List<MutipleQuestion> getMQByTidAndDiff(Integer tid, String difficulty) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

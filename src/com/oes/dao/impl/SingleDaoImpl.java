@@ -154,5 +154,10 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 		}		
 		return false;
 	}
+
+	public List<SingleQuestion> getSQByTidAndDiff(Integer tid, String difficulty) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

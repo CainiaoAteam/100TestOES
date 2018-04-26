@@ -138,5 +138,9 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 		}		
 		return false;
 	}
+	public List<FillQuestion> getFQByTidAndDiff(Integer tid, String difficulty) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

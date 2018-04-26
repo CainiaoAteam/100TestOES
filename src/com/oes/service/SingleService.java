@@ -14,4 +14,6 @@ public interface SingleService {
 
 	SingleQuestion getSingleById(int parseInt);
 
+	List<SingleQuestion> getSinglesByTidAndDifficulty(Integer tid, String difficulty);
+
 }

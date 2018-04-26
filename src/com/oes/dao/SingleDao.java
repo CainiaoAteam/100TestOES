@@ -15,4 +15,6 @@ public interface SingleDao {
 	public boolean updateSingleBySid(SingleQuestion sq);
 	public SingleQuestion getSingleBySqid(int sqid);
 
+	List<SingleQuestion> getSQByTidAndDiff(Integer tid, String difficulty);
+
 }
