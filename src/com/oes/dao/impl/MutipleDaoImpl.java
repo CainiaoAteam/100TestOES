@@ -184,7 +184,13 @@ public class MutipleDaoImpl extends JdbcDaoSupport implements MutipleDao {
 	}
 	public boolean delectMutipleByMqid(int mqid) {
 		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete from mutiplequestion where mqid = ?";  
+		int temp= this.getJdbcTemplate().update(sql,mqid); 
+		
+		if(temp>0)
+			return true;
+		else
+			return false;
 	}
 
 }

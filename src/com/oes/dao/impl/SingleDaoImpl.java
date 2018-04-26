@@ -193,7 +193,13 @@ public class SingleDaoImpl extends JdbcDaoSupport implements SingleDao {
 
 	public boolean delectSingleBySqid(int sqid) {
 		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete from singlequestion where sqid = ?";  
+		int temp= this.getJdbcTemplate().update(sql,sqid); 
+		
+		if(temp>0)
+			return true;
+		else
+			return false;
 	}
 	
 }

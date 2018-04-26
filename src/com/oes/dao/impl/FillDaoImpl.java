@@ -163,7 +163,13 @@ public class FillDaoImpl extends JdbcDaoSupport implements FillDao {
 	}
 	public boolean deleteFillByfqid(int fqid) {
 		// TODO Auto-generated method stub
-		return false;
+		String sql = "delete from fillquestion where fqid = ?";  
+		int temp= this.getJdbcTemplate().update(sql,fqid); 
+		
+		if(temp>0)
+			return true;
+		else
+			return false;
 	}
 	
 }
