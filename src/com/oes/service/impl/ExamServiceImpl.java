@@ -62,6 +62,12 @@ public class ExamServiceImpl implements ExamService {
 		return exam;
 	}
 
+
+	public List<Exam> getExamTid(int tid) {
+		// TODO Auto-generated method stub
+		return examDao.getExamsByTid(tid);
+	}
+
 	
 	
 	

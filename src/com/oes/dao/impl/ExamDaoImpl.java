@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,11 +31,19 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		//注： 这里要对data处理一下，以便于和数据库中的时间对比
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int minute = calendar.get(Calendar.MINUTE);
+		calendar.set(Calendar.MINUTE, minute-30);
+		String datebefore = sdf.format(calendar.getTime());
+		
+		System.out.println("30分钟前的时间：" + sdf.format(calendar.getTime()));
+		
 		String sql = "select * from exam where examday >= ?";
 		
 		 final List<Exam> examlist = new ArrayList<Exam>();
 		 JdbcTemplate jdbcTemplate = getJdbcTemplate();
-		 Object args[] = new Object[]{date}; 
+		 Object args[] = new Object[]{datebefore}; 
 		 
 		  jdbcTemplate.query(sql,args, new RowCallbackHandler(){  
 			  
@@ -217,7 +226,7 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		}
 
-	public List<Exam> getExamByDate(int sid, Date date) {
+	public List<Exam> getExamByDate(int sid, final Date date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -313,20 +322,22 @@ public class ExamDaoImpl extends JdbcDaoSupport implements ExamDao {
 		
 		return false;
 	}
-	
-	/**
-	 * 新增，实现它
-	 */
-	public Exam getExamsBySidAndExamId(int sid, int examid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	/**
 	 * 保存考试信息，即老师发布考试
 	 */
 	public boolean addExam(Exam exam) {
 		// TODO Auto-generated method stub
+		String sql = "insert into exam(tid,examno,tpid,examday,examtime,examname,state)values(?,?,?,?,?,?,?)"; 
+		JdbcTemplate jdbcTemplate = getJdbcTemplate();
+		Object args[] = new Object[] {exam.getTeacher().getTid(),exam.getExamno(),exam.getTestpaper().getTpid(),
+				exam.getExamday(),exam.getExamtime(),exam.getExamname(),exam.getState()};
+		
+		int temp = jdbcTemplate.update(sql, args);
+		if( temp>0 )
+			return true;
+		
 		return false;
 	}
 

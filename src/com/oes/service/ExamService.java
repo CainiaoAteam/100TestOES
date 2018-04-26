@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.oes.bean.Exam;
 import com.oes.bean.Record;
+import com.oes.bean.TestPaper;
 import com.oes.dao.ExamDao;
 
 public interface ExamService {
@@ -31,6 +32,8 @@ public interface ExamService {
 //	 * @return
 //	 */
 //	List<Record> getExamRecordBySid(Integer sid);
+
+	List<Exam> getExamTid(int tid);
 	
 	
 	

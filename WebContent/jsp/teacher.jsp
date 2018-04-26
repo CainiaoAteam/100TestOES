@@ -77,17 +77,23 @@
 	});*/
 
 	//点击我的试卷默认加载通过审核的试卷
-	function getPaperIsPass(){
+	function getPaperIsPass(ispass){
 		var url = "${pageContext.request.contextPath }/teacher_getPaperIsPass";
 		var who = ${sessionScope.user.tid};
-		var param = {"paperState":1,"who":who};
+		var param = {"paperState":ispass,"who":who};
 		var tmp ="";
 		var inner ="";
 		var sta = ["待审核","通过审核","未通过审核"];
 
 		$.post(url,param,function(data){
 			if(data.tip == "no"){
-				$("#paperBody").html("暂无通过审核的试卷！");
+				if(ispass == 1){
+					$("#paperBody").html("暂无通过审核的试卷！");
+				}else if(ispass == 0){
+					$("#paperBody").html("暂无待审核的试卷！");
+				}else {
+					$("#paperBody").html("暂无未通过审核的试卷！");
+				}
 			}else{
 				$.each(data,function(i,n){
 					tmp = "<tr>"+
@@ -113,9 +119,101 @@
 	}
 
 </script>
+<!-- 获取成绩管理 -->
+<script type="text/javascript">
+	//获取关于该老师的所有考试
+	function getExamByTid(){
+		var url="${pageContext.request.contextPath }/teacher_getAllExamByTid";
+		var who = ${sessionScope.user.tid};
+		var param = {"who":who};
+		var tmp = "";
+		var inner = "";
+		$.post(url,param,function(data){
 
+			if(data.tip == "no"){
+				$("#stuScore").html("你还有发布过考试，暂无学生成绩信息！");
+			}else{
+				$.each(data,function(i,n){
+					tmp = "<option value="+data[i].examid+">"+data[i].examname+"</option>";
+					inner += tmp;
+				});
+				$("#examnameshow").html(inner);
+			}
 
-	
+		},"json");
+
+	}
+	function showScoreByExamIdForTid(obj){
+		var examId = obj.value;
+		var url="${pageContext.request.contextPath }/teacher_getExamByTid";
+		var param = {"examid":examId};
+
+		var tmp = "";
+		var inner = "";
+		$.post(url,param,function(data){
+
+			if(data.tip == "no"){
+				$("#showScore").html("没有关于该考试的学生成绩！");
+			}else{
+				$.each(data,function(i,n){
+					tmp = "<tr>"+
+							"<td>"+(i+1)+"</td>"+
+							"<td>"+n.exam.examno+"</td>"+
+							"<td>"+n.student.sname+"</td>"+
+							"<td>"+n.score+"</td>"+
+							"<td><a href='${pageContext.request.contextPath }/exam_showPaper?rid="+n.rid+"'><button class='btn btn-outline-info btn-sm'>答题情况</button></a></td>"+
+						"</tr>";
+				});
+				$("#scorelist").html(inner);
+			}
+
+		},"json");
+	}
+
+	//根据考试的情况查看考试
+	function getExams(examstate){
+		var url = "${pageContext.request.contextPath }/teacher_getPaperIsPass";
+		var who = ${sessionScope.user.tid};
+		var param = {"paperState":ispass,"who":who};
+		var tmp ="";
+		var inner ="";
+		var sta = ["已考","未考"];
+
+		$.post(url,param,function(data){
+			if(data.tip == "no"){
+				if(examstate == -1){
+					$("#paperBody").html("暂无你发布考试！");
+				}else if(examstate == 0){
+					$("#paperBody").html("暂无已考试卷！");
+				}else {
+					$("#paperBody").html("暂无未通过审核的试卷！");
+				}
+			}else{
+				$.each(data,function(i,n){
+					tmp = "<tr>"+
+									"<td>"+
+										"<div class='card'>"+
+											"<div class='card-body'>"+
+												"<h4 class='card-title'>"+n.tpname+"</h4>"+
+												"<p class='card-text'>试卷编号:"+n.tpno+"</p>"+
+												"<p class='card-text'>状态："+sta[Number(n.state)]+"</p>"+
+												"<a href=${pageContext.request.contextPath }/teacher_showPaper?tpid="+n.tpid+" class='card-link'>"+
+													"<p style='text-align: right;'>查看试卷</p>"+
+												"</a>"+
+											"</div>"+
+										"</div>"+
+									"</td>"+
+							"</tr>"
+					inner += tmp;
+				})
+				$("#paperBody").html(inner);
+			}
+		},"json");
+
+	}
+
+</script>
+>>>>>>> branch 'master' of https://github.com/CainiaoAteam/100TestOES.git
 
 </head>
 
@@ -140,15 +238,15 @@
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#myPaper" onclick="getPaperIsPass()">我的试卷</a>
+						<a class="nav-link" data-toggle="pill" href="#myPaper" onclick="getPaperIsPass(1)">我的试卷</a>
 					</li>
 					<br />
 					<li class="nav-item"><!-- 新增我的发布-->
-						<a class="nav-link" data-toggle="pill" href="#releaseExam">发布考试</a>
+						<a class="nav-link" data-toggle="pill" href="#releaseExam" onclick="getExams(-1)">发布考试</a>
 					</li>
 					<br />
 					<li class="nav-item">
-						<a class="nav-link" data-toggle="pill" href="#stuScore">学生成绩</a>
+						<a class="nav-link" data-toggle="pill" href="#stuScore" onclick="getExamByTid()">学生成绩</a>
 					</li>
 					<br />
 					<li class="nav-item">
@@ -271,20 +369,6 @@
 						</div>
 						<table class="table table-hover">
 							<tbody id="paperBody">
-								<!-- <tr>
-									<td>
-										<div class="card">
-											<div class="card-body">
-												<h4 class="card-title">全国英语四级考试</h4>
-												<p class="card-text">试卷编号：1531p</p>
-												<p class="card-text">状态：制作中...</p>
-												<a href="seeExamPaper.html" class="card-link">
-													<p style="text-align: right;">查看试卷</p>
-												</a>
-											</div>
-										</div>
-									</td>
-								</tr> -->
 							</tbody>
 						</table>
 					</div>
@@ -327,6 +411,7 @@
 							</tbody>
 						</table>
 					</div>
+
 					<div id="stuScore" class="container tab-pane fade"><!-- 查看学生成绩-->
 						<div>
 							<table class="table table-hover">
@@ -334,22 +419,33 @@
 								<tr>
 									<td>
 										<div class="card">
-											<div class="card-body">
-												<h4 class="card-title">全国英语四级考试</h4>
-												<p class="card-text">试卷编号：1531p</p>
-												<p class="card-text">考试时间：2018年8月8日 <span>9:00-11:30</span></p>
-												<a href="seeExamPaper.html" class="card-link">
-													<p style="text-align: right;">查看该试卷成绩</p>
-												</a>
-											</div>
+											<select onchange="showScoreByExamIdForTid(this)" style="width: 280px;height: 35px;padding:20px; margin: 20px;" name="exmaname" id="examnameshow">
+												<option value="-1">---请选择查看成绩的考试---</option>
+											</select>
+										</div>
+										<div id="showScore" class="card">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>序号</th>
+														<th>考试编号</th>
+														<th>学生姓名</th>
+														<th>成绩</th>
+														<th>查看答题情况</th>
+													</tr>
+												</thead>
+												<tbody id="scorelist">
+													
+												</tbody>
+											</table>
 										</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-						</div>
-							
+						</div>	
 					</div>
+
 					<div id="myInfo" class="container tab-pane fade">
 						<table class="table table-hover" style="border: hidden;">
 							<tbody>
@@ -802,42 +898,7 @@
 		<script type="text/javascript">
 			// 根据试卷状态加载试卷
 			function getTestPaperByState(obj){
-				alert(obj.value);
-				var url = "${pageContext.request.contextPath }/teacher_getTestPaperByState";
-				var who = ${sessionScope.user.tid};
-				var param = {"state":obj.value,"who":who};
-				var tmp = "";
-				var inner = "";
-				var states = ["待审核","通过审核","未通过审核"];
-				$.post(url,param,function(data){
-					data = eval("("+data+")");
-					// console.log(data);
-					if(data.tip == "no"){
-						$("#paperBody").html("<p style='color:red;'>暂无该状态下的sss试卷！</p>");
-					}else{
-						$.each(data,function(i,n){
-							tmp="<tr>"+
-									"<td>"+
-										"<div class='card'>"+
-											"<div class='card-body'>"+
-												"<h4 class='card-title'>"+data[i].tpname+"</h4>"+
-												"<p class='card-text'>"+data[i].tpno+"</p>"+
-												"<p class='card-text'>"+states[Number(data[i].tpstate)]+"</p>"+
-												"<a href='${pageContext.request.contextPath }/paper_getPaperById?pid="+data[i].tpid+"' class='card-link'>"+
-													"<p style='text-align: right;'>"+查看试卷+"</p>"+
-												"</a>"+
-											"</div>"+
-										"</div>"+
-									"</td>"+
-								"</tr>";
-							inner += tmp;
-						});
-
-					$("#paperBody").html(inner);
-
-					}
-					
-				},"json");
+				getPaperIsPass(obj.value);
 			}
 		</script>
 
